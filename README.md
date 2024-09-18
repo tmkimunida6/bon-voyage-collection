@@ -178,3 +178,7 @@
 - 写真のアップロード
   - Active Storage
   - 保存先：Amazon S3, Google Cloud Storageなど
+<br><br>
+
+### 画面遷移図
+Figma：https://www.figma.com/design/OXJ6Eoec2lubFa9zQ37bnz/Portfolio?node-id=0-1&t=qsWIeidmTbucADgU-1
