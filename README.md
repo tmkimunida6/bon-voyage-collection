@@ -182,3 +182,6 @@
 
 ### 画面遷移図
 Figma：https://www.figma.com/design/OXJ6Eoec2lubFa9zQ37bnz/Portfolio?node-id=0-1&t=qsWIeidmTbucADgU-1
+
+### ER図
+dbdiagram：https://dbdocs.io/yuguchi.tomoki.p0/My-New-Portfolio?view=relationships
