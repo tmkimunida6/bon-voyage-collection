@@ -1,0 +1,14 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: "Dockerfile.dev"
+    command: bash -c "tail -f log/development.log"
+    volumes:
+      - .:/myapp
+    ports:
+      - 3001:3000
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
