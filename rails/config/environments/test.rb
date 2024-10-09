@@ -24,7 +24,7 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
   config.cache_store = :redis_cache_store, {
-    url: ENV['REDIS_URL'] || 'redis://localhost:6379/0',
+    url: ENV["REDIS_URL"] || "redis://localhost:6379/0",
     driver: :hiredis
   }
 
