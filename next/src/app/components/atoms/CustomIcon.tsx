@@ -7,10 +7,9 @@ type Props = IconProps & {
   iconName: keyof typeof iconMapper
 }
 
-const CustomIcon = (props: Props) => {
-  const { iconName } = props;
+const CustomIcon = ({ iconName, ...rest }: Props) => {
   return (
-    <Icon as={iconMapper[iconName]} {...props} />
+    <Icon as={iconMapper[iconName]} {...rest} />
   )
 }
 
