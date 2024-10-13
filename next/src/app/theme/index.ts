@@ -1,6 +1,7 @@
 import { extendTheme } from '@chakra-ui/react'
 import { Noto_Sans_JP } from 'next/font/google'
 import { Button } from './components/button'
+import { Input } from './components/input'
 import { Link } from './components/link'
 
 const notoSansJp = Noto_Sans_JP({
@@ -29,6 +30,7 @@ const customTheme = extendTheme({
   components: {
     Button,
     Link,
+    Input,
   },
 })
 

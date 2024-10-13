@@ -5418,6 +5418,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shallowequal@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "shallowequal@npm:1.1.0"
+  checksum: 10c0/b926efb51cd0f47aa9bc061add788a4a650550bbe50647962113a4579b60af2abe7b62f9b02314acc6f97151d4cf87033a2b15fc20852fae306d1a095215396c
+  languageName: node
+  linkType: hard
+
 "shebang-command@npm:^2.0.0":
   version: 2.0.0
   resolution: "shebang-command@npm:2.0.0"
@@ -5505,6 +5512,7 @@ __metadata:
     react-dom: "npm:^18"
     react-icons: "npm:^5.3.0"
     typescript: "npm:5.5.4"
+    use-intersection: "npm:^0.2.1"
   languageName: unknown
   linkType: soft
 
@@ -5979,6 +5987,18 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/d232c37160fe3970c99255da19b5fb5299fb5926a5d6141d928a87feb47732c323d29be2f8137d3b1e5499c70d284cd1d9cfad703cc58179db8be24d7dd8f1f2
+  languageName: node
+  linkType: hard
+
+"use-intersection@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "use-intersection@npm:0.2.1"
+  dependencies:
+    shallowequal: "npm:^1.1.0"
+  peerDependencies:
+    react: ^16.8.0
+    react-dom: ^16.8.0
+  checksum: 10c0/da01fa2517ada6d1243aae1c245cec30272c4b65780b962ebe7ca549f85053a5a66280c1aca540dbc3e54ecf27b13ba173402709a1da83cc65f8c4f896cb1113
   languageName: node
   linkType: hard
 
