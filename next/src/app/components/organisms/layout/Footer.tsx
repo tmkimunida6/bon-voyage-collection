@@ -10,7 +10,7 @@ type FooterProps = {
 
 const Footer = ({ footerRef }: FooterProps) => {
   return (
-    <Box as='footer' ref={footerRef}>
+    <Box as="footer" ref={footerRef}>
       <VStack p={4} bg="brand.secondary">
         <HStack spacing={4}>
           <ChakraLink as={NextLink} href="#" fontSize="xs" color="brand.brown">

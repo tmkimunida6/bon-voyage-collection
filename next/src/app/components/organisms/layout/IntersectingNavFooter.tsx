@@ -7,7 +7,7 @@ import Nav from './Nav'
 
 const IntersectingNavFooter = () => {
   const footerRef = useRef<HTMLElement>(null)
-  const footerIntersecting = useIntersection(footerRef);
+  const footerIntersecting = useIntersection(footerRef)
 
   return (
     <>
