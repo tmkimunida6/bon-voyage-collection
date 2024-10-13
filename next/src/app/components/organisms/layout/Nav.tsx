@@ -13,6 +13,7 @@ const Nav = ({ footerIntersecting }: NavProps) => {
         position={!footerIntersecting ? 'fixed' : 'static'}
         bottom={0}
         width="100%"
+        zIndex={10}
       >
         <NavButton iconName="FaHome" text="ホーム" />
         <NavButton iconName="FaSearch" text="検索" />

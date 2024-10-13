@@ -12,7 +12,7 @@ const IntersectingNavFooter = () => {
   return (
     <>
       <Nav footerIntersecting={footerIntersecting} />
-      <Footer footerRef={footerRef} />
+      <Footer ref={footerRef} />
     </>
   )
 }
