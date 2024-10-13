@@ -1,7 +1,7 @@
 import { HStack, Spacer } from '@chakra-ui/react'
 import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
-import CustomIcon from '../atoms/CustomIcon'
+import CustomIcon from '../../atoms/CustomIcon'
 
 const Header = () => {
   return (

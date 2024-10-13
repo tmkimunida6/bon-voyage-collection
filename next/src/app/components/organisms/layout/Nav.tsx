@@ -1,5 +1,5 @@
 import { HStack } from '@chakra-ui/react'
-import NavButton from '../molecules/NavButton'
+import NavButton from '../../molecules/NavButton'
 
 const Nav = () => {
   return (
