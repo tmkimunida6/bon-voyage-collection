@@ -1,65 +1,66 @@
 'use client'
 
 import {
-  Button,
+  Heading,
   Input,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Accordion,
   Text,
+  HStack,
+  Flex,
+  VStack,
+  Box,
+  Stack,
+  Image,
+  Button,
 } from '@chakra-ui/react'
 import type { NextPage } from 'next'
-import CustomAccordionItem from '../components/molecules/CustomAccordionItem'
+import NextLink from 'next/link'
 import TextIconLink from '../components/molecules/TextIconLink'
-import TriggerWithModal from '../components/organisms/modal/TriggerWithModal'
 
 const Top: NextPage = () => {
   return (
     <>
-      <h1>Top</h1>
-      <Button variant="primary">おすすめのお土産をみる</Button>
-      <TextIconLink iconName="FaPenSquare" iconPosition="left" href="#">
-        編集する
-      </TextIconLink>
-      <TriggerWithModal
-        renderTrigger={({ onClick }) => (
-          <Input placeholder="Click to open modal" onClick={onClick} />
-        )}
-        modalTitle="詳細条件"
-        buttonText="確定"
+      <Box my={10}>
+        <Stack spacing={8}>
+          <Heading>お土産との出会いを見つけるサービス</Heading>
+          <VStack spacing={6}>
+            <Text>まずはあなたにおすすめのお土産をいくつかご紹介します。</Text>
+            <HStack>
+              <Input placeholder="都市名" size="md" />
+              <Input placeholder="カテゴリー" size="md" />
+            </HStack>
+            <Button variant="primary" as={NextLink} href="./recommend">
+              おすすめのお土産をみる
+            </Button>
+          </VStack>
+          <Flex justifyContent="right">
+            <TextIconLink
+              iconName="FaChevronRight"
+              iconPosition="right"
+              href="./login"
+            >
+              ログインはこちらから
+            </TextIconLink>
+          </Flex>
+        </Stack>
+      </Box>
+      <Box
+        position="fixed"
+        top={0}
+        left={0}
+        width="100vw"
+        height="100dvh"
+        zIndex={-1}
       >
-        <Tabs>
-          <TabList>
-            <Tab>One</Tab>
-            <Tab>Two</Tab>
-            <Tab>Three</Tab>
-          </TabList>
-
-          <TabPanels>
-            <TabPanel>
-              <p>one!</p>
-            </TabPanel>
-            <TabPanel>
-              <p>two!</p>
-            </TabPanel>
-            <TabPanel>
-              <p>three!</p>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </TriggerWithModal>
-      <Accordion allowToggle>
-        <CustomAccordionItem
-          title="アコーディオンを開く"
-          triggerBgColor="brand.gray"
-          hasBorder={true}
-        >
-          <Text>あああああああああああ</Text>
-        </CustomAccordionItem>
-      </Accordion>
+        <Image
+          src="/images/bg_top.jpg"
+          alt="トップページ"
+          w="100%"
+          h="100%"
+          objectFit="cover"
+          objectPosition="center"
+          opacity="30%"
+        />
+      </Box>
     </>
   )
 }

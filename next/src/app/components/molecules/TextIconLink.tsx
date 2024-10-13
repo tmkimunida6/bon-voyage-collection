@@ -19,7 +19,7 @@ const TextIconLink = ({
   children,
 }: TextIconLinkProps) => {
   return (
-    <HStack spacing={1}>
+    <HStack spacing={1} width="max-content">
       {iconPosition === 'left' && (
         <CustomIcon iconName={iconName} color="brand.link" />
       )}

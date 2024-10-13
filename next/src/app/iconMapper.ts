@@ -8,6 +8,7 @@ import {
   FaRegComment,
   FaRegHeart,
   FaRegBookmark,
+  FaChevronRight
 } from 'react-icons/fa'
 import { FaGift } from 'react-icons/fa6'
 
@@ -22,4 +23,5 @@ export const iconMapper = {
   FaGift,
   FaRegComment,
   FaRegHeart,
+  FaChevronRight
 }
