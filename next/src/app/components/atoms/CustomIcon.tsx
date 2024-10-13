@@ -8,9 +8,7 @@ type Props = IconProps & {
 }
 
 const CustomIcon = ({ iconName, ...rest }: Props) => {
-  return (
-    <Icon as={iconMapper[iconName]} {...rest} />
-  )
+  return <Icon as={iconMapper[iconName]} {...rest} />
 }
 
-export default CustomIcon;
+export default CustomIcon

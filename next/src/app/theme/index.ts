@@ -10,7 +10,7 @@ const customTheme = extendTheme({
       gray: '#C8D0DB',
       brown: '#C69B92',
       link: '#88BFB8',
-      star: '#E2DB87'
+      star: '#E2DB87',
     },
   },
   components: {

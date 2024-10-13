@@ -1,5 +1,15 @@
-import { FaHome, FaSearch, FaPenSquare, FaUserAlt, FaBookmark, FaStar, FaRegComment, FaRegHeart, FaRegBookmark } from 'react-icons/fa'
-import { FaGift } from "react-icons/fa6"
+import {
+  FaHome,
+  FaSearch,
+  FaPenSquare,
+  FaUserAlt,
+  FaBookmark,
+  FaStar,
+  FaRegComment,
+  FaRegHeart,
+  FaRegBookmark,
+} from 'react-icons/fa'
+import { FaGift } from 'react-icons/fa6'
 
 export const iconMapper = {
   FaHome,
@@ -11,5 +21,5 @@ export const iconMapper = {
   FaStar,
   FaGift,
   FaRegComment,
-  FaRegHeart
+  FaRegHeart,
 }

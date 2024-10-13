@@ -1,6 +1,5 @@
 'use client'
 
-import { ReactNode } from 'react'
 import {
   Modal,
   ModalOverlay,
@@ -9,29 +8,34 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button
+  Button,
 } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 
 type CustomModalProps = {
   isOpen: boolean
-  onClose: () => void,
-  modalTitle: string,
-  buttonText: string,
+  onClose: () => void
+  modalTitle: string
+  buttonText: string
   children: ReactNode
 }
 
-const CustomModal = ({ isOpen, onClose, modalTitle, buttonText, children }: CustomModalProps) => {
+const CustomModal = ({
+  isOpen,
+  onClose,
+  modalTitle,
+  buttonText,
+  children,
+}: CustomModalProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{modalTitle}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          {children}
-        </ModalBody>
-        <ModalFooter justifyContent='center'>
-          <Button bg='brand.primary' color='white' mr={3} onClick={onClose}>
+        <ModalBody>{children}</ModalBody>
+        <ModalFooter justifyContent="center">
+          <Button bg="brand.primary" color="white" mr={3} onClick={onClose}>
             {buttonText}
           </Button>
         </ModalFooter>
@@ -40,4 +44,4 @@ const CustomModal = ({ isOpen, onClose, modalTitle, buttonText, children }: Cust
   )
 }
 
-export default CustomModal;
+export default CustomModal
