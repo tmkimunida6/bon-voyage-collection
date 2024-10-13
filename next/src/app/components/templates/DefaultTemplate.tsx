@@ -5,7 +5,7 @@ import IntersectingNavFooter from '../organisms/layout/IntersectingNavFooter'
 
 const DefaultTemplate = ({ children }: { children: ReactNode }) => {
   return (
-    <Stack spacing={0} minH='100dvh'>
+    <Stack spacing={0} minH="100dvh">
       <Header />
       <Container flex={1}>{children}</Container>
       <IntersectingNavFooter />
