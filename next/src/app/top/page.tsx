@@ -15,8 +15,6 @@ import type { NextPage } from 'next'
 import CustomAccordionItem from '../components/molecules/CustomAccordionItem'
 import TextIconLink from '../components/molecules/TextIconLink'
 import TriggerWithModal from '../components/organisms/modal/TriggerWithModal'
-import SouvenirCard from '../components/organisms/souvenir/SouvenirCard'
-import SouvenirCardList from '../components/organisms/souvenir/SouvenirCardList'
 
 const Top: NextPage = () => {
   return (
@@ -26,16 +24,6 @@ const Top: NextPage = () => {
       <TextIconLink iconName="FaPenSquare" iconPosition="left" href="#">
         編集する
       </TextIconLink>
-      <SouvenirCardList
-        size="lg"
-        renderItem={(size) => (
-          <>
-            <SouvenirCard size={size} isFavoritable={true} />
-            <SouvenirCard size={size} isFavoritable={true} />
-            <SouvenirCard size={size} isFavoritable={true} />
-          </>
-        )}
-      />
       <TriggerWithModal
         renderTrigger={({ onClick }) => (
           <Input placeholder="Click to open modal" onClick={onClick} />
