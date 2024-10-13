@@ -1,16 +1,14 @@
 import { Container } from '@chakra-ui/react'
 import { ReactNode } from 'react'
-import Footer from '../organisms/layout/Footer'
 import Header from '../organisms/layout/Header'
-import Nav from '../organisms/layout/Nav'
+import IntersectingNavFooter from '../organisms/layout/IntersectingNavFooter'
 
 const DefaultTemplate = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header />
-      <Container>{children}</Container>
-      <Nav />
-      <Footer />
+      <Container flex={1}>{children}</Container>
+      <IntersectingNavFooter />
     </>
   )
 }

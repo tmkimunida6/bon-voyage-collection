@@ -1,11 +1,16 @@
 import { Link as ChakraLink } from '@chakra-ui/next-js'
-import { HStack, VStack } from '@chakra-ui/react'
+import { Box, HStack, VStack } from '@chakra-ui/react'
 import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
+import { RefObject } from 'react'
 
-const Footer = () => {
+type FooterProps = {
+  footerRef: RefObject<HTMLElement>
+}
+
+const Footer = ({ footerRef }: FooterProps) => {
   return (
-    <footer>
+    <Box as='footer' ref={footerRef}>
       <VStack p={4} bg="brand.secondary">
         <HStack spacing={4}>
           <ChakraLink as={NextLink} href="#" fontSize="xs" color="brand.brown">
@@ -20,7 +25,7 @@ const Footer = () => {
         </HStack>
         <Logo />
       </VStack>
-    </footer>
+    </Box>
   )
 }
 
