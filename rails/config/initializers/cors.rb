@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "0.0.0.0:3001", "localhost:3001", "https://souvenir-99j28dnek-tmk-imunida6s-projects.vercel.app/"
+    origins Settings.front_domain
 
     resource "*",
       headers: :any,

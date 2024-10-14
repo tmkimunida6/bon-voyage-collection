@@ -11,6 +11,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 gem "rack-cors"
+# 環境ごとのドメイン設定管理を行う
+gem "config"
 
 gem "redis"
 gem "hiredis"
