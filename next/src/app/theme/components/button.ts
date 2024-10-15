@@ -7,5 +7,19 @@ export const Button = {
     secondary: {
       bg: 'brand.gray',
     },
+    ghost: {
+      _hover: {
+        bg: 'transparent',
+      },
+      _focus_visible: {
+        boxShadow: 'none',
+      },
+      _active: {
+        bg: 'transparent',
+      },
+    },
+  },
+  baseStyle: {
+    width: 'max-content',
   },
 }

@@ -7,7 +7,9 @@ const DefaultTemplate = ({ children }: { children: ReactNode }) => {
   return (
     <Stack spacing={0} minH="100dvh">
       <Header />
-      <Container flex={1}>{children}</Container>
+      <Container flex={1} p={6}>
+        {children}
+      </Container>
       <IntersectingNavFooter />
     </Stack>
   )
