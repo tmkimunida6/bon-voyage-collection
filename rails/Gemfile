@@ -41,7 +41,11 @@ group :development, :test do
   gem "pry-doc"
   gem "pry-rails"
 
+  # ▼Rspec
   gem "rspec-rails"
+  # テスト用データを作成する
+  gem "factory_bot_rails"
+  gem "faker"
 
   # メール送受信のテスト
   gem "letter_opener_web"
