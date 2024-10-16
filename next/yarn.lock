@@ -1378,6 +1378,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@conform-to/dom@npm:1.2.2":
+  version: 1.2.2
+  resolution: "@conform-to/dom@npm:1.2.2"
+  checksum: 10c0/87912486e53c06a27e961353436726fe5ab8246265bc5c4bee8ab4143b2e66244caeb47fe1d1eb4ca6ade8333ddcbd16378d255272f5ea2a464a708d846a4cbf
+  languageName: node
+  linkType: hard
+
+"@conform-to/react@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@conform-to/react@npm:1.2.2"
+  dependencies:
+    "@conform-to/dom": "npm:1.2.2"
+  peerDependencies:
+    react: ">=18"
+  checksum: 10c0/da277eb4ef888ee44d342e45c4ac5243a77c5427003b35b444b6c0b534b1950749ef1333bbd756349aa3bbf3eea8d19b5596d500b93198b15fc93b1e797ed0c8
+  languageName: node
+  linkType: hard
+
+"@conform-to/zod@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@conform-to/zod@npm:1.2.2"
+  dependencies:
+    "@conform-to/dom": "npm:1.2.2"
+  peerDependencies:
+    zod: ^3.21.0
+  checksum: 10c0/113594da03271bcf2814183b5fed9e84563cbd2cd64f99b73a4d2156eee8600e47d951809dac7776a0db28fc086f5e923e53d510ea8302952dba1d80c2e9d852
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-plugin@npm:^11.12.0":
   version: 11.12.0
   resolution: "@emotion/babel-plugin@npm:11.12.0"
@@ -5568,6 +5597,8 @@ __metadata:
   dependencies:
     "@chakra-ui/next-js": "npm:^2.4.2"
     "@chakra-ui/react": "npm:^2.10.2"
+    "@conform-to/react": "npm:^1.2.2"
+    "@conform-to/zod": "npm:^1.2.2"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
     "@svgr/webpack": "npm:^8.1.0"
@@ -5593,6 +5624,7 @@ __metadata:
     swr: "npm:^2.2.5"
     typescript: "npm:5.5.4"
     use-intersection: "npm:^0.2.1"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -6242,5 +6274,12 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.23.8":
+  version: 3.23.8
+  resolution: "zod@npm:3.23.8"
+  checksum: 10c0/8f14c87d6b1b53c944c25ce7a28616896319d95bc46a9660fe441adc0ed0a81253b02b5abdaeffedbeb23bdd25a0bf1c29d2c12dd919aef6447652dd295e3e69
   languageName: node
   linkType: hard

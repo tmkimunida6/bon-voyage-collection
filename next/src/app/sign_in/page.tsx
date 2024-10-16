@@ -1,6 +1,9 @@
 'use client'
 
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
   Button,
   ButtonGroup,
   Heading,
@@ -8,15 +11,25 @@ import {
   Spacer,
   Stack,
 } from '@chakra-ui/react'
+import { useForm } from '@conform-to/react'
+import { parseWithZod } from '@conform-to/zod'
 import type { NextPage } from 'next'
 import { useFormState } from 'react-dom'
 import InputWithLabel from '../components/molecules/InputWithLabel'
 import TextIconLink from '../components/molecules/TextIconLink'
 import { signinAction } from '@/actions/signinAction'
-
+import { signinSchema } from '@/schemas/userSchema'
 
 const Login: NextPage = () => {
-  const [lastResult, handleSignin] = useFormState(signinAction, undefined);
+  const [lastResult, action] = useFormState(signinAction, undefined)
+  const [form, fields] = useForm({
+    lastResult,
+
+    // Reuse the validation logic on the client
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: signinSchema })
+    },
+  })
 
   return (
     <>
@@ -27,19 +40,27 @@ const Login: NextPage = () => {
           アカウント作成
         </TextIconLink>
       </HStack>
-      <form action={handleSignin}>
+      <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
+        {form.errors && (
+          <Alert status="error" my={4} borderRadius={4}>
+            <AlertIcon />
+            <AlertDescription>{form.errors[0]}</AlertDescription>
+          </Alert>
+        )}
         <Stack spacing={6}>
           <InputWithLabel
-            label="Email"
+            label="メールアドレス"
             type="email"
-            name="email"
+            name={fields.email.name}
             placeholder="example@email.com"
+            errors={fields.email.errors}
           />
           <InputWithLabel
             label="パスワード"
             type="password"
-            name="password"
+            name={fields.password.name}
             placeholder="パスワードを入力して下さい"
+            errors={fields.password.errors}
           />
           <ButtonGroup justifyContent="center">
             <Button type="submit" variant="primary">

@@ -1,29 +1,41 @@
 'use server'
+
+import { parseWithZod } from '@conform-to/zod'
+import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
-import { cookies } from 'next/headers'
+import { signinSchema } from '@/schemas/userSchema'
 
 export async function signinAction(prevState: unknown, formData: FormData) {
-  const email = formData.get('email') as string | null
-  const password = formData.get('password') as string | null
+  const submission = parseWithZod(formData, {
+    schema: signinSchema,
+  })
 
-  if (!email || !password) {
-    console.log('Email or password is missing')
-    return
+  if (submission.status !== 'success') {
+    return submission.reply()
   }
 
+  const email = formData.get('email')
+  const password = formData.get('password')
   try {
     const res = await fetch(`${apiBaseUrl}/auth/sign_in`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     })
 
     if (!res.ok) {
-      console.log('Failed to sign in')
-      return
+      if (res.status === 401) {
+        return submission.reply({
+          formErrors: ['メールアドレスまたはパスワードが間違っています。'],
+        })
+      } else {
+        return submission.reply({
+          formErrors: ['サーバーエラーが発生しました。'],
+        })
+      }
     }
 
     const accessToken = res.headers.get('access-token')
@@ -31,17 +43,22 @@ export async function signinAction(prevState: unknown, formData: FormData) {
     const uid = res.headers.get('uid')
 
     if (accessToken && client && uid) {
-      cookies().set('access-token', accessToken, { httpOnly: true, secure: false })
+      cookies().set('access-token', accessToken, {
+        httpOnly: true,
+        secure: false,
+      })
       cookies().set('client', client, { httpOnly: true, secure: false })
       cookies().set('uid', uid, { httpOnly: true, secure: false })
     } else {
-      console.log('Missing authentication headers')
-      return
+      return submission.reply({
+        formErrors: ['ログインに失敗しました。'],
+      })
     }
   } catch (e) {
-    console.log((e as Error).message)
-    return
+    return submission.reply({
+      formErrors: ['サーバーエラーが発生しました。'],
+    })
   }
 
-  redirect('/')
+  redirect('/top')
 }
