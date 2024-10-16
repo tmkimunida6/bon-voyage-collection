@@ -21,5 +21,10 @@ export const Button = {
   },
   baseStyle: {
     width: 'max-content',
+    _hover: {
+      _disabled: {
+        background: '',
+      },
+    },
   },
 }

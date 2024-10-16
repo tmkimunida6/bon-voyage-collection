@@ -4,8 +4,6 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
-  Button,
-  ButtonGroup,
   Heading,
   HStack,
   Spacer,
@@ -15,6 +13,7 @@ import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import type { NextPage } from 'next'
 import { useFormState } from 'react-dom'
+import SubmitButton from '../components/atoms/SubmitButton'
 import InputWithLabel from '../components/molecules/InputWithLabel'
 import TextIconLink from '../components/molecules/TextIconLink'
 import { signinAction } from '@/actions/signinAction'
@@ -25,7 +24,6 @@ const Login: NextPage = () => {
   const [form, fields] = useForm({
     lastResult,
 
-    // Reuse the validation logic on the client
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: signinSchema })
     },
@@ -62,11 +60,7 @@ const Login: NextPage = () => {
             placeholder="パスワードを入力して下さい"
             errors={fields.password.errors}
           />
-          <ButtonGroup justifyContent="center">
-            <Button type="submit" variant="primary">
-              ログイン
-            </Button>
-          </ButtonGroup>
+          <SubmitButton>ログイン</SubmitButton>
         </Stack>
       </form>
     </>
