@@ -1,11 +1,21 @@
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
-export const fetcher = (url: string) => {
-  return axios
-    .get(url)
-    .then((res: AxiosResponse) => res.data)
-    .catch((err: AxiosError) => {
-      console.log(err.message)
-      throw err
-    })
+export const fetcher = async (
+  endpoint: string,
+  method: 'GET' | 'POST' | 'PATCH' | 'DELETE',
+  body?: object,
+) => {
+  const response = await fetch(`${apiBaseUrl}${endpoint}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  })
+
+  if (!response.ok) {
+    throw new Error('サーバーエラーが発生しました。')
+  }
+
+  return response
 }
