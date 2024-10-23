@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { headers } from 'next/headers'
 import { Webhook } from 'svix'
@@ -62,27 +64,21 @@ export async function POST(req: Request) {
     if (eventType === 'user.created') {
       try {
         await fetcher('/users', 'POST', userPayload)
-      } catch (e: any) {
-        return new Response(`ユーザーの作成に失敗しました。${e.message}`, {
-          status: 500,
-        })
+      } catch (e) {
+        return new Response('ユーザーの作成に失敗しました。', { status: 500 })
       }
     } else if (eventType === 'user.updated') {
       try {
         await fetcher(`/users/${user_id}`, 'PATCH', userPayload)
-      } catch (e: any) {
-        return new Response(`ユーザーの更新に失敗しました。${e.message}`, {
-          status: 500,
-        })
+      } catch (e) {
+        return new Response('ユーザーの更新に失敗しました。', { status: 500 })
       }
     }
   } else if (eventType === 'user.deleted') {
     try {
       await fetcher(`/users/${user_id}`, 'DELETE')
-    } catch (e: any) {
-      return new Response(`ユーザーの削除に失敗しました。${e.message}`, {
-        status: 500,
-      })
+    } catch (e) {
+      return new Response('ユーザーの削除に失敗しました。', { status: 500 })
     }
   }
 

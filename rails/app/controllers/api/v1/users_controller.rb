@@ -30,7 +30,7 @@ class Api::V1::UsersController < ApplicationController
 
   def set_user
     @user = User.find_by!(user_id: params[:user_id])
-    render json: { error: 'User not found' }, status: :not_found unless @user
+    render json: { error: "User not found" }, status: :not_found unless @user
   end
 
   def user_params
