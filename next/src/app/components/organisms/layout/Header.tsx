@@ -16,10 +16,12 @@ const Header = () => {
         <Spacer />
         <Box>
           <SignedIn>
-            <UserButton />
-            <NextLink href="#">
-              <CustomIcon iconName="FaBookmark" color="brand.brown" />
-            </NextLink>
+            <HStack spacing={4}>
+              <UserButton />
+              <NextLink href="#">
+                <CustomIcon iconName="FaBookmark" color="brand.brown" />
+              </NextLink>
+            </HStack>
           </SignedIn>
           <SignedOut>
             <Button size='sm' variant="outline" as={NextLink} href="./sign-in" gap='2px'>
