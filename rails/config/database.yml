@@ -21,12 +21,11 @@ default: &default
   username: <%= ENV['POSTGRES_USER'] %>
   password: <%= ENV['POSTGRES_PASSWORD'] %>
   host: <%= ENV['POSTGRES_HOST'] %>
-  database: <%= ENV['POSTGRES_DB'] %>
 
 
 development:
   <<: *default
-  database: <%= ENV['POSTGRES_DB'] %>
+  database: <%= ENV['POSTGRES_DB'] %>_dev
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
