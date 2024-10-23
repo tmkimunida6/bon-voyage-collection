@@ -1,4 +1,4 @@
-/* eslint no-unused-vars: 0 */
+/* eslint @typescript-eslint/no-unused-vars: 0 */
 
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { headers } from 'next/headers'
