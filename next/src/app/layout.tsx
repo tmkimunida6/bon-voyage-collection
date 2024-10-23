@@ -2,6 +2,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import DefaultTemplate from './components/templates/DefaultTemplate'
 import { Providers } from './providers'
+import { jaJP } from '@clerk/localizations'
 
 export const metadata: Metadata = {
   title: 'お土産との出会いを見つけるサービス',
@@ -18,7 +19,7 @@ export default function RootLayout({
     <html lang="ja" suppressHydrationWarning>
       <body>
         <Providers>
-          <ClerkProvider>
+          <ClerkProvider localization={jaJP}>
             <DefaultTemplate>{children}</DefaultTemplate>
           </ClerkProvider>
         </Providers>

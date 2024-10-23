@@ -1405,6 +1405,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@clerk/localizations@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "@clerk/localizations@npm:3.3.1"
+  dependencies:
+    "@clerk/types": "npm:4.27.0"
+  checksum: 10c0/86cb003bddc1477aa99a72a7e34834548d7e2bdb9a668d79fc189e8e2bec8f74d5cff42fb31c36663c114a985083d6236fcab57085817edf7b45c685b8f43b8b
+  languageName: node
+  linkType: hard
+
 "@clerk/nextjs@npm:^6.0.0":
   version: 6.0.0
   resolution: "@clerk/nextjs@npm:6.0.0"
@@ -5753,6 +5762,7 @@ __metadata:
   dependencies:
     "@chakra-ui/next-js": "npm:^2.4.2"
     "@chakra-ui/react": "npm:^2.10.2"
+    "@clerk/localizations": "npm:^3.3.1"
     "@clerk/nextjs": "npm:^6.0.0"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
