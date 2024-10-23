@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import DefaultTemplate from './components/templates/DefaultTemplate'
 import { Providers } from './providers'
@@ -14,10 +15,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <body>
         <Providers>
-          <DefaultTemplate>{children}</DefaultTemplate>
+          <ClerkProvider>
+            <DefaultTemplate>{children}</DefaultTemplate>
+          </ClerkProvider>
         </Providers>
       </body>
     </html>
