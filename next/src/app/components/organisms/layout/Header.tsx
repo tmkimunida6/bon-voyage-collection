@@ -8,7 +8,7 @@ import CustomIcon from '../../atoms/CustomIcon'
 
 const Header = () => {
   return (
-    <Box as='header'>
+    <Box as="header">
       <HStack p={4} bg="brand.secondary">
         <NextLink href="/">
           <Logo />
@@ -24,7 +24,13 @@ const Header = () => {
             </HStack>
           </SignedIn>
           <SignedOut>
-            <Button size='sm' variant="outline" as={NextLink} href="./sign-in" gap='2px'>
+            <Button
+              size="sm"
+              variant="outline"
+              as={NextLink}
+              href="./sign-in"
+              gap="2px"
+            >
               ログイン
               <CustomIcon iconName="FaSignInAlt" />
             </Button>
