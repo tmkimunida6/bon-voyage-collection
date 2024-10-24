@@ -1,4 +1,3 @@
-import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import DefaultTemplate from './components/templates/DefaultTemplate'
 import { Providers } from './providers'
@@ -16,13 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" suppressHydrationWarning>
-        <body>
-          <Providers>
-            <ClerkProvider>
-              <DefaultTemplate>{children}</DefaultTemplate>
-            </ClerkProvider>
-          </Providers>
-        </body>
-      </html>
+      <body>
+        <Providers>
+          <DefaultTemplate>{children}</DefaultTemplate>
+        </Providers>
+      </body>
+    </html>
   )
 }
