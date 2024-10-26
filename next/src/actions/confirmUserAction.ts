@@ -2,17 +2,20 @@
 
 import { apiBaseUrl } from "@/constants/apiBaseUrl"
 import { fetchUserState } from "@/utils/fetchUserState"
-import { redirect } from "next/navigation"
-import { cookies } from "next/headers"
+import { setAccessTokenAction } from "./setAccessTokenAction"
 
-export async function confirmUserAction(confirmationToken: string | null) {
+type ConfirmUserActionResult = {
+  status: "error" | "info" | "warning" | "success" | "loading"
+  message: string
+}
+
+export async function confirmUserAction(confirmationToken: string | null): Promise<ConfirmUserActionResult> {
   const endpoint = `${apiBaseUrl}/user/confirmations`
 
   const user = await fetchUserState()
 
-  if(!confirmationToken || user.isSignedIn) {
-    return redirect('/')
-  }
+  if(!confirmationToken) return { status: 'error', message: 'URLが有効ではありません。' }
+  if(user.isSignedIn) return { status: 'error', message: 'すでに別のアカウントでログイン済みです。ログアウトしてから再度アクセスしてください。' }
 
   try {
     const res = await fetch(endpoint, {
@@ -22,29 +25,25 @@ export async function confirmUserAction(confirmationToken: string | null) {
       },
       body: JSON.stringify({ confirmation_token: confirmationToken }),
     })
+    const data = await res.json()
 
     if(!res.ok) {
-      return;
+      const message = data.message
+      return { status: 'error', message }
     }
-    const data = await res.json()
-    const accessToken =data.access_token
-    const client =data.client
-    const uid =data.uid
+
+    const accessToken = data.access_token
+    const client = data.client
+    const uid = data.uid
 
     if (accessToken && client && uid) {
-      cookies().set('access-token', accessToken, {
-        httpOnly: true,
-        secure: false,
-      })
-      cookies().set('client', client, { httpOnly: true, secure: false })
-      cookies().set('uid', uid, { httpOnly: true, secure: false })
+      setAccessTokenAction(accessToken, client, uid)
+      return { status: 'success', message: 'ユーザー認証に成功しました。' }
     } else {
-      return;
+      return { status: 'error', message: 'サーバーエラーが発生しました。時間をおいてから再度お試しください。' }
     }
-  } catch(error: any) {
-    console.log(error.message)
-    return;
-  }
 
-  return redirect('/')
+  } catch(error: any) {
+    return { status: 'error', message: 'サーバーエラーが発生しました。時間をおいてから再度お試しください。' }
+  }
 }
