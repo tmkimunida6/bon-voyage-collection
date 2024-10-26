@@ -7,6 +7,12 @@ class Api::V1::User::ConfirmationsController < Api::V1::BaseController
 
     user.update!(confirmed_at: Time.current)
 
-    render json: { message: "User confirmartion succeeded." }, status: :ok
+    token = user.create_new_auth_token
+    render json: {
+      message: "User confirmartion succeeded.",
+      access_token: token['access-token'],
+      client: token['client'],
+      uid: token['uid']
+      }, status: :ok
   end
 end

@@ -3,6 +3,7 @@
 import { apiBaseUrl } from "@/constants/apiBaseUrl"
 import { fetchUserState } from "@/utils/fetchUserState"
 import { redirect } from "next/navigation"
+import { cookies } from "next/headers"
 
 export async function confirmUserAction(confirmationToken: string | null) {
   const endpoint = `${apiBaseUrl}/user/confirmations`
@@ -13,8 +14,6 @@ export async function confirmUserAction(confirmationToken: string | null) {
     return redirect('/')
   }
 
-  let redirectTo = '/sign_in'
-
   try {
     const res = await fetch(endpoint, {
       method: 'PATCH',
@@ -24,13 +23,28 @@ export async function confirmUserAction(confirmationToken: string | null) {
       body: JSON.stringify({ confirmation_token: confirmationToken }),
     })
 
-    if (!res.ok) {
-      redirectTo = '/'
+    if(!res.ok) {
+      return;
     }
-  } catch(e) {
-    console.log(e.message)
-    redirectTo = '/'
+    const data = await res.json()
+    const accessToken =data.access_token
+    const client =data.client
+    const uid =data.uid
+
+    if (accessToken && client && uid) {
+      cookies().set('access-token', accessToken, {
+        httpOnly: true,
+        secure: false,
+      })
+      cookies().set('client', client, { httpOnly: true, secure: false })
+      cookies().set('uid', uid, { httpOnly: true, secure: false })
+    } else {
+      return;
+    }
+  } catch(error: any) {
+    console.log(error.message)
+    return;
   }
 
-  return redirect(redirectTo)
+  return redirect('/')
 }
