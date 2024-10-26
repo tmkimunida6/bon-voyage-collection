@@ -48,7 +48,7 @@ const RegisterForm = () => {
           placeholder="パスワードを入力して下さい"
           errors={fields.password_confirmation.errors}
         />
-        <SubmitButton>ログイン</SubmitButton>
+        <SubmitButton>登録する</SubmitButton>
       </Stack>
     </form>
   )

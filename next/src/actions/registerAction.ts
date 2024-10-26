@@ -1,10 +1,9 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { registerSchema } from '@/schemas/userSchema'
+import { redirect } from 'next/navigation'
 
 export async function registerAction(prevState: unknown, formData: FormData) {
   const submission = parseWithZod(formData, {
@@ -12,7 +11,9 @@ export async function registerAction(prevState: unknown, formData: FormData) {
   })
 
   if (submission.status !== 'success') {
-    return submission.reply()
+    return submission.reply({
+      formErrors: ['認証用のメールを送信しました。'],
+    })
   }
 
   const email = formData.get('email')
@@ -45,5 +46,5 @@ export async function registerAction(prevState: unknown, formData: FormData) {
     })
   }
 
-  redirect('/top')
+  redirect('/register/temporary')
 }

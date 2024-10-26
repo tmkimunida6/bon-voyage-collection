@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
       # devise認証
       mount_devise_token_auth_for "User", at: "auth", controllers: {
-        registration: "api/v1/registrations"
+        registrations: "api/v1/user/registrations"
       }
 
       # メール認証後のアクション
