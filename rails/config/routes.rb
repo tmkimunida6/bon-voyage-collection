@@ -12,7 +12,9 @@ Rails.application.routes.draw do
       get "health_check", to: "health_check#index"
 
       # devise認証
-      mount_devise_token_auth_for "User", at: "auth"
+      mount_devise_token_auth_for "User", at: "auth", controllers: {
+        registration: "api/v1/registrations"
+      }
 
       # ログイン中のユーザー
       namespace :current do

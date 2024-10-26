@@ -12,7 +12,6 @@ export async function fetchUserState() {
     name: '',
     email: '',
     isSignedIn: false,
-    isFetched: false,
   }
 
   if (!accessToken || !client || !uid) {
