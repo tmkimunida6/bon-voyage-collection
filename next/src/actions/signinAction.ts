@@ -1,10 +1,10 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { signinSchema } from '@/schemas/userSchema'
+import { setAccessTokenAction } from './setAccessTokenAction'
 
 export async function signinAction(prevState: unknown, formData: FormData) {
   const submission = parseWithZod(formData, {
@@ -43,12 +43,7 @@ export async function signinAction(prevState: unknown, formData: FormData) {
     const uid = res.headers.get('uid')
 
     if (accessToken && client && uid) {
-      cookies().set('access-token', accessToken, {
-        httpOnly: true,
-        secure: false,
-      })
-      cookies().set('client', client, { httpOnly: true, secure: false })
-      cookies().set('uid', uid, { httpOnly: true, secure: false })
+      setAccessTokenAction(accessToken, client, uid)
     } else {
       return submission.reply({
         formErrors: ['ログインに失敗しました。'],

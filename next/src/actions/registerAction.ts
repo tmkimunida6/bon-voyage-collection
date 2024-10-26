@@ -39,23 +39,6 @@ export async function registerAction(prevState: unknown, formData: FormData) {
         })
       }
     }
-
-    const accessToken = res.headers.get('access-token')
-    const client = res.headers.get('client')
-    const uid = res.headers.get('uid')
-
-    if (accessToken && client && uid) {
-      cookies().set('access-token', accessToken, {
-        httpOnly: true,
-        secure: false,
-      })
-      cookies().set('client', client, { httpOnly: true, secure: false })
-      cookies().set('uid', uid, { httpOnly: true, secure: false })
-    } else {
-      return submission.reply({
-        formErrors: ['ログインに失敗しました。'],
-      })
-    }
   } catch (e) {
     return submission.reply({
       formErrors: ['サーバーエラーが発生しました。'],
