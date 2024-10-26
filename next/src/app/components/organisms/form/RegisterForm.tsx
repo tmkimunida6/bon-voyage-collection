@@ -4,17 +4,17 @@ import { Alert, AlertDescription, AlertIcon, Stack } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { useFormState } from 'react-dom'
-import SubmitButton from '../../atoms/SubmitButton'
-import { signinAction } from '@/actions/signinAction'
-import { signinSchema } from '@/schemas/userSchema'
+import { registerAction } from '@/actions/registerAction'
+import { registerSchema } from '@/schemas/userSchema'
 import InputWithLabel from '../../molecules/InputWithLabel'
+import SubmitButton from '../../atoms/SubmitButton'
 
-const SigninForm = () => {
-  const [lastResult, action] = useFormState(signinAction, undefined)
+const RegisterForm = () => {
+  const [lastResult, action] = useFormState(registerAction, undefined)
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: signinSchema })
+      return parseWithZod(formData, { schema: registerSchema })
     },
   })
 
@@ -41,10 +41,17 @@ const SigninForm = () => {
           placeholder="パスワードを入力して下さい"
           errors={fields.password.errors}
         />
+        <InputWithLabel
+          label="パスワード確認"
+          type="password"
+          name={fields.password_confirmation.name}
+          placeholder="パスワードを入力して下さい"
+          errors={fields.password_confirmation.errors}
+        />
         <SubmitButton>ログイン</SubmitButton>
       </Stack>
     </form>
   )
 }
 
-export default SigninForm
+export default RegisterForm
