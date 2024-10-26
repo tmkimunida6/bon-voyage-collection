@@ -36,7 +36,7 @@ const Top: NextPage = () => {
             <TextIconLink
               iconName="FaChevronRight"
               iconPosition="right"
-              href="./login"
+              href="./sign_in"
             >
               ログインはこちらから
             </TextIconLink>

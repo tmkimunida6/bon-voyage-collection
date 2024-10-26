@@ -11,7 +11,8 @@ import {
   FaChevronRight,
   FaPen,
   FaEye,
-  FaEyeSlash
+  FaEyeSlash,
+  FaSignInAlt,
 } from 'react-icons/fa'
 import { FaGift } from 'react-icons/fa6'
 
@@ -29,5 +30,6 @@ export const iconMapper = {
   FaChevronRight,
   FaPen,
   FaEye,
-  FaEyeSlash
+  FaEyeSlash,
+  FaSignInAlt,
 }

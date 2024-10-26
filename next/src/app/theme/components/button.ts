@@ -18,6 +18,16 @@ export const Button = {
         bg: 'transparent',
       },
     },
+    outline: {
+      bg: 'white',
+      borderColor: 'brand.primary',
+      borderWidth: 2,
+      color: 'brand.primary',
+      _hover: {
+        bg: 'brand.primary',
+        color: 'white',
+      }
+    }
   },
   baseStyle: {
     width: 'max-content',
