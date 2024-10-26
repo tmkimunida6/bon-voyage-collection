@@ -16,6 +16,11 @@ Rails.application.routes.draw do
         registration: "api/v1/registrations"
       }
 
+      # メール認証後のアクション
+      namespace :user do
+        resource :confirmations, only: [:update]
+      end
+
       # ログイン中のユーザー
       namespace :current do
         resource :user, only: [:show]
