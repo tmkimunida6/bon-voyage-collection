@@ -1,5 +1,3 @@
-'use server'
-
 import { cookies } from 'next/headers'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { userType } from '@/app/types/types'

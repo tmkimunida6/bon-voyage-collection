@@ -2,12 +2,11 @@ import { Box, Button, HStack, Spacer, Text } from '@chakra-ui/react'
 import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
-import { useUserStore } from '@/store/userStore'
-import { fetchUserState } from '@/actions/fetchUserState'
+import { fetchUserState } from '@/utils/fetchUserState'
+import SignoutButton from '../../atoms/SignoutButton'
 
 export default async function Header() {
   const user = await fetchUserState()
-  console.log(user)
 
   return (
     <Box as="header">
@@ -18,16 +17,7 @@ export default async function Header() {
         <Spacer />
         {user.isSignedIn ? (
           <>
-          <Button
-            size="sm"
-            variant="outline"
-            as={NextLink}
-            href="./sign_out"
-            gap="2px"
-          >
-            ログアウト
-            <CustomIcon iconName="FaSignInAlt" />
-          </Button>
+          <SignoutButton></SignoutButton>
           <Text>{user.email}</Text>
           </>
         ): (
