@@ -9,6 +9,10 @@ import {
   FaRegHeart,
   FaRegBookmark,
   FaChevronRight,
+  FaPen,
+  FaEye,
+  FaEyeSlash,
+  FaSignInAlt,
 } from 'react-icons/fa'
 import { FaGift } from 'react-icons/fa6'
 
@@ -24,4 +28,8 @@ export const iconMapper = {
   FaRegComment,
   FaRegHeart,
   FaChevronRight,
+  FaPen,
+  FaEye,
+  FaEyeSlash,
+  FaSignInAlt,
 }
