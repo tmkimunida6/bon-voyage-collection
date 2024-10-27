@@ -26,8 +26,8 @@ export const Button = {
       _hover: {
         bg: 'brand.primary',
         color: 'white',
-      }
-    }
+      },
+    },
   },
   baseStyle: {
     width: 'max-content',

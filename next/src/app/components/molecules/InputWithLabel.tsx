@@ -1,4 +1,9 @@
-import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react'
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+} from '@chakra-ui/react'
 import PasswordInput from '../atoms/PasswordInput'
 
 type InputWithLabelProps = {
@@ -14,7 +19,7 @@ const InputWithLabel = ({
   type = 'text',
   name,
   placeholder,
-  errors
+  errors,
 }: InputWithLabelProps) => {
   return (
     <FormControl isRequired isInvalid={!!errors}>

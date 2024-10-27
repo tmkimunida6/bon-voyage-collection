@@ -1,13 +1,15 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 import { cookies } from 'next/headers'
-import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { userType } from '@/app/types/types'
+import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
 export async function fetchUserState() {
   const cookieStore = cookies()
   const accessToken = cookieStore.get('access-token')?.value
   const client = cookieStore.get('client')?.value
   const uid = cookieStore.get('uid')?.value
-  let user:userType = {
+  let user: userType = {
     id: 0,
     name: '',
     email: '',
@@ -15,7 +17,7 @@ export async function fetchUserState() {
   }
 
   if (!accessToken || !client || !uid) {
-    return user;
+    return user
   }
 
   try {
@@ -36,10 +38,10 @@ export async function fetchUserState() {
     const userData = await res.json()
     user = {
       ...userData,
-      isSignedIn: true
+      isSignedIn: true,
     }
     return user
-  } catch (error) {
+  } catch (e) {
     throw new Error('Server error')
   }
 }

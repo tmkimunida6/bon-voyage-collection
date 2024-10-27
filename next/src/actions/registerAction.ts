@@ -1,9 +1,11 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
+import { redirect } from 'next/navigation'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { registerSchema } from '@/schemas/userSchema'
-import { redirect } from 'next/navigation'
 
 export async function registerAction(prevState: unknown, formData: FormData) {
   const submission = parseWithZod(formData, {
@@ -26,16 +28,21 @@ export async function registerAction(prevState: unknown, formData: FormData) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password, password_confirmation, confirm_success_url }),
+      body: JSON.stringify({
+        email,
+        password,
+        password_confirmation,
+        confirm_success_url,
+      }),
     })
 
-    const data = await res.json();
+    const data = await res.json()
     console.log(data)
     if (!res.ok) {
       return submission.reply({
-        formErrors: data.errors.full_messages || data.errors || ['サーバーエラーが発生しました。']
-      });
-
+        formErrors: data.errors.full_messages ||
+          data.errors || ['サーバーエラーが発生しました。'],
+      })
     }
   } catch (e) {
     return submission.reply({

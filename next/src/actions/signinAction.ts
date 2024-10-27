@@ -1,10 +1,12 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
 import { redirect } from 'next/navigation'
+import { setAccessTokenAction } from './setAccessTokenAction'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { signinSchema } from '@/schemas/userSchema'
-import { setAccessTokenAction } from './setAccessTokenAction'
 
 export async function signinAction(prevState: unknown, formData: FormData) {
   const submission = parseWithZod(formData, {
@@ -26,10 +28,11 @@ export async function signinAction(prevState: unknown, formData: FormData) {
       body: JSON.stringify({ email, password }),
     })
 
-    const data = await res.json();
+    const data = await res.json()
     if (!res.ok) {
       return submission.reply({
-        formErrors: data.errors.full_messages || data.errors || ['サーバーエラーが発生しました。'],
+        formErrors: data.errors.full_messages ||
+          data.errors || ['サーバーエラーが発生しました。'],
       })
     }
 

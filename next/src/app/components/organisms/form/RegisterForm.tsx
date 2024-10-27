@@ -4,10 +4,10 @@ import { Alert, AlertDescription, AlertIcon, Stack } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { useFormState } from 'react-dom'
+import SubmitButton from '../../atoms/SubmitButton'
+import InputWithLabel from '../../molecules/InputWithLabel'
 import { registerAction } from '@/actions/registerAction'
 import { registerSchema } from '@/schemas/userSchema'
-import InputWithLabel from '../../molecules/InputWithLabel'
-import SubmitButton from '../../atoms/SubmitButton'
 
 const RegisterForm = () => {
   const [lastResult, action] = useFormState(registerAction, undefined)

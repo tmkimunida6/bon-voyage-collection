@@ -18,12 +18,12 @@ Rails.application.routes.draw do
 
       # メール認証後のアクション
       namespace :user do
-        resource :confirmations, only: [:update]
+        resource :confirmations, only: [ :update ]
       end
 
       # ログイン中のユーザー
       namespace :current do
-        resource :user, only: [:show]
+        resource :user, only: [ :show ]
       end
     end
   end

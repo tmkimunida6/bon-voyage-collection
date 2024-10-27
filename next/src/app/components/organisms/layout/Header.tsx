@@ -2,8 +2,8 @@ import { Box, Button, HStack, Spacer, Text } from '@chakra-ui/react'
 import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
-import { fetchUserState } from '@/utils/fetchUserState'
 import SignoutButton from '../../atoms/SignoutButton'
+import { fetchUserState } from '@/utils/fetchUserState'
 
 export default async function Header() {
   const user = await fetchUserState()
@@ -17,10 +17,10 @@ export default async function Header() {
         <Spacer />
         {user.isSignedIn ? (
           <>
-          <SignoutButton></SignoutButton>
-          <Text>{user.email}</Text>
+            <SignoutButton></SignoutButton>
+            <Text>{user.email}</Text>
           </>
-        ): (
+        ) : (
           <Button
             size="sm"
             variant="outline"
@@ -31,7 +31,7 @@ export default async function Header() {
             ログイン
             <CustomIcon iconName="FaSignInAlt" />
           </Button>
-        ) }
+        )}
         <NextLink href="#">
           <CustomIcon iconName="FaBookmark" color="brand.brown" />
         </NextLink>
