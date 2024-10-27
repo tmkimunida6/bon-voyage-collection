@@ -25,7 +25,7 @@ export default async function Header() {
             size="sm"
             variant="outline"
             as={NextLink}
-            href="./sign_in"
+            href="/sign_in"
             gap="2px"
           >
             ログイン

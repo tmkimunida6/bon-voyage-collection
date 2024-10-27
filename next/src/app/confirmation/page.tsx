@@ -1,7 +1,7 @@
 'use client'
 
 import { confirmUserAction } from '@/actions/confirmUserAction'
-import { Spinner, useToast, VStack, Spacer, Text } from '@chakra-ui/react'
+import { Spinner, useToast, VStack, Text } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
@@ -21,11 +21,11 @@ const Confirmation: NextPage = () => {
         duration: 5000,
         isClosable: true,
       })
+      router.push('/')
     }
     confirmUser()
   }, [])
 
-  router.push('/')
 
   return (
     <>

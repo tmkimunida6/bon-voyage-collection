@@ -29,16 +29,13 @@ export async function registerAction(prevState: unknown, formData: FormData) {
       body: JSON.stringify({ email, password, password_confirmation, confirm_success_url }),
     })
 
+    const data = await res.json();
+    console.log(data)
     if (!res.ok) {
-      if (res.status === 401) {
-        return submission.reply({
-          formErrors: ['無効なメールアドレスまたはパスワードです。'],
-        })
-      } else {
-        return submission.reply({
-          formErrors: ['サーバーエラーが発生しました。'],
-        })
-      }
+      return submission.reply({
+        formErrors: data.errors.full_messages || data.errors || ['サーバーエラーが発生しました。']
+      });
+
     }
   } catch (e) {
     return submission.reply({
