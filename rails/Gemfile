@@ -26,6 +26,9 @@ gem "devise-i18n"
 # トークン認証
 gem "devise_token_auth"
 
+# ▼翻訳
+gem "rails-i18n"
+
 # ▼API
 # レスポンスJSONを制御する
 gem "active_model_serializers"

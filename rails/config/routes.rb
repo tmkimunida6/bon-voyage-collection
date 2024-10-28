@@ -11,20 +11,22 @@ Rails.application.routes.draw do
       # ヘルスチェック
       get "health_check", to: "health_check#index"
 
+      # ユーザー
       # devise認証
       mount_devise_token_auth_for "User", at: "auth", controllers: {
         registrations: "api/v1/user/registrations"
       }
-
       # メール認証後のアクション
       namespace :user do
         resource :confirmations, only: [ :update ]
       end
-
       # ログイン中のユーザー
       namespace :current do
         resource :user, only: [ :show ]
       end
+
+      # お土産
+      resource :souvenirs, only: [ :create ]
     end
   end
 end
