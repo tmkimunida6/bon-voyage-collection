@@ -31,7 +31,7 @@ gem "rails-i18n"
 
 # ▼API
 # レスポンスJSONを制御する
-gem "active_model_serializers"
+gem "alba"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
