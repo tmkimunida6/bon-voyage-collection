@@ -1,8 +1,8 @@
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
 import { cookies } from 'next/headers'
-import { userType } from '@/app/types/types'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
+import { userType } from '@/types/types'
 
 export async function fetchUserState() {
   const cookieStore = cookies()
@@ -42,6 +42,6 @@ export async function fetchUserState() {
     }
     return user
   } catch (e) {
-    throw new Error('Server error')
+    throw new Error(`Server error${e}`)
   }
 }

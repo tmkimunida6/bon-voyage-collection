@@ -1,7 +1,7 @@
 'use client'
 
 import { Icon, IconProps } from '@chakra-ui/react'
-import { iconMapper } from '@/app/iconMapper'
+import { iconMapper } from '@/utils/iconMapper'
 
 type Props = IconProps & {
   iconName: keyof typeof iconMapper

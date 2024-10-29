@@ -1,6 +1,6 @@
 import { Heading, HStack } from '@chakra-ui/react'
 import type { NextPage } from 'next'
-import RegisterForm from '../components/organisms/form/RegisterForm'
+import RegisterForm from '@/components/organisms/form/RegisterForm'
 
 const Register: NextPage = () => {
   return (
