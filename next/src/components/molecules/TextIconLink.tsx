@@ -3,7 +3,7 @@ import { HStack } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
 import CustomIcon from '../atoms/CustomIcon'
-import { iconMapper } from '@/app/iconMapper'
+import { iconMapper } from '@/utils/iconMapper'
 
 type TextIconLinkProps = {
   iconName: keyof typeof iconMapper

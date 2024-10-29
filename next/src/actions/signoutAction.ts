@@ -10,5 +10,5 @@ export async function signoutAction() {
   cookieStore.delete('client')
   cookieStore.delete('uid')
 
-  redirect('/top')
+  redirect('/')
 }

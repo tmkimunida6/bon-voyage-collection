@@ -53,5 +53,5 @@ export async function signinAction(prevState: unknown, formData: FormData) {
     })
   }
 
-  redirect('/top')
+  redirect('/')
 }

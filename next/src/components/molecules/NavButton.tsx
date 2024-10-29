@@ -1,7 +1,7 @@
 import { VStack, Button, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import CustomIcon from '../atoms/CustomIcon'
-import { iconMapper } from '@/app/iconMapper'
+import { iconMapper } from '@/utils/iconMapper'
 
 type NavButtonProps = {
   iconName: keyof typeof iconMapper
