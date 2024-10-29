@@ -27,6 +27,9 @@ Rails.application.routes.draw do
 
       # お土産
       resource :souvenirs, only: [ :create ]
+
+      # カテゴリー
+      resources :categories, only: [ :index ]
     end
   end
 end
