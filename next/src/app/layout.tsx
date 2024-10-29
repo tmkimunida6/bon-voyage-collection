@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import DefaultTemplate from './components/templates/DefaultTemplate'
-import { Providers } from './providers'
+import DefaultTemplate from '@/components/templates/DefaultTemplate'
+import { Providers } from '@/providers/providers'
 
 export const metadata: Metadata = {
   title: 'お土産との出会いを見つけるサービス',
