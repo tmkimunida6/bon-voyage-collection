@@ -21,6 +21,7 @@ const customTheme = extendTheme({
     brand: {
       primary: '#E699AA',
       secondary: '#F2DEE8',
+      black: '#333333',
       gray: '#C8D0DB',
       brown: '#C69B92',
       link: '#88BFB8',

@@ -32,7 +32,7 @@ export default async function Header() {
             <CustomIcon iconName="FaSignInAlt" />
           </Button>
         )}
-        <NextLink href="#">
+        <NextLink href="/">
           <CustomIcon iconName="FaBookmark" color="brand.brown" />
         </NextLink>
       </HStack>

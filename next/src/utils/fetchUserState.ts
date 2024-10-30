@@ -2,14 +2,14 @@
 
 import { cookies } from 'next/headers'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
-import { userType } from '@/types/types'
+import { UserType } from '@/types/types'
 
 export async function fetchUserState() {
   const cookieStore = cookies()
   const accessToken = cookieStore.get('access-token')?.value
   const client = cookieStore.get('client')?.value
   const uid = cookieStore.get('uid')?.value
-  let user: userType = {
+  let user: UserType = {
     id: 0,
     name: '',
     email: '',

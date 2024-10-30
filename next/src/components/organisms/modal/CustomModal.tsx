@@ -17,6 +17,7 @@ type CustomModalProps = {
   onClose: () => void
   modalTitle: string
   buttonText: string
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   children: ReactNode
 }
 
@@ -25,10 +26,11 @@ const CustomModal = ({
   onClose,
   modalTitle,
   buttonText,
+  size = 'md',
   children,
 }: CustomModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size={size}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{modalTitle}</ModalHeader>
