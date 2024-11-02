@@ -16,7 +16,7 @@ type CustomModalProps = {
   isOpen: boolean
   onClose: () => void
   modalTitle: string
-  buttonText: string
+  buttonText?: string
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   children: ReactNode
 }
@@ -37,9 +37,11 @@ const CustomModal = ({
         <ModalCloseButton />
         <ModalBody>{children}</ModalBody>
         <ModalFooter justifyContent="center">
-          <Button bg="brand.primary" color="white" mr={3} onClick={onClose}>
-            {buttonText}
-          </Button>
+          {buttonText && (
+            <Button bg="brand.primary" color="white" mr={3} onClick={onClose}>
+              {buttonText}
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

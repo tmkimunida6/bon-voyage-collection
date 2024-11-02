@@ -6,13 +6,17 @@ import { Input, useDisclosure, useToast } from '@chakra-ui/react'
 import { useState } from 'react'
 import CategoryList from './CategoryList'
 import CustomModal from '@/components/organisms/modal/CustomModal'
-import { CategoryType } from '@/types/types'
+import { useCategoryStore } from '@/store/store'
+import { CategoriesType } from '@/types/types'
 import { fetchCategories } from '@/utils/fetchCategories'
 
 const CategoryInput = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [categories, setCategories] = useState<Array<CategoryType> | null>(null)
+  const [categories, setCategories] = useState<Array<CategoriesType> | null>(
+    null,
+  )
   const toast = useToast()
+  const { selectedCategory } = useCategoryStore()
   const handleCategoryModal = async () => {
     if (!categories) {
       try {
@@ -36,16 +40,24 @@ const CategoryInput = () => {
         placeholder="カテゴリー"
         size="md"
         onClick={handleCategoryModal}
+        name="category_name"
         readOnly
+        value={selectedCategory?.name}
+      />
+      <Input
+        type="hidden"
+        readOnly
+        name="category_id"
+        value={selectedCategory?.id}
       />
       <CustomModal
         isOpen={isOpen}
         onClose={onClose}
         modalTitle="カテゴリーを探す"
-        buttonText="確定する"
+        buttonText=""
         size="lg"
       >
-        <CategoryList categories={categories} />
+        <CategoryList categories={categories} onClose={onClose} />
       </CustomModal>
     </>
   )

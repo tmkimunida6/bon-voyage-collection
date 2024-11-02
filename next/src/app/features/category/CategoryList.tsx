@@ -1,12 +1,25 @@
 import { Accordion, Button, HStack } from '@chakra-ui/react'
 import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
-import { CategoryType } from '@/types/types'
+import { useCategoryStore } from '@/store/store'
+import { CategoriesType } from '@/types/types'
 
 type CategoryListProps = {
-  categories: Array<CategoryType> | null
+  categories: Array<CategoriesType> | null
+  onClose: () => void
 }
 
-export default function CategoryList({ categories }: CategoryListProps) {
+export default function CategoryList({
+  categories,
+  onClose,
+}: CategoryListProps) {
+  const setSelectedCategory = useCategoryStore(
+    (state) => state.setSelectedCategory,
+  )
+  const selectCategory = (category: { id: number; name: string }) => {
+    setSelectedCategory(category)
+    onClose()
+  }
+
   return (
     <Accordion allowMultiple>
       {categories?.map((category) => (
@@ -37,6 +50,12 @@ export default function CategoryList({ categories }: CategoryListProps) {
                       },
                     }}
                     _hover={{ textDecoration: 'underline' }}
+                    onClick={() =>
+                      selectCategory({
+                        id: grand_child_category.id,
+                        name: grand_child_category.name,
+                      })
+                    }
                   >
                     {grand_child_category.name}
                   </Button>

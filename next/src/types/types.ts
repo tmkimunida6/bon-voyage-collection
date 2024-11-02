@@ -14,5 +14,8 @@ export type UserType = {
 export type CategoryType = {
   id: number
   name: string
-  children: Array<CategoryType>
+}
+
+export type CategoriesType = CategoryType & {
+  children: Array<CategoriesType>
 }
