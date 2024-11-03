@@ -13,7 +13,7 @@ import DataWithIcon from '../../molecules/DataWithIcon'
 import Rating from '../../molecules/Rating'
 
 type SouvenirCardProps = {
-  size: 'sm' | 'lg'
+  size: 'sm' | 'md' | 'lg'
   isFavoritable: boolean
 }
 
@@ -21,6 +21,12 @@ const SouvenirCard = ({ size, isFavoritable }: SouvenirCardProps) => {
   const cardStyles = {
     sm: {
       boxShadow: '0 0 15px rgba(0,0,0,0.25)',
+    },
+    md: {
+      border: '1px',
+      borderColor: 'brand.primary',
+      width: '160px',
+      flexShrink: 0
     },
     lg: {
       border: '1px',
