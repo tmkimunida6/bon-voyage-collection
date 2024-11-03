@@ -19,3 +19,8 @@ export type CategoryType = {
 export type CategoriesType = CategoryType & {
   children: Array<CategoriesType>
 }
+
+export type SouvenirCardType = {
+  id: number
+  name: string
+}
