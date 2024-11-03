@@ -1,6 +1,6 @@
 class Api::V1::SouvenirsController < Api::V1::BaseController
-  before_action :authenticate_user!, except: [:index, :show, :related]
-  before_action :set_souvenir, only: [:show, :related]
+  before_action :authenticate_user!, except: [ :index, :show, :related ]
+  before_action :set_souvenir, only: [ :show, :related ]
 
   def index
     souvenirs = Souvenir.all

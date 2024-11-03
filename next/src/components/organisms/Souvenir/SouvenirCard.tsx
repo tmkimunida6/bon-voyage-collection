@@ -8,13 +8,13 @@ import {
   Stack,
   Text,
   LinkOverlay,
-  LinkBox
+  LinkBox,
 } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
 import DataWithIcon from '../../molecules/DataWithIcon'
 import Rating from '../../molecules/Rating'
 import { SouvenirCardType } from '@/types/types'
-import NextLink from 'next/link'
 
 type SouvenirCardProps = {
   size: 'sm' | 'md' | 'lg'
@@ -31,7 +31,7 @@ const SouvenirCard = ({ size, isFavoritable, souvenir }: SouvenirCardProps) => {
       border: '1px',
       borderColor: 'brand.primary',
       width: '160px',
-      flexShrink: 0
+      height: '100%',
     },
     lg: {
       border: '1px',
@@ -50,7 +50,9 @@ const SouvenirCard = ({ size, isFavoritable, souvenir }: SouvenirCardProps) => {
               borderRadius="lg"
             />
             <LinkOverlay as={NextLink} href={`/souvenir/${souvenir.id}`}>
-              <Heading size="xs">{souvenir.name}</Heading>
+              <Heading size="xs" h="2.4em" noOfLines={2}>
+                {souvenir.name}
+              </Heading>
             </LinkOverlay>
             <Rating rate={3.4} />
             <HStack>

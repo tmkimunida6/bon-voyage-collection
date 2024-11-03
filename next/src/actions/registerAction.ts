@@ -37,7 +37,6 @@ export async function registerAction(prevState: unknown, formData: FormData) {
     })
 
     const data = await res.json()
-    console.log(data)
     if (!res.ok) {
       return submission.reply({
         formErrors: data.errors.full_messages ||

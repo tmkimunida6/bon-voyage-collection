@@ -31,6 +31,7 @@ export async function createSouvenirAction(
     })
   }
 
+  let data
   try {
     const res = await fetch(`${apiBaseUrl}/souvenirs`, {
       method: 'POST',
@@ -43,7 +44,7 @@ export async function createSouvenirAction(
       body: JSON.stringify({ name, category_id, description }),
     })
 
-    const data = await res.json()
+    data = await res.json()
     if (!res.ok) {
       return submission.reply({
         formErrors: data.errors.full_messages ||
@@ -55,6 +56,5 @@ export async function createSouvenirAction(
       formErrors: ['サーバーエラーが発生しました。'],
     })
   }
-
-  redirect('/souvenir/complete')
+  redirect(`/souvenir/complete/?souvenir=${data.id}`)
 }
