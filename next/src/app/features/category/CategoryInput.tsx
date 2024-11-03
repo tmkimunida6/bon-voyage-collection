@@ -16,7 +16,7 @@ import { CategoriesType } from '@/types/types'
 import { fetchCategories } from '@/utils/fetchCategories'
 
 type CategoryInputProps = {
-  errors: Array<string> | undefined
+  errors?: Array<string> | undefined
 }
 
 const CategoryInput = ({ errors }: CategoryInputProps) => {
