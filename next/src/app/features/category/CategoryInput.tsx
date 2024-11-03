@@ -2,7 +2,12 @@
 
 'use client'
 
-import { Input, useDisclosure, useToast } from '@chakra-ui/react'
+import {
+  FormErrorMessage,
+  Input,
+  useDisclosure,
+  useToast,
+} from '@chakra-ui/react'
 import { useState } from 'react'
 import CategoryList from './CategoryList'
 import CustomModal from '@/components/organisms/modal/CustomModal'
@@ -10,7 +15,11 @@ import { useCategoryStore } from '@/store/store'
 import { CategoriesType } from '@/types/types'
 import { fetchCategories } from '@/utils/fetchCategories'
 
-const CategoryInput = () => {
+type CategoryInputProps = {
+  errors: Array<string> | undefined
+}
+
+const CategoryInput = ({ errors }: CategoryInputProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [categories, setCategories] = useState<Array<CategoriesType> | null>(
     null,
@@ -37,18 +46,18 @@ const CategoryInput = () => {
   return (
     <>
       <Input
+        type="hidden"
+        readOnly
+        name="category_id"
+        value={selectedCategory?.id}
+      />
+      <Input
         placeholder="カテゴリー"
         size="md"
         onClick={handleCategoryModal}
         name="category_name"
         readOnly
         value={selectedCategory?.name}
-      />
-      <Input
-        type="hidden"
-        readOnly
-        name="category_id"
-        value={selectedCategory?.id}
       />
       <CustomModal
         isOpen={isOpen}
@@ -59,6 +68,7 @@ const CategoryInput = () => {
       >
         <CategoryList categories={categories} onClose={onClose} />
       </CustomModal>
+      <FormErrorMessage>{errors}</FormErrorMessage>
     </>
   )
 }
