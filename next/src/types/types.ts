@@ -4,9 +4,18 @@ export type FormFieldType = {
   fields: Record<string, FieldMetadata>
 }
 
-export type userType = {
+export type UserType = {
   id: number
   name: string
   email: string
   isSignedIn: boolean
+}
+
+export type CategoryType = {
+  id: number
+  name: string
+}
+
+export type CategoriesType = CategoryType & {
+  children: Array<CategoriesType>
 }

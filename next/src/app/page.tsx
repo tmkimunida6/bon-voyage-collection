@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Heading,
   Input,
@@ -14,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import NextLink from 'next/link'
+import CategoryInput from './features/category/CategoryInput'
 import TextIconLink from '@/components/molecules/TextIconLink'
 
 const Top: NextPage = () => {
@@ -26,7 +25,7 @@ const Top: NextPage = () => {
             <Text>まずはあなたにおすすめのお土産をいくつかご紹介します。</Text>
             <HStack>
               <Input placeholder="都市名" size="md" />
-              <Input placeholder="カテゴリー" size="md" />
+              <CategoryInput />
             </HStack>
             <Button variant="primary" as={NextLink} href="./recommend">
               おすすめのお土産をみる

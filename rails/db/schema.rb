@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_26_155232) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_03_001649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "ancestry", null: false, collation: "C"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
+    t.index ["name", "ancestry"], name: "index_categories_on_name_and_ancestry", unique: true
+  end
+
+  create_table "souvenirs", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_souvenirs_on_category_id"
+    t.index ["name"], name: "index_souvenirs_on_name", unique: true
+    t.index ["user_id"], name: "index_souvenirs_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -40,4 +61,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_26_155232) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "souvenirs", "categories"
+  add_foreign_key "souvenirs", "users"
 end

@@ -1,0 +1,73 @@
+categories:
+  - name: "食べる・飲む"
+    children:
+      - name: "お菓子"
+        children:
+          - name: "甘いもの系"
+          - name: "しょっぱい系"
+      - name: "ご飯もの"
+        children:
+          - name: "肉類"
+          - name: "魚類"
+          - name: "野菜"
+          - name: "果物"
+          - name: "麺類"
+          - name: "米類"
+      - name: "飲料"
+        children:
+          - name: "コーヒー"
+          - name: "紅茶・お茶"
+          - name: "フルーツ系"
+          - name: "お酒"
+          - name: "乳飲料"
+      - name: "調味料"
+        children:
+          - name: "和食"
+          - name: "洋食"
+          - name: "アジア"
+          - name: "エスニック"
+          - name: "その他調味料"
+  - name: "使う・鑑賞する"
+    children:
+      - name: "雑貨"
+        children:
+          - name: "インテリア"
+          - name: "ビジネス"
+          - name: "キッチン"
+          - name: "ガジェット系"
+          - name: "ハンドメイド"
+          - name: "文房具"
+          - name: "工芸品・民芸品"
+          - name: "その他雑貨"
+      - name: "ぬいぐるみ・おもちゃ"
+        children:
+          - name: "ぬいぐるみ"
+          - name: "おもちゃ"
+          - name: "キーホルダー"
+          - name: "DVD・CD"
+          - name: "本・雑誌"
+          - name: "その他おもちゃ"
+      - name: "ビューティー"
+        children:
+          - name: "スキンケア"
+          - name: "石けん"
+          - name: "化粧品"
+          - name: "香水・フレグランス"
+          - name: "その他美容系"
+      - name: "ファッション"
+        children:
+          - name: "メンズ"
+          - name: "レディース"
+          - name: "子供用"
+          - name: "かばん"
+          - name: "アクセサリー"
+          - name: "その他小物"
+      - name: "植物"
+        children:
+          - name: "お花"
+          - name: "観葉植物"
+      - name: "その他"
+        children:
+          - name: "絵画"
+          - name: "お守り"
+          - name: "その他"

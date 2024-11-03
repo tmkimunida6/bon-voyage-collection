@@ -21,17 +21,24 @@ const CustomAccordionItem = ({
   hasBorder = false,
   children,
 }: CustomAccordionItemProps) => {
+  const isWhite = triggerBgColor === 'white' || triggerBgColor === 'transparent'
+  const accordionButtonStyles = isWhite
+    ? {
+        color: 'brand.black',
+        borderRadius: 0,
+      }
+    : {
+        color: 'white',
+        borderRadius: '4px',
+        _hover: { opacity: 0.7 },
+        _expanded: { borderRadius: '4px 4px 0 0' },
+      }
+
   return (
-    <AccordionItem>
+    <AccordionItem border="none">
       <Heading>
-        <AccordionButton
-          bg={triggerBgColor}
-          color="white"
-          borderRadius="4px"
-          _hover={{ bg: triggerBgColor, opacity: 0.7 }}
-          _expanded={{ borderRadius: '4px 4px 0 0' }}
-        >
-          <Box as="span" flex="1" textAlign="left">
+        <AccordionButton bg={triggerBgColor} {...accordionButtonStyles}>
+          <Box as="span" flex="1" textAlign="left" fontWeight="bold">
             {title}
           </Box>
           <AccordionIcon />

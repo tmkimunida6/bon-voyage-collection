@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      souvenir:
+        name: お土産の名称
+        description: 説明

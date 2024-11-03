@@ -1,9 +1,17 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'yaml'
+
+# カテゴリー
+def create_categories(categories, parent = nil)
+  categories.each do |category_data|
+    begin
+      children = category_data.delete('children')
+      category = Category.create(category_data.merge(parent: parent))
+      create_categories(children, category) if children
+    rescue => e
+      puts "Invalid category data: #{category_data} #{e.message}"
+    end
+  end
+end
+
+categories_data = YAML.load_file(Rails.root.join('db/seeds/categories.yml'))
+create_categories(categories_data['categories'])
