@@ -9,7 +9,7 @@ export async function getUserTokens() {
   const uid = cookieStore.get('uid')?.value as string
 
   if (!accessToken || !client || !uid) {
-    return null;
+    return null
   }
 
   return { accessToken, client, uid }

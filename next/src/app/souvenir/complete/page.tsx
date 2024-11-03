@@ -1,7 +1,7 @@
-import TextIconLink from '@/components/molecules/TextIconLink'
-import { Heading, HStack, Text, Stack, Button, VStack } from '@chakra-ui/react'
+import { Heading, HStack, Text, Stack, Button } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import NextLink from 'next/link'
+import TextIconLink from '@/components/molecules/TextIconLink'
 
 const CompleteSouvenirCreation: NextPage = () => {
   return (
@@ -13,7 +13,9 @@ const CompleteSouvenirCreation: NextPage = () => {
       <Button variant="primary" as={NextLink} href="/">
         登録したお土産を見る
       </Button>
-      <TextIconLink iconName='FaChevronLeft' iconPosition='left' href='/search'>検索画面へ</TextIconLink>
+      <TextIconLink iconName="FaChevronLeft" iconPosition="left" href="/search">
+        検索画面へ
+      </TextIconLink>
     </Stack>
   )
 }

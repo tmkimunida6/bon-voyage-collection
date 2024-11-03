@@ -1,8 +1,8 @@
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
+import { getUserTokens } from './getUserTokens'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { UserType } from '@/types/types'
-import { getUserTokens } from './getUserTokens'
 
 export async function fetchUserState() {
   let user: UserType = {
@@ -12,7 +12,7 @@ export async function fetchUserState() {
     isSignedIn: false,
   }
   const tokens = await getUserTokens()
-  if(!tokens) return user
+  if (!tokens) return user
 
   try {
     const res = await fetch(`${apiBaseUrl}/current/user`, {

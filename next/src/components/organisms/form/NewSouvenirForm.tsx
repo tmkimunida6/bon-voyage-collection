@@ -6,8 +6,7 @@ import {
   AlertIcon,
   FormControl,
   FormLabel,
-  Stack,
-  Text,
+  Stack
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'

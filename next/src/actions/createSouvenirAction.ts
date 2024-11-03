@@ -3,10 +3,10 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
+import { redirect } from 'next/navigation'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { newSouvenirSchema } from '@/schemas/souvenirSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
-import { redirect } from 'next/navigation'
 
 export async function createSouvenirAction(
   prevState: unknown,
@@ -25,7 +25,7 @@ export async function createSouvenirAction(
   const description = formData.get('souvenir_description')
 
   const tokens = await getUserTokens()
-  if(!tokens) {
+  if (!tokens) {
     return submission.reply({
       formErrors: ['ログインしてください。'],
     })
