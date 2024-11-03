@@ -1,4 +1,5 @@
 import { FieldMetadata } from '@conform-to/react'
+import { number } from 'zod'
 
 export type FormFieldType = {
   fields: Record<string, FieldMetadata>
@@ -18,4 +19,9 @@ export type CategoryType = {
 
 export type CategoriesType = CategoryType & {
   children: Array<CategoriesType>
+}
+
+export type SouvenirCardType = {
+  id: number
+  name: string
 }
