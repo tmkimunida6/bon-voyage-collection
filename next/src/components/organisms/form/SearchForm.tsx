@@ -30,9 +30,9 @@ const SearchForm = () => {
 
   const [word, setWord] = useState<string>(searchParams.get('word') || '')
   const [searchResult, setSearchResult] = useState<{
-    souvenirs: Array<SouvenirType>
+    souvenirs: Array<SouvenirType> | null
     total_pages: number
-  }>({ souvenirs: [], total_pages: 1 })
+  }>({ souvenirs: null, total_pages: 1 })
   const [loading, setLoading] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState(1)
   const { selectedCategory } = useCategoryStore()
@@ -105,14 +105,10 @@ const SearchForm = () => {
         <VStack>
           <Button
             variant="primary"
-            onClick={() =>
-              handleSearch(
-                currentPage,
-                word,
-                selectedCategory.id,
-                selectedCategory.name,
-              )
-            }
+            onClick={() => {
+              handleSearch(1, word, selectedCategory.id, selectedCategory.name)
+              setCurrentPage(1)
+            }}
           >
             検索する
           </Button>

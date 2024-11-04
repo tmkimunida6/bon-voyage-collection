@@ -5,13 +5,14 @@ import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
 import { SouvenirType } from '@/types/types'
 
 type SouvenirSearchResultProps = {
-  souvenirs: Array<SouvenirType>
+  souvenirs: Array<SouvenirType> | null
 }
 
 export default function SouvenirSearchResult({
   souvenirs,
 }: SouvenirSearchResultProps) {
-  console.log(souvenirs)
+  if (!souvenirs) return
+
   return (
     <>
       {souvenirs.length ? (
