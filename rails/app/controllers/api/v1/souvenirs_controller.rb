@@ -39,6 +39,6 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   end
 
   def souvenir_search_params
-    params.permit(:name_or_description_cont)
+    params.permit(:name_or_description_cont, :category_id_eq)
   end
 end

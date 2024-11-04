@@ -5,12 +5,14 @@ import SouvenirCardList from './SouvenirCardList'
 
 type SouvenirSearchResultProps = {
   word: string
+  category_id: number | ''
 }
 
 export default async function SouvenirSearchResult({
   word,
+  category_id
 }: SouvenirSearchResultProps) {
-  const souvenirs = await searchSouvenirData(word)
+  const souvenirs = await searchSouvenirData(word, category_id)
   return (
     <>
       {souvenirs && (

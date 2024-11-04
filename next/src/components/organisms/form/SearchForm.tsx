@@ -4,30 +4,29 @@ import { Button, FormControl, Heading, HStack, Input, Stack, VStack } from '@cha
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
+import { useCategoryStore } from '@/store/store'
 
 const SearchForm = () => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
   const [word, setWord] = useState<string>(searchParams.get('word') || '')
-  // const [searchCategory, setCategory] = useState(
-  //   searchParams.get('category') || '',
-  // )
+  const { selectedCategory } = useCategoryStore()
 
-  const handleSearch = (word: string) => {
-    const urlParams = new URLSearchParams(searchParams)
-    urlParams.set('page', '1')
+  const handleSearch = (word: string, category_id: number) => {
+    const params = new URLSearchParams(searchParams)
+    params.set('page', '1')
     if (word) {
-      urlParams.set('word', word)
+      params.set('word', word)
     } else {
-      urlParams.delete('word')
+      params.delete('word')
     }
-    // if (category) {
-    //   params.set('category', category)
-    // } else {
-    //   params.delete('category')
-    // }
-    replace(`${pathname}?${urlParams.toString()}`)
+    if (selectedCategory) {
+      params.set('category_id', category_id.toString())
+    } else {
+      params.delete('category_id')
+    }
+    replace(`${pathname}?${params.toString()}`)
   }
 
   return (
@@ -46,7 +45,7 @@ const SearchForm = () => {
         </FormControl>
       </HStack>
       <VStack>
-        <Button variant='primary' onClick={() => handleSearch(word)}>検索する</Button>
+        <Button variant='primary' onClick={() => handleSearch(word, selectedCategory.id)}>検索する</Button>
       </VStack>
     </Stack>
   )
