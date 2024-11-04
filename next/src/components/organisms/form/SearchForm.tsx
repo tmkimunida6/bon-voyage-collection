@@ -12,9 +12,8 @@ const SearchForm = () => {
   const { replace } = useRouter()
   const [word, setWord] = useState<string>(searchParams.get('word') || '')
   const { selectedCategory } = useCategoryStore()
-  const selectedCategoryId = selectedCategory ? selectedCategory.id : ''
 
-  const handleSearch = (word: string, category_id: number | '') => {
+  const handleSearch = (word: string, category_id: number | '', category_name: string) => {
     const params = new URLSearchParams(searchParams)
     params.set('page', '1')
     if (word) {
@@ -24,8 +23,10 @@ const SearchForm = () => {
     }
     if (selectedCategory) {
       params.set('category_id', category_id.toString())
+      params.set('category_name', category_name.toString())
     } else {
       params.delete('category_id')
+      params.delete('category_name')
     }
     replace(`${pathname}?${params.toString()}`)
   }
@@ -46,7 +47,7 @@ const SearchForm = () => {
         </FormControl>
       </HStack>
       <VStack>
-        <Button variant='primary' onClick={() => handleSearch(word, selectedCategoryId)}>検索する</Button>
+        <Button variant='primary' onClick={() => handleSearch(word, selectedCategory.id, selectedCategory.name)}>検索する</Button>
       </VStack>
     </Stack>
   )

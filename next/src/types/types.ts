@@ -12,7 +12,7 @@ export type UserType = {
 }
 
 export type CategoryType = {
-  id: number
+  id: number | ''
   name: string
 }
 

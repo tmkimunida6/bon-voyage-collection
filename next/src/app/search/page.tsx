@@ -7,6 +7,7 @@ type SearchParamsProps = {
     page?: string
     word?: string
     category_id?: number | ''
+    category_name?: string
   }
 }
 
