@@ -11,9 +11,10 @@ type SouvenirSearchResultProps = {
 export default function SouvenirSearchResult({
   souvenirs,
 }: SouvenirSearchResultProps) {
+  console.log(souvenirs)
   return (
     <>
-      {souvenirs ? (
+      {souvenirs.length ? (
         <SouvenirCardList
           size="lg"
           renderItem={(size) => (
