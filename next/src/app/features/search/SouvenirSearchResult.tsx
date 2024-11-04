@@ -1,21 +1,24 @@
-import SouvenirCard from './SouvenirCard'
-import SouvenirCardList from './SouvenirCardList'
+import { Stack, Text } from '@chakra-ui/react'
 import { SouvenirType } from '@/types/types'
 import { searchSouvenirData } from '@/utils/searchSouvenirData'
+import TextIconLink from '@/components/molecules/TextIconLink'
+import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
+import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 
 type SouvenirSearchResultProps = {
   word: string
-  category_id: number | ''
+  category_id: string
 }
 
 export default async function SouvenirSearchResult({
   word,
-  category_id,
+  category_id
 }: SouvenirSearchResultProps) {
   const souvenirs = await searchSouvenirData(word, category_id)
+
   return (
     <>
-      {souvenirs && (
+      {souvenirs ? (
         <SouvenirCardList
           size="lg"
           renderItem={(size) => (
@@ -31,6 +34,11 @@ export default async function SouvenirSearchResult({
             </>
           )}
         />
+      ) : (
+        <Stack spacing={4}>
+          <Text>条件に一致するお土産が見つかりませんでした。</Text>
+          <TextIconLink iconName='FaPen' iconPosition='left' href='/souvenir/new'>お土産の新規登録を行う</TextIconLink>
+        </Stack>
       )}
     </>
   )

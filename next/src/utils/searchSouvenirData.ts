@@ -3,10 +3,8 @@ import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
 export async function searchSouvenirData(
   word: string,
-  category_id: number | '',
+  category_id: string,
 ) {
-  if (!word && !category_id) return
-
   try {
     const res = await fetch(
       `${apiBaseUrl}/souvenirs?name_or_description_cont=${word}&category_id_eq=${category_id}`,
@@ -20,13 +18,15 @@ export async function searchSouvenirData(
     )
 
     const data = await res.json()
-    console.log(data)
+
     if (!res.ok) {
-      return null
+      throw new Error(
+        data.errors.full_messages || 'サーバーエラーが発生しました。',
+      )
     }
 
     return data
   } catch (e) {
-    return null
+    throw new Error('サーバーエラーが発生しました。')
   }
 }

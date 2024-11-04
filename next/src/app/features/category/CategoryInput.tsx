@@ -77,7 +77,7 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
       />
       <InputGroup size="md">
         <Input
-          placeholder="カテゴリー"
+          placeholder="カテゴリーを選択"
           size="md"
           name="category_name"
           readOnly

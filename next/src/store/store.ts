@@ -6,6 +6,6 @@ type categoryState = {
   setSelectedCategory: (category: CategoryType) => void
 }
 export const useCategoryStore = create<categoryState>((set) => ({
-  selectedCategory: { id: 0, name: '' },
+  selectedCategory: { id: '', name: '' },
   setSelectedCategory: (category) => set({ selectedCategory: category }),
 }))
