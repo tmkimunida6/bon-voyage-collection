@@ -14,10 +14,10 @@ import {
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
+import SouvenirSearchResult from '@/app/features/search/SouvenirSearchResult'
 import { useCategoryStore } from '@/store/store'
 import { SouvenirType } from '@/types/types'
 import { searchSouvenirData } from '@/utils/searchSouvenirData'
-import SouvenirSearchResult from '@/app/features/search/SouvenirSearchResult'
 
 const SearchForm = () => {
   const searchParams = useSearchParams()
@@ -29,7 +29,7 @@ const SearchForm = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const { selectedCategory } = useCategoryStore()
 
-  const toast = useToast();
+  const toast = useToast()
 
   const handleSearch = async (
     word: string,
@@ -56,7 +56,7 @@ const SearchForm = () => {
       setLoading(true)
       const souvenirs = await searchSouvenirData(word, category_id.toString())
       setSearchResult(souvenirs)
-    } catch(error: any) {
+    } catch (error: any) {
       toast({
         title: error.message,
         status: 'error',
@@ -98,7 +98,6 @@ const SearchForm = () => {
       </Stack>
       <SouvenirSearchResult souvenirs={searchResult} />
     </>
-
   )
 }
 
