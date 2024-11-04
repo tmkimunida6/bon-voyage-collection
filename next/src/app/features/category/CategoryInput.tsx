@@ -11,15 +11,14 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
+import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import CategoryList from './CategoryList'
+import CustomIcon from '@/components/atoms/CustomIcon'
 import CustomModal from '@/components/organisms/modal/CustomModal'
 import { useCategoryStore } from '@/store/store'
 import { CategoriesType } from '@/types/types'
 import { fetchCategories } from '@/utils/fetchCategories'
-import CustomIcon from '@/components/atoms/CustomIcon'
-import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation'
-import { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
 type CategoryInputProps = {
   errors?: Array<string> | undefined
@@ -60,10 +59,13 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
     const params = new URLSearchParams(searchParams)
     const defaultCategoryId = params.get('category_id')
     const defaultCategoryName = params.get('category_name')
-    if(defaultCategoryId && defaultCategoryName) {
-      setSelectedCategory({ id: Number(defaultCategoryId), name: defaultCategoryName})
+    if (defaultCategoryId && defaultCategoryName) {
+      setSelectedCategory({
+        id: Number(defaultCategoryId),
+        name: defaultCategoryName,
+      })
     }
-  }, [])
+  }, [searchParams, setSelectedCategory])
 
   return (
     <>
@@ -73,20 +75,33 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
         name="category_id"
         value={selectedCategory.id || ''}
       />
-      <InputGroup size='md'>
+      <InputGroup size="md">
         <Input
           placeholder="カテゴリー"
           size="md"
           name="category_name"
           readOnly
-          value={selectedCategory.name  || ''}
+          value={selectedCategory.name || ''}
           pr={10}
         />
         <InputRightElement width={selectedCategory.id ? '' : '4.5rem'}>
           {selectedCategory.id ? (
-            <Button size='sm' variant='ghost' p={0}><CustomIcon iconName="FaTimes" color='brand.gray' onClick={() => setSelectedCategory({id: '', name: ''})} /></Button>
+            <Button size="sm" variant="ghost" p={0}>
+              <CustomIcon
+                iconName="FaTimes"
+                color="brand.gray"
+                onClick={() => setSelectedCategory({ id: '', name: '' })}
+              />
+            </Button>
           ) : (
-            <Button h='1.75rem' size='sm' variant='secondary' onClick={handleCategoryModal}>選択</Button>
+            <Button
+              h="1.75rem"
+              size="sm"
+              variant="secondary"
+              onClick={handleCategoryModal}
+            >
+              選択
+            </Button>
           )}
         </InputRightElement>
       </InputGroup>

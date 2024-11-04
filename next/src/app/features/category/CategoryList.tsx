@@ -15,7 +15,7 @@ export default function CategoryList({
   const setSelectedCategory = useCategoryStore(
     (state) => state.setSelectedCategory,
   )
-  const selectCategory = (category: { id: number, name: string }) => {
+  const selectCategory = (category: { id: number; name: string }) => {
     setSelectedCategory(category)
     onClose()
   }

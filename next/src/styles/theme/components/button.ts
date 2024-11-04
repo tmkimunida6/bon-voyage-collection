@@ -6,6 +6,7 @@ export const Button = {
     },
     secondary: {
       bg: 'brand.gray',
+      color: 'white',
     },
     ghost: {
       _hover: {

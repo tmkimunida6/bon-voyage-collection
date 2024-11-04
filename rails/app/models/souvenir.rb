@@ -5,7 +5,7 @@ class Souvenir < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def self.ransackable_attributes(auth_object = nil)
-    ["id", "name", "category_id", "description"]
+    [ "id", "name", "category_id", "description" ]
   end
 
   def self.ransackable_associations(auth_object = nil)

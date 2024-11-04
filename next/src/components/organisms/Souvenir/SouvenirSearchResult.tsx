@@ -1,7 +1,7 @@
 import SouvenirCard from './SouvenirCard'
+import SouvenirCardList from './SouvenirCardList'
 import { SouvenirType } from '@/types/types'
 import { searchSouvenirData } from '@/utils/searchSouvenirData'
-import SouvenirCardList from './SouvenirCardList'
 
 type SouvenirSearchResultProps = {
   word: string
@@ -10,16 +10,23 @@ type SouvenirSearchResultProps = {
 
 export default async function SouvenirSearchResult({
   word,
-  category_id
+  category_id,
 }: SouvenirSearchResultProps) {
   const souvenirs = await searchSouvenirData(word, category_id)
   return (
     <>
       {souvenirs && (
-        <SouvenirCardList size="lg" renderItem={(size) => (
+        <SouvenirCardList
+          size="lg"
+          renderItem={(size) => (
             <>
               {souvenirs.map((souvenir: SouvenirType) => (
-                <SouvenirCard key={souvenir.id} size={size} isFavoritable={true} souvenir={souvenir} />
+                <SouvenirCard
+                  key={souvenir.id}
+                  size={size}
+                  isFavoritable={true}
+                  souvenir={souvenir}
+                />
               ))}
             </>
           )}

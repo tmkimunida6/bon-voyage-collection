@@ -1,8 +1,11 @@
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
-export async function searchSouvenirData(word: string, category_id: number | '') {
-  if (!word && !category_id ) return
+export async function searchSouvenirData(
+  word: string,
+  category_id: number | '',
+) {
+  if (!word && !category_id) return
 
   try {
     const res = await fetch(

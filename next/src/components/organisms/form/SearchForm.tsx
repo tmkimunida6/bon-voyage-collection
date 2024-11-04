@@ -1,6 +1,13 @@
 'use client'
 
-import { Button, FormControl, Heading, HStack, Input, Stack, VStack } from '@chakra-ui/react'
+import {
+  Button,
+  FormControl,
+  HStack,
+  Input,
+  Stack,
+  VStack,
+} from '@chakra-ui/react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
@@ -13,7 +20,11 @@ const SearchForm = () => {
   const [word, setWord] = useState<string>(searchParams.get('word') || '')
   const { selectedCategory } = useCategoryStore()
 
-  const handleSearch = (word: string, category_id: number | '', category_name: string) => {
+  const handleSearch = (
+    word: string,
+    category_id: number | '',
+    category_name: string,
+  ) => {
     const params = new URLSearchParams(searchParams)
     params.set('page', '1')
     if (word) {
@@ -47,7 +58,14 @@ const SearchForm = () => {
         </FormControl>
       </HStack>
       <VStack>
-        <Button variant='primary' onClick={() => handleSearch(word, selectedCategory.id, selectedCategory.name)}>検索する</Button>
+        <Button
+          variant="primary"
+          onClick={() =>
+            handleSearch(word, selectedCategory.id, selectedCategory.name)
+          }
+        >
+          検索する
+        </Button>
       </VStack>
     </Stack>
   )

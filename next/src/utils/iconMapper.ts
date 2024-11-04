@@ -13,7 +13,7 @@ import {
   FaEyeSlash,
   FaSignInAlt,
   FaClipboardList,
-  FaTimes
+  FaTimes,
 } from 'react-icons/fa'
 import { FaGift, FaChevronRight, FaChevronLeft } from 'react-icons/fa6'
 
@@ -35,5 +35,5 @@ export const iconMapper = {
   FaEyeSlash,
   FaSignInAlt,
   FaClipboardList,
-  FaTimes
+  FaTimes,
 }
