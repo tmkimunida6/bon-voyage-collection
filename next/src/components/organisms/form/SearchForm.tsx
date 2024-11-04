@@ -12,8 +12,9 @@ const SearchForm = () => {
   const { replace } = useRouter()
   const [word, setWord] = useState<string>(searchParams.get('word') || '')
   const { selectedCategory } = useCategoryStore()
+  const selectedCategoryId = selectedCategory ? selectedCategory.id : ''
 
-  const handleSearch = (word: string, category_id: number) => {
+  const handleSearch = (word: string, category_id: number | '') => {
     const params = new URLSearchParams(searchParams)
     params.set('page', '1')
     if (word) {
@@ -45,7 +46,7 @@ const SearchForm = () => {
         </FormControl>
       </HStack>
       <VStack>
-        <Button variant='primary' onClick={() => handleSearch(word, selectedCategory.id)}>検索する</Button>
+        <Button variant='primary' onClick={() => handleSearch(word, selectedCategoryId)}>検索する</Button>
       </VStack>
     </Stack>
   )
