@@ -6,16 +6,13 @@ import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 
 type SouvenirSearchResultProps = {
-  word: string
-  category_id: string
+  souvenirs: Array<SouvenirType>
 }
 
-export default async function SouvenirSearchResult({
-  word,
-  category_id
+export default function SouvenirSearchResult({
+  souvenirs
 }: SouvenirSearchResultProps) {
-  const souvenirs = await searchSouvenirData(word, category_id)
-
+  // const souvenirs = await searchSouvenirData(word, category_id)
   return (
     <>
       {souvenirs ? (
