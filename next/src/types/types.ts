@@ -8,7 +8,7 @@ export type UserType = {
   id: number
   name: string
   email: string
-  isSignedIn: boolean
+  isSignedIn?: boolean
 }
 
 export type CategoryType = {
@@ -23,4 +23,13 @@ export type CategoriesType = CategoryType & {
 export type SouvenirCardType = {
   id: number
   name: string
+}
+
+export type SouvenirType = {
+  id: number
+  name: string
+  description: string
+  created_at: Date
+  user: UserType
+  categories: CategoriesType
 }
