@@ -22,13 +22,13 @@ const Top: NextPage = () => {
         <Stack spacing={8}>
           <Heading>お土産との出会いを見つけるサービス</Heading>
           <VStack spacing={6}>
-            <Text>まずはあなたにおすすめのお土産をいくつかご紹介します。</Text>
+            <Text>まずはお土産を探してみましょう。</Text>
             <HStack>
-              <Input placeholder="都市名" size="md" />
+              <Input placeholder="フリーワード" size="md" />
               <CategoryInput />
             </HStack>
             <Button variant="primary" as={NextLink} href="./recommend">
-              おすすめのお土産をみる
+              お土産をみる
             </Button>
           </VStack>
           <Flex justifyContent="right">

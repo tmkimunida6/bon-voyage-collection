@@ -52,7 +52,7 @@ export default function CategoryList({
                     _hover={{ textDecoration: 'underline' }}
                     onClick={() =>
                       selectCategory({
-                        id: grand_child_category.id,
+                        id: grand_child_category.id as number,
                         name: grand_child_category.name,
                       })
                     }

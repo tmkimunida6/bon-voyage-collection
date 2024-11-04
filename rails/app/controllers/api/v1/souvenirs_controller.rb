@@ -3,8 +3,12 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   before_action :set_souvenir, only: [ :show, :related ]
 
   def index
-    souvenirs = Souvenir.all
-    render json: SouvenirResource.new(souvenirs).serialize
+    q = Souvenir.ransack(souvenir_search_params)
+    souvenirs = q.result(distinct: true).order("created_at desc").page(params[:page])
+    render json: {
+      souvenirs: JSON.parse(SouvenirResource.new(souvenirs).serialize),
+      total_pages: souvenirs.total_pages
+    }
   end
 
   def show
@@ -35,5 +39,9 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
 
   def set_souvenir
     @souvenir = Souvenir.find(params[:id])
+  end
+
+  def souvenir_search_params
+    params.permit(:name_or_description_cont, :category_id_eq, :page)
   end
 end

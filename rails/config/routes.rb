@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       end
 
       # カテゴリー
-      resources :categories, only: [ :index ]
+      resources :categories, only: [ :index, :show ]
     end
   end
 end

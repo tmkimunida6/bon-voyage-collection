@@ -11,3 +11,9 @@ export const newSouvenirSchema = z.object({
     .max(200, '200文字以内で入力してください。')
     .optional(),
 })
+
+export const searchSouvenirSchema = z.object({
+  souvenir_name: z.string().optional(),
+  category_id: z.string().optional(),
+  category_name: z.string().optional(),
+})
