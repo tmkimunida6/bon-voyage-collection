@@ -12,10 +12,9 @@ export default function CategoryList({
   categories,
   onClose,
 }: CategoryListProps) {
-  const setSelectedCategory = useCategoryStore(
-    (state) => state.setSelectedCategory,
-  )
-  const selectCategory = (category: { id: number; name: string }) => {
+  const { setSelectedCategory}  = useCategoryStore()
+
+  const onSelectCategory = (category: { id: number; name: string }) => {
     setSelectedCategory(category)
     onClose()
   }
@@ -51,7 +50,7 @@ export default function CategoryList({
                     }}
                     _hover={{ textDecoration: 'underline' }}
                     onClick={() =>
-                      selectCategory({
+                      onSelectCategory({
                         id: grand_child_category.id as number,
                         name: grand_child_category.name,
                       })

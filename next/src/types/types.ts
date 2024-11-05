@@ -21,7 +21,7 @@ export type CategoriesType = CategoryType & {
 }
 
 export type SouvenirCardType = {
-  id: number
+  id: number | ""
   name: string
 }
 

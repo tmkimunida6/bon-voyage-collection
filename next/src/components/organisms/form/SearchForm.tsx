@@ -22,8 +22,13 @@ import CustomIcon from '@/components/atoms/CustomIcon'
 import { useCategoryStore } from '@/store/store'
 import { SouvenirType } from '@/types/types'
 import { searchSouvenirData } from '@/utils/searchSouvenirData'
+import SouvenirSearchResultForPost from '@/app/features/search/SouvenirSearchResultForPost'
 
-const SearchForm = () => {
+type SearchFormProps = {
+  page: "search" | "post"
+}
+
+const SearchForm = ({ page }: SearchFormProps) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -86,9 +91,23 @@ const SearchForm = () => {
     handleSearch(page, word, selectedCategory.id, selectedCategory.name)
   }
 
+  // 検索結果だしわけ
+  let resultUI
+  switch (page){
+    case 'search':
+      resultUI = <SouvenirSearchResult souvenirs={searchResult.souvenirs} />
+      break;
+    case 'post':
+      resultUI = <SouvenirSearchResultForPost souvenirs={searchResult.souvenirs} />
+      break;
+    default:
+      resultUI = <SouvenirSearchResult souvenirs={searchResult.souvenirs} />
+      break;
+  }
+
   return (
     <>
-      <Stack spacing={6}>
+      <Stack spacing={6} mb={6}>
         <HStack>
           <FormControl>
             <Input
@@ -120,7 +139,7 @@ const SearchForm = () => {
         </VStack>
       ) : (
         <>
-          <SouvenirSearchResult souvenirs={searchResult.souvenirs} />
+          {resultUI}
           {searchResult.total_pages > 1 && (
             <HStack spacing={4} justify="center" mt={4}>
               <IconButton
