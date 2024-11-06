@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_03_001649) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_06_130537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_03_001649) do
     t.datetime "updated_at", null: false
     t.index ["ancestry"], name: "index_categories_on_ancestry"
     t.index ["name", "ancestry"], name: "index_categories_on_name_and_ancestry", unique: true
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "souvenir_id", null: false
+    t.decimal "rating", precision: 3, scale: 1
+    t.integer "for_who"
+    t.integer "age"
+    t.text "review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["souvenir_id"], name: "index_posts_on_souvenir_id"
+    t.index ["user_id", "souvenir_id"], name: "index_posts_on_user_id_and_souvenir_id", unique: true
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "souvenirs", force: :cascade do |t|
@@ -61,6 +75,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_03_001649) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "posts", "souvenirs"
+  add_foreign_key "posts", "users"
   add_foreign_key "souvenirs", "categories"
   add_foreign_key "souvenirs", "users"
 end
