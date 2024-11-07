@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client'
 
 import {
@@ -5,6 +7,8 @@ import {
   AlertDescription,
   AlertIcon,
   Button,
+  FormControl,
+  FormErrorMessage,
   Heading,
   HStack,
   Input,
@@ -14,24 +18,28 @@ import {
   Stack,
   Textarea,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
+import { redirect } from 'next/navigation'
+import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import CustomModal from '../modal/CustomModal'
-import { createSouvenirAction } from '@/actions/createSouvenirAction'
-import RatingSlider from '@/components/molecules/RatingSlider'
-import { newSouvenirSchema } from '@/schemas/souvenirSchema'
 import SearchForm from './SearchForm'
-import { useSouvenirStore } from '@/store/store'
+import { createPostAction } from '@/actions/createPostAction'
 import SubmitButton from '@/components/atoms/SubmitButton'
+import RatingSlider from '@/components/molecules/RatingSlider'
+import { ageOptions, forWhoOptions } from '@/constants/options'
+import { postSchema } from '@/schemas/postSchema'
+import { useSouvenirStore } from '@/store/store'
 
 const PostForm = () => {
-  const [lastResult, action] = useFormState(createSouvenirAction, undefined)
+  const [lastResult, action] = useFormState(createPostAction, undefined)
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: newSouvenirSchema })
+      return parseWithZod(formData, { schema: postSchema })
     },
   })
 
@@ -44,6 +52,21 @@ const PostForm = () => {
   // お土産グローバルステート
   const { selectedSouvenir } = useSouvenirStore()
 
+  // フォーム送信後の処理
+  const toast = useToast()
+  useEffect(() => {
+    if (!lastResult) return
+    if (lastResult.status === 'success') {
+      toast({
+        title: '記録が完了しました。',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+    redirect('/')
+  }, [lastResult])
+
   return (
     <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
       {form.errors && (
@@ -53,61 +76,66 @@ const PostForm = () => {
         </Alert>
       )}
       <Stack spacing={6}>
-        <Input type="hidden" readOnly name="souvenir_id" value={selectedSouvenir.id} />
-        <InputGroup size="md">
+        <FormControl isRequired isInvalid={!!fields.souvenir_id.errors}>
           <Input
-            placeholder="お土産を選択"
-            size="md"
-            name="souvenir_name"
-            value={selectedSouvenir.name}
+            type="hidden"
             readOnly
-            pr={10}
+            name={fields.souvenir_id.name}
+            value={selectedSouvenir.id}
           />
-          <InputRightElement width="4.5rem">
-            <Button
-              h="1.75rem"
-              size="sm"
-              variant="secondary"
-              onClick={handleSouvenirModal}
+          <InputGroup size="md">
+            <Input
+              placeholder="お土産を選択"
+              size="md"
+              name={fields.souvenir_name.name}
+              value={selectedSouvenir.name}
+              readOnly
+              pr={10}
+            />
+            <InputRightElement width="4.5rem">
+              <Button
+                h="1.75rem"
+                size="sm"
+                variant="secondary"
+                onClick={handleSouvenirModal}
+              >
+                検索
+              </Button>
+            </InputRightElement>
+            <CustomModal
+              isOpen={isOpen}
+              onClose={onClose}
+              modalTitle="お土産を探す"
+              buttonText={selectedSouvenir.id ? '確定する' : ''}
+              size="lg"
             >
-              検索
-            </Button>
-          </InputRightElement>
-          <CustomModal
-            isOpen={isOpen}
-            onClose={onClose}
-            modalTitle="お土産を探す"
-            buttonText={selectedSouvenir.id ? "確定する" : ""}
-            size="lg"
-          >
-            <SearchForm page="post" />
-          </CustomModal>
-        </InputGroup>
+              <SearchForm page="post" />
+            </CustomModal>
+          </InputGroup>
+          <FormErrorMessage>{fields.souvenir_id.errors}</FormErrorMessage>
+        </FormControl>
         <Stack spacing={1}>
           <Heading as="h2" fontSize="md">
             レビュー
           </Heading>
           <RatingSlider />
           <HStack spacing={1} mt={3}>
-            <Select placeholder="誰に？" size="sm" name="toWho">
-              <option value="自分">自分</option>
-              <option value="家族">家族</option>
-              <option value="友人">友人</option>
-              <option value="ペット">ペット</option>
-              <option value="その他">その他</option>
+            <Select placeholder="誰に？" size="sm" name={fields.for_who.name}>
+              {forWhoOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </Select>
-            <Select placeholder="年齢層" size="sm" name="age">
-              <option value="0~9歳">0~9歳</option>
-              <option value="10代">10代</option>
-              <option value="20代">20代</option>
-              <option value="30代">30代</option>
-              <option value="40代">40代</option>
-              <option value="50代">50代</option>
-              <option value="60代">60代</option>
-              <option value="70代以上">70代以上</option>
+            <Select placeholder="年齢層" size="sm" name={fields.age.name}>
+              {ageOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </Select>
           </HStack>
-          <Textarea placeholder="感想を記入" />
+          <Textarea placeholder="感想を記入" name={fields.review.name} />
         </Stack>
         <SubmitButton>記録する</SubmitButton>
       </Stack>

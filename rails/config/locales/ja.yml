@@ -5,6 +5,7 @@ ja:
         name: お土産の名称
         description: 説明
       post:
+        souvenir_id: "このお土産"
         for_who:
           for_myself: 自分用
           for_family: 家族用
