@@ -34,6 +34,9 @@ Rails.application.routes.draw do
 
       # カテゴリー
       resources :categories, only: [ :index, :show ]
+
+      # 投稿
+      resources :posts, only: [ :index, :create ]
     end
   end
 end

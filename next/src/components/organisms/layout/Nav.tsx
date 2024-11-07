@@ -17,7 +17,7 @@ const Nav = ({ footerIntersecting }: NavProps) => {
       >
         <NavButton iconName="FaHome" text="ホーム" href="/" />
         <NavButton iconName="FaSearch" text="検索" href="/search" />
-        <NavButton iconName="FaPenSquare" text="投稿" href="/" />
+        <NavButton iconName="FaPenSquare" text="投稿" href="/post" />
         <NavButton iconName="FaUserAlt" text="マイページ" href="/" />
       </HStack>
     </Box>

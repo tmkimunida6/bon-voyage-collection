@@ -4,3 +4,21 @@ ja:
       souvenir:
         name: お土産の名称
         description: 説明
+      post:
+        souvenir_id: "このお土産"
+        for_who:
+          for_myself: 自分用
+          for_family: 家族用
+          for_friends: 友人用
+          for_partner: 恋人用
+          for_pets: ペット用
+          for_other: その他
+        age:
+          under_ten: 0~9歳
+          teens: 10代
+          twenties: 20代
+          thirties: 30代
+          forties: 40代
+          fifties: 50代
+          sixties: 60代
+          over_seventies: 70代以上

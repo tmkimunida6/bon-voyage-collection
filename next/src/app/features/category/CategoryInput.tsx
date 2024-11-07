@@ -48,10 +48,7 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
     onOpen()
   }
 
-  const { selectedCategory } = useCategoryStore()
-  const setSelectedCategory = useCategoryStore(
-    (state) => state.setSelectedCategory,
-  )
+  const { selectedCategory, setSelectedCategory } = useCategoryStore()
 
   // 初回ロード時にクエリにカテゴリーがあった場合にデフォルトの値をセット
   const searchParams = useSearchParams()

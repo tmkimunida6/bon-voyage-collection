@@ -7,7 +7,7 @@ const Search = () => {
       <HStack mb={6}>
         <Heading as="h1">検索</Heading>
       </HStack>
-      <SearchForm />
+      <SearchForm page="search" />
     </Stack>
   )
 }
