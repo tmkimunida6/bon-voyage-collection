@@ -12,7 +12,7 @@ export default function CategoryList({
   categories,
   onClose,
 }: CategoryListProps) {
-  const { setSelectedCategory}  = useCategoryStore()
+  const { setSelectedCategory } = useCategoryStore()
 
   const onSelectCategory = (category: { id: number; name: string }) => {
     setSelectedCategory(category)

@@ -13,5 +13,4 @@ class PostResource
   attribute :age do |post|
     I18n.t("activerecord.attributes.post.age.#{post.age}")
   end
-
 end

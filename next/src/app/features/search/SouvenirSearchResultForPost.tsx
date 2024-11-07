@@ -1,7 +1,16 @@
-import { Button, Card, CardBody, Heading, Image, SimpleGrid, Stack, Text } from '@chakra-ui/react'
+import {
+  Button,
+  Card,
+  CardBody,
+  Heading,
+  Image,
+  SimpleGrid,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import TextIconLink from '@/components/molecules/TextIconLink'
-import { SouvenirCardType, SouvenirType } from '@/types/types'
 import { useSouvenirStore } from '@/store/store'
+import { SouvenirCardType, SouvenirType } from '@/types/types'
 
 type SouvenirSearchResultForPostProps = {
   souvenirs: Array<SouvenirType> | null
@@ -10,9 +19,10 @@ type SouvenirSearchResultForPostProps = {
 export default function SouvenirSearchResultForPost({
   souvenirs,
 }: SouvenirSearchResultForPostProps) {
+  const { selectedSouvenir, setSelectedSouvenir } = useSouvenirStore()
+
   if (!souvenirs) return
 
-  const { selectedSouvenir, setSelectedSouvenir } = useSouvenirStore()
   const onSelectSouvenir = (souvenir: SouvenirCardType) => {
     setSelectedSouvenir(souvenir)
   }
@@ -36,10 +46,26 @@ export default function SouvenirSearchResultForPost({
                   opacity: 1,
                 },
               }}
-              onClick={() => onSelectSouvenir({ id: souvenir.id, name: souvenir.name })}
+              onClick={() =>
+                onSelectSouvenir({ id: souvenir.id, name: souvenir.name })
+              }
               disabled={souvenir.id === selectedSouvenir.id}
             >
-              <Card h="100%" boxShadow="none" border="1px" borderColor={souvenir.id === selectedSouvenir.id ? "brand.primary" : "brand.secondary"} bg={souvenir.id === selectedSouvenir.id ? "brand.primary" : "white"}>
+              <Card
+                h="100%"
+                boxShadow="none"
+                border="1px"
+                borderColor={
+                  souvenir.id === selectedSouvenir.id
+                    ? 'brand.primary'
+                    : 'brand.secondary'
+                }
+                bg={
+                  souvenir.id === selectedSouvenir.id
+                    ? 'brand.primary'
+                    : 'white'
+                }
+              >
                 <CardBody p={1}>
                   <Stack spacing={2}>
                     <Image

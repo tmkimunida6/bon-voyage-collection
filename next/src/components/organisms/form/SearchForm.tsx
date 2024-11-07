@@ -18,14 +18,14 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
 import SouvenirSearchResult from '@/app/features/search/SouvenirSearchResult'
+import SouvenirSearchResultForPost from '@/app/features/search/SouvenirSearchResultForPost'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import { useCategoryStore } from '@/store/store'
 import { SouvenirType } from '@/types/types'
 import { searchSouvenirData } from '@/utils/searchSouvenirData'
-import SouvenirSearchResultForPost from '@/app/features/search/SouvenirSearchResultForPost'
 
 type SearchFormProps = {
-  page: "search" | "post"
+  page: 'search' | 'post'
 }
 
 const SearchForm = ({ page }: SearchFormProps) => {
@@ -93,16 +93,18 @@ const SearchForm = ({ page }: SearchFormProps) => {
 
   // 検索結果だしわけ
   let resultUI
-  switch (page){
+  switch (page) {
     case 'search':
       resultUI = <SouvenirSearchResult souvenirs={searchResult.souvenirs} />
-      break;
+      break
     case 'post':
-      resultUI = <SouvenirSearchResultForPost souvenirs={searchResult.souvenirs} />
-      break;
+      resultUI = (
+        <SouvenirSearchResultForPost souvenirs={searchResult.souvenirs} />
+      )
+      break
     default:
       resultUI = <SouvenirSearchResult souvenirs={searchResult.souvenirs} />
-      break;
+      break
   }
 
   return (

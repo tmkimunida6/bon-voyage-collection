@@ -11,6 +11,6 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :posts, [:user_id, :souvenir_id], unique: true
+    add_index :posts, [ :user_id, :souvenir_id ], unique: true
   end
 end
