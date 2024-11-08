@@ -6,11 +6,9 @@ import {
   Button,
   FormControl,
   HStack,
-  IconButton,
   Input,
   Spinner,
   Stack,
-  Text,
   useToast,
   VStack,
 } from '@chakra-ui/react'
@@ -19,9 +17,9 @@ import { useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
 import SouvenirSearchResult from '@/app/features/search/SouvenirSearchResult'
 import SouvenirSearchResultForPost from '@/app/features/search/SouvenirSearchResultForPost'
-import CustomIcon from '@/components/atoms/CustomIcon'
+import Pagination from '@/components/molecules/Pagination'
 import { useCategoryStore } from '@/store/store'
-import { SouvenirType } from '@/types/types'
+import { PagesType, SouvenirType } from '@/types/types'
 import { searchSouvenirData } from '@/utils/searchSouvenirData'
 
 type SearchFormProps = {
@@ -36,10 +34,17 @@ const SearchForm = ({ page }: SearchFormProps) => {
   const [word, setWord] = useState<string>(searchParams.get('word') || '')
   const [searchResult, setSearchResult] = useState<{
     souvenirs: Array<SouvenirType> | null
-    total_pages: number
-  }>({ souvenirs: null, total_pages: 1 })
+    pages: PagesType
+  }>({
+    souvenirs: null,
+    pages: {
+      current_page: 1,
+      total_pages: 1,
+      prev_page: null,
+      next_page: null,
+    },
+  })
   const [loading, setLoading] = useState<boolean>(false)
-  const [currentPage, setCurrentPage] = useState(1)
   const { selectedCategory } = useCategoryStore()
 
   const toast = useToast()
@@ -86,11 +91,6 @@ const SearchForm = ({ page }: SearchFormProps) => {
     }
   }
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-    handleSearch(page, word, selectedCategory.id, selectedCategory.name)
-  }
-
   // 検索結果だしわけ
   let resultUI
   switch (page) {
@@ -128,7 +128,6 @@ const SearchForm = ({ page }: SearchFormProps) => {
             variant="primary"
             onClick={() => {
               handleSearch(1, word, selectedCategory.id, selectedCategory.name)
-              setCurrentPage(1)
             }}
           >
             検索する
@@ -142,24 +141,14 @@ const SearchForm = ({ page }: SearchFormProps) => {
       ) : (
         <>
           {resultUI}
-          {searchResult.total_pages > 1 && (
-            <HStack spacing={4} justify="center" mt={4}>
-              <IconButton
-                icon={<CustomIcon iconName="FaChevronLeft" />}
-                aria-label="Previous Page"
-                onClick={() => handlePageChange(currentPage - 1)}
-                isDisabled={currentPage === 1}
-              />
-              <Text>
-                Page {currentPage} / {searchResult.total_pages}
-              </Text>
-              <IconButton
-                icon={<CustomIcon iconName="FaChevronRight" />}
-                aria-label="Next Page"
-                onClick={() => handlePageChange(currentPage + 1)}
-                isDisabled={currentPage === searchResult.total_pages}
-              />
-            </HStack>
+          {searchResult.pages.total_pages > 1 && (
+            <Pagination
+              currentPage={searchResult.pages.current_page}
+              totalPages={searchResult.pages.total_pages}
+              nextPage={searchResult.pages.next_page}
+              prevPage={searchResult.pages.prev_page}
+              handleSearch={handleSearch}
+            />
           )}
         </>
       )}

@@ -7,7 +7,12 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
     souvenirs = q.result(distinct: true).order("created_at desc").page(params[:page])
     render json: {
       souvenirs: JSON.parse(SouvenirResource.new(souvenirs).serialize),
-      total_pages: souvenirs.total_pages
+      pages: {
+        current_page: souvenirs.current_page,
+        total_pages: souvenirs.total_pages,
+        next_page: souvenirs.next_page,
+        prev_page: souvenirs.prev_page
+      }
     }
   end
 

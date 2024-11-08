@@ -33,3 +33,10 @@ export type SouvenirType = {
   user: UserType
   categories: CategoriesType
 }
+
+export type PagesType = {
+  current_page: number
+  total_pages: number
+  next_page: number | null
+  prev_page: number | null
+}
