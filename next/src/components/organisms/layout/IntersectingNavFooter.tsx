@@ -1,17 +1,35 @@
 'use client'
 
-import { useRef } from 'react'
-import { useIntersection } from 'use-intersection'
+import { useEffect, useRef, useState } from 'react'
 import Footer from './Footer'
 import Nav from './Nav'
 
 const IntersectingNavFooter = () => {
   const footerRef = useRef<HTMLElement>(null)
-  const footerIntersecting = useIntersection(footerRef)
+  const [isIntersecting, setIsIntersecting] = useState<boolean>(false)
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        setIsIntersecting(entry.isIntersecting)
+      },
+      { threshold: 0 }
+    )
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current)
+    }
+
+    return () => {
+      if (footerRef.current) {
+        observer.unobserve(footerRef.current)
+      }
+    }
+  }, [footerRef])
   return (
     <>
-      <Nav footerIntersecting={footerIntersecting} />
+      <Nav isIntersecting={isIntersecting} />
       <Footer ref={footerRef} />
     </>
   )
