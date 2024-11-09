@@ -1,4 +1,6 @@
 class Souvenir < ApplicationRecord
+  include Aliasable
+
   belongs_to :user
   belongs_to :category
   has_many :posts, dependent: :destroy

@@ -1,5 +1,5 @@
 class UserResource
   include Alba::Resource
 
-  attributes :id, :name, :email
+  attributes :alias_id, :name
 end

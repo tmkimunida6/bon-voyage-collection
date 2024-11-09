@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_06_130537) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_09_025017) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_06_130537) do
     t.text "review"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "alias_id"
+    t.index ["alias_id"], name: "index_posts_on_alias_id", unique: true
     t.index ["souvenir_id"], name: "index_posts_on_souvenir_id"
     t.index ["user_id", "souvenir_id"], name: "index_posts_on_user_id_and_souvenir_id", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -44,6 +46,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_06_130537) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id", null: false
+    t.string "alias_id"
+    t.index ["alias_id"], name: "index_souvenirs_on_alias_id", unique: true
     t.index ["category_id"], name: "index_souvenirs_on_category_id"
     t.index ["name"], name: "index_souvenirs_on_name", unique: true
     t.index ["user_id"], name: "index_souvenirs_on_user_id"
@@ -69,6 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_06_130537) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "confirm_success_url"
+    t.string "alias_id"
+    t.index ["alias_id"], name: "index_users_on_alias_id", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

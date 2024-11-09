@@ -56,5 +56,5 @@ export async function createSouvenirAction(
       formErrors: ['サーバーエラーが発生しました。'],
     })
   }
-  redirect(`/souvenir/complete/?souvenir=${data.id}`)
+  redirect(`/souvenir/complete/?souvenir=${data.alias_id}`)
 }

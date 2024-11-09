@@ -1,5 +1,5 @@
 class RelatedSouvenirResource
   include Alba::Resource
 
-  attributes :id, :name
+  attributes :alias_id, :name
 end

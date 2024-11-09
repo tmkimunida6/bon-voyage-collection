@@ -75,7 +75,7 @@ const PostCardList = ({ postResult }: PostCardListProps) => {
         templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
       >
         {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCard key={post.alias_id} post={post} />
         ))}
       </SimpleGrid>
       <VStack ref={loader} py={6}>

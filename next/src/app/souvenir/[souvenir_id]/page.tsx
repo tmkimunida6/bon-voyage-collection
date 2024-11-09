@@ -48,7 +48,7 @@ export default async function SouvenirDetailPage({
             <Flex flexWrap="nowrap" gap={4} w="max-content">
               {relatedSouvenirData.map((souvenir: SouvenirCardType) => (
                 <SouvenirCard
-                  key={souvenir.id}
+                  key={souvenir.alias_id}
                   size="md"
                   isFavoritable={false}
                   souvenir={souvenir}

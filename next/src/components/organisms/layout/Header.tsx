@@ -18,7 +18,7 @@ export default async function Header() {
         {user.isSignedIn ? (
           <>
             <SignoutButton></SignoutButton>
-            <Text>{user.email}</Text>
+            <Text>{user.alias_id}</Text>
           </>
         ) : (
           <Button

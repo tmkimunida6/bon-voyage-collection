@@ -20,11 +20,11 @@ type PostCardProps = {
 
 const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Card key={post.id} p={4} boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)">
+    <Card key={post.user.alias_id} p={4} boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)">
       <Stack spacing={2}>
         <HStack>
           <Avatar size="xs" />
-          <Text fontSize="xs">dammyuser</Text>
+          <Text fontSize="xs">{post.user.name || `user_${post.user.alias_id}`}</Text>
         </HStack>
         <HStack justifyContent="space-between">
           <Heading fontSize="sm">{post.souvenir.name}</Heading>
