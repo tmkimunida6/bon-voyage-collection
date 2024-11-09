@@ -35,7 +35,7 @@ export default function SouvenirSearchResultForPost({
         >
           {souvenirs.map((souvenir) => (
             <Button
-              key={souvenir.id}
+              key={souvenir.alias_id}
               variant="ghost"
               w="100%"
               h="100%"
@@ -47,21 +47,24 @@ export default function SouvenirSearchResultForPost({
                 },
               }}
               onClick={() =>
-                onSelectSouvenir({ id: souvenir.id, name: souvenir.name })
+                onSelectSouvenir({
+                  alias_id: souvenir.alias_id,
+                  name: souvenir.name,
+                })
               }
-              disabled={souvenir.id === selectedSouvenir.id}
+              disabled={souvenir.alias_id === selectedSouvenir.alias_id}
             >
               <Card
                 h="100%"
                 boxShadow="none"
                 border="1px"
                 borderColor={
-                  souvenir.id === selectedSouvenir.id
+                  souvenir.alias_id === selectedSouvenir.alias_id
                     ? 'brand.primary'
                     : 'brand.secondary'
                 }
                 bg={
-                  souvenir.id === selectedSouvenir.id
+                  souvenir.alias_id === selectedSouvenir.alias_id
                     ? 'brand.primary'
                     : 'white'
                 }

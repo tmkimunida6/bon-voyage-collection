@@ -22,7 +22,7 @@ export default function SouvenirSearchResult({
             <>
               {souvenirs.map((souvenir: SouvenirType) => (
                 <SouvenirCard
-                  key={souvenir.id}
+                  key={souvenir.alias_id}
                   size={size}
                   isFavoritable={true}
                   souvenir={souvenir}

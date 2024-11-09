@@ -1,7 +1,7 @@
 class SouvenirResource
   include Alba::Resource
 
-  attributes :id, :name, :description, :created_at
+  attributes :alias_id, :name, :description
 
   one :user, resource: UserResource
   one :category, resource: CategoryResource

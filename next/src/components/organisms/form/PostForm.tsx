@@ -81,7 +81,7 @@ const PostForm = () => {
             type="hidden"
             readOnly
             name={fields.souvenir_id.name}
-            value={selectedSouvenir.id}
+            value={selectedSouvenir.alias_id}
           />
           <InputGroup size="md">
             <Input
@@ -106,7 +106,7 @@ const PostForm = () => {
               isOpen={isOpen}
               onClose={onClose}
               modalTitle="お土産を探す"
-              buttonText={selectedSouvenir.id ? '確定する' : ''}
+              buttonText={selectedSouvenir.alias_id ? '確定する' : ''}
               size="lg"
             >
               <SearchForm page="post" />

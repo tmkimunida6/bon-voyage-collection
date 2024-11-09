@@ -49,7 +49,7 @@ const SouvenirCard = ({ size, isFavoritable, souvenir }: SouvenirCardProps) => {
               alt="Green double couch with wooden legs"
               borderRadius="lg"
             />
-            <LinkOverlay as={NextLink} href={`/souvenir/${souvenir.id}`}>
+            <LinkOverlay as={NextLink} href={`/souvenir/${souvenir.alias_id}`}>
               <Heading size="xs" h="2.4em" noOfLines={2}>
                 {souvenir.name}
               </Heading>

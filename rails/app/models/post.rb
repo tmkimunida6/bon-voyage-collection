@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  include Aliasable
+
   belongs_to :user
   belongs_to :souvenir
 
