@@ -91,6 +91,16 @@ const SearchForm = ({ page }: SearchFormProps) => {
     }
   }
 
+  // ページネーション
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams)
+    const word = params.get('word') || ''
+    const category_id = Number(params.get('category_id')) || ''
+    const category_name = params.get('category_name') || ''
+
+    handleSearch(page, word, category_id, category_name)
+  }
+
   // 検索結果だしわけ
   let resultUI
   switch (page) {
@@ -147,7 +157,7 @@ const SearchForm = ({ page }: SearchFormProps) => {
               totalPages={searchResult.pages.total_pages}
               nextPage={searchResult.pages.next_page}
               prevPage={searchResult.pages.prev_page}
-              handleSearch={handleSearch}
+              handlePageChange={handlePageChange}
             />
           )}
         </>

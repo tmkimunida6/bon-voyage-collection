@@ -1,5 +1,4 @@
 import { HStack, IconButton, Text } from '@chakra-ui/react'
-import { useSearchParams } from 'next/navigation'
 import CustomIcon from '../atoms/CustomIcon'
 
 type PaginationProps = {
@@ -7,12 +6,7 @@ type PaginationProps = {
   totalPages: number
   nextPage: number | null
   prevPage: number | null
-  handleSearch: (
-    currentPage: number,
-    word: string | '',
-    category_id: number | '',
-    category_name: string,
-  ) => void
+  handlePageChange: (page: number) => void
 }
 
 const Pagination = ({
@@ -20,18 +14,8 @@ const Pagination = ({
   totalPages,
   nextPage,
   prevPage,
-  handleSearch,
+  handlePageChange,
 }: PaginationProps) => {
-  const searchParams = useSearchParams()
-
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams)
-    const word = params.get('word') || ''
-    const category_id = Number(params.get('category_id')) || ''
-    const category_name = params.get('category_name') || ''
-
-    handleSearch(page, word, category_id, category_name)
-  }
   return (
     <HStack spacing={4} justify="center" mt={4}>
       <IconButton
