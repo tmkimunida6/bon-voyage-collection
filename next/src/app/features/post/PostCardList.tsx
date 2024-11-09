@@ -72,7 +72,7 @@ const PostCardList = ({ postResult }: PostCardListProps) => {
     <>
       <SimpleGrid
         spacing={4}
-        templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
+        templateColumns="repeat(auto-fill, minmax(272px, 1fr))"
       >
         {posts.map((post) => (
           <PostCard key={post.alias_id} post={post} />
