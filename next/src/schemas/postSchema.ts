@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const postSchema = z.object({
-  souvenir_id: z.number({
+  souvenir_id: z.string({
     required_error: 'お土産を選択してください。',
   }),
   souvenir_name: z.string({
