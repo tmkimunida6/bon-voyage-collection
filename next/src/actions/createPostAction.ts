@@ -3,10 +3,11 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
-import { redirect } from 'next/navigation'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { postSchema } from '@/schemas/postSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
+import { uploadImageAction } from './uploadImageAction'
+import { revalidatePath } from 'next/cache'
 
 export async function createPostAction(prevState: unknown, formData: FormData) {
   const submission = parseWithZod(formData, {
@@ -19,9 +20,10 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
 
   const souvenir_id = formData.get('souvenir_id')
   const rating = formData.get('rating')
-  const to_who = Number(formData.get('for_who'))
+  const for_who = Number(formData.get('for_who'))
   const age = Number(formData.get('age'))
   const review = formData.get('review')
+  const imageFile = String(formData.get('image')) || ''
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -32,6 +34,11 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
 
   let data
   try {
+    // 画像をCloudinaryにアップロード
+    const uploadResult = await uploadImageAction(imageFile, "post")
+    const image_public_id = uploadResult.public_id
+
+    // DBにデータ送信
     const res = await fetch(`${apiBaseUrl}/posts`, {
       method: 'POST',
       headers: {
@@ -40,16 +47,18 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
         client: tokens.client,
         uid: tokens.uid,
       },
-      body: JSON.stringify({ souvenir_id, rating, to_who, age, review }),
+      body: JSON.stringify({ souvenir_id, rating, for_who, age, review, image_public_id }),
     })
 
     data = await res.json()
+
     if (!res.ok) {
       return submission.reply({
         formErrors: data.errors.full_messages ||
           data.errors || ['サーバーエラーが発生しました。'],
       })
     }
+    revalidatePath('/timeline')
     return submission.reply()
   } catch (e) {
     return submission.reply({

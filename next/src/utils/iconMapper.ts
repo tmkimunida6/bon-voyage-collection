@@ -17,6 +17,7 @@ import {
   FaTimes,
   FaUser,
   FaHandHoldingHeart,
+  FaTrashAlt,
 } from 'react-icons/fa'
 import {
   FaGift,
@@ -50,4 +51,5 @@ export const iconMapper = {
   FaTimes,
   FaUser,
   FaHandHoldingHeart,
+  FaTrashAlt,
 }

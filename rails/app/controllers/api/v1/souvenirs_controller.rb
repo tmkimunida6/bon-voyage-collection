@@ -39,7 +39,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   private
 
   def souvenir_params
-    params.permit(:name, :description, :category_id)
+    params.permit(:name, :description, :category_id, :image_public_id)
   end
 
   def set_souvenir
