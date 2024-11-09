@@ -40,3 +40,14 @@ export type PagesType = {
   next_page: number | null
   prev_page: number | null
 }
+
+export type PostType = {
+  id: number
+  rating: string
+  for_who: string | null
+  age: string | null
+  review: string
+  created_at: Date
+  user: UserType
+  souvenir: SouvenirType
+}
