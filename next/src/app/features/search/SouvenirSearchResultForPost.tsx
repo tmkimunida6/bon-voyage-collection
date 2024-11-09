@@ -47,7 +47,10 @@ export default function SouvenirSearchResultForPost({
                 },
               }}
               onClick={() =>
-                onSelectSouvenir({ alias_id: souvenir.alias_id, name: souvenir.name })
+                onSelectSouvenir({
+                  alias_id: souvenir.alias_id,
+                  name: souvenir.name,
+                })
               }
               disabled={souvenir.alias_id === selectedSouvenir.alias_id}
             >

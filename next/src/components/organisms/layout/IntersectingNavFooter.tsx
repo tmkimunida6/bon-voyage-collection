@@ -9,21 +9,22 @@ const IntersectingNavFooter = () => {
   const [isIntersecting, setIsIntersecting] = useState<boolean>(false)
 
   useEffect(() => {
+    const footerElement = footerRef.current
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0]
         setIsIntersecting(entry.isIntersecting)
       },
-      { threshold: 0 }
+      { threshold: 0 },
     )
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current)
+    if (footerElement) {
+      observer.observe(footerElement)
     }
 
     return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current)
+      if (footerElement) {
+        observer.unobserve(footerElement)
       }
     }
   }, [footerRef])

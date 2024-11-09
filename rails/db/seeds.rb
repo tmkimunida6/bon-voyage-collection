@@ -46,9 +46,9 @@ souvenirs = Souvenir.all
 50.times do
   Post.create!(
     rating: (rand(9) + 2) * 0.5,
-    for_who: [Post.for_whos.keys.sample, nil].sample,
-    age: [Post.ages.keys.sample, nil].sample,
-    review: [Faker::Lorem.paragraph, nil].sample,
+    for_who: [ Post.for_whos.keys.sample, nil ].sample,
+    age: [ Post.ages.keys.sample, nil ].sample,
+    review: [ Faker::Lorem.paragraph, nil ].sample,
     souvenir: souvenirs.sample,
     user: users.sample
   )

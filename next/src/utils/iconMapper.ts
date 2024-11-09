@@ -18,7 +18,13 @@ import {
   FaUser,
   FaHandHoldingHeart,
 } from 'react-icons/fa'
-import { FaGift, FaChevronRight, FaChevronLeft, FaChevronDown, FaChevronUp } from 'react-icons/fa6'
+import {
+  FaGift,
+  FaChevronRight,
+  FaChevronLeft,
+  FaChevronDown,
+  FaChevronUp,
+} from 'react-icons/fa6'
 
 export const iconMapper = {
   FaHome,
