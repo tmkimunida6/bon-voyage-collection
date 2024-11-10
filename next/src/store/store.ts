@@ -15,6 +15,6 @@ type souvenirState = {
   setSelectedSouvenir: (souvenir: SouvenirCardType) => void
 }
 export const useSouvenirStore = create<souvenirState>((set) => ({
-  selectedSouvenir: { alias_id: '', name: '' },
+  selectedSouvenir: { alias_id: '', name: '', image_url: '' },
   setSelectedSouvenir: (souvenir) => set({ selectedSouvenir: souvenir }),
 }))

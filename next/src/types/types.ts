@@ -5,7 +5,7 @@ export type FormFieldType = {
 }
 
 export type UserType = {
-  alias_id: number
+  alias_id: string
   name: string
   email: string
   isSignedIn?: boolean
@@ -21,20 +21,18 @@ export type CategoriesType = CategoryType & {
 }
 
 export type SouvenirCardType = {
-  alias_id: number | ''
+  alias_id: string
   name: string
   image_url: string
-  post: PostType
 }
 
 export type SouvenirType = {
-  alias_id: number
+  alias_id: string
   name: string
   description: string
   image_url: string
   user: UserType
   categories: CategoriesType
-  post: PostType
 }
 
 export type PagesType = {
@@ -45,7 +43,7 @@ export type PagesType = {
 }
 
 export type PostType = {
-  alias_id: number
+  alias_id: string
   rating: string | null
   for_who: string | null
   age: string | null

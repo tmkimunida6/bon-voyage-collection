@@ -50,6 +50,7 @@ export default function SouvenirSearchResultForPost({
                 onSelectSouvenir({
                   alias_id: souvenir.alias_id,
                   name: souvenir.name,
+                  image_url: souvenir.image_url,
                 })
               }
               disabled={souvenir.alias_id === selectedSouvenir.alias_id}
