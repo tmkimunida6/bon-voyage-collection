@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Toaster from '@/components/molecules/Toaster'
 import DefaultTemplate from '@/components/templates/DefaultTemplate'
 import { Providers } from '@/providers/providers'
+import { Suspense } from 'react'
+import { Spinner, VStack } from '@chakra-ui/react'
 
 export const metadata: Metadata = {
   title: 'お土産との出会いを見つけるサービス',
@@ -18,7 +20,19 @@ export default function RootLayout({
     <html lang="ja" suppressHydrationWarning>
       <body>
         <Providers>
-          <Toaster />
+          <Suspense fallback={
+            <VStack
+              position="absolute"
+              top="50%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              spacing={4}
+            >
+              <Spinner size="xl" speed="0.5s" thickness="4px" />
+            </VStack>
+          }>
+            <Toaster />
+          </Suspense>
           <DefaultTemplate>{children}</DefaultTemplate>
         </Providers>
       </body>
