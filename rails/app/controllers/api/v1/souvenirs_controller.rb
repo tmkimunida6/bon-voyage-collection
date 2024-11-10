@@ -4,7 +4,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
 
   def index
     q = Souvenir.ransack(souvenir_search_params)
-    souvenirs = q.result(distinct: true).order("created_at desc").page(params[:page])
+    souvenirs = q.result(distinct: true).includes(:user, :category).order("created_at desc").page(params[:page])
     render json: {
       souvenirs: JSON.parse(SouvenirResource.new(souvenirs).serialize),
       pages: {

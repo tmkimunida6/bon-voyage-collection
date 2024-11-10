@@ -6,14 +6,11 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
-  Box,
   Button,
   FormControl,
   FormErrorMessage,
   Heading,
   HStack,
-  IconButton,
-  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -22,22 +19,21 @@ import {
   Textarea,
   useDisclosure,
   useToast,
-  VStack,
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { redirect } from 'next/navigation'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import CustomModal from '../modal/CustomModal'
 import SearchForm from './SearchForm'
 import { createPostAction } from '@/actions/createPostAction'
 import SubmitButton from '@/components/atoms/SubmitButton'
 import RatingSlider from '@/components/molecules/RatingSlider'
+import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { ageOptions, forWhoOptions } from '@/constants/options'
 import { postSchema } from '@/schemas/postSchema'
 import { useSouvenirStore } from '@/store/store'
-import CustomIcon from '@/components/atoms/CustomIcon'
 
 const PostForm = () => {
   const [lastResult, action] = useFormState(createPostAction, undefined)
@@ -71,45 +67,6 @@ const PostForm = () => {
       redirect('/timeline')
     }
   }, [lastResult])
-
-  // 画像アップロード
-  const [selectedImage, setSelectedImage] = useState<string>('');
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const inputFileRef = useRef<HTMLInputElement>(null)
-
-  const onClickInputFile = () => {
-    const inputFileElement = inputFileRef.current
-    inputFileElement?.click()
-  }
-
-  function fileToBase64(file: File) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-      reader.readAsDataURL(file);
-    });
-  }
-
-  const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
-      const encodedImage = await fileToBase64(file) as string;
-      setSelectedImage(encodedImage);
-
-      // プレビュー画像をセット
-      const previewUrl = URL.createObjectURL(file);
-      setPreviewUrl(previewUrl);
-    }
-  };
-
-  const deleteInputFile = () => {
-    setSelectedImage('');
-    setPreviewUrl(null);
-  }
-
-
-
 
   return (
     <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
@@ -181,23 +138,7 @@ const PostForm = () => {
           </HStack>
           <Textarea placeholder="感想を記入" name={fields.review.name} />
         </Stack>
-        <VStack>
-          {previewUrl ? (
-            <Box position="relative" display="inline-flex">
-              <Image src={previewUrl} alt="プレビュー画像" maxH="300px" />
-              <HStack position="absolute" bottom={2} right={2} >
-                <IconButton colorScheme='yellow' color="white" aria-label='変更する' icon={<CustomIcon iconName="FaPen" />} size="xs" onClick={onClickInputFile} />
-                <IconButton colorScheme='red' aria-label='削除する' icon={<CustomIcon iconName="FaTrashAlt" />} size="xs" onClick={deleteInputFile} />
-              </HStack>
-            </Box>
-          ) : (
-            <VStack bg="brand.gray" w="100%" h="128px" borderRadius={4} justifyContent="center">
-              <Button variant="ghost" color="white" w="100%" h="100%" onClick={onClickInputFile}>＋画像をアップロード</Button>
-            </VStack>
-          )}
-          <Input type='file' accept="image/*" onChange={handleImageChange} hidden ref={inputFileRef} />
-          <Input type="hidden" name="image" value={selectedImage} />
-        </VStack>
+        <UploadImageForm />
         <SubmitButton>記録する</SubmitButton>
       </Stack>
     </form>

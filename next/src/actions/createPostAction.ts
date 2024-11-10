@@ -3,11 +3,11 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
+import { revalidatePath } from 'next/cache'
+import { uploadImageAction } from './uploadImageAction'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { postSchema } from '@/schemas/postSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
-import { uploadImageAction } from './uploadImageAction'
-import { revalidatePath } from 'next/cache'
 
 export async function createPostAction(prevState: unknown, formData: FormData) {
   const submission = parseWithZod(formData, {
@@ -35,7 +35,7 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
   let data
   try {
     // 画像をCloudinaryにアップロード
-    const uploadResult = await uploadImageAction(imageFile, "post")
+    const uploadResult = await uploadImageAction(imageFile, 'post')
     const image_url = uploadResult.secure_url
 
     // DBにデータ送信
@@ -47,7 +47,14 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
         client: tokens.client,
         uid: tokens.uid,
       },
-      body: JSON.stringify({ souvenir_id, rating, for_who, age, review, image_url }),
+      body: JSON.stringify({
+        souvenir_id,
+        rating,
+        for_who,
+        age,
+        review,
+        image_url,
+      }),
     })
 
     data = await res.json()

@@ -15,6 +15,7 @@ import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
 import { createSouvenirAction } from '@/actions/createSouvenirAction'
 import CategoryInput from '@/app/features/category/CategoryInput'
+import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { newSouvenirSchema } from '@/schemas/souvenirSchema'
 
 const NewSouvenirForm = () => {
@@ -54,6 +55,7 @@ const NewSouvenirForm = () => {
           errors={fields.souvenir_description.errors}
           isRequired={false}
         />
+        <UploadImageForm />
         <SubmitButton>登録する</SubmitButton>
       </Stack>
     </form>

@@ -23,15 +23,18 @@ export type CategoriesType = CategoryType & {
 export type SouvenirCardType = {
   alias_id: number | ''
   name: string
+  image_url: string
+  post: PostType
 }
 
 export type SouvenirType = {
   alias_id: number
   name: string
   description: string
-  created_at: Date
+  image_url: string
   user: UserType
   categories: CategoriesType
+  post: PostType
 }
 
 export type PagesType = {
