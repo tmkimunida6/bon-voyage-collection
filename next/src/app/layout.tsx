@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
+import Toaster from '@/components/molecules/Toaster'
 import DefaultTemplate from '@/components/templates/DefaultTemplate'
 import { Providers } from '@/providers/providers'
-import Toaster from '@/components/molecules/Toaster'
 
 export const metadata: Metadata = {
   title: 'お土産との出会いを見つけるサービス',

@@ -14,11 +14,20 @@ const Rating = ({ rating, isSmall }: RatingProps) => {
   return (
     <HStack gap="2px">
       {[...Array(fullStars)].map((_, index) => (
-        <CustomIcon key={index} iconName="FaStar" color="brand.star" fontSize={isSmall ? "xs" : "sm"} />
+        <CustomIcon
+          key={index}
+          iconName="FaStar"
+          color="brand.star"
+          fontSize={isSmall ? 'xs' : 'sm'}
+        />
       ))}
       {hasHalfStar && (
-        <Flex position="relative" height={isSmall ? "12px": "16px"}>
-          <CustomIcon iconName="FaStar" color="gray.300" fontSize={isSmall ? "xs" : "sm"} />
+        <Flex position="relative" height={isSmall ? '12px' : '16px'}>
+          <CustomIcon
+            iconName="FaStar"
+            color="gray.300"
+            fontSize={isSmall ? 'xs' : 'sm'}
+          />
           <Flex
             position="absolute"
             top="0"
@@ -27,12 +36,21 @@ const Rating = ({ rating, isSmall }: RatingProps) => {
             height="100%"
             overflow="hidden"
           >
-            <CustomIcon iconName="FaStar" color="brand.star" fontSize={isSmall ? "xs" : "sm"} />
+            <CustomIcon
+              iconName="FaStar"
+              color="brand.star"
+              fontSize={isSmall ? 'xs' : 'sm'}
+            />
           </Flex>
         </Flex>
       )}
       {[...Array(emptyStars)].map((_, index) => (
-        <CustomIcon key={index} iconName="FaStar" color="brand.gray" fontSize={isSmall ? "xs" : "sm"} />
+        <CustomIcon
+          key={index}
+          iconName="FaStar"
+          color="brand.gray"
+          fontSize={isSmall ? 'xs' : 'sm'}
+        />
       ))}
     </HStack>
   )

@@ -23,7 +23,12 @@ type SouvenirCardProps = {
   rating?: string | null
 }
 
-const SouvenirCard = ({ size, isFavoritable, souvenir, rating = '0' }: SouvenirCardProps) => {
+const SouvenirCard = ({
+  size,
+  isFavoritable,
+  souvenir,
+  rating = '0',
+}: SouvenirCardProps) => {
   const cardStyles = {
     sm: {
       boxShadow: '0 0 15px rgba(0,0,0,0.25)',
