@@ -32,7 +32,7 @@ export default async function SouvenirDetailPage({
       <Heading as="h2" fontSize="xl">
         {souvenirData.name}
       </Heading>
-      <Image src="https://placehold.jp/1080x720.png" alt={souvenirData.name} />
+      <Image src={souvenirData.image_url} alt={souvenirData.name} />
       <DataWithIcon iconName="FaClipboardList">
         <Text>
           {souvenirData.category.parent.name} - {souvenirData.category.name}

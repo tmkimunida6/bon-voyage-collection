@@ -45,8 +45,8 @@ const SouvenirCard = ({ size, isFavoritable, souvenir }: SouvenirCardProps) => {
         <CardBody p={size === 'lg' ? 2 : 1}>
           <Stack spacing={2}>
             <Image
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              alt="Green double couch with wooden legs"
+              src={souvenir.image_url}
+              alt={souvenir.name}
               borderRadius="lg"
             />
             <LinkOverlay as={NextLink} href={`/souvenir/${souvenir.alias_id}`}>

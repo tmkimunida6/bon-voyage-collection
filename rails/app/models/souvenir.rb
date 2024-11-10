@@ -6,6 +6,7 @@ class Souvenir < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
+  validates :image_url, presence: true, uniqueness: true
 
   def self.ransackable_attributes(auth_object = nil)
     [ "id", "name", "category_id", "description" ]

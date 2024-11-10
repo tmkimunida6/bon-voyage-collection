@@ -1,7 +1,7 @@
 class PostResource
   include Alba::Resource
 
-  attributes :alias_id, :rating, :for_who, :age, :review
+  attributes :alias_id, :rating, :for_who, :age, :review, :image_url
 
   one :user, resource: UserResource
   one :souvenir, resource: SouvenirResource

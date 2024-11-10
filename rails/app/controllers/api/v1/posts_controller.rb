@@ -15,7 +15,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def create
-    souvenir = Souvenir.find(params[:souvenir_id])
+    souvenir = Souvenir.find_by(alias_id: params[:souvenir_id])
     post = current_user.posts.build(post_params)
     post.souvenir = souvenir
     if post.save
@@ -28,6 +28,6 @@ class Api::V1::PostsController < Api::V1::BaseController
   private
 
   def post_params
-    params.permit(:souvenir_id, :rating, :for_who, :age, :review)
+    params.permit(:souvenir_id, :rating, :for_who, :age, :review, :image_url)
   end
 end

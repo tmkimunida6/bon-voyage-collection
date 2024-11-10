@@ -10,7 +10,9 @@ import {
   Image,
   Stack,
   Text,
+  Link as ChakraLink,
 } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { useState } from 'react'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import Rating from '@/components/molecules/Rating'
@@ -24,11 +26,7 @@ const PostCard = ({ post }: PostCardProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
 
   return (
-    <Card
-      key={post.user.alias_id}
-      p={4}
-      boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)"
-    >
+    <Card key={post.alias_id} p={4} boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)">
       <Stack spacing={2}>
         <HStack>
           <Avatar size="xs" />
@@ -37,7 +35,14 @@ const PostCard = ({ post }: PostCardProps) => {
           </Text>
         </HStack>
         <HStack justifyContent="space-between">
-          <Heading fontSize="sm">{post.souvenir.name}</Heading>
+          <Heading fontSize="sm">
+            <ChakraLink
+              as={NextLink}
+              href={`/souvenir/${post.souvenir.alias_id}`}
+            >
+              {post.souvenir.name}
+            </ChakraLink>
+          </Heading>
           <CustomIcon iconName="FaRegBookmark" color="brand.secondary" />
         </HStack>
         <HStack spacing={6}>
@@ -81,22 +86,24 @@ const PostCard = ({ post }: PostCardProps) => {
           </Stack>
         )}
       </Stack>
-      <Flex gap={4} mt={4}>
-        <Image
-          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-          alt="Green double couch with wooden legs"
-          borderRadius="lg"
-          // maxW="calc(50% - 0.5rem)"
-        />
-        {/* <Stack maxW="calc(50% - 0.5rem)">
-          {(post.for_who || post.age) && (
-            <HStack>
+      {post.image_url && (
+        <Flex gap={4} mt={4}>
+          <Image
+            src={post.image_url}
+            alt={post.souvenir.name}
+            borderRadius="lg"
+            // maxW="calc(50% - 0.5rem)"
+          />
+          {/* <Stack maxW="calc(50% - 0.5rem)">
+            {(post.for_who || post.age) && (
+              <HStack>
               <CustomIcon iconName="FaHandHoldingHeart" color="brand.primary" />
               <Text fontSize="xs" isTruncated>{post.for_who} {(post.for_who && post.age) && "/"} {post.age}</Text>
-            </HStack>
-          )}
-        </Stack> */}
-      </Flex>
+              </HStack>
+              )}
+              </Stack> */}
+        </Flex>
+      )}
     </Card>
   )
 }

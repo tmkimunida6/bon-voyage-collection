@@ -4,6 +4,7 @@
 
 import { parseWithZod } from '@conform-to/zod'
 import { redirect } from 'next/navigation'
+import { uploadImageAction } from './uploadImageAction'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { newSouvenirSchema } from '@/schemas/souvenirSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
@@ -23,6 +24,7 @@ export async function createSouvenirAction(
   const name = formData.get('souvenir_name')
   const category_id = formData.get('category_id')
   const description = formData.get('souvenir_description')
+  const imageFile = String(formData.get('image')) || ''
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -33,6 +35,11 @@ export async function createSouvenirAction(
 
   let data
   try {
+    // 画像をCloudinaryにアップロード
+    const uploadResult = await uploadImageAction(imageFile, 'souvenir')
+    const image_url = uploadResult.secure_url
+
+    // DBにデータ送信
     const res = await fetch(`${apiBaseUrl}/souvenirs`, {
       method: 'POST',
       headers: {
@@ -41,7 +48,7 @@ export async function createSouvenirAction(
         client: tokens.client,
         uid: tokens.uid,
       },
-      body: JSON.stringify({ name, category_id, description }),
+      body: JSON.stringify({ name, category_id, description, image_url }),
     })
 
     data = await res.json()

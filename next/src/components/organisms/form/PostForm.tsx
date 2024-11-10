@@ -30,6 +30,7 @@ import SearchForm from './SearchForm'
 import { createPostAction } from '@/actions/createPostAction'
 import SubmitButton from '@/components/atoms/SubmitButton'
 import RatingSlider from '@/components/molecules/RatingSlider'
+import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { ageOptions, forWhoOptions } from '@/constants/options'
 import { postSchema } from '@/schemas/postSchema'
 import { useSouvenirStore } from '@/store/store'
@@ -63,8 +64,8 @@ const PostForm = () => {
         duration: 5000,
         isClosable: true,
       })
+      redirect('/timeline')
     }
-    redirect('/')
   }, [lastResult])
 
   return (
@@ -137,6 +138,7 @@ const PostForm = () => {
           </HStack>
           <Textarea placeholder="感想を記入" name={fields.review.name} />
         </Stack>
+        <UploadImageForm />
         <SubmitButton>記録する</SubmitButton>
       </Stack>
     </form>
