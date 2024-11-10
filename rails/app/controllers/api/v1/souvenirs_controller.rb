@@ -21,7 +21,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   end
 
   def related
-    related_souvenirs = Souvenir.where(category_id: @souvenir.category_id).where.not(id: @souvenir.id)
+    related_souvenirs = Souvenir.where(category_id: @souvenir.category_id).where.not(alias_id: @souvenir.alias_id)
     render json: RelatedSouvenirResource.new(related_souvenirs).serialize
   end
 
@@ -39,11 +39,11 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   private
 
   def souvenir_params
-    params.permit(:name, :description, :category_id, :image_public_id)
+    params.permit(:name, :description, :category_id, :image_url)
   end
 
   def set_souvenir
-    @souvenir = Souvenir.find(params[:id])
+    @souvenir = Souvenir.find_by(alias_id: params[:id])
   end
 
   def souvenir_search_params

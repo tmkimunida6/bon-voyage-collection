@@ -43,11 +43,11 @@ export type PagesType = {
 
 export type PostType = {
   alias_id: number
-  rating: string
+  rating: string | null
   for_who: string | null
   age: string | null
-  review: string
-  created_at: Date
+  review: string | null
+  image_url: string | null
   user: UserType
   souvenir: SouvenirType
 }

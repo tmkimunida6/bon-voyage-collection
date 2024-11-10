@@ -36,7 +36,7 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
   try {
     // 画像をCloudinaryにアップロード
     const uploadResult = await uploadImageAction(imageFile, "post")
-    const image_public_id = uploadResult.public_id
+    const image_url = uploadResult.secure_url
 
     // DBにデータ送信
     const res = await fetch(`${apiBaseUrl}/posts`, {
@@ -47,7 +47,7 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
         client: tokens.client,
         uid: tokens.uid,
       },
-      body: JSON.stringify({ souvenir_id, rating, for_who, age, review, image_public_id }),
+      body: JSON.stringify({ souvenir_id, rating, for_who, age, review, image_url }),
     })
 
     data = await res.json()
