@@ -3,9 +3,10 @@ import CustomIcon from '../atoms/CustomIcon'
 
 type RatingProps = {
   rate: number
+  isSmall?: boolean
 }
 
-const Rating = ({ rate }: RatingProps) => {
+const Rating = ({ rate, isSmall }: RatingProps) => {
   const fullStars = Math.floor(rate)
   const hasHalfStar = rate % 1 !== 0
   const emptyStars = 5 - Math.ceil(rate)
@@ -13,11 +14,11 @@ const Rating = ({ rate }: RatingProps) => {
   return (
     <HStack gap="2px">
       {[...Array(fullStars)].map((_, index) => (
-        <CustomIcon key={index} iconName="FaStar" color="brand.star" />
+        <CustomIcon key={index} iconName="FaStar" color="brand.star" fontSize={isSmall ? "xs" : "sm"} />
       ))}
       {hasHalfStar && (
-        <Flex position="relative" height="16px">
-          <CustomIcon iconName="FaStar" color="gray.300" />
+        <Flex position="relative" height={isSmall ? "12px": "16px"}>
+          <CustomIcon iconName="FaStar" color="gray.300" fontSize={isSmall ? "xs" : "sm"} />
           <Flex
             position="absolute"
             top="0"
@@ -26,12 +27,12 @@ const Rating = ({ rate }: RatingProps) => {
             height="100%"
             overflow="hidden"
           >
-            <CustomIcon iconName="FaStar" color="brand.star" />
+            <CustomIcon iconName="FaStar" color="brand.star" fontSize={isSmall ? "xs" : "sm"} />
           </Flex>
         </Flex>
       )}
       {[...Array(emptyStars)].map((_, index) => (
-        <CustomIcon key={index} iconName="FaStar" color="brand.gray" />
+        <CustomIcon key={index} iconName="FaStar" color="brand.gray" fontSize={isSmall ? "xs" : "sm"} />
       ))}
     </HStack>
   )

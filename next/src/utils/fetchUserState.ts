@@ -1,3 +1,5 @@
+'use server'
+
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
 import { getUserTokens } from './getUserTokens'
@@ -8,7 +10,6 @@ export async function fetchUserState() {
   let user: UserType = {
     alias_id: '',
     name: '',
-    email: '',
     isSignedIn: false,
   }
   const tokens = await getUserTokens()
