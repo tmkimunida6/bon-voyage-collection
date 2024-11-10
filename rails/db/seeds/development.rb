@@ -34,7 +34,7 @@ categories = Category.all
 souvenirs = 50.times.map do
   Souvenir.create!(
     name: Faker::Commerce.product_name,
-    description: [Faker::Lorem.sentence, Faker::Lorem.sentences(number: 5).join(' ')].sample,
+    description: [ Faker::Lorem.sentence, Faker::Lorem.sentences(number: 5).join(' ') ].sample,
     user: users.sample,
     category: categories.sample,
     image_url: "https://res.cloudinary.com/demo/image/upload/v#{rand(1000..9999)}/cld-sample-#{rand(2...5)}.jpg"
@@ -46,12 +46,12 @@ users = User.all
 souvenirs = Souvenir.all
 50.times do
   Post.create!(
-    rating: [(rand(9) + 2) * 0.5, nil].sample,
+    rating: [ (rand(9) + 2) * 0.5, nil ].sample,
     for_who: [ Post.for_whos.keys.sample, nil ].sample,
     age: [ Post.ages.keys.sample, nil ].sample,
     review: [ Faker::Lorem.paragraph, Faker::Lorem.sentences(number: 5).join(' '), nil ].sample,
     souvenir: souvenirs.sample,
     user: users.sample,
-    image_url: ["https://res.cloudinary.com/demo/image/upload/v#{rand(1000..9999)}/cld-sample-#{rand(2...5)}.jpg", nil].sample
+    image_url: [ "https://res.cloudinary.com/demo/image/upload/v#{rand(1000..9999)}/cld-sample-#{rand(2...5)}.jpg", nil ].sample
   )
 end
