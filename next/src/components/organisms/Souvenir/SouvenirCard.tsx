@@ -20,9 +20,10 @@ type SouvenirCardProps = {
   size: 'sm' | 'md' | 'lg'
   isFavoritable: boolean
   souvenir: SouvenirCardType
+  rating?: string | null
 }
 
-const SouvenirCard = ({ size, isFavoritable, souvenir }: SouvenirCardProps) => {
+const SouvenirCard = ({ size, isFavoritable, souvenir, rating = '0' }: SouvenirCardProps) => {
   const cardStyles = {
     sm: {
       boxShadow: '0 0 15px rgba(0,0,0,0.25)',
@@ -54,36 +55,38 @@ const SouvenirCard = ({ size, isFavoritable, souvenir }: SouvenirCardProps) => {
                 {souvenir.name}
               </Heading>
             </LinkOverlay>
-            <Rating rate={3.4} />
-            <HStack>
-              {size === 'lg' ? (
-                <>
-                  <DataWithIcon iconName="FaGift">
-                    <Text size="xs" fontWeight="bold">
-                      100
-                    </Text>
-                  </DataWithIcon>
-                  <DataWithIcon iconName="FaBookmark">
-                    <Text size="xs" fontWeight="bold">
-                      100
-                    </Text>
-                  </DataWithIcon>
-                </>
-              ) : (
-                <>
-                  <DataWithIcon iconName="FaRegComment">
-                    <Text size="xs" fontWeight="bold">
-                      100
-                    </Text>
-                  </DataWithIcon>
-                  <DataWithIcon iconName="FaRegHeart">
-                    <Text size="xs" fontWeight="bold">
-                      100
-                    </Text>
-                  </DataWithIcon>
-                </>
-              )}
-            </HStack>
+            <Rating rating={Number(rating)} isSmall={size === 'sm'} />
+            {size !== 'sm' && (
+              <HStack>
+                {size === 'lg' ? (
+                  <>
+                    <DataWithIcon iconName="FaGift">
+                      <Text size="xs" fontWeight="bold">
+                        100
+                      </Text>
+                    </DataWithIcon>
+                    <DataWithIcon iconName="FaBookmark">
+                      <Text size="xs" fontWeight="bold">
+                        100
+                      </Text>
+                    </DataWithIcon>
+                  </>
+                ) : (
+                  <>
+                    <DataWithIcon iconName="FaRegComment">
+                      <Text size="xs" fontWeight="bold">
+                        100
+                      </Text>
+                    </DataWithIcon>
+                    <DataWithIcon iconName="FaRegHeart">
+                      <Text size="xs" fontWeight="bold">
+                        100
+                      </Text>
+                    </DataWithIcon>
+                  </>
+                )}
+              </HStack>
+            )}
           </Stack>
         </CardBody>
         {size === 'lg' && isFavoritable && (

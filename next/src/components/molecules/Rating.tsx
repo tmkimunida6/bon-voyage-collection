@@ -2,14 +2,14 @@ import { Flex, HStack } from '@chakra-ui/react'
 import CustomIcon from '../atoms/CustomIcon'
 
 type RatingProps = {
-  rate: number
+  rating: number
   isSmall?: boolean
 }
 
-const Rating = ({ rate, isSmall }: RatingProps) => {
-  const fullStars = Math.floor(rate)
-  const hasHalfStar = rate % 1 !== 0
-  const emptyStars = 5 - Math.ceil(rate)
+const Rating = ({ rating, isSmall }: RatingProps) => {
+  const fullStars = Math.floor(rating)
+  const hasHalfStar = rating % 1 !== 0
+  const emptyStars = 5 - Math.ceil(rating)
 
   return (
     <HStack gap="2px">
@@ -23,7 +23,7 @@ const Rating = ({ rate, isSmall }: RatingProps) => {
             position="absolute"
             top="0"
             left="0"
-            width={`${(rate - fullStars) * 100}%`}
+            width={`${(rating - fullStars) * 100}%`}
             height="100%"
             overflow="hidden"
           >
