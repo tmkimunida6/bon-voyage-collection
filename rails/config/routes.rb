@@ -22,7 +22,11 @@ Rails.application.routes.draw do
       end
       # ログイン中のユーザー
       namespace :current do
-        resource :user, only: [ :show ]
+        resource :user, only: [ :show ] do
+          member do
+            get :posts
+          end
+        end
       end
 
       # お土産

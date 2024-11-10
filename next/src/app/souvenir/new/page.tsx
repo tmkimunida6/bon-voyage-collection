@@ -1,8 +1,10 @@
 import { Heading, HStack } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import NewSouvenirForm from '@/components/organisms/form/NewSouvenirForm'
+import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
-const NewSouvenir: NextPage = () => {
+export default async function NewSouvenir() {
+  await checkLoginStatus()
+
   return (
     <>
       <HStack mb={6}>
@@ -12,5 +14,3 @@ const NewSouvenir: NextPage = () => {
     </>
   )
 }
-
-export default NewSouvenir
