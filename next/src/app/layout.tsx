@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import DefaultTemplate from '@/components/templates/DefaultTemplate'
 import { Providers } from '@/providers/providers'
+import Toaster from '@/components/molecules/Toaster'
 
 export const metadata: Metadata = {
   title: 'お土産との出会いを見つけるサービス',
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="ja" suppressHydrationWarning>
       <body>
         <Providers>
+          <Toaster />
           <DefaultTemplate>{children}</DefaultTemplate>
         </Providers>
       </body>

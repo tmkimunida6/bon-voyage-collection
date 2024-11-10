@@ -1,18 +1,12 @@
 import { Avatar, Box, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/react'
-import PostCardSmall from '../features/post/PostCardSmall'
 import { fetchPostDataByUser } from '@/utils/fetchPostDataByUser'
-import { fetchUserState } from '@/utils/fetchUserState'
 import { PostType } from '@/types/types'
+import { checkLoginStatus } from '@/utils/checkLoginStatus'
 import { redirect } from 'next/navigation'
 
 export default async function Mypage() {
-  const user = await fetchUserState()
-  if(!user.isSignedIn) {
-    redirect('/sign_in')
-  }
-
+  const user = await checkLoginStatus()
   const my_posts = await fetchPostDataByUser()
-
 
   return (
     <Stack spacing={6}>

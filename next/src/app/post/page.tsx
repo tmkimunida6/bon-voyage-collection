@@ -1,8 +1,10 @@
 import { Heading, HStack } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import PostForm from '@/components/organisms/form/PostForm'
+import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
-const Post: NextPage = () => {
+export default async function Post() {
+  await checkLoginStatus()
+
   return (
     <>
       <HStack mb={6}>
@@ -12,5 +14,3 @@ const Post: NextPage = () => {
     </>
   )
 }
-
-export default Post
