@@ -46,7 +46,7 @@ const PostCard = ({ post }: PostCardProps) => {
           <CustomIcon iconName="FaRegBookmark" color="brand.secondary" />
         </HStack>
         <HStack spacing={6}>
-          {post.rating && <Rating rate={Number(post.rating)} />}
+          {post.rating && <Rating rating={Number(post.rating)} />}
           {(post.for_who || post.age) && (
             <HStack>
               <CustomIcon iconName="FaHandHoldingHeart" color="brand.primary" />
