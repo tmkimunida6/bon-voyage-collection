@@ -6,7 +6,7 @@ import { UserType } from '@/types/types'
 
 export async function fetchUserState() {
   let user: UserType = {
-    alias_id: 0,
+    alias_id: '',
     name: '',
     email: '',
     isSignedIn: false,
