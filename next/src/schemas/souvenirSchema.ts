@@ -10,6 +10,7 @@ export const newSouvenirSchema = z.object({
     .string()
     .max(200, '200文字以内で入力してください。')
     .optional(),
+  image: z.string({ required_error: '画像を選択してください。' }),
 })
 
 export const searchSouvenirSchema = z.object({

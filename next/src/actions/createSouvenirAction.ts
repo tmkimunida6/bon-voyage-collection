@@ -24,7 +24,7 @@ export async function createSouvenirAction(
   const name = formData.get('souvenir_name')
   const category_id = formData.get('category_id')
   const description = formData.get('souvenir_description')
-  const imageFile = String(formData.get('image')) || ''
+  const imageFile = String(formData.get('image'))
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -59,6 +59,7 @@ export async function createSouvenirAction(
       })
     }
   } catch (e) {
+    console.log(e)
     return submission.reply({
       formErrors: ['サーバーエラーが発生しました。'],
     })

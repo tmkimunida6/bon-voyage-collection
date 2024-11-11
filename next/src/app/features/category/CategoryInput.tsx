@@ -68,7 +68,7 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
     <>
       <Input
         type="hidden"
-        readOnly
+        isReadOnly
         name="category_id"
         value={selectedCategory.id || ''}
       />
@@ -77,7 +77,7 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
           placeholder="カテゴリーを選択"
           size="md"
           name="category_name"
-          readOnly
+          isReadOnly
           value={selectedCategory.name || ''}
           pr={10}
         />

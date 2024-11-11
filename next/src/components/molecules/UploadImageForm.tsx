@@ -3,6 +3,8 @@
 import {
   Box,
   Button,
+  FormControl,
+  FormErrorMessage,
   HStack,
   IconButton,
   Image,
@@ -12,7 +14,17 @@ import {
 import { ChangeEvent, useRef, useState } from 'react'
 import CustomIcon from '../atoms/CustomIcon'
 
-const UploadImageForm = () => {
+type UploadImageFormProps = {
+  name: string
+  errors: Array<string> | undefined
+  isRequired: boolean
+}
+
+const UploadImageForm = ({
+  name,
+  errors,
+  isRequired,
+}: UploadImageFormProps) => {
   const [selectedImage, setSelectedImage] = useState<string>('')
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const inputFileRef = useRef<HTMLInputElement>(null)
@@ -49,7 +61,7 @@ const UploadImageForm = () => {
   }
 
   return (
-    <VStack>
+    <VStack spacing={0}>
       {previewUrl ? (
         <Box position="relative" display="inline-flex">
           <Image src={previewUrl} alt="プレビュー画像" maxH="300px" />
@@ -78,6 +90,8 @@ const UploadImageForm = () => {
           h="128px"
           borderRadius={4}
           justifyContent="center"
+          border={errors && '2px solid var(--chakra-colors-red-500)'}
+          boxShadow={errors && '0 0 0 1px var(--chakra-colors-red-500)'}
         >
           <Button
             variant="ghost"
@@ -86,7 +100,7 @@ const UploadImageForm = () => {
             h="100%"
             onClick={onClickInputFile}
           >
-            ＋画像をアップロード
+            ＋画像をアップロード{isRequired && '（必須）'}
           </Button>
         </VStack>
       )}
@@ -97,7 +111,10 @@ const UploadImageForm = () => {
         hidden
         ref={inputFileRef}
       />
-      <Input type="hidden" name="image" value={selectedImage} />
+      <FormControl isInvalid={!!errors}>
+        <Input type="hidden" name={name} value={selectedImage} />
+        <FormErrorMessage>{errors}</FormErrorMessage>
+      </FormControl>
     </VStack>
   )
 }
