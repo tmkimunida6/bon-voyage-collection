@@ -1,6 +1,6 @@
 class Api::V1::SouvenirsController < Api::V1::BaseController
-  before_action :authenticate_user!, except: [ :index, :show, :related ]
-  before_action :set_souvenir, only: [ :show, :related ]
+  before_action :authenticate_user!, except: [ :index, :show, :related, :favorited_souvenir ]
+  before_action :set_souvenir, only: [ :show, :related, :favorited_souvenir, :favorited_index ]
 
   def index
     q = Souvenir.ransack(souvenir_search_params)
@@ -35,6 +35,23 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
       render json: { errors: souvenir.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
+  # Favorite一覧
+  def favorited_index
+    favorited_souvenirs = current_user.favorited_souvenirs.includes(:user, :category)
+    render json: JSON.parse(SouvenirResource.new(favorited_souvenirs).serialize)
+  end
+
+  # Favoriteステータス
+  def favorited_souvenir
+    if user_signed_in?
+      is_favorited = @souvenir.favorited_by?(current_user)
+      render json: { favorited: is_favorited }
+    else
+      render json: { favorited: false }
+    end
+  end
+
 
   private
 

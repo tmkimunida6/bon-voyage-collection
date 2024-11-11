@@ -31,9 +31,19 @@ Rails.application.routes.draw do
 
       # お土産
       resources :souvenirs, only: [ :index, :show, :create ] do
+        # 欲しい登録/削除
+        resource :favorites, only: [:create, :destroy]
+
+        # 「欲しい」一覧
+        collection do
+          get :favorited_index
+        end
+
         member do
           get :related
+          get :favorited_souvenir
         end
+
       end
 
       # カテゴリー
