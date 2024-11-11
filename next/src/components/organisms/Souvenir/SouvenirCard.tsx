@@ -9,6 +9,7 @@ import {
   Text,
   LinkOverlay,
   LinkBox,
+  Flex,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
@@ -50,11 +51,14 @@ const SouvenirCard = ({
       <Card {...cardStyles[size]}>
         <CardBody p={size === 'lg' ? 2 : 1}>
           <Stack spacing={2}>
-            <Image
-              src={souvenir.image_url}
-              alt={souvenir.name}
-              borderRadius="lg"
-            />
+            <Flex aspectRatio="3/2" justifyContent="center" alignItems="center">
+              <Image
+                src={souvenir.image_url}
+                alt={souvenir.name}
+                borderRadius="lg"
+                width="100%"
+              />
+            </Flex>
             <LinkOverlay as={NextLink} href={`/souvenir/${souvenir.alias_id}`}>
               <Heading size="xs" h="2.4em" noOfLines={2}>
                 {souvenir.name}

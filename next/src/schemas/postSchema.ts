@@ -11,4 +11,5 @@ export const postSchema = z.object({
   for_who: z.number().int().optional(),
   age: z.number().int().optional(),
   review: z.string().optional(),
+  image: z.string().optional(),
 })

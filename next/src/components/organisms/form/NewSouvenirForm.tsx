@@ -55,7 +55,11 @@ const NewSouvenirForm = () => {
           errors={fields.souvenir_description.errors}
           isRequired={false}
         />
-        <UploadImageForm />
+        <UploadImageForm
+          name={fields.image.name}
+          errors={fields.image.errors}
+          isRequired={true}
+        />
         <SubmitButton>登録する</SubmitButton>
       </Stack>
     </form>

@@ -80,7 +80,7 @@ const PostForm = () => {
         <FormControl isRequired isInvalid={!!fields.souvenir_id.errors}>
           <Input
             type="hidden"
-            readOnly
+            isReadOnly
             name={fields.souvenir_id.name}
             value={selectedSouvenir.alias_id}
           />
@@ -90,7 +90,7 @@ const PostForm = () => {
               size="md"
               name={fields.souvenir_name.name}
               value={selectedSouvenir.name}
-              readOnly
+              isReadOnly
               pr={10}
             />
             <InputRightElement width="4.5rem">
@@ -138,7 +138,11 @@ const PostForm = () => {
           </HStack>
           <Textarea placeholder="感想を記入" name={fields.review.name} />
         </Stack>
-        <UploadImageForm />
+        <UploadImageForm
+          name={fields.image.name}
+          errors={fields.image.errors}
+          isRequired={false}
+        />
         <SubmitButton>記録する</SubmitButton>
       </Stack>
     </form>
