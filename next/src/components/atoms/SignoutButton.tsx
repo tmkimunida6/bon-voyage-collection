@@ -3,9 +3,14 @@
 import { Button } from '@chakra-ui/react'
 import CustomIcon from './CustomIcon'
 import { signoutAction } from '@/actions/signoutAction'
+import { useFavoriteStore } from '@/store/store'
 
 const signoutButton = () => {
-  const handleSignout = () => signoutAction()
+  const { setFavoritedSouvenirs } = useFavoriteStore()
+  const handleSignout = () => {
+    setFavoritedSouvenirs([])
+    signoutAction()
+  }
 
   return (
     <Button size="sm" variant="outline" gap="2px" onClick={handleSignout}>

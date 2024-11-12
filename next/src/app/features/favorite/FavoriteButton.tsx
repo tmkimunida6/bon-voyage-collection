@@ -2,7 +2,7 @@
 
 'use client'
 
-import { Box, Button, useToast } from '@chakra-ui/react'
+import { Button, IconButton, useToast } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { favoriteAction } from '@/actions/favoriteAction'
 import CustomIcon from '@/components/atoms/CustomIcon'
@@ -11,25 +11,21 @@ import { useFavoriteStore } from '@/store/store'
 
 type FavoriteButtonProps = {
   currentSouvenir: SouvenirType
-  iconOnly: boolean
-  favoritedSouvenirData: Array<SouvenirType>
+  isIconButton: boolean
 }
 
 const FavoriteButton = ({
   currentSouvenir,
-  iconOnly,
-  favoritedSouvenirData,
+  isIconButton,
 }: FavoriteButtonProps) => {
   const [isFavorited, setIsFavorited] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { favoritedSouvenirs, setFavoritedSouvenirs, addFavoritedSouvenir, removeFavoritedSouvenir } = useFavoriteStore()
+  const { favoritedSouvenirs, addFavoritedSouvenir, removeFavoritedSouvenir } = useFavoriteStore()
   const toast = useToast()
 
   // 初回レンダリングのみ
   useEffect(() => {
-    !favoritedSouvenirs.length && setFavoritedSouvenirs(favoritedSouvenirData)
-    const souvenirs = favoritedSouvenirs.length ? favoritedSouvenirs : favoritedSouvenirData
-    if (souvenirs.some((souvenir) => souvenir.alias_id === currentSouvenir.alias_id)) {
+    if (favoritedSouvenirs.some((souvenir) => souvenir.alias_id === currentSouvenir.alias_id)) {
       setIsFavorited(true);
     }
   }, [])
@@ -71,26 +67,42 @@ const FavoriteButton = ({
 
   return (
     <>
-      {isFavorited ? (
-        <Button
-          variant="secondary"
-          gap={2}
-          onClick={() => handleFavorite('DELETE')}
-          pointerEvents={isLoading ? "none" : "auto"}
-        >
-          <CustomIcon iconName="FaBookmark" />
-          リストから削除
-        </Button>
+      {isIconButton ? (
+        <IconButton
+          aria-label="Search database"
+          icon={<CustomIcon iconName="FaRegBookmark" color="brand.primary" />}
+          variant="ghost"
+          position="absolute"
+          top={2}
+          right={2}
+          height={6}
+          minWidth={6}
+          _hover={{ backgroundColor: 'none' }}
+        />
       ) : (
-        <Button
-          variant="outline"
-          gap={2}
-          onClick={() => handleFavorite('POST')}
-          pointerEvents={isLoading ? "none" : "auto"}
-        >
-          <CustomIcon iconName="FaRegBookmark" />
-          欲しい！
-        </Button>
+        <>
+          {isFavorited ? (
+            <Button
+              variant="secondary"
+              gap={2}
+              onClick={() => handleFavorite('DELETE')}
+              pointerEvents={isLoading ? "none" : "auto"}
+            >
+              <CustomIcon iconName="FaBookmark" />
+              リストから削除
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              gap={2}
+              onClick={() => handleFavorite('POST')}
+              pointerEvents={isLoading ? "none" : "auto"}
+            >
+              <CustomIcon iconName="FaRegBookmark" />
+              欲しい！
+            </Button>
+          )}
+        </>
       )}
     </>
   )

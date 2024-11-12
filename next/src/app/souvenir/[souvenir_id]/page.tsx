@@ -13,7 +13,7 @@ import FavoriteButton from '@/app/features/favorite/FavoriteButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import DataWithIcon from '@/components/molecules/DataWithIcon'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
-import { SouvenirCardType } from '@/types/types'
+import { SouvenirType } from '@/types/types'
 import { fetchRelatedSouvenirData } from '@/utils/fetchRelatedSouvenirData'
 import { fetchSouvenirData } from '@/utils/fetchSouvenirData'
 import { fetchFavoritedSouvenirs } from '@/utils/fetchFavoritedSouvenirs'
@@ -28,8 +28,6 @@ export default async function SouvenirDetailPage({
   const { souvenir_id } = params
   const souvenirData = await fetchSouvenirData(souvenir_id)
   const relatedSouvenirData = await fetchRelatedSouvenirData(souvenir_id)
-  const favoritedSouvenirData = await fetchFavoritedSouvenirs()
-  console.log(favoritedSouvenirData)
 
   return (
     <Stack spacing={6}>
@@ -51,8 +49,7 @@ export default async function SouvenirDetailPage({
         </Button>
         <FavoriteButton
           currentSouvenir={souvenirData}
-          iconOnly={false}
-          favoritedSouvenirData={favoritedSouvenirData}
+          isIconButton={false}
         />
       </HStack>
       <Stack spacing={4}>
@@ -80,7 +77,7 @@ export default async function SouvenirDetailPage({
           </Heading>
           <Box overflowX="auto" mx={-6} px={6}>
             <Flex flexWrap="nowrap" gap={4} w="max-content">
-              {relatedSouvenirData.map((souvenir: SouvenirCardType) => (
+              {relatedSouvenirData.map((souvenir: SouvenirType) => (
                 <SouvenirCard
                   key={souvenir.alias_id}
                   size="md"
