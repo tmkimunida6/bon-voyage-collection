@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { CategoryType, SouvenirCardType, SouvenirType } from '@/types/types'
+import { CategoryType, SouvenirSelectType, SouvenirType } from '@/types/types'
 
 type categoryState = {
   selectedCategory: CategoryType
@@ -11,11 +11,11 @@ export const useCategoryStore = create<categoryState>((set) => ({
 }))
 
 type souvenirState = {
-  selectedSouvenir: SouvenirCardType
-  setSelectedSouvenir: (souvenir: SouvenirCardType) => void
+  selectedSouvenir: SouvenirSelectType
+  setSelectedSouvenir: (souvenir: SouvenirSelectType) => void
 }
 export const useSouvenirStore = create<souvenirState>((set) => ({
-  selectedSouvenir: { alias_id: '', name: '', image_url: '' },
+  selectedSouvenir: { alias_id: '', name: '' },
   setSelectedSouvenir: (souvenir) => set({ selectedSouvenir: souvenir }),
 }))
 
