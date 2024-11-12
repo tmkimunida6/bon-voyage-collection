@@ -3,7 +3,6 @@ import {
   CardBody,
   Heading,
   HStack,
-  IconButton,
   Image,
   Stack,
   Text,
@@ -12,15 +11,15 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import CustomIcon from '../../atoms/CustomIcon'
 import DataWithIcon from '../../molecules/DataWithIcon'
 import Rating from '../../molecules/Rating'
-import { SouvenirCardType } from '@/types/types'
+import { SouvenirType } from '@/types/types'
+import FavoriteButton from '@/app/features/favorite/FavoriteButton'
 
 type SouvenirCardProps = {
   size: 'sm' | 'md' | 'lg'
   isFavoritable: boolean
-  souvenir: SouvenirCardType
+  souvenir: SouvenirType
   rating?: string | null
 }
 
@@ -99,16 +98,9 @@ const SouvenirCard = ({
           </Stack>
         </CardBody>
         {size === 'lg' && isFavoritable && (
-          <IconButton
-            aria-label="Search database"
-            icon={<CustomIcon iconName="FaRegBookmark" color="brand.primary" />}
-            variant="ghost"
-            position="absolute"
-            top={2}
-            right={2}
-            height={6}
-            minWidth={6}
-            _hover={{ backgroundColor: 'none' }}
+          <FavoriteButton
+            currentSouvenir={souvenir}
+            isIconButton={true}
           />
         )}
       </Card>

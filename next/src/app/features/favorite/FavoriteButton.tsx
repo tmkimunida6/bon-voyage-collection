@@ -19,7 +19,7 @@ const FavoriteButton = ({
   isIconButton,
 }: FavoriteButtonProps) => {
   const [isFavorited, setIsFavorited] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const { favoritedSouvenirs, addFavoritedSouvenir, removeFavoritedSouvenir } = useFavoriteStore()
   const toast = useToast()
 
@@ -28,7 +28,8 @@ const FavoriteButton = ({
     if (favoritedSouvenirs.some((souvenir) => souvenir.alias_id === currentSouvenir.alias_id)) {
       setIsFavorited(true);
     }
-  }, [])
+    setIsLoading(false)
+  }, [favoritedSouvenirs])
 
   const handleFavorite = async (method: 'POST' | 'DELETE') => {
     try {
@@ -70,7 +71,7 @@ const FavoriteButton = ({
       {isIconButton ? (
         <IconButton
           aria-label="Search database"
-          icon={<CustomIcon iconName="FaRegBookmark" color="brand.primary" />}
+          icon={<CustomIcon iconName={isFavorited ? "FaBookmark" : "FaRegBookmark"} color="brand.primary" />}
           variant="ghost"
           position="absolute"
           top={2}
@@ -78,6 +79,8 @@ const FavoriteButton = ({
           height={6}
           minWidth={6}
           _hover={{ backgroundColor: 'none' }}
+          onClick={() => isFavorited ? handleFavorite('DELETE') : handleFavorite('POST')}
+          pointerEvents={isLoading ? "none" : "auto"}
         />
       ) : (
         <>
