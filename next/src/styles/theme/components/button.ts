@@ -2,7 +2,13 @@ export const Button = {
   variants: {
     primary: {
       bg: 'brand.primary',
+      borderColor: 'brand.primary',
       color: 'white',
+      borderWidth: 2,
+      _hover: {
+        bg: 'white',
+        color: 'brand.primary',
+      },
     },
     secondary: {
       bg: 'brand.gray',

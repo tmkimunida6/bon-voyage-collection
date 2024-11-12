@@ -1,6 +1,6 @@
 class Api::V1::SouvenirsController < Api::V1::BaseController
-  before_action :authenticate_user!, except: [ :index, :show, :related, :favorited_souvenir ]
-  before_action :set_souvenir, only: [ :show, :related, :favorited_souvenir, :favorited_index ]
+  before_action :authenticate_user!, except: [ :index, :show, :related, :favorited_status ]
+  before_action :set_souvenir, only: [ :show, :related, :favorited_status, :favorited_index ]
 
   def index
     q = Souvenir.ransack(souvenir_search_params)
@@ -43,7 +43,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   end
 
   # Favoriteステータス
-  def favorited_souvenir
+  def favorited_status
     if user_signed_in?
       is_favorited = @souvenir.favorited_by?(current_user)
       render json: { favorited: is_favorited }

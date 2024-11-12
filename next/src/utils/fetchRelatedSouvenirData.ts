@@ -2,7 +2,7 @@
 
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
-export async function fetchRelatedSouvenirData(id: number) {
+export async function fetchRelatedSouvenirData(id: string) {
   try {
     const res = await fetch(`${apiBaseUrl}/souvenirs/${id}/related`, {
       method: 'GET',

@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
         member do
           get :related
-          get :favorited_souvenir
+          get :favorited_status
         end
 
       end
