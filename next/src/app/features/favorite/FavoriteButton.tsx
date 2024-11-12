@@ -1,66 +1,70 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
+
 'use client'
 
-import { Button, useToast } from '@chakra-ui/react'
+import { Box, Button, useToast } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { favoriteAction } from '@/actions/favoriteAction'
 import CustomIcon from '@/components/atoms/CustomIcon'
-import { fetchFavoritedStatus } from '@/utils/fetchFavoritedStatus'
+import { SouvenirType } from '@/types/types'
+import { useFavoriteStore } from '@/store/store'
 
 type FavoriteButtonProps = {
-  souvenir_id: string
+  currentSouvenir: SouvenirType
   iconOnly: boolean
-  favorited: boolean
+  favoritedSouvenirData: Array<SouvenirType>
 }
 
 const FavoriteButton = ({
-  souvenir_id,
+  currentSouvenir,
   iconOnly,
-  favorited,
+  favoritedSouvenirData,
 }: FavoriteButtonProps) => {
   const [isFavorited, setIsFavorited] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { favoritedSouvenirs, setFavoritedSouvenirs, addFavoritedSouvenir, removeFavoritedSouvenir } = useFavoriteStore()
   const toast = useToast()
 
+  // 初回レンダリングのみ
   useEffect(() => {
-    const fetchData = async () => {
-      let status
-      try {
-        setIsLoading(true)
-        status = await fetchFavoritedStatus(souvenir_id)
-      } catch {
-        toast({
-          title: '情報の取得に失敗しました。',
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-        })
-      } finally {
-        setIsFavorited(status.favorited)
-        setIsLoading(false)
-      }
+    !favoritedSouvenirs.length && setFavoritedSouvenirs(favoritedSouvenirData)
+    const souvenirs = favoritedSouvenirs.length ? favoritedSouvenirs : favoritedSouvenirData
+    if (souvenirs.some((souvenir) => souvenir.alias_id === currentSouvenir.alias_id)) {
+      setIsFavorited(true);
     }
-    fetchData()
-  }, [souvenir_id])
+  }, [])
 
-  const handleAddFavorite = async (method: 'POST' | 'DELETE') => {
+  const handleFavorite = async (method: 'POST' | 'DELETE') => {
     try {
       setIsLoading(true)
-      const result = await favoriteAction(souvenir_id, method)
+      setIsFavorited((prev) => !prev)
+
+      const result = await favoriteAction(currentSouvenir.alias_id, method)
+
+      // グローバルステートに反映
+      if (method === 'POST') {
+        if (!favoritedSouvenirs.some((souvenir) => souvenir.alias_id === currentSouvenir.alias_id)) {
+          addFavoritedSouvenir(currentSouvenir);
+        }
+      } else if (method === 'DELETE') {
+        removeFavoritedSouvenir(currentSouvenir);
+      }
+
       toast({
         title: result.message,
-        status: result.status,
+        status: 'success',
         duration: 5000,
         isClosable: true,
       })
-    } catch {
+    } catch(error: any) {
+      setIsFavorited((prev) => !prev)
       toast({
-        title: '情報の取得に失敗しました。',
+        title: error.message,
         status: 'error',
         duration: 5000,
         isClosable: true,
       })
     } finally {
-      setIsFavorited((prev) => !prev)
       setIsLoading(false)
     }
   }
@@ -71,18 +75,18 @@ const FavoriteButton = ({
         <Button
           variant="secondary"
           gap={2}
-          onClick={() => handleAddFavorite('DELETE')}
-          isLoading={isLoading}
+          onClick={() => handleFavorite('DELETE')}
+          pointerEvents={isLoading ? "none" : "auto"}
         >
           <CustomIcon iconName="FaBookmark" />
-          「欲しい！」から削除
+          リストから削除
         </Button>
       ) : (
         <Button
           variant="outline"
           gap={2}
-          onClick={() => handleAddFavorite('POST')}
-          isLoading={isLoading}
+          onClick={() => handleFavorite('POST')}
+          pointerEvents={isLoading ? "none" : "auto"}
         >
           <CustomIcon iconName="FaRegBookmark" />
           欲しい！

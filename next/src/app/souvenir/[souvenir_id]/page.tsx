@@ -14,9 +14,9 @@ import CustomIcon from '@/components/atoms/CustomIcon'
 import DataWithIcon from '@/components/molecules/DataWithIcon'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import { SouvenirCardType } from '@/types/types'
-import { fetchFavoritedStatus } from '@/utils/fetchFavoritedStatus'
 import { fetchRelatedSouvenirData } from '@/utils/fetchRelatedSouvenirData'
 import { fetchSouvenirData } from '@/utils/fetchSouvenirData'
+import { fetchFavoritedSouvenirs } from '@/utils/fetchFavoritedSouvenirs'
 
 type SouvenirDetailPageProps = {
   params: { souvenir_id: string }
@@ -28,8 +28,8 @@ export default async function SouvenirDetailPage({
   const { souvenir_id } = params
   const souvenirData = await fetchSouvenirData(souvenir_id)
   const relatedSouvenirData = await fetchRelatedSouvenirData(souvenir_id)
-  const favoritedStatus = await fetchFavoritedStatus(souvenir_id)
-  console.log(favoritedStatus)
+  const favoritedSouvenirData = await fetchFavoritedSouvenirs()
+  console.log(favoritedSouvenirData)
 
   return (
     <Stack spacing={6}>
@@ -50,9 +50,9 @@ export default async function SouvenirDetailPage({
           買った！
         </Button>
         <FavoriteButton
-          souvenir_id={souvenir_id}
+          currentSouvenir={souvenirData}
           iconOnly={false}
-          favorited={favoritedStatus.favorited}
+          favoritedSouvenirData={favoritedSouvenirData}
         />
       </HStack>
       <Stack spacing={4}>

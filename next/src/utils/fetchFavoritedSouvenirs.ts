@@ -1,19 +1,17 @@
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
-'use server'
-
 import { getUserTokens } from './getUserTokens'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
-export async function fetchFavoritedStatus(souvenir_id: string) {
+export async function fetchFavoritedSouvenirs() {
   const tokens = await getUserTokens()
   if (!tokens) {
-    return { favorited: false }
+    return {}
   }
 
   try {
     const res = await fetch(
-      `${apiBaseUrl}/souvenirs/${souvenir_id}/favorited_status`,
+      `${apiBaseUrl}/souvenirs/favorited_index`,
       {
         method: 'GET',
         headers: {
@@ -28,11 +26,13 @@ export async function fetchFavoritedStatus(souvenir_id: string) {
 
     const data = await res.json()
     if (!res.ok) {
-      return { favorited: false }
+      throw new Error(
+        data.errors.full_messages || 'サーバーエラーが発生しました。',
+      )
     }
 
     return data
   } catch (e) {
-    return { favorited: false }
+    throw new Error('サーバーエラーが発生しました。')
   }
 }

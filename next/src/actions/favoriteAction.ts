@@ -11,7 +11,7 @@ export async function favoriteAction(
 ) {
   const tokens = await getUserTokens()
   if (!tokens) {
-    return ['ログインしてください。']
+    throw new Error('ログインしてください。')
   }
 
   try {
@@ -30,8 +30,11 @@ export async function favoriteAction(
     )
 
     const data = await res.json()
+    if(!res.ok) {
+      throw new Error(data.message || 'サーバーエラーが発生しました。')
+    }
     return data
   } catch (e) {
-    return ['サーバーエラーが発生しました。']
+    throw new Error('サーバーエラーが発生しました。')
   }
 }
