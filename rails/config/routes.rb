@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       # お土産
       resources :souvenirs, only: [ :index, :show, :create ] do
         # 欲しい登録/削除
-        resource :favorites, only: [:create, :destroy]
+        resource :favorites, only: [ :create, :destroy ]
 
         # 「欲しい」一覧
         collection do
@@ -43,7 +43,6 @@ Rails.application.routes.draw do
           get :related
           get :favorited_status
         end
-
       end
 
       # カテゴリー

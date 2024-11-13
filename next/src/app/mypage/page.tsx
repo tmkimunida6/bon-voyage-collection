@@ -11,11 +11,11 @@ import {
   Text,
 } from '@chakra-ui/react'
 import FavoriteSouvenirList from '../features/favorite/FavoriteSouvenirList'
+import CollectionCount from '../features/mypage/CollectionCount'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import { PostType } from '@/types/types'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 import { fetchPostDataByUser } from '@/utils/fetchPostDataByUser'
-import CollectionCount from '../features/mypage/CollectionCount'
 
 export default async function Mypage() {
   const user = await checkLoginStatus()

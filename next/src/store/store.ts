@@ -28,12 +28,14 @@ type FavoritedSouvenirsState = {
 export const useFavoriteStore = create<FavoritedSouvenirsState>((set) => ({
   favoritedSouvenirs: [],
   setFavoritedSouvenirs: (souvenirs) => set({ favoritedSouvenirs: souvenirs }),
-  addFavoritedSouvenir: (souvenir) => set((state) => ({
-    favoritedSouvenirs: [...state.favoritedSouvenirs, souvenir],
-  })),
-  removeFavoritedSouvenir: (souvenir) => set((state) => ({
-    favoritedSouvenirs: state.favoritedSouvenirs.filter(
-      (prev_souvenir) => prev_souvenir.alias_id !== souvenir.alias_id
-    ),
-  })),
+  addFavoritedSouvenir: (souvenir) =>
+    set((state) => ({
+      favoritedSouvenirs: [...state.favoritedSouvenirs, souvenir],
+    })),
+  removeFavoritedSouvenir: (souvenir) =>
+    set((state) => ({
+      favoritedSouvenirs: state.favoritedSouvenirs.filter(
+        (prev_souvenir) => prev_souvenir.alias_id !== souvenir.alias_id,
+      ),
+    })),
 }))

@@ -16,7 +16,6 @@ import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import { SouvenirType } from '@/types/types'
 import { fetchRelatedSouvenirData } from '@/utils/fetchRelatedSouvenirData'
 import { fetchSouvenirData } from '@/utils/fetchSouvenirData'
-import { fetchFavoritedSouvenirs } from '@/utils/fetchFavoritedSouvenirs'
 
 type SouvenirDetailPageProps = {
   params: { souvenir_id: string }
@@ -47,10 +46,7 @@ export default async function SouvenirDetailPage({
           <CustomIcon iconName="FaGift" />
           買った！
         </Button>
-        <FavoriteButton
-          currentSouvenir={souvenirData}
-          isIconButton={false}
-        />
+        <FavoriteButton currentSouvenir={souvenirData} isIconButton={false} />
       </HStack>
       <Stack spacing={4}>
         <Image

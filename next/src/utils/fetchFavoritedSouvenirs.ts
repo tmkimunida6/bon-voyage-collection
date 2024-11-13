@@ -10,19 +10,16 @@ export async function fetchFavoritedSouvenirs() {
   }
 
   try {
-    const res = await fetch(
-      `${apiBaseUrl}/souvenirs/favorited_index`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': tokens.accessToken,
-          client: tokens.client,
-          uid: tokens.uid,
-        },
-        cache: 'no-store',
+    const res = await fetch(`${apiBaseUrl}/souvenirs/favorited_index`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'access-token': tokens.accessToken,
+        client: tokens.client,
+        uid: tokens.uid,
       },
-    )
+      cache: 'no-store',
+    })
 
     const data = await res.json()
     if (!res.ok) {

@@ -5,7 +5,7 @@ import CustomIcon from './CustomIcon'
 import { signoutAction } from '@/actions/signoutAction'
 import { useFavoriteStore } from '@/store/store'
 
-const signoutButton = () => {
+const SignoutButton = () => {
   const { setFavoritedSouvenirs } = useFavoriteStore()
   const handleSignout = () => {
     setFavoritedSouvenirs([])
@@ -20,4 +20,4 @@ const signoutButton = () => {
   )
 }
 
-export default signoutButton
+export default SignoutButton
