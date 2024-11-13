@@ -13,14 +13,16 @@ import {
 import NextLink from 'next/link'
 import DataWithIcon from '../../molecules/DataWithIcon'
 import Rating from '../../molecules/Rating'
-import { SouvenirType } from '@/types/types'
 import FavoriteButton from '@/app/features/favorite/FavoriteButton'
+import FavoriteTrashButton from '@/app/features/favorite/FavoriteTrashButton'
+import { SouvenirType } from '@/types/types'
 
 type SouvenirCardProps = {
   size: 'sm' | 'md' | 'lg'
   isFavoritable: boolean
   souvenir: SouvenirType
   rating?: string | null
+  hasTrashIcon?: boolean
 }
 
 const SouvenirCard = ({
@@ -28,6 +30,7 @@ const SouvenirCard = ({
   isFavoritable,
   souvenir,
   rating = '0',
+  hasTrashIcon = false,
 }: SouvenirCardProps) => {
   const cardStyles = {
     sm: {
@@ -56,6 +59,8 @@ const SouvenirCard = ({
                 alt={souvenir.name}
                 borderRadius="lg"
                 width="100%"
+                aspectRatio="3/2"
+                objectFit="contain"
               />
             </Flex>
             <LinkOverlay as={NextLink} href={`/souvenir/${souvenir.alias_id}`}>
@@ -98,11 +103,9 @@ const SouvenirCard = ({
           </Stack>
         </CardBody>
         {size === 'lg' && isFavoritable && (
-          <FavoriteButton
-            currentSouvenir={souvenir}
-            isIconButton={true}
-          />
+          <FavoriteButton currentSouvenir={souvenir} isIconButton={true} />
         )}
+        {hasTrashIcon && <FavoriteTrashButton currentSouvenir={souvenir} />}
       </Card>
     </LinkBox>
   )

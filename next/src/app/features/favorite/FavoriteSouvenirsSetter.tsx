@@ -1,14 +1,22 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
+
 'use client'
 
-import { useFavoriteStore } from "@/store/store"
-import { SouvenirType } from "@/types/types"
-import { useEffect } from "react"
+import { useEffect } from 'react'
+import { useFavoriteStore } from '@/store/store'
+import { SouvenirType } from '@/types/types'
 
-export default function FavoriteSouvenirsSetter({ favoritedSouvenirsData }: { favoritedSouvenirsData: Array<SouvenirType>}) {
+export default function FavoriteSouvenirsSetter({
+  favoritedSouvenirsData,
+}: {
+  favoritedSouvenirsData: Array<SouvenirType>
+}) {
   const { favoritedSouvenirs, setFavoritedSouvenirs } = useFavoriteStore()
 
   useEffect(() => {
-    !favoritedSouvenirs.length && setFavoritedSouvenirs(favoritedSouvenirsData)
+    if (!favoritedSouvenirs.length) {
+      setFavoritedSouvenirs(favoritedSouvenirsData)
+    }
   }, [])
 
   return <></>
