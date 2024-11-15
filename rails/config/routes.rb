@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       resources :categories, only: [ :index, :show ]
 
       # 投稿
-      resources :posts, only: [ :index, :create ]
+      resources :posts, only: [ :index, :create, :destroy ]
     end
   end
 end
