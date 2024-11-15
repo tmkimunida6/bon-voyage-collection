@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
-export async function fetchSouvenirData(id: number) {
+export async function fetchSouvenirData(id: string) {
   try {
     const res = await fetch(`${apiBaseUrl}/souvenirs/${id}`, {
       method: 'GET',

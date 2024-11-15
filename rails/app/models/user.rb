@@ -10,4 +10,6 @@ class User < ActiveRecord::Base
 
   has_many :souvenirs, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_souvenirs, through: :favorites, source: :souvenir
 end

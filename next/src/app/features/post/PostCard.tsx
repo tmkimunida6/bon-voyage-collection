@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useState } from 'react'
+import FavoriteButton from '../favorite/FavoriteButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import Rating from '@/components/molecules/Rating'
 import { PostType } from '@/types/types'
@@ -43,7 +44,7 @@ const PostCard = ({ post }: PostCardProps) => {
               {post.souvenir.name}
             </ChakraLink>
           </Heading>
-          <CustomIcon iconName="FaRegBookmark" color="brand.secondary" />
+          <FavoriteButton currentSouvenir={post.souvenir} isIconButton={true} />
         </HStack>
         <HStack spacing={6}>
           {post.rating && <Rating rating={Number(post.rating)} />}

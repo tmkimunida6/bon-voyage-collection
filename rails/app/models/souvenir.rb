@@ -4,6 +4,8 @@ class Souvenir < ApplicationRecord
   belongs_to :user
   belongs_to :category
   has_many :posts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by_users, through: :favorites, source: :user
 
   validates :name, presence: true, uniqueness: true
   validates :image_url, presence: true, uniqueness: true
@@ -14,5 +16,10 @@ class Souvenir < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     []
+  end
+
+  # Favoriteステータス
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
   end
 end

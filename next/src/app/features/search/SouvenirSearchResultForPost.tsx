@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import { useSouvenirStore } from '@/store/store'
-import { SouvenirCardType, SouvenirType } from '@/types/types'
+import { SouvenirSelectType, SouvenirType } from '@/types/types'
 
 type SouvenirSearchResultForPostProps = {
   souvenirs: Array<SouvenirType> | null
@@ -23,8 +23,8 @@ export default function SouvenirSearchResultForPost({
 
   if (!souvenirs) return
 
-  const onSelectSouvenir = (souvenir: SouvenirCardType) => {
-    setSelectedSouvenir(souvenir)
+  const onSelectSouvenir = (souvenir: SouvenirSelectType) => {
+    setSelectedSouvenir({ alias_id: souvenir.alias_id, name: souvenir.name })
   }
   return (
     <>
@@ -50,7 +50,6 @@ export default function SouvenirSearchResultForPost({
                 onSelectSouvenir({
                   alias_id: souvenir.alias_id,
                   name: souvenir.name,
-                  image_url: souvenir.image_url,
                 })
               }
               disabled={souvenir.alias_id === selectedSouvenir.alias_id}

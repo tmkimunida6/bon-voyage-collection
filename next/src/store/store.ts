@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { CategoryType, SouvenirCardType } from '@/types/types'
+import { CategoryType, SouvenirSelectType, SouvenirType } from '@/types/types'
 
 type categoryState = {
   selectedCategory: CategoryType
@@ -11,10 +11,31 @@ export const useCategoryStore = create<categoryState>((set) => ({
 }))
 
 type souvenirState = {
-  selectedSouvenir: SouvenirCardType
-  setSelectedSouvenir: (souvenir: SouvenirCardType) => void
+  selectedSouvenir: SouvenirSelectType
+  setSelectedSouvenir: (souvenir: SouvenirSelectType) => void
 }
 export const useSouvenirStore = create<souvenirState>((set) => ({
-  selectedSouvenir: { alias_id: '', name: '', image_url: '' },
+  selectedSouvenir: { alias_id: '', name: '' },
   setSelectedSouvenir: (souvenir) => set({ selectedSouvenir: souvenir }),
+}))
+
+type FavoritedSouvenirsState = {
+  favoritedSouvenirs: Array<SouvenirType>
+  setFavoritedSouvenirs: (souvenirs: Array<SouvenirType>) => void
+  addFavoritedSouvenir: (souvenir: SouvenirType) => void
+  removeFavoritedSouvenir: (souvenir: SouvenirType) => void
+}
+export const useFavoriteStore = create<FavoritedSouvenirsState>((set) => ({
+  favoritedSouvenirs: [],
+  setFavoritedSouvenirs: (souvenirs) => set({ favoritedSouvenirs: souvenirs }),
+  addFavoritedSouvenir: (souvenir) =>
+    set((state) => ({
+      favoritedSouvenirs: [...state.favoritedSouvenirs, souvenir],
+    })),
+  removeFavoritedSouvenir: (souvenir) =>
+    set((state) => ({
+      favoritedSouvenirs: state.favoritedSouvenirs.filter(
+        (prev_souvenir) => prev_souvenir.alias_id !== souvenir.alias_id,
+      ),
+    })),
 }))

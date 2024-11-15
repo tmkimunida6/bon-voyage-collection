@@ -3,6 +3,7 @@ import { Noto_Sans_JP } from 'next/font/google'
 import { Button } from './components/button'
 import { Input } from './components/input'
 import { Link } from './components/link'
+import { Tabs } from './components/tabs'
 
 const notoSansJp = Noto_Sans_JP({
   subsets: ['latin'],
@@ -32,6 +33,7 @@ const customTheme = extendTheme({
     Button,
     Link,
     Input,
+    Tabs,
   },
 })
 

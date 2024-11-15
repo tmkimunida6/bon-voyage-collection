@@ -22,3 +22,5 @@ ja:
           fifties: 50代
           sixties: 60代
           over_seventies: 70代以上
+      favorite:
+        souvenir_id: "このお土産"

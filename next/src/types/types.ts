@@ -19,10 +19,9 @@ export type CategoriesType = CategoryType & {
   children: Array<CategoriesType>
 }
 
-export type SouvenirCardType = {
+export type SouvenirSelectType = {
   alias_id: string
   name: string
-  image_url: string
 }
 
 export type SouvenirType = {
