@@ -46,7 +46,7 @@ export default async function SouvenirDetailPage({
           <CustomIcon iconName="FaGift" />
           買った！
         </Button>
-        <FavoriteButton currentSouvenir={souvenirData} isIconButton={false} />
+        <FavoriteButton currentSouvenir={souvenirData} isIconButton={false} position='absolute' />
       </HStack>
       <Stack spacing={4}>
         <Image

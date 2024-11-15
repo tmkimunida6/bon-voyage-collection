@@ -13,11 +13,13 @@ import { SouvenirType } from '@/types/types'
 type FavoriteButtonProps = {
   currentSouvenir: SouvenirType
   isIconButton: boolean
+  position: "static" | "absolute"
 }
 
 const FavoriteButton = ({
   currentSouvenir,
   isIconButton,
+  position
 }: FavoriteButtonProps) => {
   const { favoritedSouvenirs } = useFavoriteStore()
   const {
@@ -41,6 +43,22 @@ const FavoriteButton = ({
     }
   }, [favoritedSouvenirs])
 
+  const positionStyles = {
+    static: {
+      position: 'static',
+      width: 'auto',
+      height: 'auto',
+      minWidth: 0
+    },
+    absolute: {
+      position: 'absolute',
+      top: 2,
+      right: 2,
+      minWidth: 6
+    },
+  }
+
+
   return (
     <>
       {isIconButton ? (
@@ -53,11 +71,9 @@ const FavoriteButton = ({
             />
           }
           variant="ghost"
-          position="absolute"
-          top={2}
-          right={2}
-          height={6}
-          minWidth={6}
+          sx= {
+            {...positionStyles[position]}
+          }
           _hover={{ backgroundColor: 'none' }}
           onClick={() => {
             if (!isLoading) {
