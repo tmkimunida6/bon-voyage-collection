@@ -13,21 +13,23 @@ import {
   Link as ChakraLink,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import FavoriteButton from '../favorite/FavoriteButton'
+import DeletePostButton from './DeletePostButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import Rating from '@/components/molecules/Rating'
-import { PostType } from '@/types/types'
 import { useCurrentUserStore } from '@/store/store'
-import DeletePostButton from './DeletePostButton'
+import { PostType, timelineResultType } from '@/types/types'
 
 type PostCardProps = {
   post: PostType
+  setTimelineResult: (state: SetStateAction<timelineResultType>) => void
 }
 
-const PostCard = ({ post }: PostCardProps) => {
+const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const { currentUser } = useCurrentUserStore()
+
   return (
     <Card key={post.alias_id} p={4} boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)">
       <Stack spacing={2}>
@@ -46,9 +48,16 @@ const PostCard = ({ post }: PostCardProps) => {
               {post.souvenir.name}
             </ChakraLink>
           </Heading>
-          <FavoriteButton currentSouvenir={post.souvenir} isIconButton={true} position="static" />
-          {(currentUser && currentUser.alias_id === post.user.alias_id) && (
-            <DeletePostButton post={post} />
+          <FavoriteButton
+            currentSouvenir={post.souvenir}
+            isIconButton={true}
+            position="static"
+          />
+          {currentUser && currentUser.alias_id === post.user.alias_id && (
+            <DeletePostButton
+              post={post}
+              setTimelineResult={setTimelineResult}
+            />
           )}
         </HStack>
         <HStack spacing={6}>

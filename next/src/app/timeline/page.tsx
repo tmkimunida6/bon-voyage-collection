@@ -1,6 +1,8 @@
-import { Heading, HStack, Stack } from '@chakra-ui/react'
+import { Heading, HStack, Spinner, Stack } from '@chakra-ui/react'
 import PostCardList from '../features/post/PostCardList'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
+import { Suspense } from 'react'
+import { redirect } from 'next/dist/server/api-utils'
 
 type TimelineProps = {
   searchParams: {
@@ -10,14 +12,16 @@ type TimelineProps = {
 
 export default async function Timeline({ searchParams }: TimelineProps) {
   const page = Number(searchParams?.page) || 1
-  const postResult = await fetchPostDataAll(page)
+  const fetchedTimelineResult = await fetchPostDataAll(page)
 
   return (
     <Stack spacing={6}>
       <HStack mb={6}>
         <Heading as="h1">タイムライン</Heading>
       </HStack>
-      <PostCardList postResult={postResult} />
+      <Suspense fallback={<Spinner />}>
+        <PostCardList fetchedTimelineResult={fetchedTimelineResult} />
+      </Suspense>
     </Stack>
   )
 }

@@ -1,16 +1,22 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
+
 'use client'
 
-import { deletePostAction } from "@/actions/deletePostAction"
-import CustomIcon from "@/components/atoms/CustomIcon"
-import { PostType } from "@/types/types"
-import { IconButton, useToast } from "@chakra-ui/react"
-import { useState } from "react"
+import { IconButton, useToast } from '@chakra-ui/react'
+import { SetStateAction, useState } from 'react'
+import { deletePostAction } from '@/actions/deletePostAction'
+import CustomIcon from '@/components/atoms/CustomIcon'
+import { PostType, timelineResultType } from '@/types/types'
 
 type DeletePostButtonProps = {
   post: PostType
+  setTimelineResult: (state: SetStateAction<timelineResultType>) => void
 }
 
-export default function DeletePostButton({ post }: DeletePostButtonProps) {
+export default function DeletePostButton({
+  post,
+  setTimelineResult,
+}: DeletePostButtonProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const toast = useToast()
 
@@ -24,7 +30,7 @@ export default function DeletePostButton({ post }: DeletePostButtonProps) {
         duration: 1000,
         isClosable: true,
       })
-    } catch(error: any) {
+    } catch (error: any) {
       toast({
         title: error.message,
         status: 'error',
@@ -33,21 +39,27 @@ export default function DeletePostButton({ post }: DeletePostButtonProps) {
       })
     } finally {
       setIsLoading(false)
+      setTimelineResult((prevResult) => ({
+        posts: prevResult.posts.filter(
+          (post: PostType) => post.alias_id !== post_id,
+        ),
+        pages: prevResult.pages,
+      }))
     }
   }
 
   return (
     <IconButton
-    aria-label="「欲しい！」から削除"
-    icon={<CustomIcon iconName="FaTrashAlt" />}
-    position="absolute"
-    top={2}
-    right={2}
-    height={6}
-    minWidth={6}
-    colorScheme="red"
-    onClick={() => handleDeletePost(post.alias_id)}
-    disabled={isLoading}
-  />
+      aria-label="「欲しい！」から削除"
+      icon={<CustomIcon iconName="FaTrashAlt" />}
+      position="absolute"
+      top={2}
+      right={2}
+      height={6}
+      minWidth={6}
+      colorScheme="red"
+      onClick={() => handleDeletePost(post.alias_id)}
+      disabled={isLoading}
+    />
   )
 }

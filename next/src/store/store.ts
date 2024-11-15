@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { CategoryType, SouvenirSelectType, SouvenirType, UserType } from '@/types/types'
+import { CategoryType, PagesType, PostType, SouvenirSelectType, SouvenirType, UserType } from '@/types/types'
 
 // カテゴリー選択
 type categoryState = {
