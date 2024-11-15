@@ -2,8 +2,18 @@
 
 'use client'
 
-import { IconButton, useToast } from '@chakra-ui/react'
-import { SetStateAction, useState } from 'react'
+import {
+  IconButton,
+  useToast,
+  AlertDialog,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  Button,
+  useDisclosure,
+} from '@chakra-ui/react'
+import { SetStateAction, useRef, useState } from 'react'
 import { deletePostAction } from '@/actions/deletePostAction'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import { PostType, timelineResultType } from '@/types/types'
@@ -20,7 +30,14 @@ export default function DeletePostButton({
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const toast = useToast()
 
-  const handleDeletePost = async (post_id: string) => {
+  // アラート
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = useRef<HTMLButtonElement>(null)
+
+  // 投稿削除
+  const confirmDeletePost = async (post_id: string) => {
+    onOpen()
+
     try {
       setIsLoading(true)
       const result = await deletePostAction(post_id)
@@ -49,17 +66,45 @@ export default function DeletePostButton({
   }
 
   return (
-    <IconButton
-      aria-label="「欲しい！」から削除"
-      icon={<CustomIcon iconName="FaTrashAlt" />}
-      position="absolute"
-      top={2}
-      right={2}
-      height={6}
-      minWidth={6}
-      colorScheme="red"
-      onClick={() => handleDeletePost(post.alias_id)}
-      disabled={isLoading}
-    />
+    <>
+      <IconButton
+        aria-label="「欲しい！」から削除"
+        icon={<CustomIcon iconName="FaTrashAlt" />}
+        position="absolute"
+        top={2}
+        right={2}
+        height={6}
+        minWidth={6}
+        colorScheme="red"
+        onClick={onOpen}
+        disabled={isLoading}
+      />
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isCentered
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              投稿を削除してもよろしいですか？
+            </AlertDialogHeader>
+            <AlertDialogFooter justifyContent="center" gap={4}>
+              <Button ref={cancelRef} onClick={onClose}>
+                キャンセル
+              </Button>
+              <Button
+                colorScheme="red"
+                onClick={() => confirmDeletePost(post.alias_id)}
+                isLoading={isLoading}
+              >
+                削除する
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+    </>
   )
 }
