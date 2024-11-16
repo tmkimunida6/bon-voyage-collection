@@ -86,7 +86,7 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
             <Button size="sm" variant="ghost" p={0}>
               <CustomIcon
                 iconName="FaTimes"
-                color="brand.gray"
+                color="gray.400"
                 onClick={() => setSelectedCategory({ id: '', name: '' })}
               />
             </Button>
@@ -94,7 +94,7 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
             <Button
               h="1.75rem"
               size="sm"
-              variant="secondary"
+              colorScheme="gray"
               onClick={handleCategoryModal}
             >
               選択

@@ -62,7 +62,7 @@ const RatingSlider = () => {
         >
           {isUnrated ? '' : rating}
         </SliderMark>
-        <SliderTrack bg="brand.gray">
+        <SliderTrack bg="gray.200">
           <SliderFilledTrack bg="brand.primary" />
         </SliderTrack>
         <SliderThumb boxSize={6}>

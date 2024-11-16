@@ -3,7 +3,7 @@ import SearchForm from '@/components/organisms/form/SearchForm'
 
 const Search = () => {
   return (
-    <Stack spacing={6}>
+    <Stack spacing={6} maxW="660px" mx="auto">
       <HStack mb={6}>
         <Heading as="h1">検索</Heading>
       </HStack>

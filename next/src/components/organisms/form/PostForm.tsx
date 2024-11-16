@@ -97,7 +97,7 @@ const PostForm = () => {
               <Button
                 h="1.75rem"
                 size="sm"
-                variant="secondary"
+                colorScheme="gray"
                 onClick={handleSouvenirModal}
               >
                 検索

@@ -10,10 +10,6 @@ export const Button = {
         color: 'brand.primary',
       },
     },
-    secondary: {
-      bg: 'brand.gray',
-      color: 'white',
-    },
     ghost: {
       _hover: {
         bg: 'transparent',

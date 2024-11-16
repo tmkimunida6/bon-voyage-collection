@@ -1,4 +1,4 @@
-import { Heading, HStack, Spinner, Stack } from '@chakra-ui/react'
+import { Spinner, Stack } from '@chakra-ui/react'
 import { Suspense } from 'react'
 import PostCardList from '../features/post/PostCardList'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
@@ -15,9 +15,6 @@ export default async function Timeline({ searchParams }: TimelineProps) {
 
   return (
     <Stack spacing={6}>
-      <HStack mb={6}>
-        <Heading as="h1">タイムライン</Heading>
-      </HStack>
       <Suspense fallback={<Spinner />}>
         <PostCardList
           fetchedTimelineResult={fetchedTimelineResult}

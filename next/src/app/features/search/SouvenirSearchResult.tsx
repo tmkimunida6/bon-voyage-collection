@@ -17,7 +17,7 @@ export default function SouvenirSearchResult({
     <>
       {souvenirs.length ? (
         <SouvenirCardList
-          size="lg"
+          size="sm"
           renderItem={(size) => (
             <>
               {souvenirs.map((souvenir: SouvenirType) => (

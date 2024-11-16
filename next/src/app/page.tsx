@@ -9,6 +9,7 @@ import {
   Stack,
   Image,
   Button,
+  FormControl,
 } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import NextLink from 'next/link'
@@ -17,15 +18,22 @@ import TextIconLink from '@/components/molecules/TextIconLink'
 
 const Top: NextPage = () => {
   return (
-    <>
+    <Box maxW="660px" mx="auto">
       <Box my={10}>
         <Stack spacing={8}>
           <Heading>お土産との出会いを見つけるサービス</Heading>
           <VStack spacing={6}>
             <Text>まずはお土産を探してみましょう。</Text>
             <HStack>
-              <Input placeholder="フリーワード" size="md" />
-              <CategoryInput />
+              <FormControl>
+                <Input
+                  type="text"
+                  placeholder="フリーワード"
+                />
+              </FormControl>
+              <FormControl>
+                <CategoryInput />
+              </FormControl>
             </HStack>
             <Button variant="primary" as={NextLink} href="./recommend">
               お土産をみる
@@ -60,7 +68,7 @@ const Top: NextPage = () => {
           opacity="30%"
         />
       </Box>
-    </>
+    </Box>
   )
 }
 

@@ -9,11 +9,13 @@ const Nav = ({ isIntersecting }: NavProps) => {
   return (
     <Box as="nav" minH="48px">
       <HStack
-        spacing={1}
+        spacing={0}
         position={!isIntersecting ? 'fixed' : 'static'}
         bottom={0}
         width="100%"
         zIndex={10}
+        bg="brand.secondary"
+        justifyContent="center"
       >
         <NavButton iconName="FaHome" text="タイムライン" href="/timeline" />
         <NavButton iconName="FaSearch" text="検索" href="/search" />

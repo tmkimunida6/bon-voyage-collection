@@ -48,7 +48,7 @@ const Rating = ({ rating, isSmall }: RatingProps) => {
         <CustomIcon
           key={index}
           iconName="FaStar"
-          color="brand.gray"
+          color="gray.400"
           fontSize={isSmall ? 'xs' : 'sm'}
         />
       ))}

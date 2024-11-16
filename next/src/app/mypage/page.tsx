@@ -41,14 +41,14 @@ export default async function Mypage() {
         <TabPanels>
           <TabPanel p={0} pt={6}>
             <SimpleGrid
-              templateColumns="repeat(auto-fill, minmax(115px, 1fr))"
+              templateColumns="repeat(auto-fill, minmax(150px, 1fr))"
               spacingX={2}
               spacingY={4}
             >
               {my_posts.map((post: PostType) => (
                 <SouvenirCard
                   key={post.alias_id}
-                  size="sm"
+                  size="lg"
                   souvenir={post.souvenir}
                   isFavoritable={false}
                   rating={post.rating}
