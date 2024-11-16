@@ -6,7 +6,7 @@ import { apiBaseUrl } from '@/constants/apiBaseUrl'
 export async function fetchFavoritedSouvenirs() {
   const tokens = await getUserTokens()
   if (!tokens) {
-    return {}
+    return []
   }
 
   try {
