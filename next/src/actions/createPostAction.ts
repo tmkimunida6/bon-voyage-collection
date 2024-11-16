@@ -34,9 +34,12 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
 
   let data
   try {
-    // 画像をCloudinaryにアップロード
-    const uploadResult = await uploadImageAction(imageFile, 'post')
-    const image_url = uploadResult.secure_url
+    let image_url = ''
+    if (imageFile) {
+      // 画像をCloudinaryにアップロード
+      const uploadResult = await uploadImageAction(imageFile, 'post')
+      image_url = uploadResult.secure_url
+    }
 
     // DBにデータ送信
     const res = await fetch(`${apiBaseUrl}/posts`, {
@@ -68,6 +71,7 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
     revalidatePath('/timeline')
     return submission.reply()
   } catch (e) {
+    console.log(e)
     return submission.reply({
       formErrors: ['サーバーエラーが発生しました。'],
     })

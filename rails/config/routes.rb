@@ -41,7 +41,6 @@ Rails.application.routes.draw do
 
         member do
           get :related
-          get :favorited_status
         end
       end
 
@@ -49,7 +48,12 @@ Rails.application.routes.draw do
       resources :categories, only: [ :index, :show ]
 
       # 投稿
-      resources :posts, only: [ :index, :create ]
+      resources :posts, only: [ :index, :create, :destroy ] do
+        # 特定のお土産に対する投稿
+        collection do
+          get "by_souvenir/:id", to: "posts#index_by_souvenir"
+        end
+      end
     end
   end
 end

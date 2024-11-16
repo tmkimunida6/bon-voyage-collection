@@ -2,8 +2,9 @@ import { Container, Stack } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import Header from '../organisms/layout/Header'
 import IntersectingNavFooter from '../organisms/layout/IntersectingNavFooter'
-import FavoriteSouvenirsSetter from '@/app/features/favorite/FavoriteSouvenirsSetter'
+import GlobalStateSetter from '@/app/features/favorite/GlobalStateSetter'
 import { fetchFavoritedSouvenirs } from '@/utils/fetchFavoritedSouvenirs'
+import { fetchUserState } from '@/utils/fetchUserState'
 
 export default async function DefaultTemplate({
   children,
@@ -11,13 +12,15 @@ export default async function DefaultTemplate({
   children: ReactNode
 }) {
   const favoritedSouvenirsData = await fetchFavoritedSouvenirs()
+  const userData = await fetchUserState()
   return (
     <>
-      <FavoriteSouvenirsSetter
+      <GlobalStateSetter
+        userData={userData}
         favoritedSouvenirsData={favoritedSouvenirsData}
       />
       <Stack spacing={0} minH="100dvh">
-        <Header />
+        <Header user={userData} />
         <Container flex={1} p={6}>
           {children}
         </Container>

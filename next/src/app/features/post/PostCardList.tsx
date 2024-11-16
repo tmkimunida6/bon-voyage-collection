@@ -6,31 +6,48 @@
 import { SimpleGrid, Spinner, useToast, VStack } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import PostCard from './PostCard'
-import { PagesType, PostType } from '@/types/types'
+import { useCurrentUserStore } from '@/store/store'
+import { timelineResultType } from '@/types/types'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
+import { fetchPostDataBySouvenir } from '@/utils/fetchPostDataBySouvenir'
 
 type PostCardListProps = {
-  postResult: { posts: Array<PostType>; pages: PagesType }
+  fetchedTimelineResult: timelineResultType
+  souvenir_id?: string
+  page: 'timeline' | 'detail'
 }
 
-const PostCardList = ({ postResult }: PostCardListProps) => {
-  const [result, setResult] = useState<{
-    posts: Array<PostType>
-    pages: PagesType
-  }>(postResult)
+const PostCardList = ({
+  fetchedTimelineResult,
+  souvenir_id,
+  page,
+}: PostCardListProps) => {
+  const [timelineResult, setTimelineResult] = useState<timelineResultType>(
+    fetchedTimelineResult,
+  )
   const [loading, setLoading] = useState<boolean>(false)
+  const { currentUser } = useCurrentUserStore()
   const toast = useToast()
   const loader = useRef<HTMLDivElement | null>(null)
 
-  const posts = result.posts
+  const posts = timelineResult.posts
 
   const fetchMorePosts = async () => {
-    if (loading || !result.pages.next_page) return
+    if (loading || !timelineResult.pages.next_page) return
 
     try {
       setLoading(true)
-      const newResult = await fetchPostDataAll(result.pages.next_page)
-      setResult((prevResult) => ({
+      let newResult: timelineResultType
+      if (page === 'timeline') {
+        newResult = await fetchPostDataAll(timelineResult.pages.next_page)
+      } else if (page === 'detail') {
+        newResult = await fetchPostDataBySouvenir(
+          souvenir_id as string,
+          timelineResult.pages.next_page,
+          currentUser?.alias_id,
+        )
+      }
+      setTimelineResult((prevResult) => ({
         posts: [...prevResult.posts, ...newResult.posts],
         pages: newResult.pages,
       }))
@@ -67,7 +84,7 @@ const PostCardList = ({ postResult }: PostCardListProps) => {
         observer.unobserve(currentLoader)
       }
     }
-  }, [result.pages.current_page])
+  }, [timelineResult.pages.current_page])
 
   return (
     <>
@@ -76,7 +93,11 @@ const PostCardList = ({ postResult }: PostCardListProps) => {
         templateColumns="repeat(auto-fill, minmax(272px, 1fr))"
       >
         {posts.map((post) => (
-          <PostCard key={post.alias_id} post={post} />
+          <PostCard
+            key={post.alias_id}
+            post={post}
+            setTimelineResult={setTimelineResult}
+          />
         ))}
       </SimpleGrid>
       <VStack ref={loader} py={6}>

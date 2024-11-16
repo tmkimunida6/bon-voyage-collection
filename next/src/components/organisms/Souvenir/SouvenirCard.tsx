@@ -103,7 +103,11 @@ const SouvenirCard = ({
           </Stack>
         </CardBody>
         {size === 'lg' && isFavoritable && (
-          <FavoriteButton currentSouvenir={souvenir} isIconButton={true} />
+          <FavoriteButton
+            currentSouvenir={souvenir}
+            isIconButton={true}
+            position="absolute"
+          />
         )}
         {hasTrashIcon && <FavoriteTrashButton currentSouvenir={souvenir} />}
       </Card>

@@ -3,11 +3,13 @@ import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
 import SignoutButton from '../../atoms/SignoutButton'
-import { fetchUserState } from '@/utils/fetchUserState'
+import { UserType } from '@/types/types'
 
-export default async function Header() {
-  const user = await fetchUserState()
+type HeaderProps = {
+  user: UserType
+}
 
+export default async function Header({ user }: HeaderProps) {
   return (
     <Box as="header">
       <HStack p={4} bg="brand.secondary">
