@@ -51,7 +51,7 @@ export type PostType = {
   souvenir: SouvenirType
 }
 
-export type timelineResultType = { 
+export type timelineResultType = {
   posts: Array<PostType>
   pages: PagesType
 }

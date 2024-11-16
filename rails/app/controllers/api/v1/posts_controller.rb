@@ -29,9 +29,9 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   def destroy
     if @post.destroy
-      render json: { message: '投稿が削除されました。' }, status: :ok
+      render json: { message: "投稿が削除されました。" }, status: :ok
     else
-      render json: { error: '投稿の削除に失敗しました。' }, status: :unprocessable_entity
+      render json: { error: "投稿の削除に失敗しました。" }, status: :unprocessable_entity
     end
   end
 
@@ -70,7 +70,7 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   def belongs_to_current_user?
     unless @post.user_id == current_user.id
-      render json: { error: 'ログインしているユーザーを確認してください。' }, status: :forbidden
+      render json: { error: "ログインしているユーザーを確認してください。" }, status: :forbidden
     end
   end
 end

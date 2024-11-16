@@ -2,9 +2,9 @@ import { Container, Stack } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import Header from '../organisms/layout/Header'
 import IntersectingNavFooter from '../organisms/layout/IntersectingNavFooter'
+import GlobalStateSetter from '@/app/features/favorite/GlobalStateSetter'
 import { fetchFavoritedSouvenirs } from '@/utils/fetchFavoritedSouvenirs'
 import { fetchUserState } from '@/utils/fetchUserState'
-import GlobalStateSetter from '@/app/features/favorite/GlobalStateSetter'
 
 export default async function DefaultTemplate({
   children,

@@ -5,9 +5,7 @@
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { getUserTokens } from '@/utils/getUserTokens'
 
-export async function deletePostAction(
-  post_id: string,
-) {
+export async function deletePostAction(post_id: string) {
   const tokens = await getUserTokens()
   if (!tokens) {
     throw new Error('ログインしてください。')
@@ -15,18 +13,15 @@ export async function deletePostAction(
 
   try {
     // DBにデータ送信
-    const res = await fetch(
-      `${apiBaseUrl}/posts/${post_id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': tokens.accessToken,
-          client: tokens.client,
-          uid: tokens.uid,
-        },
+    const res = await fetch(`${apiBaseUrl}/posts/${post_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'access-token': tokens.accessToken,
+        client: tokens.client,
+        uid: tokens.uid,
       },
-    )
+    })
 
     const data = await res.json()
     if (!res.ok) {
