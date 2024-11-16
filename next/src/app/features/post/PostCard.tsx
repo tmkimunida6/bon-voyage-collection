@@ -31,7 +31,7 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
   const { currentUser } = useCurrentUserStore()
 
   return (
-    <Card key={post.alias_id} p={4} boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)">
+    <Card p={4} boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)">
       <Stack spacing={2}>
         <HStack>
           <Avatar size="xs" />
@@ -107,6 +107,8 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
             src={post.image_url}
             alt={post.souvenir.name}
             borderRadius="lg"
+            objectFit="contain"
+            aspectRatio="3/2"
             // maxW="calc(50% - 0.5rem)"
           />
           {/* <Stack maxW="calc(50% - 0.5rem)">

@@ -6,18 +6,27 @@
 import { SimpleGrid, Spinner, useToast, VStack } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import PostCard from './PostCard'
+import { useCurrentUserStore } from '@/store/store'
 import { timelineResultType } from '@/types/types'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
+import { fetchPostDataBySouvenir } from '@/utils/fetchPostDataBySouvenir'
 
 type PostCardListProps = {
   fetchedTimelineResult: timelineResultType
+  souvenir_id?: string
+  page: 'timeline' | 'detail'
 }
 
-const PostCardList = ({ fetchedTimelineResult }: PostCardListProps) => {
+const PostCardList = ({
+  fetchedTimelineResult,
+  souvenir_id,
+  page,
+}: PostCardListProps) => {
   const [timelineResult, setTimelineResult] = useState<timelineResultType>(
     fetchedTimelineResult,
   )
   const [loading, setLoading] = useState<boolean>(false)
+  const { currentUser } = useCurrentUserStore()
   const toast = useToast()
   const loader = useRef<HTMLDivElement | null>(null)
 
@@ -28,7 +37,16 @@ const PostCardList = ({ fetchedTimelineResult }: PostCardListProps) => {
 
     try {
       setLoading(true)
-      const newResult = await fetchPostDataAll(timelineResult.pages.next_page)
+      let newResult: timelineResultType
+      if (page === 'timeline') {
+        newResult = await fetchPostDataAll(timelineResult.pages.next_page)
+      } else if (page === 'detail') {
+        newResult = await fetchPostDataBySouvenir(
+          souvenir_id as string,
+          timelineResult.pages.next_page,
+          currentUser?.alias_id,
+        )
+      }
       setTimelineResult((prevResult) => ({
         posts: [...prevResult.posts, ...newResult.posts],
         pages: newResult.pages,

@@ -1,5 +1,5 @@
 class Api::V1::PostsController < Api::V1::BaseController
-  before_action :authenticate_user!, except: [ :index ]
+  before_action :authenticate_user!, except: [ :index, :index_by_souvenir ]
   before_action :set_post, only: [ :destroy ]
   before_action :belongs_to_current_user?, only: [ :destroy ]
 
@@ -33,7 +33,29 @@ class Api::V1::PostsController < Api::V1::BaseController
     else
       render json: { error: '投稿の削除に失敗しました。' }, status: :unprocessable_entity
     end
+  end
 
+  def index_by_souvenir
+    souvenir = Souvenir.find_by(alias_id: params[:id])
+    user = User.find_by(alias_id: params[:user_id])
+    posts_by_souvenir = Post.where(souvenir_id: souvenir.id).order("created_at desc")
+
+    # ログイン中ユーザーの投稿を先頭に
+    current_user_posts = posts_by_souvenir.where(user_id: user.id)
+    other_user_posts = posts_by_souvenir.where.not(user_id: user.id)
+    posts_by_souvenir = current_user_posts + other_user_posts
+
+    paginated_posts = Kaminari.paginate_array(posts_by_souvenir).page(params[:page])
+
+    render json: {
+      posts: JSON.parse(PostResource.new(paginated_posts).serialize),
+      pages: {
+        current_page: paginated_posts.current_page,
+        total_pages: paginated_posts.total_pages,
+        next_page: paginated_posts.next_page,
+        prev_page: paginated_posts.prev_page
+      }
+    }
   end
 
   private
@@ -47,8 +69,6 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def belongs_to_current_user?
-    pp @post.user_id
-    pp current_user.id
     unless @post.user_id == current_user.id
       render json: { error: 'ログインしているユーザーを確認してください。' }, status: :forbidden
     end

@@ -10,12 +10,15 @@ import {
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import FavoriteButton from '@/app/features/favorite/FavoriteButton'
+import PostCardList from '@/app/features/post/PostCardList'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import DataWithIcon from '@/components/molecules/DataWithIcon'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import { SouvenirType } from '@/types/types'
+import { fetchPostDataBySouvenir } from '@/utils/fetchPostDataBySouvenir'
 import { fetchRelatedSouvenirData } from '@/utils/fetchRelatedSouvenirData'
 import { fetchSouvenirData } from '@/utils/fetchSouvenirData'
+import { fetchUserState } from '@/utils/fetchUserState'
 
 type SouvenirDetailPageProps = {
   params: { souvenir_id: string }
@@ -27,6 +30,12 @@ export default async function SouvenirDetailPage({
   const { souvenir_id } = params
   const souvenirData = await fetchSouvenirData(souvenir_id)
   const relatedSouvenirData = await fetchRelatedSouvenirData(souvenir_id)
+  const userData = await fetchUserState()
+  const postsBySouvenir = await fetchPostDataBySouvenir(
+    souvenir_id,
+    1,
+    userData.alias_id,
+  )
 
   return (
     <Stack spacing={6}>
@@ -46,7 +55,11 @@ export default async function SouvenirDetailPage({
           <CustomIcon iconName="FaGift" />
           買った！
         </Button>
-        <FavoriteButton currentSouvenir={souvenirData} isIconButton={false} position='absolute' />
+        <FavoriteButton
+          currentSouvenir={souvenirData}
+          isIconButton={false}
+          position="absolute"
+        />
       </HStack>
       <Stack spacing={4}>
         <Image
@@ -85,6 +98,20 @@ export default async function SouvenirDetailPage({
           </Box>
         </Stack>
       )}
+      <Stack spacing={4}>
+        <Heading as="h3" fontSize="lg">
+          投稿・レビュー
+        </Heading>
+        {postsBySouvenir.posts.length ? (
+          <PostCardList
+            fetchedTimelineResult={postsBySouvenir}
+            souvenir_id={souvenir_id}
+            page="detail"
+          />
+        ) : (
+          <Text>まだ投稿はありません。</Text>
+        )}
+      </Stack>
     </Stack>
   )
 }

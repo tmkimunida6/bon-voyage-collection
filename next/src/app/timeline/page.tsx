@@ -1,8 +1,7 @@
 import { Heading, HStack, Spinner, Stack } from '@chakra-ui/react'
+import { Suspense } from 'react'
 import PostCardList from '../features/post/PostCardList'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
-import { Suspense } from 'react'
-import { redirect } from 'next/dist/server/api-utils'
 
 type TimelineProps = {
   searchParams: {
@@ -20,7 +19,10 @@ export default async function Timeline({ searchParams }: TimelineProps) {
         <Heading as="h1">タイムライン</Heading>
       </HStack>
       <Suspense fallback={<Spinner />}>
-        <PostCardList fetchedTimelineResult={fetchedTimelineResult} />
+        <PostCardList
+          fetchedTimelineResult={fetchedTimelineResult}
+          page="timeline"
+        />
       </Suspense>
     </Stack>
   )

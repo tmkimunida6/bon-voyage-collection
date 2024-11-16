@@ -9,7 +9,7 @@ export async function fetchPostDataAll(page: number) {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: "no-store",
+      cache: 'no-store',
     })
 
     const data = await res.json()
