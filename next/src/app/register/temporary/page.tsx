@@ -1,8 +1,7 @@
 import { Heading, HStack, Text, Stack, Button } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import NextLink from 'next/link'
 
-const Temporary: NextPage = () => {
+export default function Temporary() {
   return (
     <Stack spacing={6}>
       <HStack mb={6}>
@@ -20,4 +19,3 @@ const Temporary: NextPage = () => {
   )
 }
 
-export default Temporary

@@ -1,12 +1,11 @@
 'use client'
 
 import { Heading, HStack, Text, Stack, Button } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import NextLink from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import TextIconLink from '@/components/molecules/TextIconLink'
 
-const CompleteSouvenirCreation: NextPage = () => {
+export default function CompleteSouvenirCreation() {
   const searchParams = useSearchParams()
   const souvenirId = searchParams.get('souvenir')
   return (
@@ -25,4 +24,3 @@ const CompleteSouvenirCreation: NextPage = () => {
   )
 }
 
-export default CompleteSouvenirCreation

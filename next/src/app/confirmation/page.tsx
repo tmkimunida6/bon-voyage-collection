@@ -3,12 +3,11 @@
 'use client'
 
 import { Spinner, useToast, VStack, Text } from '@chakra-ui/react'
-import { NextPage } from 'next'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { confirmUserAction } from '@/actions/confirmUserAction'
 
-const Confirmation: NextPage = () => {
+export default function Confirmation() {
   const toast = useToast()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -44,4 +43,3 @@ const Confirmation: NextPage = () => {
   )
 }
 
-export default Confirmation

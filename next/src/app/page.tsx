@@ -11,12 +11,11 @@ import {
   Button,
   FormControl,
 } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import NextLink from 'next/link'
 import CategoryInput from './features/category/CategoryInput'
 import TextIconLink from '@/components/molecules/TextIconLink'
 
-const Top: NextPage = () => {
+export default function Top() {
   return (
     <Box maxW="660px" mx="auto">
       <Box my={10}>
@@ -71,5 +70,3 @@ const Top: NextPage = () => {
     </Box>
   )
 }
-
-export default Top

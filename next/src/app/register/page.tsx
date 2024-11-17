@@ -1,8 +1,7 @@
 import { Box, Heading, HStack } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import RegisterForm from '@/components/organisms/form/RegisterForm'
 
-const Register: NextPage = () => {
+export default function Register() {
   return (
     <Box maxW="660px" mx="auto">
       <HStack mb={6}>
@@ -12,5 +11,3 @@ const Register: NextPage = () => {
     </Box>
   )
 }
-
-export default Register
