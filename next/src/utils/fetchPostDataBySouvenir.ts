@@ -1,6 +1,5 @@
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
-// import { getUserTokens } from './getUserTokens'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
 export async function fetchPostDataBySouvenir(
@@ -25,7 +24,7 @@ export async function fetchPostDataBySouvenir(
     if (!res.ok) {
       return null
     }
-
+    
     return data
   } catch (e) {
     return null

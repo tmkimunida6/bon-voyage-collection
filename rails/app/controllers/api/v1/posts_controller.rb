@@ -41,9 +41,11 @@ class Api::V1::PostsController < Api::V1::BaseController
     posts_by_souvenir = Post.where(souvenir_id: souvenir.id).order("created_at desc")
 
     # ログイン中ユーザーの投稿を先頭に
-    current_user_posts = posts_by_souvenir.where(user_id: user.id)
-    other_user_posts = posts_by_souvenir.where.not(user_id: user.id)
-    posts_by_souvenir = current_user_posts + other_user_posts
+    if user
+      current_user_posts = posts_by_souvenir.where(user_id: user.id)
+      other_user_posts = posts_by_souvenir.where.not(user_id: user.id)
+      posts_by_souvenir = current_user_posts + other_user_posts
+    end
 
     paginated_posts = Kaminari.paginate_array(posts_by_souvenir).page(params[:page])
 
