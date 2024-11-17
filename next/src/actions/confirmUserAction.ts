@@ -7,25 +7,26 @@ import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { fetchUserState } from '@/utils/fetchUserState'
 
 type ConfirmUserActionResult = {
-  status: 'error' | 'info' | 'warning' | 'success' | 'loading'
   message: string
+  status: 'error' | 'info' | 'warning' | 'success' | 'loading'
 }
 
 export async function confirmUserAction(
-  confirmationToken: string | null,
+  confirmationToken: string,
 ): Promise<ConfirmUserActionResult> {
   const endpoint = `${apiBaseUrl}/user/confirmations`
 
   const user = await fetchUserState()
 
-  if (!confirmationToken)
-    return { status: 'error', message: 'URLが有効ではありません。' }
-  if (user.isSignedIn)
-    return {
-      status: 'error',
-      message:
-        'すでに別のアカウントでログイン済みです。ログアウトしてから再度アクセスしてください。',
-    }
+  // トークンなしの場合
+  if (!confirmationToken) {
+    return { message: 'URLが有効ではありません。', status: 'error' }
+  }
+
+  // ログイン済みの場合
+  if (user.isSignedIn) {
+    return { message: 'すでに別のアカウントでログイン済みです。ログアウトしてから再度アクセスしてください。', status: 'error' }
+  }
 
   try {
     const res = await fetch(endpoint, {
@@ -39,7 +40,7 @@ export async function confirmUserAction(
 
     if (!res.ok) {
       const message = data.message
-      return { status: 'error', message }
+      return { message, status: 'error' }
     }
 
     const accessToken = data.access_token
@@ -48,19 +49,17 @@ export async function confirmUserAction(
 
     if (accessToken && client && uid) {
       setAccessTokenAction(accessToken, client, uid)
-      return { status: 'success', message: 'ユーザー認証に成功しました。' }
+      return {message: 'ユーザー認証に成功しました。', status: 'error' }
     } else {
       return {
+        message: 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
         status: 'error',
-        message:
-          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
       }
     }
   } catch (error) {
     return {
-      status: 'error',
-      message:
-        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      message: 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      status: 'error'
     }
   }
 }

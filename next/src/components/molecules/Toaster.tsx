@@ -13,6 +13,7 @@ type ToastMessageType = {
 
 const toastMessages: Record<string, ToastMessageType> = {
   login_required: { message: 'ログインしてください', status: 'error' },
+  invalid_url: { message: 'URLが有効ではありません。', status: 'error' },
 }
 
 const Toaster = () => {
@@ -23,12 +24,12 @@ const Toaster = () => {
 
   useEffect(() => {
     if (!statusQuery) return
-    const errorMessage =
+    const toastData =
       toastMessages[statusQuery as keyof typeof toastMessages] ||
       'エラーが発生しました。'
     toast({
-      title: errorMessage.message,
-      status: errorMessage.status,
+      title: toastData.message,
+      status: toastData.status,
       duration: 5000,
       isClosable: true,
     })

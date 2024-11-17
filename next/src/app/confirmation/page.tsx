@@ -1,31 +1,29 @@
-/* eslint react-hooks/exhaustive-deps: 0 */
-
-'use client'
-
-import { Spinner, useToast, VStack, Text } from '@chakra-ui/react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { Spinner, VStack, Text } from '@chakra-ui/react'
+import { redirect } from 'next/navigation'
 import { confirmUserAction } from '@/actions/confirmUserAction'
+import { Metadata } from 'next'
+import ConfirmationToaster from '../features/user/ConfirmationToaster'
 
-export default function Confirmation() {
-  const toast = useToast()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const confirmationToken = searchParams.get('confirmation_token')
 
-  useEffect(() => {
-    const confirmUser = async () => {
-      const result = await confirmUserAction(confirmationToken)
-      toast({
-        title: result.message,
-        status: result.status,
-        duration: 5000,
-        isClosable: true,
-      })
-      router.push('/')
-    }
-    confirmUser()
-  }, [])
+export const metadata: Metadata = {
+  title: 'ユーザー認証中 | Bon Voyage Collcection',
+  description: 'ユーザー認証中です。',
+  keywords: ''
+}
+
+type ConfirmationProps = {
+  searchParams: {
+    confirmation_token: string
+  }
+}
+
+export default async function Confirmation({ searchParams }: ConfirmationProps) {
+  if(!searchParams.confirmation_token) {
+    redirect('/?status=invalid_url')
+  }
+
+  const confirmationToken = searchParams.confirmation_token
+  const result = await confirmUserAction(confirmationToken)
 
   return (
     <>
@@ -36,9 +34,10 @@ export default function Confirmation() {
         transform="translate(-50%, -50%)"
         spacing={4}
       >
-        <Spinner size="xl" speed="0.5s" thickness="4px" />
-        <Text fontWeight="bold">ユーザー認証中です</Text>
+        <Spinner size="xl" speed="0.8s" thickness="4px" color='brand.primary' />
+        <Text fontWeight="bold" fontSize="lg">ユーザー認証中です</Text>
       </VStack>
+      <ConfirmationToaster message={result.message} status={result.status} />
     </>
   )
 }
