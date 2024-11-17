@@ -13,7 +13,7 @@ export default async function Header({ user }: HeaderProps) {
   return (
     <Box as="header">
       <HStack p={4} bg="brand.secondary">
-        <NextLink href="#">
+        <NextLink href="/">
           <Logo />
         </NextLink>
         <Spacer />
