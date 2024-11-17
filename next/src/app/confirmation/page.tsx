@@ -8,7 +8,10 @@ import ConfirmationToaster from '../features/user/ConfirmationToaster'
 export const metadata: Metadata = {
   title: 'ユーザー認証中 | Bon Voyage Collcection',
   description: 'ユーザー認証中です。',
-  keywords: ''
+  keywords: '',
+  robots: {
+    index: false,
+  },
 }
 
 type ConfirmationProps = {

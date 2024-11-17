@@ -1,6 +1,13 @@
 import { Box, Heading, HStack, Spacer } from '@chakra-ui/react'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import SigninForm from '@/components/organisms/form/SigninForm'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'ログイン | Bon Voyage Collcection',
+  description: 'Bon Voyage Collcectionにログインして、あなただけのお土産コレクションを作成しましょう。',
+  keywords: 'お土産,Souvenir,ログイン,Bon Voyage Collection'
+}
 
 export default function SignIn() {
   return (

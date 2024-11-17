@@ -1,13 +1,31 @@
-'use client'
-
 import { Heading, HStack, Text, Stack, Button } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import TextIconLink from '@/components/molecules/TextIconLink'
+import { Metadata } from 'next'
 
-export default function CompleteSouvenirCreation() {
-  const searchParams = useSearchParams()
-  const souvenirId = searchParams.get('souvenir')
+
+export const metadata: Metadata = {
+  title: 'お土産の新規登録完了 | Bon Voyage Collcection',
+  description: 'お土産の登録が完了しました。',
+  keywords: '',
+  robots: {
+    index: false,
+  },
+}
+
+
+type CompleteSouvenirCreationProps = {
+  searchParams: {
+    souvenir: string
+  }
+}
+
+export default function CompleteSouvenirCreation({ searchParams }: CompleteSouvenirCreationProps) {
+  if(!searchParams.souvenir) {
+    redirect('/timeline')
+  }
+  const souvenirId = searchParams.souvenir
   return (
     <Stack spacing={6}>
       <HStack mb={6}>

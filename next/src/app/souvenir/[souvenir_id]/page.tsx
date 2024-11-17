@@ -24,6 +24,14 @@ type SouvenirDetailPageProps = {
   params: { souvenir_id: string }
 }
 
+export async function generateMetadata({ params }: SouvenirDetailPageProps) {
+  const souvenirData = await fetchSouvenirData(params.souvenir_id)
+  return {
+    title: `${souvenirData.name}（お土産詳細） | Bon Voyage Collection`,
+    description: 'ユーザーが投稿したデータによるお土産の詳細情報です。気になったお土産は「欲しい」に追加しましょう。'
+  }
+}
+
 export default async function SouvenirDetailPage({
   params,
 }: SouvenirDetailPageProps) {

@@ -1,6 +1,13 @@
 import { Heading, HStack } from '@chakra-ui/react'
 import NewSouvenirForm from '@/components/organisms/form/NewSouvenirForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'お土産の新規登録 | Bon Voyage Collcection',
+  description: 'お土産を新たに登録して、あなただけのお土産コレクションを作成しましょう。',
+  keywords: 'お土産,Souvenir,お土産登録,コレクション,Bon Voyage Collection'
+}
 
 export default async function NewSouvenir() {
   await checkLoginStatus()

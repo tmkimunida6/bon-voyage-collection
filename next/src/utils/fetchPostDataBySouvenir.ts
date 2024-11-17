@@ -24,7 +24,7 @@ export async function fetchPostDataBySouvenir(
     if (!res.ok) {
       return null
     }
-    
+
     return data
   } catch (e) {
     return null
