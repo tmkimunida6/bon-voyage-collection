@@ -92,15 +92,16 @@ export default async function SouvenirDetailPage({
           <Heading as="h3" fontSize="lg">
             似ているお土産
           </Heading>
-          <Box overflowX="auto" mx={-6} px={6}>
+          <Box overflowX="auto" mx={{ base: -4, sm: -6 }} px={{ base: 4, sm: 6 }}>
             <Flex flexWrap="nowrap" gap={4} w="max-content">
               {relatedSouvenirData.map((souvenir: SouvenirType) => (
-                <SouvenirCard
-                  key={souvenir.alias_id}
-                  size="md"
-                  isFavoritable={false}
-                  souvenir={souvenir}
-                />
+                <Box maxW="150px" key={souvenir.alias_id}>
+                  <SouvenirCard
+                    size="md"
+                    isFavoritable={false}
+                    souvenir={souvenir}
+                  />
+                </Box>
               ))}
             </Flex>
           </Box>

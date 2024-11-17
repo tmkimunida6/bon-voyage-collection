@@ -20,7 +20,7 @@ export default function Top() {
     <Box maxW="660px" mx="auto">
       <Box my={10}>
         <Stack spacing={8}>
-          <Heading>お土産との出会いを見つけるサービス</Heading>
+          <Heading fontSize="4xl">お土産との出会いを見つけよう。</Heading>
           <VStack spacing={6}>
             <Text>まずはお土産を探してみましょう。</Text>
             <HStack>

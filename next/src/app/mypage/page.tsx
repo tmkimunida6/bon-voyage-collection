@@ -55,7 +55,7 @@ export default async function Mypage() {
               {my_posts.map((post: PostType) => (
                 <SouvenirCard
                   key={post.alias_id}
-                  size="lg"
+                  size="md"
                   souvenir={post.souvenir}
                   isFavoritable={false}
                   rating={post.rating}

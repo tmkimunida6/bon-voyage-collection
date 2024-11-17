@@ -85,7 +85,7 @@ const FavoriteButton = ({
         />
       ) : (
         <Button
-          variant={isFavorited ? 'secondary' : 'outline'}
+          variant={isFavorited ? 'solid' : 'outline'}
           gap={2}
           onClick={() => {
             if (!isLoading) {

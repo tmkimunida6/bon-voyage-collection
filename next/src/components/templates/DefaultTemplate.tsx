@@ -21,7 +21,7 @@ export default async function DefaultTemplate({
       />
       <Stack spacing={0} minH="100dvh">
         <Header user={userData} />
-        <Container flex={1} p={6} maxW="1200px">
+        <Container flex={1} maxW="1200px" p={{ base: 4, sm: 6, lg: 12 }}>
           {children}
         </Container>
         <IntersectingNavFooter />

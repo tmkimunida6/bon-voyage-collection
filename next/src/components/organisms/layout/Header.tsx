@@ -12,7 +12,7 @@ type HeaderProps = {
 export default async function Header({ user }: HeaderProps) {
   return (
     <Box as="header">
-      <HStack p={4} bg="brand.secondary">
+      <HStack px={{ base: 4, sm: 6 }} py={4} bg="brand.secondary">
         <NextLink href="/">
           <Logo />
         </NextLink>
