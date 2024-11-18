@@ -49,10 +49,10 @@ const SouvenirCard = ({
   return (
     <LinkBox
       transition="all 0.3s"
-      borderRadius= "4px"
+      borderRadius="4px"
       h="100%"
-      sx ={{
-        _hover: { boxShadow: '0 0 15px rgba(0,0,0,0.25)' }
+      sx={{
+        _hover: { boxShadow: '0 0 15px rgba(0,0,0,0.25)' },
       }}
     >
       <Card {...cardStyles[size]} height="100%">

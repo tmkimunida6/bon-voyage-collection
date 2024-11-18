@@ -1,5 +1,5 @@
-require 'bigdecimal'
-require 'bigdecimal/util'
+require "bigdecimal"
+require "bigdecimal/util"
 
 class Post < ApplicationRecord
   include Aliasable
@@ -18,7 +18,7 @@ class Post < ApplicationRecord
     return nil if ratings.empty?
 
     average = ratings.sum / ratings.size
-    formatted_average = format('%.1f', average)
+    formatted_average = format("%.1f", average)
     formatted_average
   end
 end

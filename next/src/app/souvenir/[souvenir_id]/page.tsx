@@ -28,7 +28,8 @@ export async function generateMetadata({ params }: SouvenirDetailPageProps) {
   const souvenirData = await fetchSouvenirData(params.souvenir_id)
   return {
     title: `${souvenirData.name}（お土産詳細） | Bon Voyage Collection`,
-    description: 'ユーザーが投稿したデータによるお土産の詳細情報です。気になったお土産は「欲しい」に追加しましょう。'
+    description:
+      'ユーザーが投稿したデータによるお土産の詳細情報です。気になったお土産は「欲しい」に追加しましょう。',
   }
 }
 
@@ -92,7 +93,11 @@ export default async function SouvenirDetailPage({
           <Heading as="h3" fontSize="lg">
             似ているお土産
           </Heading>
-          <Box overflowX="auto" mx={{ base: -4, sm: -6 }} px={{ base: 4, sm: 6 }}>
+          <Box
+            overflowX="auto"
+            mx={{ base: -4, sm: -6 }}
+            px={{ base: 4, sm: 6 }}
+          >
             <Flex flexWrap="nowrap" gap={4} w="max-content">
               {relatedSouvenirData.map((souvenir: SouvenirCardType) => (
                 <Box maxW="150px" key={souvenir.alias_id}>

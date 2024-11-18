@@ -10,14 +10,14 @@ export const Tabs = {
           color: 'brand.primary',
           borderColor: 'brand.primary',
           borderBottomColor: 'transparent',
-          fontWeight: "bold",
-          pointerEvents: "none"
+          fontWeight: 'bold',
+          pointerEvents: 'none',
         },
         _hover: {
           backgroundColor: 'brand.primary',
-          fontWeight: "bold",
-          color: 'white'
-        }
+          fontWeight: 'bold',
+          color: 'white',
+        },
       },
     },
   },

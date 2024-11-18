@@ -1,9 +1,8 @@
 import { Heading, HStack, Text, Stack, Button } from '@chakra-ui/react'
+import { Metadata } from 'next'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
 import TextIconLink from '@/components/molecules/TextIconLink'
-import { Metadata } from 'next'
-
 
 export const metadata: Metadata = {
   title: 'お土産の新規登録完了 | Bon Voyage Collcection',
@@ -14,15 +13,16 @@ export const metadata: Metadata = {
   },
 }
 
-
 type CompleteSouvenirCreationProps = {
   searchParams: {
     souvenir: string
   }
 }
 
-export default function CompleteSouvenirCreation({ searchParams }: CompleteSouvenirCreationProps) {
-  if(!searchParams.souvenir) {
+export default function CompleteSouvenirCreation({
+  searchParams,
+}: CompleteSouvenirCreationProps) {
+  if (!searchParams.souvenir) {
     redirect('/timeline')
   }
   const souvenirId = searchParams.souvenir
@@ -41,4 +41,3 @@ export default function CompleteSouvenirCreation({ searchParams }: CompleteSouve
     </Stack>
   )
 }
-

@@ -14,5 +14,4 @@ class PostResource
 
   one :user, resource: UserResource, if: proc { params[:mypage_posts] }
   one :souvenir, resource: RestrictedSouvenirResource
-
 end

@@ -10,18 +10,19 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react'
+import { Metadata } from 'next'
 import FavoriteSouvenirList from '../features/favorite/FavoriteSouvenirList'
 import CollectionCount from '../features/mypage/CollectionCount'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import { PostType } from '@/types/types'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 import { fetchPostDataByUser } from '@/utils/fetchPostDataByUser'
-import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'マイページ | Bon Voyage Collcection',
-  description: '記録したお土産と欲しいお土産を一覧でチェック。あなただけのお土産コレクション管理しましょう。',
-  keywords: 'お土産,Souvenir,マイページ,Bon Voyage Collection'
+  description:
+    '記録したお土産と欲しいお土産を一覧でチェック。あなただけのお土産コレクション管理しましょう。',
+  keywords: 'お土産,Souvenir,マイページ,Bon Voyage Collection',
 }
 
 export default async function Mypage() {

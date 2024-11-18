@@ -1,15 +1,15 @@
 import { Spinner, Stack } from '@chakra-ui/react'
+import { Metadata } from 'next'
 import { Suspense } from 'react'
 import PostCardList from '../features/post/PostCardList'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
-import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'ホーム | Bon Voyage Collcection',
-  description: '旅先で見つけたお土産の記録をタイムラインでチェックし、新しい出会いを見つけましょう。',
-  keywords: 'お土産,Souvenir,タイムライン,SNS,Bon Voyage Collection'
+  description:
+    '旅先で見つけたお土産の記録をタイムラインでチェックし、新しい出会いを見つけましょう。',
+  keywords: 'お土産,Souvenir,タイムライン,SNS,Bon Voyage Collection',
 }
-
 
 type TimelineProps = {
   searchParams: {

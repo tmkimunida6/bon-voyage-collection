@@ -1,9 +1,8 @@
 import { Spinner, VStack, Text } from '@chakra-ui/react'
-import { redirect } from 'next/navigation'
-import { confirmUserAction } from '@/actions/confirmUserAction'
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import ConfirmationToaster from '../features/user/ConfirmationToaster'
-
+import { confirmUserAction } from '@/actions/confirmUserAction'
 
 export const metadata: Metadata = {
   title: 'ユーザー認証中 | Bon Voyage Collcection',
@@ -20,8 +19,10 @@ type ConfirmationProps = {
   }
 }
 
-export default async function Confirmation({ searchParams }: ConfirmationProps) {
-  if(!searchParams.confirmation_token) {
+export default async function Confirmation({
+  searchParams,
+}: ConfirmationProps) {
+  if (!searchParams.confirmation_token) {
     redirect('/?status=invalid_url')
   }
 
@@ -37,11 +38,12 @@ export default async function Confirmation({ searchParams }: ConfirmationProps) 
         transform="translate(-50%, -50%)"
         spacing={4}
       >
-        <Spinner size="xl" speed="0.8s" thickness="4px" color='brand.primary' />
-        <Text fontWeight="bold" fontSize="lg">ユーザー認証中です</Text>
+        <Spinner size="xl" speed="0.8s" thickness="4px" color="brand.primary" />
+        <Text fontWeight="bold" fontSize="lg">
+          ユーザー認証中です
+        </Text>
       </VStack>
       <ConfirmationToaster message={result.message} status={result.status} />
     </>
   )
 }
-

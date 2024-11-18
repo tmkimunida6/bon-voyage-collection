@@ -14,7 +14,7 @@ const SouvenirCardList = ({ size, renderItem }: SouvenirCardListProps) => {
     },
     md: {
       templateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-      gap: '16px 8px'
+      gap: '16px 8px',
     },
     lg: {
       templateColumns: 'repeat(auto-fill, minmax(172px, 1fr))',

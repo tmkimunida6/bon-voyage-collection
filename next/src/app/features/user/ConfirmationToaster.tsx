@@ -6,9 +6,8 @@ import { useEffect } from 'react'
 
 type ToastDataType = {
   message: string
-  status: "error" | "info" | "warning" | "success" | "loading"
+  status: 'error' | 'info' | 'warning' | 'success' | 'loading'
 }
-
 
 const ConfirmationToaster = ({ message, status }: ToastDataType) => {
   const toast = useToast()
@@ -22,8 +21,7 @@ const ConfirmationToaster = ({ message, status }: ToastDataType) => {
     })
 
     redirect('/')
-  }, [toast])
-
+  }, [toast, message, status])
 
   return null
 }

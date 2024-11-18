@@ -25,10 +25,7 @@ export default function Top() {
             <Text>まずはお土産を探してみましょう。</Text>
             <HStack>
               <FormControl>
-                <Input
-                  type="text"
-                  placeholder="フリーワード"
-                />
+                <Input type="text" placeholder="フリーワード" />
               </FormControl>
               <FormControl>
                 <CategoryInput />

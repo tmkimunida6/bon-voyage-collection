@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 
 'use server'
 
@@ -25,7 +25,11 @@ export async function confirmUserAction(
 
   // ログイン済みの場合
   if (user.isSignedIn) {
-    return { message: 'すでに別のアカウントでログイン済みです。ログアウトしてから再度アクセスしてください。', status: 'error' }
+    return {
+      message:
+        'すでに別のアカウントでログイン済みです。ログアウトしてから再度アクセスしてください。',
+      status: 'error',
+    }
   }
 
   try {
@@ -49,17 +53,19 @@ export async function confirmUserAction(
 
     if (accessToken && client && uid) {
       setAccessTokenAction(accessToken, client, uid)
-      return {message: 'ユーザー認証に成功しました。', status: 'error' }
+      return { message: 'ユーザー認証に成功しました。', status: 'success' }
     } else {
       return {
-        message: 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+        message:
+          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
         status: 'error',
       }
     }
-  } catch (error) {
+  } catch (error: any) {
     return {
-      message: 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
-      status: 'error'
+      message:
+        error.message || 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      status: 'error',
     }
   }
 }
