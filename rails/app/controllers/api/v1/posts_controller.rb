@@ -50,7 +50,7 @@ class Api::V1::PostsController < Api::V1::BaseController
     paginated_posts = Kaminari.paginate_array(posts_by_souvenir).page(params[:page])
 
     render json: {
-      posts: JSON.parse(PostResource.new(paginated_posts).serialize),
+      posts: JSON.parse(PostResource.new(paginated_posts, params: { mypage_posts: true }).serialize),
       pages: {
         current_page: paginated_posts.current_page,
         total_pages: paginated_posts.total_pages,
