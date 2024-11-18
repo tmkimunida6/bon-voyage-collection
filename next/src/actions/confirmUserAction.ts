@@ -62,7 +62,8 @@ export async function confirmUserAction(
   } catch (error: any) {
     return {
       message:
-        error.message || 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+        error.message ||
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
       status: 'error',
     }
   }

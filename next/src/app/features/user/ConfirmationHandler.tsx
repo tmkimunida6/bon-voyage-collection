@@ -1,16 +1,17 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
+
 'use client'
 
-import { confirmUserAction } from '@/actions/confirmUserAction'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { confirmUserAction } from '@/actions/confirmUserAction'
 
 type ToastDataType = {
   confirmationToken: string
 }
 
 const ConfirmationHandler = ({ confirmationToken }: ToastDataType) => {
-
   const toast = useToast()
   const router = useRouter()
 
@@ -26,7 +27,9 @@ const ConfirmationHandler = ({ confirmationToken }: ToastDataType) => {
         })
       } catch (error: any) {
         toast({
-          title: error.message || 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+          title:
+            error.message ||
+            'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
           status: 'error',
           duration: 5000,
           isClosable: true,
