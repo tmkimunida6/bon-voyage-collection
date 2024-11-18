@@ -14,8 +14,6 @@ type ConfirmUserActionResult = {
 export async function confirmUserAction(
   confirmationToken: string,
 ): Promise<ConfirmUserActionResult> {
-  const endpoint = `${apiBaseUrl}/user/confirmations`
-
   const user = await fetchUserState()
 
   // トークンなしの場合
@@ -33,18 +31,18 @@ export async function confirmUserAction(
   }
 
   try {
-    const res = await fetch(endpoint, {
+    const res = await fetch(`${apiBaseUrl}/user/confirmations`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ confirmation_token: confirmationToken }),
     })
+
     const data = await res.json()
 
     if (!res.ok) {
-      const message = data.message
-      return { message, status: 'error' }
+      return { message: data.message, status: 'error' }
     }
 
     const accessToken = data.access_token
@@ -52,8 +50,8 @@ export async function confirmUserAction(
     const uid = data.uid
 
     if (accessToken && client && uid) {
-      setAccessTokenAction(accessToken, client, uid)
-      return { message: 'ユーザー認証に成功しました。', status: 'success' }
+      await setAccessTokenAction(accessToken, client, uid)
+      return { message: data.message, status: 'success' }
     } else {
       return {
         message:

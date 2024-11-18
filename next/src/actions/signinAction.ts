@@ -41,7 +41,7 @@ export async function signinAction(prevState: unknown, formData: FormData) {
     const uid = res.headers.get('uid')
 
     if (accessToken && client && uid) {
-      setAccessTokenAction(accessToken, client, uid)
+      await setAccessTokenAction(accessToken, client, uid)
     } else {
       return submission.reply({
         formErrors: ['ログインに失敗しました。'],

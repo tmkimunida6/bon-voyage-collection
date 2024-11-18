@@ -1,6 +1,6 @@
-'use server'
-
 /* eslint @typescript-eslint/no-unused-vars: 0 */
+
+'use server'
 
 import { getUserTokens } from './getUserTokens'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
