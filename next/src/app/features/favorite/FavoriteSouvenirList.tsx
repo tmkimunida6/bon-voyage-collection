@@ -3,7 +3,7 @@
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
 import { useFavoriteStore } from '@/store/store'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 
 const FavoriteSouvenirList = () => {
   const { favoritedSouvenirs } = useFavoriteStore()
@@ -13,13 +13,13 @@ const FavoriteSouvenirList = () => {
       size="md"
       renderItem={(size) => (
         <>
-          {favoritedSouvenirs.map((souvenir: SouvenirType) => (
+          {favoritedSouvenirs.map((souvenir: SouvenirCardType) => (
             <SouvenirCard
               key={souvenir.alias_id}
               size={size}
               souvenir={souvenir}
               isFavoritable={true}
-              rating={'2'}
+              rating={souvenir.average_rating || null}
               hasTrashIcon={true}
             />
           ))}

@@ -10,10 +10,10 @@ import {
 } from '@chakra-ui/react'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import { useSouvenirStore } from '@/store/store'
-import { SouvenirSelectType, SouvenirType } from '@/types/types'
+import { SouvenirSelectType, SouvenirCardType } from '@/types/types'
 
 type SouvenirSearchResultForPostProps = {
-  souvenirs: Array<SouvenirType> | null
+  souvenirs: Array<SouvenirCardType> | null
 }
 
 export default function SouvenirSearchResultForPost({

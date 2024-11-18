@@ -4,11 +4,11 @@
 
 import { useEffect } from 'react'
 import { useCurrentUserStore, useFavoriteStore } from '@/store/store'
-import { SouvenirType, UserType } from '@/types/types'
+import { SouvenirCardType, UserType } from '@/types/types'
 
 type GlobalStateSetterProps = {
   userData: UserType
-  favoritedSouvenirsData: Array<SouvenirType>
+  favoritedSouvenirsData: Array<SouvenirCardType>
 }
 
 export default function GlobalStateSetter({

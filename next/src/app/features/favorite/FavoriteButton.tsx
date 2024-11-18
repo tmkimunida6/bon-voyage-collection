@@ -8,10 +8,10 @@ import { useEffect } from 'react'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import useFavorite from '@/hooks/useFavorite'
 import { useFavoriteStore } from '@/store/store'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 
 type FavoriteButtonProps = {
-  currentSouvenir: SouvenirType
+  currentSouvenir: SouvenirCardType
   isIconButton: boolean
   position: 'static' | 'absolute'
 }

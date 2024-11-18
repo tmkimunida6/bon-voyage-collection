@@ -19,7 +19,7 @@ import SouvenirSearchResult from '@/app/features/search/SouvenirSearchResult'
 import SouvenirSearchResultForPost from '@/app/features/search/SouvenirSearchResultForPost'
 import Pagination from '@/components/molecules/Pagination'
 import { useCategoryStore } from '@/store/store'
-import { PagesType, SouvenirType } from '@/types/types'
+import { PagesType, SouvenirCardType } from '@/types/types'
 import { searchSouvenirData } from '@/utils/searchSouvenirData'
 
 type SearchFormProps = {
@@ -33,7 +33,7 @@ const SearchForm = ({ page }: SearchFormProps) => {
 
   const [word, setWord] = useState<string>(searchParams.get('word') || '')
   const [searchResult, setSearchResult] = useState<{
-    souvenirs: Array<SouvenirType> | null
+    souvenirs: Array<SouvenirCardType> | null
     pages: PagesType
   }>({
     souvenirs: null,

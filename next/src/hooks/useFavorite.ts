@@ -6,12 +6,12 @@ import { useToast } from '@chakra-ui/react'
 import { useState } from 'react'
 import { favoriteAction } from '@/actions/favoriteAction'
 import { useFavoriteStore } from '@/store/store'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 
 type UseFavoriteHook = {
   handleFavorite: (
     method: 'POST' | 'DELETE',
-    currentSouvenir: SouvenirType,
+    currentSouvenir: SouvenirCardType,
   ) => Promise<void>
   isLoading: boolean
   setIsLoading: (state: boolean) => void
@@ -34,7 +34,7 @@ const useFavorite = (): UseFavoriteHook => {
 
   const handleFavorite = async (
     method: 'POST' | 'DELETE',
-    currentSouvenir: SouvenirType,
+    currentSouvenir: SouvenirCardType,
   ) => {
     const originalState = [...favoritedSouvenirs]
     try {

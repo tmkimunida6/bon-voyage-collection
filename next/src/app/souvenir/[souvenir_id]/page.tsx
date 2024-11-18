@@ -14,7 +14,7 @@ import PostCardList from '@/app/features/post/PostCardList'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import DataWithIcon from '@/components/molecules/DataWithIcon'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 import { fetchPostDataBySouvenir } from '@/utils/fetchPostDataBySouvenir'
 import { fetchRelatedSouvenirData } from '@/utils/fetchRelatedSouvenirData'
 import { fetchSouvenirData } from '@/utils/fetchSouvenirData'
@@ -94,12 +94,13 @@ export default async function SouvenirDetailPage({
           </Heading>
           <Box overflowX="auto" mx={{ base: -4, sm: -6 }} px={{ base: 4, sm: 6 }}>
             <Flex flexWrap="nowrap" gap={4} w="max-content">
-              {relatedSouvenirData.map((souvenir: SouvenirType) => (
+              {relatedSouvenirData.map((souvenir: SouvenirCardType) => (
                 <Box maxW="150px" key={souvenir.alias_id}>
                   <SouvenirCard
                     size="md"
                     isFavoritable={false}
                     souvenir={souvenir}
+                    rating={souvenir.average_rating || null}
                   />
                 </Box>
               ))}

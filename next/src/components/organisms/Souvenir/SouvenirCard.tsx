@@ -15,13 +15,13 @@ import DataWithIcon from '../../molecules/DataWithIcon'
 import Rating from '../../molecules/Rating'
 import FavoriteButton from '@/app/features/favorite/FavoriteButton'
 import FavoriteTrashButton from '@/app/features/favorite/FavoriteTrashButton'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 
 type SouvenirCardProps = {
   size: 'sm' | 'md' | 'lg'
   isFavoritable: boolean
-  souvenir: SouvenirType
-  rating?: string | null
+  souvenir: SouvenirCardType
+  rating: string | null
   hasTrashIcon?: boolean
 }
 
@@ -50,6 +50,7 @@ const SouvenirCard = ({
     <LinkBox
       transition="all 0.3s"
       borderRadius= "4px"
+      h="100%"
       sx ={{
         _hover: { boxShadow: '0 0 15px rgba(0,0,0,0.25)' }
       }}
