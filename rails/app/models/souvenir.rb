@@ -22,4 +22,9 @@ class Souvenir < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+
+  # 平均評価スコア
+  def average_rating
+    posts.average_rating
+  end
 end
