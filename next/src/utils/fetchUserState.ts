@@ -26,17 +26,18 @@ export async function fetchUserState() {
       },
     })
 
+    const data = await res.json()
+
     if (!res.ok) {
-      throw new Error('Failed to validate token')
+      return user
     }
 
-    const userData = await res.json()
     user = {
-      ...userData,
+      ...data,
       isSignedIn: true,
     }
     return user
-  } catch (e) {
-    throw new Error(`Server error${e}`)
+  } catch (error) {
+    return user
   }
 }

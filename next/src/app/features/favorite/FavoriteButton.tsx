@@ -62,7 +62,9 @@ const FavoriteButton = ({
     <>
       {isIconButton ? (
         <IconButton
-          aria-label="Search database"
+          aria-label={
+            isFavorited ? '「欲しい！」から削除する' : '「欲しい！」に登録する'
+          }
           icon={
             <CustomIcon
               iconName={isFavorited ? 'FaBookmark' : 'FaRegBookmark'}

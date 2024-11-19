@@ -1,4 +1,4 @@
-import { Heading, HStack } from '@chakra-ui/react'
+import { Box, Heading, HStack } from '@chakra-ui/react'
 import { Metadata } from 'next'
 import NewSouvenirForm from '@/components/organisms/form/NewSouvenirForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
@@ -14,11 +14,11 @@ export default async function NewSouvenir() {
   await checkLoginStatus()
 
   return (
-    <>
+    <Box maxW="660px" mx="auto">
       <HStack mb={6}>
         <Heading as="h1">お土産の新規登録</Heading>
       </HStack>
       <NewSouvenirForm />
-    </>
+    </Box>
   )
 }

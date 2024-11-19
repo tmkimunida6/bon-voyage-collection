@@ -26,7 +26,13 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   end
 
   def create
-    category = Category.find(params[:category_id])
+    begin
+      category = Category.find(params[:category_id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { errors: ["カテゴリーを選択してください。"] }, status: :not_found
+      return
+    end
+
     souvenir = current_user.souvenirs.build(souvenir_params)
     souvenir.category = category
     if souvenir.save

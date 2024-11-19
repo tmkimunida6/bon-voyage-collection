@@ -37,14 +37,20 @@ export default async function SouvenirDetailPage({
   params,
 }: SouvenirDetailPageProps) {
   const { souvenir_id } = params
-  const souvenirData = await fetchSouvenirData(souvenir_id)
+
   const relatedSouvenirData = await fetchRelatedSouvenirData(souvenir_id)
-  const userData = await fetchUserState()
-  const postsBySouvenir = await fetchPostDataBySouvenir(
-    souvenir_id,
-    1,
-    userData.alias_id,
-  )
+  const souvenirData = await fetchSouvenirData(souvenir_id)
+  let postsBySouvenir
+  try {
+    const userData = await fetchUserState()
+    postsBySouvenir = await fetchPostDataBySouvenir(
+      souvenir_id,
+      1,
+      userData.alias_id,
+    )
+  } catch (error) {
+    postsBySouvenir = null
+  }
 
   return (
     <Stack spacing={6}>
@@ -88,7 +94,7 @@ export default async function SouvenirDetailPage({
           )}
         </Stack>
       </Stack>
-      {relatedSouvenirData.length && (
+      {relatedSouvenirData && relatedSouvenirData.length && (
         <Stack spacing={4}>
           <Heading as="h3" fontSize="lg">
             似ているお土産
@@ -117,7 +123,7 @@ export default async function SouvenirDetailPage({
         <Heading as="h3" fontSize="lg">
           投稿・レビュー
         </Heading>
-        {postsBySouvenir.posts.length ? (
+        {postsBySouvenir && postsBySouvenir.posts.length ? (
           <PostCardList
             fetchedTimelineResult={postsBySouvenir}
             souvenir_id={souvenir_id}
@@ -129,4 +135,5 @@ export default async function SouvenirDetailPage({
       </Stack>
     </Stack>
   )
+
 }

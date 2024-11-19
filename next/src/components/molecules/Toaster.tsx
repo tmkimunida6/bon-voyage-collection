@@ -14,6 +14,8 @@ type ToastMessageType = {
 const toastMessages: Record<string, ToastMessageType> = {
   login_required: { message: 'ログインしてください', status: 'error' },
   invalid_url: { message: 'URLが有効ではありません。', status: 'error' },
+  server_error: { message: 'サーバーエラーが発生しました。時間をおいてから再度お試しください。', status: 'error' },
+  not_found: { message: 'ページが存在しません。URLを再度ご確認ください。', status: 'error' },
 }
 
 const Toaster = () => {

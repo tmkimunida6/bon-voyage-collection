@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-explicit-any: 0 */
+/* eslint @typescript-eslint/no-unused-vars: 0 */
 
 'use server'
 
@@ -31,10 +31,14 @@ export async function favoriteAction(
 
     const data = await res.json()
     if (!res.ok) {
-      throw new Error(data.message || 'サーバーエラーが発生しました。')
+      throw new Error(
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      )
     }
     return data
-  } catch (e: any) {
-    throw new Error(e.message || 'サーバーエラーが発生しました。')
+  } catch (error) {
+    throw new Error(
+      'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+    )
   }
 }

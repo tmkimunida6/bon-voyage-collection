@@ -23,13 +23,11 @@ export async function fetchFavoritedSouvenirs() {
 
     const data = await res.json()
     if (!res.ok) {
-      throw new Error(
-        data.errors.full_messages || 'サーバーエラーが発生しました。',
-      )
+      return []
     }
 
     return data
   } catch (e) {
-    throw new Error('サーバーエラーが発生しました。')
+    return []
   }
 }

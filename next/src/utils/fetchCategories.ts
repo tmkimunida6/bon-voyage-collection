@@ -13,13 +13,11 @@ export async function fetchCategories() {
 
     const data = await res.json()
     if (!res.ok) {
-      throw new Error(
-        data.errors.full_messages || 'サーバーエラーが発生しました。',
-      )
+      throw new Error('サーバーエラーが発生しました。時間をおいてから再度お試しください。')
     }
 
     return data
-  } catch (e) {
-    throw new Error('サーバーエラーが発生しました。')
+  } catch (error) {
+    throw new Error('サーバーエラーが発生しました。時間をおいてから再度お試しください。')
   }
 }

@@ -21,9 +21,7 @@ export async function searchSouvenirData(
     const data = await res.json()
 
     if (!res.ok) {
-      throw new Error(
-        data.errors.full_messages || 'サーバーエラーが発生しました。',
-      )
+      throw new Error(data.error || 'サーバーエラーが発生しました。')
     }
 
     return data

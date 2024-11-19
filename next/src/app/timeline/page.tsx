@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { Suspense } from 'react'
 import PostCardList from '../features/post/PostCardList'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
+import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'ホーム | Bon Voyage Collcection',
@@ -19,16 +20,21 @@ type TimelineProps = {
 
 export default async function Timeline({ searchParams }: TimelineProps) {
   const page = Number(searchParams?.page) || 1
-  const fetchedTimelineResult = await fetchPostDataAll(page)
 
-  return (
-    <Stack spacing={6}>
-      <Suspense fallback={<Spinner />}>
-        <PostCardList
-          fetchedTimelineResult={fetchedTimelineResult}
-          page="timeline"
-        />
-      </Suspense>
-    </Stack>
-  )
+  try {
+    const fetchedTimelineResult = await fetchPostDataAll(page)
+    return (
+      <Stack spacing={6}>
+        <Suspense fallback={<Spinner />}>
+          <PostCardList
+            fetchedTimelineResult={fetchedTimelineResult}
+            page="timeline"
+          />
+        </Suspense>
+      </Stack>
+    )
+  } catch (error) {
+    redirect('/?status=server_error')
+  }
+
 }

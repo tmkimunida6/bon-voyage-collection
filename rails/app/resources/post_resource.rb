@@ -12,6 +12,6 @@ class PostResource
     I18n.t("activerecord.attributes.post.age.#{post.age}") unless post.age.nil?
   end
 
-  one :user, resource: UserResource, if: proc { params[:mypage_posts] }
+  one :user, resource: UserResource
   one :souvenir, resource: RestrictedSouvenirResource
 end
