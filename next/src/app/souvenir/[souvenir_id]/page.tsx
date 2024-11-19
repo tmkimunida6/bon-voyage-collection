@@ -15,6 +15,7 @@ import FavoriteButton from '@/app/features/favorite/FavoriteButton'
 import PostCardList from '@/app/features/post/PostCardList'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import DataWithIcon from '@/components/molecules/DataWithIcon'
+import Rating from '@/components/molecules/Rating'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import { SouvenirCardType } from '@/types/types'
 import { fetchPostDataBySouvenir } from '@/utils/fetchPostDataBySouvenir'
@@ -59,9 +60,15 @@ export default async function SouvenirDetailPage({
       <HStack mb={6}>
         <Heading as="h1">お土産の詳細</Heading>
       </HStack>
-      <Heading as="h2" fontSize="xl">
-        {souvenirData.name}
-      </Heading>
+      <Stack spacing={2}>
+        <Heading as="h2" fontSize="xl">
+          {souvenirData.name}
+        </Heading>
+        <HStack gap={2}>
+          <Text fontSize="xs">平均おすすめ度</Text>
+          <Rating rating={souvenirData.average_rating} />
+        </HStack>
+      </Stack>
       <HStack justifyContent="center" spacing={4}>
         <Button
           variant="primary"
