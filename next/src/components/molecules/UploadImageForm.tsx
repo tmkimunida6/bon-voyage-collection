@@ -85,7 +85,7 @@ const UploadImageForm = ({
         </Box>
       ) : (
         <VStack
-          bg="brand.gray"
+          bg="gray.200"
           w="100%"
           h="128px"
           borderRadius={4}
@@ -95,10 +95,10 @@ const UploadImageForm = ({
         >
           <Button
             variant="ghost"
-            color="white"
             w="100%"
             h="100%"
             onClick={onClickInputFile}
+            _hover={{ opacity: 0.5 }}
           >
             ＋画像をアップロード{isRequired && '（必須）'}
           </Button>

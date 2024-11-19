@@ -15,13 +15,13 @@ import DataWithIcon from '../../molecules/DataWithIcon'
 import Rating from '../../molecules/Rating'
 import FavoriteButton from '@/app/features/favorite/FavoriteButton'
 import FavoriteTrashButton from '@/app/features/favorite/FavoriteTrashButton'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 
 type SouvenirCardProps = {
   size: 'sm' | 'md' | 'lg'
   isFavoritable: boolean
-  souvenir: SouvenirType
-  rating?: string | null
+  souvenir: SouvenirCardType
+  rating: string | null
   hasTrashIcon?: boolean
 }
 
@@ -39,8 +39,6 @@ const SouvenirCard = ({
     md: {
       border: '1px',
       borderColor: 'brand.primary',
-      width: '160px',
-      height: '100%',
     },
     lg: {
       border: '1px',
@@ -49,57 +47,75 @@ const SouvenirCard = ({
   }
 
   return (
-    <LinkBox>
-      <Card {...cardStyles[size]}>
-        <CardBody p={size === 'lg' ? 2 : 1}>
-          <Stack spacing={2}>
-            <Flex aspectRatio="3/2" justifyContent="center" alignItems="center">
-              <Image
-                src={souvenir.image_url}
-                alt={souvenir.name}
-                borderRadius="lg"
-                width="100%"
+    <LinkBox
+      transition="all 0.3s"
+      borderRadius="4px"
+      h="100%"
+      sx={{
+        _hover: { boxShadow: '0 0 15px rgba(0,0,0,0.25)' },
+      }}
+    >
+      <Card {...cardStyles[size]} height="100%">
+        <CardBody p={2} height="100%">
+          <Stack justifyContent="space-between" height="100%" spacing={2}>
+            <Stack spacing={2}>
+              <Flex
                 aspectRatio="3/2"
-                objectFit="contain"
-              />
-            </Flex>
-            <LinkOverlay as={NextLink} href={`/souvenir/${souvenir.alias_id}`}>
-              <Heading size="xs" h="2.4em" noOfLines={2}>
-                {souvenir.name}
-              </Heading>
-            </LinkOverlay>
-            <Rating rating={Number(rating)} isSmall={size === 'sm'} />
-            {size !== 'sm' && (
-              <HStack>
-                {size === 'lg' ? (
-                  <>
-                    <DataWithIcon iconName="FaGift">
-                      <Text size="xs" fontWeight="bold">
-                        100
-                      </Text>
-                    </DataWithIcon>
-                    <DataWithIcon iconName="FaBookmark">
-                      <Text size="xs" fontWeight="bold">
-                        100
-                      </Text>
-                    </DataWithIcon>
-                  </>
-                ) : (
-                  <>
-                    <DataWithIcon iconName="FaRegComment">
-                      <Text size="xs" fontWeight="bold">
-                        100
-                      </Text>
-                    </DataWithIcon>
-                    <DataWithIcon iconName="FaRegHeart">
-                      <Text size="xs" fontWeight="bold">
-                        100
-                      </Text>
-                    </DataWithIcon>
-                  </>
-                )}
-              </HStack>
-            )}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Image
+                  src={souvenir.image_url}
+                  alt={souvenir.name}
+                  borderRadius="lg"
+                  width="100%"
+                  aspectRatio="3/2"
+                  objectFit="contain"
+                />
+              </Flex>
+              <LinkOverlay
+                as={NextLink}
+                href={`/souvenir/${souvenir.alias_id}`}
+              >
+                <Heading size="xs" maxH="2.4em" noOfLines={2}>
+                  {souvenir.name}
+                </Heading>
+              </LinkOverlay>
+            </Stack>
+            <Stack spacing={1}>
+              <Rating rating={Number(rating)} isSmall={size === 'sm'} />
+              {size !== 'sm' && (
+                <HStack>
+                  {size === 'lg' ? (
+                    <>
+                      <DataWithIcon iconName="FaGift">
+                        <Text size="xs" fontWeight="bold">
+                          100
+                        </Text>
+                      </DataWithIcon>
+                      <DataWithIcon iconName="FaBookmark">
+                        <Text size="xs" fontWeight="bold">
+                          100
+                        </Text>
+                      </DataWithIcon>
+                    </>
+                  ) : (
+                    <>
+                      <DataWithIcon iconName="FaRegComment">
+                        <Text size="xs" fontWeight="bold">
+                          100
+                        </Text>
+                      </DataWithIcon>
+                      <DataWithIcon iconName="FaRegHeart">
+                        <Text size="xs" fontWeight="bold">
+                          100
+                        </Text>
+                      </DataWithIcon>
+                    </>
+                  )}
+                </HStack>
+              )}
+            </Stack>
           </Stack>
         </CardBody>
         {size === 'lg' && isFavoritable && (

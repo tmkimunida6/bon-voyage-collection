@@ -32,6 +32,7 @@ const Pagination = ({
         aria-label="次へ"
         onClick={() => nextPage && handlePageChange(nextPage)}
         isDisabled={!nextPage}
+        bg="gray.200"
       />
     </HStack>
   )

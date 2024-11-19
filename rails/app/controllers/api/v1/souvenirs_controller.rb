@@ -6,7 +6,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
     q = Souvenir.ransack(souvenir_search_params)
     souvenirs = q.result(distinct: true).includes(:user, :category).order("created_at desc").page(params[:page])
     render json: {
-      souvenirs: JSON.parse(SouvenirResource.new(souvenirs).serialize),
+      souvenirs: JSON.parse(SouvenirResource.new(souvenirs, params: { exclude_description: true, exclude_category: true }).serialize),
       pages: {
         current_page: souvenirs.current_page,
         total_pages: souvenirs.total_pages,
@@ -22,15 +22,21 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
 
   def related
     related_souvenirs = Souvenir.where(category_id: @souvenir.category_id).where.not(alias_id: @souvenir.alias_id)
-    render json: RelatedSouvenirResource.new(related_souvenirs).serialize
+    render json: SouvenirResource.new(related_souvenirs, params: { exclude_description: true, exclude_category: true }).serialize
   end
 
   def create
-    category = Category.find(params[:category_id])
+    begin
+      category = Category.find(params[:category_id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { errors: [ "カテゴリーを選択してください。" ] }, status: :not_found
+      return
+    end
+
     souvenir = current_user.souvenirs.build(souvenir_params)
     souvenir.category = category
     if souvenir.save
-      render json: SouvenirResource.new(souvenir).serialize
+      render json: SouvenirResource.new(souvenir, params: { exclude_description: true, exclude_image_url: true, exclude_average_rating: true, exclude_category: true }).serialize
     else
       render json: { errors: souvenir.errors.full_messages }, status: :unprocessable_entity
     end
@@ -39,7 +45,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   # Favorite一覧
   def favorited_index
     favorited_souvenirs = current_user.favorited_souvenirs.includes(:user, :category)
-    render json: JSON.parse(SouvenirResource.new(favorited_souvenirs).serialize)
+    render json: JSON.parse(SouvenirResource.new(favorited_souvenirs, params: { exclude_description: true, exclude_category: true }).serialize)
   end
 
   private

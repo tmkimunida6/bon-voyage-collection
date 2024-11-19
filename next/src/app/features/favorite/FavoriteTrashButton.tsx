@@ -6,10 +6,10 @@ import { IconButton } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import useFavorite from '@/hooks/useFavorite'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 
 type FavoriteTrashButtonProps = {
-  currentSouvenir: SouvenirType
+  currentSouvenir: SouvenirCardType
 }
 
 const FavoriteTrashButton = ({ currentSouvenir }: FavoriteTrashButtonProps) => {

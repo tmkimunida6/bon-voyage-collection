@@ -14,10 +14,10 @@ export async function fetchSouvenirData(id: string) {
 
     const data = await res.json()
     if (!res.ok) {
-      redirect('/404')
+      redirect('/?status=not_found')
     }
     return data
-  } catch (e) {
-    redirect('/404')
+  } catch (error) {
+    redirect('/?status=not_found')
   }
 }

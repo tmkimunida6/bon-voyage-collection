@@ -23,14 +23,13 @@ export type SouvenirSelectType = {
   alias_id: string
   name: string
 }
-
-export type SouvenirType = {
-  alias_id: string
-  name: string
-  description: string
+export type SouvenirCardType = SouvenirSelectType & {
   image_url: string
-  user: UserType
-  categories: CategoriesType
+  average_rating?: string | null
+}
+export type SouvenirDetailType = SouvenirCardType & {
+  description: string
+  category: CategoriesType
 }
 
 export type PagesType = {
@@ -48,7 +47,7 @@ export type PostType = {
   review: string | null
   image_url: string | null
   user: UserType
-  souvenir: SouvenirType
+  souvenir: SouvenirCardType
 }
 
 export type timelineResultType = {

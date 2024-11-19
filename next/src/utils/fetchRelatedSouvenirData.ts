@@ -17,7 +17,7 @@ export async function fetchRelatedSouvenirData(id: string) {
     }
 
     return data
-  } catch (e) {
+  } catch (error) {
     return null
   }
 }

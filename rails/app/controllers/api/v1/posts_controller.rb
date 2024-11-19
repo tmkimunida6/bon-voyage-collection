@@ -18,6 +18,11 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   def create
     souvenir = Souvenir.find_by(alias_id: params[:souvenir_id])
+    if souvenir.nil?
+      render json: { errors: [ "お土産を選択してください。" ] }, status: :unprocessable_entity
+      return
+    end
+
     post = current_user.posts.build(post_params)
     post.souvenir = souvenir
     if post.save
@@ -41,14 +46,16 @@ class Api::V1::PostsController < Api::V1::BaseController
     posts_by_souvenir = Post.where(souvenir_id: souvenir.id).order("created_at desc")
 
     # ログイン中ユーザーの投稿を先頭に
-    current_user_posts = posts_by_souvenir.where(user_id: user.id)
-    other_user_posts = posts_by_souvenir.where.not(user_id: user.id)
-    posts_by_souvenir = current_user_posts + other_user_posts
+    if user
+      current_user_posts = posts_by_souvenir.where(user_id: user.id)
+      other_user_posts = posts_by_souvenir.where.not(user_id: user.id)
+      posts_by_souvenir = current_user_posts + other_user_posts
+    end
 
     paginated_posts = Kaminari.paginate_array(posts_by_souvenir).page(params[:page])
 
     render json: {
-      posts: JSON.parse(PostResource.new(paginated_posts).serialize),
+      posts: JSON.parse(PostResource.new(paginated_posts, params: { mypage_posts: true }).serialize),
       pages: {
         current_page: paginated_posts.current_page,
         total_pages: paginated_posts.total_pages,

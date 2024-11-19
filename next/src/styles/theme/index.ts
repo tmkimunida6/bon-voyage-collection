@@ -1,7 +1,7 @@
 import { extendTheme } from '@chakra-ui/react'
 import { Noto_Sans_JP } from 'next/font/google'
 import { Button } from './components/button'
-import { Input } from './components/input'
+import { Form } from './components/form'
 import { Link } from './components/link'
 import { Tabs } from './components/tabs'
 
@@ -20,11 +20,9 @@ const customTheme = extendTheme({
   },
   colors: {
     brand: {
-      primary: '#E699AA',
-      secondary: '#F2DEE8',
+      primary: '#f3a16f',
+      secondary: '#bb957f',
       black: '#333333',
-      gray: '#C8D0DB',
-      brown: '#C69B92',
       link: '#88BFB8',
       star: '#E2DB87',
     },
@@ -32,8 +30,18 @@ const customTheme = extendTheme({
   components: {
     Button,
     Link,
-    Input,
+    Input: Form.Input,
+    Select: Form.Select,
+    Textarea: Form.Textarea,
     Tabs,
+  },
+  styles: {
+    global: {
+      body: {
+        bg: '#fef2da',
+        color: 'brand.black',
+      },
+    },
   },
 })
 

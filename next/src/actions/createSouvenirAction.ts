@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 
 'use server'
 
@@ -54,14 +54,17 @@ export async function createSouvenirAction(
     data = await res.json()
     if (!res.ok) {
       return submission.reply({
-        formErrors: data.errors.full_messages ||
-          data.errors || ['サーバーエラーが発生しました。'],
+        formErrors: data.errors || [
+          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+        ],
       })
     }
-  } catch (e) {
-    console.log(e)
+  } catch (error: any) {
     return submission.reply({
-      formErrors: ['サーバーエラーが発生しました。'],
+      formErrors: [
+        error.message ||
+          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      ],
     })
   }
   redirect(`/souvenir/complete/?souvenir=${data.alias_id}`)

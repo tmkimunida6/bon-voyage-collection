@@ -11,12 +11,24 @@ type NavButtonProps = {
 
 const NavButton = ({ iconName, text, href }: NavButtonProps) => {
   return (
-    <Button as={NextLink} href={href} p={2} h="auto" flex="1" bg="brand.gray">
+    <Button
+      as={NextLink}
+      href={href}
+      p={2}
+      h="auto"
+      flex="1"
+      bg="transparent"
+      borderRadius={0}
+      color="white"
+      maxW="calc(660px / 4)"
+      _hover={{
+        bg: 'white',
+        color: 'brand.secondary',
+      }}
+    >
       <VStack gap="2px">
-        <CustomIcon iconName={iconName} color="white" />
-        <Text fontSize="xs" color="white">
-          {text}
-        </Text>
+        <CustomIcon iconName={iconName} />
+        <Text fontSize="xs">{text}</Text>
       </VStack>
     </Button>
   )

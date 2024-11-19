@@ -4,6 +4,7 @@ ja:
       souvenir:
         name: お土産の名称
         description: 説明
+        image_url: 画像
       post:
         souvenir_id: "このお土産"
         for_who:

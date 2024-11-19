@@ -8,7 +8,7 @@ class Api::V1::User::ConfirmationsController < Api::V1::BaseController
 
     token = user.create_new_auth_token
     render json: {
-      message: "User confirmartion succeeded.",
+      message: "ユーザー認証に成功しました。",
       access_token: token["access-token"],
       client: token["client"],
       uid: token["uid"]

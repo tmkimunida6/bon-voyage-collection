@@ -2,10 +2,10 @@ import { Stack, Text } from '@chakra-ui/react'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 
 type SouvenirSearchResultProps = {
-  souvenirs: Array<SouvenirType> | null
+  souvenirs: Array<SouvenirCardType> | null
 }
 
 export default function SouvenirSearchResult({
@@ -17,15 +17,16 @@ export default function SouvenirSearchResult({
     <>
       {souvenirs.length ? (
         <SouvenirCardList
-          size="lg"
+          size="sm"
           renderItem={(size) => (
             <>
-              {souvenirs.map((souvenir: SouvenirType) => (
+              {souvenirs.map((souvenir: SouvenirCardType) => (
                 <SouvenirCard
                   key={souvenir.alias_id}
                   size={size}
                   isFavoritable={true}
                   souvenir={souvenir}
+                  rating={souvenir.average_rating || null}
                 />
               ))}
             </>

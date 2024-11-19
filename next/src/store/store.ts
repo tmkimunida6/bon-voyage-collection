@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import {
   CategoryType,
   SouvenirSelectType,
-  SouvenirType,
+  SouvenirCardType,
   UserType,
 } from '@/types/types'
 
@@ -28,10 +28,10 @@ export const useSouvenirStore = create<souvenirState>((set) => ({
 
 // 「欲しい！」お土産一覧
 type FavoritedSouvenirsState = {
-  favoritedSouvenirs: Array<SouvenirType>
-  setFavoritedSouvenirs: (souvenirs: Array<SouvenirType>) => void
-  addFavoritedSouvenir: (souvenir: SouvenirType) => void
-  removeFavoritedSouvenir: (souvenir: SouvenirType) => void
+  favoritedSouvenirs: Array<SouvenirCardType>
+  setFavoritedSouvenirs: (souvenirs: Array<SouvenirCardType>) => void
+  addFavoritedSouvenir: (souvenir: SouvenirCardType) => void
+  removeFavoritedSouvenir: (souvenir: SouvenirCardType) => void
 }
 export const useFavoriteStore = create<FavoritedSouvenirsState>((set) => ({
   favoritedSouvenirs: [],

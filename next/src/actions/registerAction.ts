@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 
 'use server'
 
@@ -13,9 +13,7 @@ export async function registerAction(prevState: unknown, formData: FormData) {
   })
 
   if (submission.status !== 'success') {
-    return submission.reply({
-      formErrors: ['認証用のメールを送信しました。'],
-    })
+    return submission.reply()
   }
 
   const email = formData.get('email')
@@ -37,15 +35,19 @@ export async function registerAction(prevState: unknown, formData: FormData) {
     })
 
     const data = await res.json()
+
     if (!res.ok) {
       return submission.reply({
-        formErrors: data.errors.full_messages ||
-          data.errors || ['サーバーエラーが発生しました。'],
+        formErrors: data.errors.full_messages || [
+          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+        ],
       })
     }
-  } catch (e) {
+  } catch (error: any) {
     return submission.reply({
-      formErrors: ['サーバーエラーが発生しました。'],
+      formErrors: error.message || [
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      ],
     })
   }
 

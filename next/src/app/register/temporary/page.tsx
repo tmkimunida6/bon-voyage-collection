@@ -1,8 +1,18 @@
 import { Heading, HStack, Text, Stack, Button } from '@chakra-ui/react'
-import type { NextPage } from 'next'
+import { Metadata } from 'next'
 import NextLink from 'next/link'
 
-const Temporary: NextPage = () => {
+export const metadata: Metadata = {
+  title: '会員登録完了 | Bon Voyage Collcection',
+  description:
+    'Bon Voyage Collcectionへの会員登録が完了しました。さっそくあなただけのお土産コレクションを作成しましょう。',
+  keywords: '',
+  robots: {
+    index: false,
+  },
+}
+
+export default function Temporary() {
   return (
     <Stack spacing={6}>
       <HStack mb={6}>
@@ -19,5 +29,3 @@ const Temporary: NextPage = () => {
     </Stack>
   )
 }
-
-export default Temporary

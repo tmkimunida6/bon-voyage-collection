@@ -47,6 +47,12 @@ export default function DeletePostButton({
         duration: 1000,
         isClosable: true,
       })
+      setTimelineResult((prevResult) => ({
+        posts: prevResult.posts.filter(
+          (post: PostType) => post.alias_id !== post_id,
+        ),
+        pages: prevResult.pages,
+      }))
     } catch (error: any) {
       toast({
         title: error.message,
@@ -56,12 +62,6 @@ export default function DeletePostButton({
       })
     } finally {
       setIsLoading(false)
-      setTimelineResult((prevResult) => ({
-        posts: prevResult.posts.filter(
-          (post: PostType) => post.alias_id !== post_id,
-        ),
-        pages: prevResult.pages,
-      }))
     }
   }
 

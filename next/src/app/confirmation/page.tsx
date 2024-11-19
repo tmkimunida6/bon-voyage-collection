@@ -1,32 +1,31 @@
-/* eslint react-hooks/exhaustive-deps: 0 */
+import { Spinner, VStack, Text } from '@chakra-ui/react'
+import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+import ConfirmationHandler from '../features/user/ConfirmationHandler'
 
-'use client'
+export const metadata: Metadata = {
+  title: 'ユーザー認証中 | Bon Voyage Collcection',
+  description: 'ユーザー認証中です。',
+  keywords: '',
+  robots: {
+    index: false,
+  },
+}
 
-import { Spinner, useToast, VStack, Text } from '@chakra-ui/react'
-import { NextPage } from 'next'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
-import { confirmUserAction } from '@/actions/confirmUserAction'
+type ConfirmationProps = {
+  searchParams: {
+    confirmation_token: string
+  }
+}
 
-const Confirmation: NextPage = () => {
-  const toast = useToast()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const confirmationToken = searchParams.get('confirmation_token')
+export default async function Confirmation({
+  searchParams,
+}: ConfirmationProps) {
+  if (!searchParams.confirmation_token) {
+    redirect('/?status=invalid_url')
+  }
 
-  useEffect(() => {
-    const confirmUser = async () => {
-      const result = await confirmUserAction(confirmationToken)
-      toast({
-        title: result.message,
-        status: result.status,
-        duration: 5000,
-        isClosable: true,
-      })
-      router.push('/')
-    }
-    confirmUser()
-  }, [])
+  const confirmationToken = searchParams.confirmation_token
 
   return (
     <>
@@ -37,11 +36,12 @@ const Confirmation: NextPage = () => {
         transform="translate(-50%, -50%)"
         spacing={4}
       >
-        <Spinner size="xl" speed="0.5s" thickness="4px" />
-        <Text fontWeight="bold">ユーザー認証中です</Text>
+        <Spinner size="xl" speed="0.8s" thickness="4px" color="brand.primary" />
+        <Text fontWeight="bold" fontSize="lg">
+          ユーザー認証中です
+        </Text>
       </VStack>
+      <ConfirmationHandler confirmationToken={confirmationToken} />
     </>
   )
 }
-
-export default Confirmation

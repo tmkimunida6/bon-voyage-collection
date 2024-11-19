@@ -22,7 +22,7 @@ const Rating = ({ rating, isSmall }: RatingProps) => {
         />
       ))}
       {hasHalfStar && (
-        <Flex position="relative" height={isSmall ? '12px' : '16px'}>
+        <Flex position="relative" height={isSmall ? '12px' : '14px'}>
           <CustomIcon
             iconName="FaStar"
             color="gray.300"
@@ -48,7 +48,7 @@ const Rating = ({ rating, isSmall }: RatingProps) => {
         <CustomIcon
           key={index}
           iconName="FaStar"
-          color="brand.gray"
+          color="gray.300"
           fontSize={isSmall ? 'xs' : 'sm'}
         />
       ))}

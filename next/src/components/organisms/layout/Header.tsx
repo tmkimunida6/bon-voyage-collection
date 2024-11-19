@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Spacer, Text } from '@chakra-ui/react'
+import { Box, Button, HStack, Spacer } from '@chakra-ui/react'
 import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
@@ -12,16 +12,13 @@ type HeaderProps = {
 export default async function Header({ user }: HeaderProps) {
   return (
     <Box as="header">
-      <HStack p={4} bg="brand.secondary">
-        <NextLink href="#">
+      <HStack px={{ base: 4, sm: 6 }} py={4} bg="brand.secondary">
+        <NextLink href="/">
           <Logo />
         </NextLink>
         <Spacer />
         {user.isSignedIn ? (
-          <>
-            <SignoutButton></SignoutButton>
-            <Text>{user.alias_id}</Text>
-          </>
+          <SignoutButton></SignoutButton>
         ) : (
           <Button
             size="sm"
@@ -34,9 +31,6 @@ export default async function Header({ user }: HeaderProps) {
             <CustomIcon iconName="FaSignInAlt" />
           </Button>
         )}
-        <NextLink href="/">
-          <CustomIcon iconName="FaBookmark" color="brand.brown" />
-        </NextLink>
       </HStack>
     </Box>
   )

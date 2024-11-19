@@ -8,10 +8,10 @@ import { useEffect } from 'react'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import useFavorite from '@/hooks/useFavorite'
 import { useFavoriteStore } from '@/store/store'
-import { SouvenirType } from '@/types/types'
+import { SouvenirCardType } from '@/types/types'
 
 type FavoriteButtonProps = {
-  currentSouvenir: SouvenirType
+  currentSouvenir: SouvenirCardType
   isIconButton: boolean
   position: 'static' | 'absolute'
 }
@@ -62,7 +62,9 @@ const FavoriteButton = ({
     <>
       {isIconButton ? (
         <IconButton
-          aria-label="Search database"
+          aria-label={
+            isFavorited ? '「欲しい！」から削除する' : '「欲しい！」に登録する'
+          }
           icon={
             <CustomIcon
               iconName={isFavorited ? 'FaBookmark' : 'FaRegBookmark'}
@@ -85,7 +87,7 @@ const FavoriteButton = ({
         />
       ) : (
         <Button
-          variant={isFavorited ? 'secondary' : 'outline'}
+          variant={isFavorited ? 'solid' : 'outline'}
           gap={2}
           onClick={() => {
             if (!isLoading) {

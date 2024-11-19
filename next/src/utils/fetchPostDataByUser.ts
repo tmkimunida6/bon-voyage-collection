@@ -1,12 +1,13 @@
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
+import { redirect } from 'next/navigation'
 import { getUserTokens } from './getUserTokens'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
 export async function fetchPostDataByUser() {
   const tokens = await getUserTokens()
   if (!tokens) {
-    throw new Error('ログインしてください。')
+    redirect('/sign_in?status=login_required')
   }
 
   try {
@@ -23,13 +24,11 @@ export async function fetchPostDataByUser() {
     const data = await res.json()
 
     if (!res.ok) {
-      throw new Error(
-        data.errors.full_messages || 'サーバーエラーが発生しました。',
-      )
+      redirect('/?status=server_error')
     }
 
     return data
-  } catch (e) {
-    throw new Error(`Server error ${e}`)
+  } catch (error) {
+    redirect('/?status=server_error')
   }
 }

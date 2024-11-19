@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 
 'use server'
 
@@ -7,39 +7,42 @@ import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { fetchUserState } from '@/utils/fetchUserState'
 
 type ConfirmUserActionResult = {
-  status: 'error' | 'info' | 'warning' | 'success' | 'loading'
   message: string
+  status: 'error' | 'info' | 'warning' | 'success' | 'loading'
 }
 
 export async function confirmUserAction(
-  confirmationToken: string | null,
+  confirmationToken: string,
 ): Promise<ConfirmUserActionResult> {
-  const endpoint = `${apiBaseUrl}/user/confirmations`
-
   const user = await fetchUserState()
 
-  if (!confirmationToken)
-    return { status: 'error', message: 'URLが有効ではありません。' }
-  if (user.isSignedIn)
+  // トークンなしの場合
+  if (!confirmationToken) {
+    return { message: 'URLが有効ではありません。', status: 'error' }
+  }
+
+  // ログイン済みの場合
+  if (user.isSignedIn) {
     return {
-      status: 'error',
       message:
         'すでに別のアカウントでログイン済みです。ログアウトしてから再度アクセスしてください。',
+      status: 'error',
     }
+  }
 
   try {
-    const res = await fetch(endpoint, {
+    const res = await fetch(`${apiBaseUrl}/user/confirmations`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ confirmation_token: confirmationToken }),
     })
+
     const data = await res.json()
 
     if (!res.ok) {
-      const message = data.message
-      return { status: 'error', message }
+      return { message: data.message, status: 'error' }
     }
 
     const accessToken = data.access_token
@@ -47,20 +50,21 @@ export async function confirmUserAction(
     const uid = data.uid
 
     if (accessToken && client && uid) {
-      setAccessTokenAction(accessToken, client, uid)
-      return { status: 'success', message: 'ユーザー認証に成功しました。' }
+      await setAccessTokenAction(accessToken, client, uid)
+      return { message: data.message, status: 'success' }
     } else {
       return {
-        status: 'error',
         message:
           'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+        status: 'error',
       }
     }
-  } catch (error) {
+  } catch (error: any) {
     return {
-      status: 'error',
       message:
+        error.message ||
         'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      status: 'error',
     }
   }
 }
