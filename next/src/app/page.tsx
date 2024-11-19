@@ -20,7 +20,9 @@ export default function Top() {
     <Box maxW="660px" mx="auto">
       <Box my={10}>
         <Stack spacing={8}>
-          <Heading fontSize="4xl">お土産との出会いを見つけよう。</Heading>
+          <Heading fontSize="4xl" textAlign={{ base: 'left', md: 'center' }}>
+            お土産との出会いを見つけよう。
+          </Heading>
           <VStack spacing={6}>
             <Text>まずはお土産を探してみましょう。</Text>
             <HStack>
@@ -46,24 +48,27 @@ export default function Top() {
           </Flex>
         </Stack>
       </Box>
-      <Box
+      <Flex
         position="fixed"
         top={0}
         left={0}
         width="100vw"
         height="100dvh"
         zIndex={-1}
+        justifyContent="center"
       >
         <Image
-          src="/images/bg_top.jpg"
+          src="/images/bg_top.png"
           alt="トップページ"
           w="100%"
           h="100%"
-          objectFit="cover"
+          maxH="100%"
+          maxW="660px"
+          objectFit="contain"
           objectPosition="center"
           opacity="30%"
         />
-      </Box>
+      </Flex>
     </Box>
   )
 }
