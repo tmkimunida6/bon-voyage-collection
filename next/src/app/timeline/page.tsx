@@ -1,9 +1,11 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 import { Spinner, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import PostCardList from '../features/post/PostCardList'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
-import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'ホーム | Bon Voyage Collcection',
@@ -36,5 +38,4 @@ export default async function Timeline({ searchParams }: TimelineProps) {
   } catch (error) {
     redirect('/?status=server_error')
   }
-
 }

@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 import {
   Box,
   Button,
@@ -135,5 +137,4 @@ export default async function SouvenirDetailPage({
       </Stack>
     </Stack>
   )
-
 }

@@ -22,11 +22,15 @@ export async function fetchPostDataBySouvenir(
     const data = await res.json()
 
     if (!res.ok) {
-      throw new Error('サーバーエラーが発生しました。時間をおいてから再度お試しください。' )
+      throw new Error(
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      )
     }
 
     return data
   } catch (error) {
-    throw new Error('サーバーエラーが発生しました。時間をおいてから再度お試しください。' )
+    throw new Error(
+      'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+    )
   }
 }

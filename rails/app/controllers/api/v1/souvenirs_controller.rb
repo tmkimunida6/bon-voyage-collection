@@ -29,7 +29,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
     begin
       category = Category.find(params[:category_id])
     rescue ActiveRecord::RecordNotFound
-      render json: { errors: ["カテゴリーを選択してください。"] }, status: :not_found
+      render json: { errors: [ "カテゴリーを選択してください。" ] }, status: :not_found
       return
     end
 
