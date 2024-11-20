@@ -1,19 +1,14 @@
 import {
   Heading,
-  Input,
   Text,
-  HStack,
   Flex,
   VStack,
   Box,
   Stack,
   Image,
-  Button,
-  FormControl,
 } from '@chakra-ui/react'
-import NextLink from 'next/link'
-import CategoryInput from './features/category/CategoryInput'
 import TextIconLink from '@/components/molecules/TextIconLink'
+import TopSearchForm from '@/components/organisms/form/TopSearchForm'
 
 export default function Top() {
   return (
@@ -25,17 +20,7 @@ export default function Top() {
           </Heading>
           <VStack spacing={6}>
             <Text>まずはお土産を探してみましょう。</Text>
-            <HStack>
-              <FormControl>
-                <Input type="text" placeholder="フリーワード" />
-              </FormControl>
-              <FormControl>
-                <CategoryInput />
-              </FormControl>
-            </HStack>
-            <Button variant="primary" as={NextLink} href="./recommend">
-              お土産をみる
-            </Button>
+            <TopSearchForm />
           </VStack>
           <Flex justifyContent="right">
             <TextIconLink

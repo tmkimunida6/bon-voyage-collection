@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/no-explicit-any: 0 */
+/* eslint react-hooks/exhaustive-deps: 0 */
 
 'use client'
 
@@ -13,7 +14,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
 import SouvenirSearchResult from '@/app/features/search/SouvenirSearchResult'
 import SouvenirSearchResultForPost from '@/app/features/search/SouvenirSearchResultForPost'
@@ -49,11 +50,44 @@ const SearchForm = ({ page }: SearchFormProps) => {
 
   const toast = useToast()
 
+  // 検索結果取得
+  const fetchSearchResult = async (
+    page: number = 1,
+    word: string,
+    category_id: string,
+  ) => {
+    try {
+      setLoading(true)
+      const searchResult = await searchSouvenirData(page, word, category_id)
+      setSearchResult(searchResult)
+    } catch (error: any) {
+      toast({
+        title: error.message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // TOPからの検索（URLのパラメータを元に検索）
+  useEffect(() => {
+    if (searchParams.size) {
+      const page = Number(searchParams.get('page')) || 1
+      const word = searchParams.get('word') || ''
+      const category_id = searchParams.get('category_id') || ''
+      fetchSearchResult(page, word, category_id)
+    }
+  }, [searchParams])
+
+  // 検索ボタン押下による検索
   const handleSearch = async (
     currentPage: number,
     word: string | '',
     category_id: number | '',
-    category_name: string,
+    category_name: string | '',
   ) => {
     const params = new URLSearchParams(searchParams)
     params.set('page', currentPage.toString())
@@ -71,24 +105,7 @@ const SearchForm = ({ page }: SearchFormProps) => {
     }
     replace(`${pathname}?${params.toString()}`)
 
-    try {
-      setLoading(true)
-      const searchResult = await searchSouvenirData(
-        currentPage,
-        word,
-        category_id.toString(),
-      )
-      setSearchResult(searchResult)
-    } catch (error: any) {
-      toast({
-        title: error.message,
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      })
-    } finally {
-      setLoading(false)
-    }
+    fetchSearchResult(currentPage, word, category_id.toString())
   }
 
   // ページネーション
