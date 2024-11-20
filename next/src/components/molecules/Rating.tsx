@@ -2,11 +2,27 @@ import { Flex, HStack } from '@chakra-ui/react'
 import CustomIcon from '../atoms/CustomIcon'
 
 type RatingProps = {
-  rating: number
+  rating: number | null
   isSmall?: boolean
 }
 
 const Rating = ({ rating, isSmall }: RatingProps) => {
+  // 評価がない場合
+  if (!rating) {
+    return (
+      <HStack gap="2px">
+        {[...Array(5)].map((_, index) => (
+          <CustomIcon
+            key={index}
+            iconName="FaStar"
+            color="gray.300"
+            fontSize={isSmall ? 'xs' : 'sm'}
+          />
+        ))}
+      </HStack>
+    )
+  }
+
   const fullStars = Math.floor(rating)
   const hasHalfStar = rating % 1 !== 0
   const emptyStars = 5 - Math.ceil(rating)
