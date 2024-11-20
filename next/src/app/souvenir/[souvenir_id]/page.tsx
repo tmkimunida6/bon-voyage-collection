@@ -66,7 +66,7 @@ export default async function SouvenirDetailPage({
         </Heading>
         <HStack gap={2}>
           <Text fontSize="xs">平均おすすめ度</Text>
-          <Rating rating={souvenirData.average_rating} />
+          <Rating rating={Number(souvenirData.average_rating)} />
         </HStack>
       </Stack>
       <HStack justifyContent="center" spacing={4}>
