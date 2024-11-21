@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-explicit-any: 0 */
+/* eslint @typescript-eslint/no-unused-vars: 0 */
 /* eslint react-hooks/exhaustive-deps: 0 */
 
 'use client'
@@ -60,9 +60,10 @@ const SearchForm = ({ page }: SearchFormProps) => {
       setLoading(true)
       const searchResult = await searchSouvenirData(page, word, category_id)
       setSearchResult(searchResult)
-    } catch (error: any) {
+    } catch (error) {
       toast({
-        title: error.message,
+        title:
+          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
         status: 'error',
         duration: 5000,
         isClosable: true,

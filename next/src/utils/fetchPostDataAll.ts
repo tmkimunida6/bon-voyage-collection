@@ -14,15 +14,10 @@ export async function fetchPostDataAll(page: number) {
 
     const data = await res.json()
     if (!res.ok) {
-      throw new Error(
-        data.error ||
-          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
-      )
+      throw new Error()
     }
     return data
   } catch (error) {
-    throw new Error(
-      'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
-    )
+    throw new Error()
   }
 }
