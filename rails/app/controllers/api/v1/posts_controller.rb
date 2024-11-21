@@ -33,7 +33,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def destroy
-    if @post.destroy
+    if @post && @post.destroy
       render json: { status: "success", message: "投稿が削除されました。" }, status: :ok
     else
       render json: { status: "error", message: "投稿の削除に失敗しました。" }, status: :unprocessable_entity

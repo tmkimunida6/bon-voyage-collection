@@ -22,7 +22,7 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { redirect } from 'next/navigation'
+import { redirect, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import CustomModal from '../modal/CustomModal'
@@ -51,7 +51,17 @@ const PostForm = () => {
   }
 
   // お土産グローバルステート
-  const { selectedSouvenir } = useSouvenirStore()
+  const { selectedSouvenir, setSelectedSouvenir } = useSouvenirStore()
+
+  // パラメータからお土産の入力
+  const searchParams = useSearchParams()
+  useEffect(() => {
+    if (searchParams.size) {
+      const souvenir_id = searchParams.get('souvenir_id') || ''
+      const souvenir_name = searchParams.get('souvenir_name') || ''
+      setSelectedSouvenir({ alias_id: souvenir_id, name: souvenir_name })
+    }
+  }, [])
 
   // フォーム送信後の処理
   const toast = useToast()

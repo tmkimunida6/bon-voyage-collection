@@ -73,7 +73,7 @@ export default async function SouvenirDetailPage({
         <Button
           variant="primary"
           as={NextLink}
-          href={`/souvenir/new?souvenir_id=${souvenir_id}`}
+          href={`/post?souvenir_id=${souvenirData.alias_id}&souvenir_name=${souvenirData.name}`}
           gap={2}
         >
           <CustomIcon iconName="FaGift" />
