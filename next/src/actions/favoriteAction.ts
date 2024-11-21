@@ -32,7 +32,8 @@ export async function favoriteAction(
     const data = await res.json()
     if (!res.ok) {
       throw new Error(
-        data.message || 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+        data.message ||
+          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
       )
     }
     return data
