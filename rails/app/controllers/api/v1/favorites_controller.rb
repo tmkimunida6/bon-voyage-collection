@@ -4,7 +4,7 @@ class Api::V1::FavoritesController < Api::V1::BaseController
 
   def create
     favorite = current_user.favorites.new(souvenir_id: @souvenir.id)
-    if favorite.save
+    if favorite && favorite.save
       render json: { status: "success", message: "「欲しい！」に追加しました。" }, status: :created
     else
       render json: { status: "error", message: favorite.errors.full_messages }, status: :unprocessable_entity
@@ -13,10 +13,10 @@ class Api::V1::FavoritesController < Api::V1::BaseController
 
   def destroy
     favorite = current_user.favorites.find_by(souvenir_id: @souvenir.id)
-    if favorite.destroy
+    if favorite && favorite.destroy
       render json: { status: "success", message: "「欲しい！」から削除しました。" }, status: :created
     else
-      render json: { status: "error", message: favorite.errors.full_messages }, status: :unprocessable_entity
+      render json: { status: "error", message: "「欲しい！」からの削除に失敗しました。" }, status: :unprocessable_entity
     end
   end
 
