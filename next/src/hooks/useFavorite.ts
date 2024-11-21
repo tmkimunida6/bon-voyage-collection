@@ -56,19 +56,15 @@ const useFavorite = (): UseFavoriteHook => {
 
       toast({
         title: result.message,
-        status: 'success',
+        status: result.status,
         duration: 1000,
         isClosable: true,
       })
-    } catch (error: any) {
-      setIsFavorited((prev) => !prev)
-      setFavoritedSouvenirs(originalState)
-      toast({
-        title: error.message,
-        status: 'error',
-        duration: 1000,
-        isClosable: true,
-      })
+
+      if (result.status === 'error') {
+        setIsFavorited((prev) => !prev)
+        setFavoritedSouvenirs(originalState)
+      }
     } finally {
       setIsLoading(false)
     }

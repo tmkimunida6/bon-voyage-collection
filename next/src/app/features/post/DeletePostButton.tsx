@@ -43,23 +43,19 @@ export default function DeletePostButton({
       const result = await deletePostAction(post_id)
       toast({
         title: result.message,
-        status: 'success',
+        status: result.status,
         duration: 1000,
         isClosable: true,
       })
-      setTimelineResult((prevResult) => ({
-        posts: prevResult.posts.filter(
-          (post: PostType) => post.alias_id !== post_id,
-        ),
-        pages: prevResult.pages,
-      }))
-    } catch (error: any) {
-      toast({
-        title: error.message,
-        status: 'error',
-        duration: 1000,
-        isClosable: true,
-      })
+
+      if (result.status === 'success') {
+        setTimelineResult((prevResult) => ({
+          posts: prevResult.posts.filter(
+            (post: PostType) => post.alias_id !== post_id,
+          ),
+          pages: prevResult.pages,
+        }))
+      }
     } finally {
       setIsLoading(false)
     }

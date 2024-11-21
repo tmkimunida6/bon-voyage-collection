@@ -34,7 +34,7 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
 
   let data
   try {
-    let image_url = ''
+    let image_url = null
     if (imageFile) {
       // 画像をCloudinaryにアップロード
       const uploadResult = await uploadImageAction(imageFile, 'post')

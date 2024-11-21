@@ -21,11 +21,11 @@ export async function searchSouvenirData(
     const data = await res.json()
 
     if (!res.ok) {
-      throw new Error(data.error || 'サーバーエラーが発生しました。')
+      throw new Error()
     }
 
     return data
   } catch (e) {
-    throw new Error('サーバーエラーが発生しました。')
+    throw new Error()
   }
 }

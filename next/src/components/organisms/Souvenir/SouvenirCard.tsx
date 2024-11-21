@@ -2,16 +2,16 @@ import {
   Card,
   CardBody,
   Heading,
-  HStack,
+  // HStack,
   Image,
   Stack,
-  Text,
+  // Text,
   LinkOverlay,
   LinkBox,
   Flex,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import DataWithIcon from '../../molecules/DataWithIcon'
+// import DataWithIcon from '../../molecules/DataWithIcon'
 import Rating from '../../molecules/Rating'
 import FavoriteButton from '@/app/features/favorite/FavoriteButton'
 import FavoriteTrashButton from '@/app/features/favorite/FavoriteTrashButton'
@@ -84,7 +84,7 @@ const SouvenirCard = ({
             </Stack>
             <Stack spacing={1}>
               <Rating rating={Number(rating)} isSmall={size === 'sm'} />
-              {size !== 'sm' && (
+              {/* {size !== 'sm' && (
                 <HStack>
                   {size === 'lg' ? (
                     <>
@@ -114,7 +114,7 @@ const SouvenirCard = ({
                     </>
                   )}
                 </HStack>
-              )}
+              )} */}
             </Stack>
           </Stack>
         </CardBody>

@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-explicit-any: 0 */
+/* eslint @typescript-eslint/no-unused-vars: 0 */
 
 'use client'
 
@@ -35,9 +35,10 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
       try {
         const fetchedCategories = await fetchCategories()
         setCategories(fetchedCategories)
-      } catch (error: any) {
+      } catch (error) {
         toast({
-          title: error.message,
+          title:
+            'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
           status: 'error',
           duration: 5000,
           isClosable: true,

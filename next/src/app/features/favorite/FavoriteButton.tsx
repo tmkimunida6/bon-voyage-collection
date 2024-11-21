@@ -34,13 +34,12 @@ const FavoriteButton = ({
   useEffect(() => {
     setIsLoading(false)
   }, [])
+
   useEffect(() => {
     const isCurrentSouvenirFavorited = favoritedSouvenirs.some(
       (souvenir) => souvenir.alias_id === currentSouvenir.alias_id,
     )
-    if (isCurrentSouvenirFavorited) {
-      setIsFavorited(true)
-    }
+    setIsFavorited(isCurrentSouvenirFavorited)
   }, [favoritedSouvenirs])
 
   const positionStyles = {
