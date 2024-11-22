@@ -16,6 +16,7 @@ export async function uploadImageAction(
   const options = {
     folder: folder_name,
     public_id,
+    format: 'webp',
   }
   return await cloudinary.uploader.upload(fileData, options)
 }
