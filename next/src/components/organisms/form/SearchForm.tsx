@@ -19,63 +19,23 @@ import CategoryInput from '@/app/features/category/CategoryInput'
 import SouvenirSearchResult from '@/app/features/search/SouvenirSearchResult'
 import SouvenirSearchResultForPost from '@/app/features/search/SouvenirSearchResultForPost'
 import Pagination from '@/components/molecules/Pagination'
+import useSearchSouvenir from '@/hooks/useSearchSouvenir'
 import { useCategoryStore } from '@/store/store'
-import { PagesType, SouvenirCardType } from '@/types/types'
-import { searchSouvenirData } from '@/utils/searchSouvenirData'
 
-type SearchFormProps = {
-  page: 'search' | 'post'
-}
-
-const SearchForm = ({ page }: SearchFormProps) => {
+const SearchForm = () => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
 
   const [word, setWord] = useState<string>(searchParams.get('word') || '')
-  const [searchResult, setSearchResult] = useState<{
-    souvenirs: Array<SouvenirCardType> | null
-    pages: PagesType
-  }>({
-    souvenirs: null,
-    pages: {
-      current_page: 1,
-      total_pages: 1,
-      prev_page: null,
-      next_page: null,
-    },
-  })
-  const [loading, setLoading] = useState<boolean>(false)
   const { selectedCategory } = useCategoryStore()
 
-  const toast = useToast()
-
-  // 検索結果取得
-  const fetchSearchResult = async (
-    page: number = 1,
-    word: string,
-    category_id: string,
-  ) => {
-    try {
-      setLoading(true)
-      const searchResult = await searchSouvenirData(page, word, category_id)
-      setSearchResult(searchResult)
-    } catch (error) {
-      toast({
-        title:
-          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
+  // 検索結果取得hooks
+  const { searchResult, loading, fetchSearchResult } = useSearchSouvenir()
 
   // TOPからの検索（URLのパラメータを元に検索）
   useEffect(() => {
-    if (searchParams.size) {
+    if (searchParams.size && pathname === '/search') {
       const page = Number(searchParams.get('page')) || 1
       const word = searchParams.get('word') || ''
       const category_id = searchParams.get('category_id') || ''
@@ -121,11 +81,11 @@ const SearchForm = ({ page }: SearchFormProps) => {
 
   // 検索結果だしわけ
   let resultUI
-  switch (page) {
-    case 'search':
+  switch (pathname) {
+    case '/search':
       resultUI = <SouvenirSearchResult souvenirs={searchResult.souvenirs} />
       break
-    case 'post':
+    case '/post':
       resultUI = (
         <SouvenirSearchResultForPost souvenirs={searchResult.souvenirs} />
       )
@@ -157,6 +117,7 @@ const SearchForm = ({ page }: SearchFormProps) => {
             onClick={() => {
               handleSearch(1, word, selectedCategory.id, selectedCategory.name)
             }}
+            pointerEvents={loading ? 'none' : 'auto'}
           >
             検索する
           </Button>

@@ -117,10 +117,10 @@ const PostForm = () => {
               isOpen={isOpen}
               onClose={onClose}
               modalTitle="お土産を探す"
-              buttonText={selectedSouvenir.alias_id ? '確定する' : ''}
+              buttonText=""
               size="lg"
             >
-              <SearchForm page="post" />
+              <SearchForm />
             </CustomModal>
           </InputGroup>
           <FormErrorMessage>{fields.souvenir_id.errors}</FormErrorMessage>
