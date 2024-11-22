@@ -24,7 +24,11 @@ export default function SouvenirSearchResultForPost({
   if (!souvenirs) return
 
   const onSelectSouvenir = (souvenir: SouvenirSelectType) => {
-    setSelectedSouvenir({ alias_id: souvenir.alias_id, name: souvenir.name })
+    if (souvenir.alias_id === selectedSouvenir.alias_id) {
+      setSelectedSouvenir({ alias_id: '', name: '' })
+    } else {
+      setSelectedSouvenir({ alias_id: souvenir.alias_id, name: souvenir.name })
+    }
   }
   return (
     <>
@@ -41,18 +45,12 @@ export default function SouvenirSearchResultForPost({
               h="100%"
               p={0}
               whiteSpace="normal"
-              sx={{
-                '&:disabled': {
-                  opacity: 1,
-                },
-              }}
               onClick={() =>
                 onSelectSouvenir({
                   alias_id: souvenir.alias_id,
                   name: souvenir.name,
                 })
               }
-              disabled={souvenir.alias_id === selectedSouvenir.alias_id}
             >
               <Card
                 h="100%"
@@ -68,11 +66,12 @@ export default function SouvenirSearchResultForPost({
                     ? 'brand.primary'
                     : 'white'
                 }
+                transition="all 0.3s"
               >
                 <CardBody p={1}>
                   <Stack spacing={2}>
                     <Image
-                      src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                      src={souvenir.image_url}
                       alt={souvenir.name}
                       borderRadius="lg"
                     />

@@ -107,7 +107,7 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
         isOpen={isOpen}
         onClose={onClose}
         modalTitle="カテゴリーを探す"
-        buttonText="削除"
+        buttonText=""
         size="lg"
       >
         <CategoryList categories={categories} onClose={onClose} />

@@ -38,7 +38,7 @@ const CustomModal = ({
         <ModalBody>{children}</ModalBody>
         <ModalFooter justifyContent="center">
           {buttonText && (
-            <Button bg="brand.primary" color="white" onClick={onClose}>
+            <Button variant="primary" onClick={onClose}>
               {buttonText}
             </Button>
           )}
