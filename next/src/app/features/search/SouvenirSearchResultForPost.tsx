@@ -74,6 +74,9 @@ export default function SouvenirSearchResultForPost({
                       src={souvenir.image_url}
                       alt={souvenir.name}
                       borderRadius="lg"
+                      width="100%"
+                      aspectRatio="3/2"
+                      objectFit="contain"
                     />
                     <Heading size="xs" lineHeight="1.5" noOfLines={2}>
                       {souvenir.name}
