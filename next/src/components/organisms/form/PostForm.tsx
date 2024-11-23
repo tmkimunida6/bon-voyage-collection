@@ -28,6 +28,7 @@ import { useFormState } from 'react-dom'
 import CustomModal from '../modal/CustomModal'
 import SearchForm from './SearchForm'
 import { createPostAction } from '@/actions/createPostAction'
+import CustomIcon from '@/components/atoms/CustomIcon'
 import SubmitButton from '@/components/atoms/SubmitButton'
 import RatingSlider from '@/components/molecules/RatingSlider'
 import UploadImageForm from '@/components/molecules/UploadImageForm'
@@ -103,15 +104,29 @@ const PostForm = () => {
               isReadOnly
               pr={10}
             />
-            <InputRightElement width="4.5rem">
-              <Button
-                h="1.75rem"
-                size="sm"
-                colorScheme="gray"
-                onClick={handleSouvenirModal}
-              >
-                検索
-              </Button>
+            <InputRightElement
+              width={selectedSouvenir.alias_id ? '' : '4.5rem'}
+            >
+              {selectedSouvenir.alias_id ? (
+                <Button size="sm" variant="ghost" p={0}>
+                  <CustomIcon
+                    iconName="FaTimes"
+                    color="gray.400"
+                    onClick={() =>
+                      setSelectedSouvenir({ alias_id: '', name: '' })
+                    }
+                  />
+                </Button>
+              ) : (
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  colorScheme="gray"
+                  onClick={handleSouvenirModal}
+                >
+                  選択
+                </Button>
+              )}
             </InputRightElement>
             <CustomModal
               isOpen={isOpen}
