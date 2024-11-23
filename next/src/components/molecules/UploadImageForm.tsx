@@ -62,7 +62,6 @@ const UploadImageForm = ({
 
         // 圧縮した画像をBase64に変換
         const encodedImage = (await fileToBase64(compressedFile)) as string
-        console.log(encodedImage)
         setSelectedImage(encodedImage)
 
         // プレビュー画像をセット
