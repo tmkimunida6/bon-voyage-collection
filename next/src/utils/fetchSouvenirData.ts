@@ -10,6 +10,7 @@ export async function fetchSouvenirData(id: string) {
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-store',
     })
 
     const data = await res.json()
