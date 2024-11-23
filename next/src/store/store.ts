@@ -4,6 +4,7 @@ import {
   SouvenirSelectType,
   SouvenirCardType,
   UserType,
+  PostType,
 } from '@/types/types'
 
 // カテゴリー選択
@@ -46,6 +47,16 @@ export const useFavoriteStore = create<FavoritedSouvenirsState>((set) => ({
         (prev_souvenir) => prev_souvenir.alias_id !== souvenir.alias_id,
       ),
     })),
+}))
+
+// 自分の投稿
+type myPostsState = {
+  myPosts: Array<PostType>
+  setMyPosts: (souvenirs: Array<PostType>) => void
+}
+export const useMyPostsStore = create<myPostsState>((set) => ({
+  myPosts: [],
+  setMyPosts: (posts) => set({ myPosts: posts }),
 }))
 
 // ログイン中ユーザー

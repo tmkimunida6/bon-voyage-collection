@@ -2,7 +2,6 @@
 
 import {
   Box,
-  Button,
   Flex,
   Heading,
   HStack,
@@ -10,10 +9,9 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import NextLink from 'next/link'
 import FavoriteButton from '@/app/features/favorite/FavoriteButton'
+import PostButtonFromDetail from '@/app/features/post/PostButtonFromDetail'
 import PostCardList from '@/app/features/post/PostCardList'
-import CustomIcon from '@/components/atoms/CustomIcon'
 import DataWithIcon from '@/components/molecules/DataWithIcon'
 import Rating from '@/components/molecules/Rating'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
@@ -70,15 +68,7 @@ export default async function SouvenirDetailPage({
         </HStack>
       </Stack>
       <HStack justifyContent="center" spacing={4}>
-        <Button
-          variant="primary"
-          as={NextLink}
-          href={`/post?souvenir_id=${souvenirData.alias_id}&souvenir_name=${souvenirData.name}`}
-          gap={2}
-        >
-          <CustomIcon iconName="FaGift" />
-          買った！
-        </Button>
+        <PostButtonFromDetail currentSouvenir={souvenirData} />
         <FavoriteButton
           currentSouvenir={souvenirData}
           isIconButton={false}

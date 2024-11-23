@@ -1,7 +1,6 @@
 import {
   Avatar,
   HStack,
-  SimpleGrid,
   Stack,
   Tab,
   TabList,
@@ -11,10 +10,8 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Metadata } from 'next'
-import FavoriteSouvenirList from '../features/favorite/FavoriteSouvenirList'
+import MySouvenirList from '../features/favorite/MySouvenirList'
 import CollectionCount from '../features/mypage/CollectionCount'
-import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
-import { PostType } from '@/types/types'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 import { fetchPostDataByUser } from '@/utils/fetchPostDataByUser'
 
@@ -48,24 +45,10 @@ export default async function Mypage() {
         </TabList>
         <TabPanels>
           <TabPanel p={0} pt={6}>
-            <SimpleGrid
-              templateColumns="repeat(auto-fill, minmax(150px, 1fr))"
-              spacingX={2}
-              spacingY={4}
-            >
-              {my_posts.map((post: PostType) => (
-                <SouvenirCard
-                  key={post.alias_id}
-                  size="md"
-                  souvenir={post.souvenir}
-                  isFavoritable={false}
-                  rating={post.rating}
-                />
-              ))}
-            </SimpleGrid>
+            <MySouvenirList type="myPost" />
           </TabPanel>
           <TabPanel p={0} pt={6}>
-            <FavoriteSouvenirList />
+            <MySouvenirList type="favoritedSouvenir" />
           </TabPanel>
         </TabPanels>
       </Tabs>
