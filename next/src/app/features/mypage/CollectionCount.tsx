@@ -1,14 +1,15 @@
 'use client'
 
 import { Text, VStack } from '@chakra-ui/react'
-import { useFavoriteStore } from '@/store/store'
+import { useFavoriteStore, useMyPostsStore } from '@/store/store'
 
-export default function CollectionCount({
-  length = undefined,
-}: {
-  length?: number | undefined
-}) {
+type CollectionCountProps = {
+  type: 'myPost' | 'favoritedSouvenir'
+}
+
+export default function CollectionCount({ type }: CollectionCountProps) {
   const { favoritedSouvenirs } = useFavoriteStore()
+  const { myPosts } = useMyPostsStore()
   return (
     <VStack
       border="1px solid"
@@ -19,7 +20,7 @@ export default function CollectionCount({
       justifyContent="center"
     >
       <Text as={'span'} fontSize="sm" lineHeight={1} fontWeight="bold">
-        {length ? length : favoritedSouvenirs.length}
+        {type === 'myPost' ? myPosts.length : favoritedSouvenirs.length}
       </Text>
     </VStack>
   )
