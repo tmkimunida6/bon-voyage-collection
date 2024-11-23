@@ -20,10 +20,10 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
 
   const souvenir_id = formData.get('souvenir_id')
   const rating = formData.get('rating')
-  const for_who = Number(formData.get('for_who'))
-  const age = Number(formData.get('age'))
+  const for_who = formData.get('for_who') ? Number(formData.get('for_who')) : ''
+  const age = formData.get('age') ? Number(formData.get('age')) : ''
   const review = formData.get('review')
-  const imageFile = String(formData.get('image')) || ''
+  const imageFile = formData.get('image') ? String(formData.get('image')) : ''
 
   const tokens = await getUserTokens()
   if (!tokens) {
