@@ -1,13 +1,12 @@
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
-import { redirect } from 'next/navigation'
 import { getUserTokens } from './getUserTokens'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
 export async function fetchPostDataByUser() {
   const tokens = await getUserTokens()
   if (!tokens) {
-    redirect('/sign_in?status=login_required')
+    return []
   }
 
   try {
@@ -25,11 +24,11 @@ export async function fetchPostDataByUser() {
     const data = await res.json()
 
     if (!res.ok) {
-      redirect('/?status=server_error')
+      return []
     }
 
     return data
   } catch (error) {
-    redirect('/?status=server_error')
+    return []
   }
 }
