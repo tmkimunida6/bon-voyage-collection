@@ -19,6 +19,7 @@ export async function fetchPostDataByUser() {
         client: tokens.client,
         uid: tokens.uid,
       },
+      cache: 'no-store',
     })
 
     const data = await res.json()
