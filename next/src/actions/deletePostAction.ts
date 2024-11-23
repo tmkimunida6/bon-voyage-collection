@@ -2,6 +2,7 @@
 
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { getUserTokens } from '@/utils/getUserTokens'
 
@@ -30,6 +31,8 @@ export async function deletePostAction(post_id: string) {
           'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
       )
     }
+    revalidatePath('/mypage')
+    revalidatePath('/timeline')
     return data
   } catch (error: any) {
     return { status: 'error', message: error.message }

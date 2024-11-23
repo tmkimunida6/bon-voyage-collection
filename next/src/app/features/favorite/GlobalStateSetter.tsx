@@ -22,7 +22,7 @@ export default function GlobalStateSetter({
   myPostsData,
 }: GlobalStateSetterProps) {
   const { favoritedSouvenirs, setFavoritedSouvenirs } = useFavoriteStore()
-  const { myPosts, setMyPosts } = useMyPostsStore()
+  const { setMyPosts } = useMyPostsStore()
   const { setCurrentUser } = useCurrentUserStore()
 
   // 「欲しい！」追加済みのお土産をセット
@@ -30,10 +30,12 @@ export default function GlobalStateSetter({
     if (!favoritedSouvenirs.length) {
       setFavoritedSouvenirs(favoritedSouvenirsData)
     }
-    if (!myPosts.length) {
-      setMyPosts(myPostsData)
-    }
   }, [userData])
+
+  // 自分の投稿をセット
+  useEffect(() => {
+    setMyPosts(myPostsData)
+  }, [myPostsData])
 
   // ログイン中のユーザーをセット
   useEffect(() => {

@@ -13,7 +13,6 @@ import { Metadata } from 'next'
 import MySouvenirList from '../features/favorite/MySouvenirList'
 import CollectionCount from '../features/mypage/CollectionCount'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
-import { fetchPostDataByUser } from '@/utils/fetchPostDataByUser'
 
 export const metadata: Metadata = {
   title: 'マイページ | Bon Voyage Collcection',
@@ -24,7 +23,6 @@ export const metadata: Metadata = {
 
 export default async function Mypage() {
   const user = await checkLoginStatus()
-  const my_posts = await fetchPostDataByUser()
 
   return (
     <Stack spacing={6}>
@@ -36,11 +34,11 @@ export default async function Mypage() {
         <TabList>
           <Tab gap={2}>
             買った！
-            <CollectionCount length={my_posts.length} />
+            <CollectionCount type="myPost" />
           </Tab>
           <Tab gap={2}>
             欲しい！
-            <CollectionCount />
+            <CollectionCount type="favoritedSouvenir" />
           </Tab>
         </TabList>
         <TabPanels>
