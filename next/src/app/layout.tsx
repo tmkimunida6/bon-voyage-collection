@@ -10,6 +10,20 @@ export const metadata: Metadata = {
   description:
     '小さなお店で出会った可愛い雑貨や、ふらっと立ち寄ったカフェでつい買ってしまった美味しそうなお菓子...旅先では、どこでどんなお土産との出会いがあるかわかりません。そんな出会い一つ一つを記録して、あなただけの思い出コレクションを作りましょう。新しいお土産との出会いもきっと見つかるはず！',
   keywords: 'お土産,Souvenir,SNS,発見,コレクション,Bon Voyage Collection',
+  openGraph: {
+    title: 'Bon Voyage Collcection | お土産との出会いを見つけるサービス',
+    description:
+      '小さなお店で出会った可愛い雑貨や、ふらっと立ち寄ったカフェでつい買ってしまった美味しそうなお菓子...旅先では、どこでどんなお土産との出会いがあるかわかりません。そんな出会い一つ一つを記録して、あなただけの思い出コレクションを作りましょう。新しいお土産との出会いもきっと見つかるはず！',
+    url: 'https://bon-voyage-collection.com/',
+    siteName: 'Bon Voyage Collcection',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Bon Voyage Collcection | お土産との出会いを見つけるサービス',
+    description:
+      '小さなお店で出会った可愛い雑貨や、ふらっと立ち寄ったカフェでつい買ってしまった美味しそうなお菓子...旅先では、どこでどんなお土産との出会いがあるかわかりません。そんな出会い一つ一つを記録して、あなただけの思い出コレクションを作りましょう。新しいお土産との出会いもきっと見つかるはず！',
+    card: 'summary_large_image',
+  },
 }
 
 export default function RootLayout({
