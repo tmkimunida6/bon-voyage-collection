@@ -1,5 +1,25 @@
-<p><%= t(:welcome).capitalize + ' ' + @email %>!</p>
+<p>※<%= t 'devise.mailer.caution_note.for_registered_mail_msg' %></p>
 
-<p><%= t '.confirm_link_msg' %> </p>
+<h2><%= t(:welcome) %></h2>
 
-<p><%= link_to t('.confirm_account_link'), "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}", target: :_blank, rel: "noopener noreferrer" %></p>
+<p>
+  <%= t '.thankyou_msg' %><br>
+  <%= t '.confirm_link_msg' %> 
+</p>
+
+<p>URL：<%= link_to "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}", "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}", target: :_blank, rel: "noopener noreferrer" %></p>
+
+<br><br>
+
+<p>
+  ※<%= t 'devise.mailer.caution_note.send_only_msg' %><br>
+  ※<%= t 'devise.mailer.caution_note.misdelivery_msg' %>
+</p>
+
+<br>
+<hr>
+
+<p>
+  Bon Boyage Collection<br>
+  <%= link_to "#{Settings.front_domain}", "#{Settings.front_domain}", target: :_blank, rel: "noopener noreferrer" %>
+</p>
