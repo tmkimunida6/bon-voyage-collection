@@ -5,8 +5,12 @@ ja:
         name: お土産の名称
         description: 説明
         image_url: 画像
+        user_id: ユーザー
+        category_id: カテゴリー
+        image_url: 画像
       post:
         souvenir_id: "このお土産"
+        rating: "スコア"
         for_who:
           for_myself: 自分用
           for_family: 家族用
@@ -23,5 +27,7 @@ ja:
           fifties: 50代
           sixties: 60代
           over_seventies: 70代以上
+        review: 感想
+        image_url: 画像
       favorite:
         souvenir_id: "このお土産"
