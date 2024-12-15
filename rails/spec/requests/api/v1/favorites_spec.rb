@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Api::V1::Favorites", type: :request do
+RSpec.describe "お気に入り", type: :request do
   let(:user) { create(:user) }
   let(:headers) { user.create_new_auth_token }
   let(:category) { create(:category) }
