@@ -155,7 +155,7 @@ RSpec.describe "お土産", type: :request do
           post_request
           expect(response).to have_http_status(:unprocessable_entity)
           json = JSON.parse(response.body)
-          expect(json['errors']).to eq ["お土産の名称はすでに存在します"]
+          expect(json['errors']).to eq ["このお土産はすでに記録済みです。"]
         end
       end
     end

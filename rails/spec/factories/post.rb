@@ -4,6 +4,6 @@ FactoryBot.define do
     for_who { Faker::Number.between(from: 0, to: 5) }
     age { Faker::Number.between(from: 0, to: 7) }
     review { Faker::Lorem.paragraph }
-    image_url { "https://example.com/image.jpg" }
+    sequence(:image_url) { |n| "https://example.com/image_#{n}.jpg" }
   end
 end
