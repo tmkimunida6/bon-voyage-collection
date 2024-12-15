@@ -17,7 +17,11 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   end
 
   def show
-    render json: SouvenirResource.new(@souvenir).serialize
+    if @souvenir
+      render json: SouvenirResource.new(@souvenir).serialize
+    else
+      render json: { message: 'お土産が見つかりませんでした。' }, status: :not_found
+    end
   end
 
   def related
