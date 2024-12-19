@@ -1,5 +1,5 @@
 class Api::V1::SouvenirsController < Api::V1::BaseController
-  before_action :authenticate_user!, except: [ :index, :show, :related ]
+  before_action :authenticate_user!, except: [ :index, :show, :related, :recommend ]
   before_action :set_souvenir, only: [ :show, :related, :favorited_index ]
 
   def index
@@ -50,6 +50,28 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
   def favorited_index
     favorited_souvenirs = current_user.favorited_souvenirs.includes(:user, :category)
     render json: JSON.parse(SouvenirResource.new(favorited_souvenirs, params: { exclude_description: true, exclude_category: true }).serialize)
+  end
+
+  def recommend
+    q = Souvenir.ransack(souvenir_search_params)
+    if current_user
+      # お気に入り済みと投稿済みは除外
+      favorited_ids = current_user.favorited_souvenirs.pluck(:alias_id)
+      posted_ids = current_user.posts.joins(:souvenir).pluck('souvenirs.alias_id')
+
+      souvenirs = q.result
+                   .where.not(alias_id: favorited_ids + posted_ids)
+                   .includes(:category)
+                   .order("RANDOM()")
+                   .limit(10)
+    else
+      souvenirs = q.result
+                   .includes(:category)
+                   .order("RANDOM()")
+                   .limit(10)
+    end
+
+    render json: JSON.parse(SouvenirResource.new(souvenirs, params: { exclude_description: true }).serialize)
   end
 
   private
