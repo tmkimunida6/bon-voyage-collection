@@ -18,6 +18,7 @@ import {
   FaUser,
   FaHandHoldingHeart,
   FaTrashAlt,
+  FaReplyAll,
 } from 'react-icons/fa'
 import {
   FaGift,
@@ -52,4 +53,5 @@ export const iconMapper = {
   FaUser,
   FaHandHoldingHeart,
   FaTrashAlt,
+  FaReplyAll,
 }

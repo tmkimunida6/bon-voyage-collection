@@ -16,7 +16,7 @@ export type CategoryType = {
 }
 
 export type CategoriesType = CategoryType & {
-  children: Array<CategoriesType>
+  parent: Array<CategoriesType>
 }
 
 export type SouvenirSelectType = {
