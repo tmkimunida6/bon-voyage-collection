@@ -6,9 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { getUserTokens } from '@/utils/getUserTokens'
 
-export async function favoriteBulkAction(
-  souvenir_ids: Array<string>,
-) {
+export async function favoriteBulkAction(souvenir_ids: Array<string>) {
   try {
     const tokens = await getUserTokens()
     if (!tokens) {

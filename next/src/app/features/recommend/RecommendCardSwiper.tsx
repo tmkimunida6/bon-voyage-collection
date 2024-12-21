@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 
 'use client'
 
@@ -19,13 +19,13 @@ import NextLink from 'next/link'
 import { useMemo, useState } from 'react'
 import TinderCard from 'react-tinder-card'
 import RecommendSwipeIcon from './RecommendSwipeIcon'
+import { favoriteBulkAction } from '@/actions/favoriteBulkAction'
 import RecommendCard from '@/app/recommend/RecommendCard'
 import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
 import { useCurrentUserStore, useFavoriteStore } from '@/store/store'
 import { SouvenirDetailType } from '@/types/types'
-import { favoriteBulkAction } from '@/actions/favoriteBulkAction'
 
 type RecommendCardSwiperProps = {
   fetchedRecommendResult: Array<SouvenirDetailType>
@@ -67,11 +67,11 @@ export default function RecommendCardSwiper({
     if (currentIndex === 0) {
       // ログイン中の場合は「欲しい！」に追加 / 未ログイン時はlocalStorageに保存
       const favoritedAliasIds = favorites.map((favorite) => favorite.alias_id)
-      if(currentUser?.isSignedIn) {
+      if (currentUser?.isSignedIn) {
         const addRecommendSouvenirsToFavorite = async () => {
           try {
             await favoriteBulkAction(favoritedAliasIds)
-          } catch(error: any) {
+          } catch (error: any) {
             toast({
               title: error.message,
               status: error.status,
@@ -84,7 +84,7 @@ export default function RecommendCardSwiper({
           }
         }
 
-        if(favoritedAliasIds.length) {
+        if (favoritedAliasIds.length) {
           addRecommendSouvenirsToFavorite()
         } else {
           setLoading(false)
@@ -121,21 +121,17 @@ export default function RecommendCardSwiper({
             <>
               右にスワイプしたお土産を
               <br />
-              「欲しい！」に{loading ? "追加中..." : "追加しました！"}
+              「欲しい！」に{loading ? '追加中...' : '追加しました！'}
             </>
           ),
-          buttonText: "マイページへ",
-          buttonHref: "/mypage?tab=favorite",
+          buttonText: 'マイページへ',
+          buttonHref: '/mypage?tab=favorite',
         }
       } else {
         return {
-          text: (
-            <>
-              今回「欲しい！」に追加したお土産はありません。
-            </>
-          ),
-          buttonText: "もう一度試す",
-          buttonHref: "/",
+          text: <>今回「欲しい！」に追加したお土産はありません。</>,
+          buttonText: 'もう一度試す',
+          buttonHref: '/',
         }
       }
     } else {
@@ -144,15 +140,14 @@ export default function RecommendCardSwiper({
           <>
             右にスワイプしたお土産を
             <br />
-            「欲しい！」に{loading ? "追加中..." : "追加しました！"}
+            「欲しい！」に{loading ? '追加中...' : '追加しました！'}
           </>
         ),
-        buttonText: "会員登録へ進む",
-        buttonHref: "/register",
+        buttonText: '会員登録へ進む',
+        buttonHref: '/register',
       }
     }
   }, [currentUser, favorites, loading])
-
 
   return (
     <>
@@ -169,7 +164,9 @@ export default function RecommendCardSwiper({
                 href={recommendCompletedContent.buttonHref}
                 size="sm"
                 mb={8}
-                isLoading={currentUser?.isSignedIn && favorites.length ? loading : false}
+                isLoading={
+                  currentUser?.isSignedIn && favorites.length ? loading : false
+                }
               >
                 {recommendCompletedContent.buttonText}
               </Button>

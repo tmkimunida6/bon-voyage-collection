@@ -27,7 +27,7 @@ type MypageProps = {
   }
 }
 
-export default async function Mypage({searchParams}: MypageProps) {
+export default async function Mypage({ searchParams }: MypageProps) {
   const user = await checkLoginStatus()
 
   let tabIndex = 0
@@ -41,7 +41,6 @@ export default async function Mypage({searchParams}: MypageProps) {
     default:
       tabIndex = 0
   }
-
 
   return (
     <Stack spacing={6}>

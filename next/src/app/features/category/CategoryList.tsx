@@ -1,4 +1,8 @@
-import { Accordion, Button, Checkbox, CheckboxGroup, HStack } from '@chakra-ui/react'
+import {
+  Accordion,
+  Button,
+  HStack,
+} from '@chakra-ui/react'
 import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
 import { useCategoryStore } from '@/store/store'
 import { CategoriesType } from '@/types/types'

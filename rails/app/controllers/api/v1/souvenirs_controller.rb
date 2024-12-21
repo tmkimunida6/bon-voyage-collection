@@ -21,7 +21,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
     if @souvenir
       render json: SouvenirResource.new(@souvenir).serialize
     else
-      render json: { message: 'お土産が見つかりませんでした。' }, status: :not_found
+      render json: { message: "お土産が見つかりませんでした。" }, status: :not_found
     end
   end
 
@@ -58,7 +58,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
     if current_user
       # お気に入り済みと投稿済みは除外
       favorited_ids = current_user.favorited_souvenirs.pluck(:alias_id)
-      posted_ids = current_user.posts.joins(:souvenir).pluck('souvenirs.alias_id')
+      posted_ids = current_user.posts.joins(:souvenir).pluck("souvenirs.alias_id")
 
       souvenirs = q.result
                    .where.not(alias_id: favorited_ids + posted_ids)
@@ -110,5 +110,4 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
       Souvenir.ransack(name_or_description_cont: souvenir_search_params[:name_or_description_cont])
     end
   end
-
 end
