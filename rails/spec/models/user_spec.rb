@@ -35,7 +35,6 @@ RSpec.describe User, type: :model do
         expect(user_with_short_password).to be_invalid
         expect(user_with_short_password.errors[:password]).not_to be_empty
       end
-
     end
   end
 end

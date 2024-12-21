@@ -28,9 +28,9 @@ const TopSearchForm = () => {
       <Button
         variant="primary"
         as={NextLink}
-        href={`./search?page=1&word=${word}&category_id=${selectedCategory.id}&category_name=${selectedCategory.name}`}
+        href={`./recommend?word=${word}&category_id=${selectedCategory.id}&category_name=${selectedCategory.name}`}
       >
-        お土産をみる
+        おすすめのお土産をみる
       </Button>
     </>
   )

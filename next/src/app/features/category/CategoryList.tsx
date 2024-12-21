@@ -1,4 +1,8 @@
-import { Accordion, Button, HStack } from '@chakra-ui/react'
+import {
+  Accordion,
+  Button,
+  HStack,
+} from '@chakra-ui/react'
 import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
 import { useCategoryStore } from '@/store/store'
 import { CategoriesType } from '@/types/types'
@@ -39,7 +43,7 @@ export default function CategoryList({
                     height="auto"
                     padding={0}
                     sx={{
-                      '&:not(:last-child)::after': {
+                      '&::after': {
                         content: '""',
                         marginLeft: 4,
                         display: 'block',
@@ -59,6 +63,23 @@ export default function CategoryList({
                     {grand_child_category.name}
                   </Button>
                 ))}
+                <Button
+                  variant="ghost"
+                  key={child_category.id}
+                  fontWeight="normal"
+                  fontSize="sm"
+                  height="auto"
+                  padding={0}
+                  _hover={{ textDecoration: 'underline' }}
+                  onClick={() =>
+                    onSelectCategory({
+                      id: child_category.id as number,
+                      name: child_category.name,
+                    })
+                  }
+                >
+                  {child_category.name}全て
+                </Button>
               </HStack>
             </CustomAccordionItem>
           ))}

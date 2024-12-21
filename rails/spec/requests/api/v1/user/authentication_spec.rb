@@ -25,7 +25,7 @@ RSpec.describe 'ユーザー認証', type: :request do
         it '権限エラーを返す' do
           post_request
           expect(response).to have_http_status(:unauthorized)
-          expect(json['errors']).to eq ['メールアドレスまたはパスワードの組み合わせが正しくありません。再度お試しください。']
+          expect(json['errors']).to eq [ 'メールアドレスまたはパスワードの組み合わせが正しくありません。再度お試しください。' ]
         end
       end
 
@@ -35,7 +35,7 @@ RSpec.describe 'ユーザー認証', type: :request do
         it '権限エラーを返す' do
           post_request
           expect(response).to have_http_status(:unauthorized)
-          expect(json['errors']).to eq ['メールアドレスまたはパスワードの組み合わせが正しくありません。再度お試しください。']
+          expect(json['errors']).to eq [ 'メールアドレスまたはパスワードの組み合わせが正しくありません。再度お試しください。' ]
         end
       end
     end

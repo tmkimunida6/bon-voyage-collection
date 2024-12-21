@@ -66,7 +66,6 @@ RSpec.describe 'ユーザー登録', type: :request do
     end
 
     context '失敗' do
-
       context '無効なトークンの場合' do
         let(:token) { 'invalid_token' }
 

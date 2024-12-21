@@ -34,15 +34,21 @@ Rails.application.routes.draw do
         # 欲しい登録/削除
         resource :favorites, only: [ :create, :destroy ]
 
-        # 「欲しい」一覧
         collection do
+          # 「欲しい」一覧
           get :favorited_index
+
+          # おすすめのお土産
+          get :recommend
         end
 
         member do
           get :related
         end
       end
+
+      # 欲しい一括追加
+      post "souvenirs/favorites/bulk_create", to: "favorites#bulk_create"
 
       # カテゴリー
       resources :categories, only: [ :index, :show ]

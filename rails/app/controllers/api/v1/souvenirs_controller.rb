@@ -1,12 +1,13 @@
 class Api::V1::SouvenirsController < Api::V1::BaseController
-  before_action :authenticate_user!, except: [ :index, :show, :related ]
+  before_action :authenticate_user!, except: [ :index, :show, :related, :recommend ]
   before_action :set_souvenir, only: [ :show, :related, :favorited_index ]
 
   def index
-    q = Souvenir.ransack(souvenir_search_params)
+    q = find_descendant_categories
+
     souvenirs = q.result(distinct: true).includes(:user, :category).order("created_at desc").page(params[:page])
     render json: {
-      souvenirs: JSON.parse(SouvenirResource.new(souvenirs, params: { exclude_description: true, exclude_category: true }).serialize),
+      souvenirs: JSON.parse(SouvenirResource.new(souvenirs, params: { exclude_description: false, exclude_category: false }).serialize),
       pages: {
         current_page: souvenirs.current_page,
         total_pages: souvenirs.total_pages,
@@ -20,7 +21,7 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
     if @souvenir
       render json: SouvenirResource.new(@souvenir).serialize
     else
-      render json: { message: 'お土産が見つかりませんでした。' }, status: :not_found
+      render json: { message: "お土産が見つかりませんでした。" }, status: :not_found
     end
   end
 
@@ -52,6 +53,28 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
     render json: JSON.parse(SouvenirResource.new(favorited_souvenirs, params: { exclude_description: true, exclude_category: true }).serialize)
   end
 
+  def recommend
+    q = find_descendant_categories
+    if current_user
+      # お気に入り済みと投稿済みは除外
+      favorited_ids = current_user.favorited_souvenirs.pluck(:alias_id)
+      posted_ids = current_user.posts.joins(:souvenir).pluck("souvenirs.alias_id")
+
+      souvenirs = q.result
+                   .where.not(alias_id: favorited_ids + posted_ids)
+                   .includes(:user, :category)
+                   .order("RANDOM()")
+                   .limit(10)
+    else
+      souvenirs = q.result
+                   .includes(:user, :category)
+                   .order("RANDOM()")
+                   .limit(10)
+    end
+
+    render json: JSON.parse(SouvenirResource.new(souvenirs, params: { exclude_description: true }).serialize)
+  end
+
   private
 
   def souvenir_params
@@ -64,5 +87,27 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
 
   def souvenir_search_params
     params.permit(:name_or_description_cont, :category_id_eq, :page)
+  end
+
+  def find_descendant_categories
+    if souvenir_search_params[:category_id_eq].present?
+      category = Category.find_by(id: souvenir_search_params[:category_id_eq])
+      if category.nil?
+        render json: {
+          souvenirs: [],
+          pages: {
+            current_page: 1,
+            total_pages: 0,
+            next_page: nil,
+            prev_page: nil
+          }
+        } and return
+      end
+
+      descendant_ids = category.subtree_ids
+      Souvenir.ransack(category_id_in: descendant_ids, name_or_description_cont: souvenir_search_params[:name_or_description_cont])
+    else
+      Souvenir.ransack(name_or_description_cont: souvenir_search_params[:name_or_description_cont])
+    end
   end
 end
