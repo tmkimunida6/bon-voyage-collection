@@ -16,7 +16,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import TinderCard from 'react-tinder-card'
 import RecommendSwipeIcon from './RecommendSwipeIcon'
 import RecommendCard from '@/app/recommend/RecommendCard'
@@ -83,7 +83,12 @@ export default function RecommendCardSwiper({
             favorites.map((favorite) => addFavoritedSouvenir(favorite))
           }
         }
-        addRecommendSouvenirsToFavorite()
+
+        if(favoritedAliasIds.length) {
+          addRecommendSouvenirsToFavorite()
+        } else {
+          setLoading(false)
+        }
       } else {
         setLoading(false)
         localStorage.setItem(
@@ -107,6 +112,48 @@ export default function RecommendCardSwiper({
     }
   }
 
+  // 結果によって内容だしわけ
+  const recommendCompletedContent = useMemo(() => {
+    if (currentUser?.isSignedIn) {
+      if (favorites.length) {
+        return {
+          text: (
+            <>
+              右にスワイプしたお土産を
+              <br />
+              「欲しい！」に{loading ? "追加中..." : "追加しました！"}
+            </>
+          ),
+          buttonText: "マイページへ",
+          buttonHref: "/mypage?tab=favorite",
+        }
+      } else {
+        return {
+          text: (
+            <>
+              今回「欲しい！」に追加したお土産はありません。
+            </>
+          ),
+          buttonText: "もう一度試す",
+          buttonHref: "/",
+        }
+      }
+    } else {
+      return {
+        text: (
+          <>
+            右にスワイプしたお土産を
+            <br />
+            「欲しい！」に{loading ? "追加中..." : "追加しました！"}
+          </>
+        ),
+        buttonText: "会員登録へ進む",
+        buttonHref: "/register",
+      }
+    }
+  }, [currentUser, favorites, loading])
+
+
   return (
     <>
       {currentIndex < 0 ? (
@@ -114,29 +161,17 @@ export default function RecommendCardSwiper({
           <CardBody p={4}>
             <Stack align="center" justify="center" spacing={0} h="100%">
               <Heading fontSize="18px" textAlign="center" mb={4}>
-                {currentUser?.isSignedIn ? (
-                  <>
-                    右にスワイプしたお土産を
-                    <br />
-                    「欲しい！」に{loading ? "追加中..." : "追加しました！"}
-                  </>
-                ) : (
-                  <>
-                    会員登録をして
-                    <br />
-                    欲しいお土産を保存しましょう
-                  </>
-                )}
+                {recommendCompletedContent.text}
               </Heading>
               <Button
                 variant="primary"
                 as={NextLink}
-                href={currentUser?.isSignedIn ? "/mypage?tab=favorite" : "/register"}
+                href={recommendCompletedContent.buttonHref}
                 size="sm"
                 mb={8}
-                isLoading={loading}
+                isLoading={currentUser?.isSignedIn && favorites.length ? loading : false}
               >
-                {currentUser?.isSignedIn ? "マイページへ" : "会員登録へ進む"}
+                {recommendCompletedContent.buttonText}
               </Button>
               <VStack spacing={1}>
                 <Text>

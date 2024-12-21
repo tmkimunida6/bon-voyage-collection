@@ -23,7 +23,7 @@ class Api::V1::FavoritesController < Api::V1::BaseController
   # 配列で渡ってきたお土産を一気にお気に入りに追加（Recommendから会員登録時）
   def bulk_create
     souvenir_ids = params[:souvenir_ids]
-    return render json: { status: "error" }, status: :unprocessable_entity if souvenir_ids.blank?
+    return if souvenir_ids.blank?
 
     souvenir_ids.each do |souvenir_id|
       souvenir = Souvenir.find_by(alias_id: souvenir_id)
