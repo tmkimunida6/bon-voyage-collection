@@ -61,12 +61,12 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
 
       souvenirs = q.result
                    .where.not(alias_id: favorited_ids + posted_ids)
-                   .includes(:category)
+                   .includes(:user, :category)
                    .order("RANDOM()")
                    .limit(10)
     else
       souvenirs = q.result
-                   .includes(:category)
+                   .includes(:user, :category)
                    .order("RANDOM()")
                    .limit(10)
     end

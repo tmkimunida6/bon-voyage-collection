@@ -47,6 +47,9 @@ Rails.application.routes.draw do
         end
       end
 
+      # 欲しい一括追加
+      post "souvenirs/favorites/bulk_create", to: "favorites#bulk_create"
+
       # カテゴリー
       resources :categories, only: [ :index, :show ]
 

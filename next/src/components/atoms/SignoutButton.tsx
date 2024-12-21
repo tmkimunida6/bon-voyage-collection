@@ -10,6 +10,10 @@ const SignoutButton = () => {
   const handleSignout = () => {
     setFavoritedSouvenirs([])
     signoutAction()
+
+    // おすすめのお土産の一時データをリセット
+    localStorage.removeItem('favoritedSouvenirs')
+    localStorage.removeItem('skipedSouvenirs')
   }
 
   return (

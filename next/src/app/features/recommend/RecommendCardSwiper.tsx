@@ -8,13 +8,12 @@ import {
   Button,
   Card,
   CardBody,
-  Flex,
   Heading,
   Link,
-  Spinner,
   Stack,
   Text,
   useToast,
+  VStack,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useState } from 'react'
@@ -24,7 +23,9 @@ import RecommendCard from '@/app/recommend/RecommendCard'
 import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
+import { useCurrentUserStore, useFavoriteStore } from '@/store/store'
 import { SouvenirDetailType } from '@/types/types'
+import { favoriteBulkAction } from '@/actions/favoriteBulkAction'
 
 type RecommendCardSwiperProps = {
   fetchedRecommendResult: Array<SouvenirDetailType>
@@ -40,10 +41,19 @@ export default function RecommendCardSwiper({
     fetchedRecommendResult.length - 1,
   )
   const [favorites, setFavorites] = useState<Array<SouvenirDetailType>>([])
+  // const [skips, setSkips] = useState<Array<SouvenirDetailType>>([])
+  const [loading, setLoading] = useState<boolean>(true)
+
+  const { currentUser } = useCurrentUserStore()
+  const { addFavoritedSouvenir } = useFavoriteStore()
+
+  const toast = useToast()
 
   const handleSwipe = (direction: string, souvenir: SouvenirDetailType) => {
     if (direction === 'right') {
       setFavorites((prev) => [...prev, souvenir])
+      // } else if (direction === 'left') {
+      //   setSkips((prev) => [...prev, souvenir])
     }
     setCurrentIndex((prev) => prev - 1)
   }
@@ -52,28 +62,95 @@ export default function RecommendCardSwiper({
     setRecommendSouvenirs((prevSouvenirs) =>
       prevSouvenirs.filter((souvenir) => souvenir.alias_id !== alias_id),
     )
+
+    // 全てのスワイプが完了したあとにlocalStorageに保存する
+    if (currentIndex === 0) {
+      // ログイン中の場合は「欲しい！」に追加 / 未ログイン時はlocalStorageに保存
+      const favoritedAliasIds = favorites.map((favorite) => favorite.alias_id)
+      if(currentUser?.isSignedIn) {
+        const addRecommendSouvenirsToFavorite = async () => {
+          try {
+            await favoriteBulkAction(favoritedAliasIds)
+          } catch(error: any) {
+            toast({
+              title: error.message,
+              status: error.status,
+              duration: 5000,
+              isClosable: true,
+            })
+          } finally {
+            setLoading(false)
+            favorites.map((favorite) => addFavoritedSouvenir(favorite))
+          }
+        }
+        addRecommendSouvenirsToFavorite()
+      } else {
+        setLoading(false)
+        localStorage.setItem(
+          'favoritedSouvenirs',
+          JSON.stringify(favoritedAliasIds),
+        )
+
+        // スキップしたお土産を保存
+        // const skippedAliasIds = skips.map((skip) => skip.alias_id)
+        // localStorage.setItem('skipedSouvenirs', JSON.stringify(skippedAliasIds))
+        // const existingSkipsAliasIds = localStorage.getItem('skipedSouvenirs')
+        // let newSkipedAliasIds
+        // if (existingSkipsAliasIds) {
+        //   const json = JSON.parse(existingSkipsAliasIds)
+        //   newSkipedAliasIds = [...json, ...skippedAliasIds]
+        // } else {
+        //   newSkipedAliasIds = skippedAliasIds
+        // }
+        // localStorage.setItem('skipedSouvenirs', JSON.stringify(newSkipedAliasIds))
+      }
+    }
   }
 
   return (
     <>
-      {currentIndex === -1 ? (
+      {currentIndex < 0 ? (
         <Card bg="white" cursor="pointer" w="100%" maxW={360} h={360}>
           <CardBody p={4}>
             <Stack align="center" justify="center" spacing={0} h="100%">
               <Heading fontSize="18px" textAlign="center" mb={4}>
-                会員登録をして
-                <br />
-                欲しいお土産を保存しましょう
+                {currentUser?.isSignedIn ? (
+                  <>
+                    右にスワイプしたお土産を
+                    <br />
+                    「欲しい！」に{loading ? "追加中..." : "追加しました！"}
+                  </>
+                ) : (
+                  <>
+                    会員登録をして
+                    <br />
+                    欲しいお土産を保存しましょう
+                  </>
+                )}
               </Heading>
-              <Button variant="primary" as={NextLink} href="/" size="sm" mb={8}>
-                会員登録へ進む
+              <Button
+                variant="primary"
+                as={NextLink}
+                href={currentUser?.isSignedIn ? "/mypage?tab=favorite" : "/register"}
+                size="sm"
+                mb={8}
+                isLoading={loading}
+              >
+                {currentUser?.isSignedIn ? "マイページへ" : "会員登録へ進む"}
               </Button>
-              <Text>
-                もっとお土産を探したい方は
-                <Link as={NextLink} href="/search" color="brand.link">
-                  検索ページへ
-                </Link>
-              </Text>
+              <VStack spacing={1}>
+                <Text>
+                  もっとお土産を探したい方は
+                  <Link as={NextLink} href="/search" color="brand.link">
+                    検索ページへ
+                  </Link>
+                </Text>
+                {currentUser?.isSignedIn ?? (
+                  <Text fontSize="10px" color="gray.400" textAlign="center">
+                    ※欲しいに追加したお土産は画面を閉じるまで保存されます。
+                  </Text>
+                )}
+              </VStack>
             </Stack>
           </CardBody>
         </Card>
@@ -102,7 +179,7 @@ export default function RecommendCardSwiper({
           <RecommendSwipeIcon position="right" />
         </>
       )}
-      {currentIndex === -1 && (
+      {currentIndex < 0 && (
         <Accordion allowMultiple w="100%">
           <CustomAccordionItem title="欲しい！に追加したお土産一覧">
             <Box py={4}>
