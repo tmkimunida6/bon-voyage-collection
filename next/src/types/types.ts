@@ -16,7 +16,11 @@ export type CategoryType = {
 }
 
 export type CategoriesType = CategoryType & {
-  parent: Array<CategoriesType>
+  children: Array<CategoriesType>
+}
+
+export type CategoriesInSouvenirType = CategoryType & {
+  parent: CategoriesInSouvenirType
 }
 
 export type SouvenirSelectType = {
@@ -29,7 +33,7 @@ export type SouvenirCardType = SouvenirSelectType & {
 }
 export type SouvenirDetailType = SouvenirCardType & {
   description: string
-  category: CategoriesType
+  category: CategoriesInSouvenirType
 }
 
 export type PagesType = {

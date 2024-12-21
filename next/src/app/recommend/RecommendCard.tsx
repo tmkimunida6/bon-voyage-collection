@@ -18,6 +18,7 @@ type RecommendCardProps = {
 }
 
 const RecommendCard = ({ souvenir, rating = '0' }: RecommendCardProps) => {
+  console.log(souvenir.category)
   return (
     <Card bg="white" cursor="pointer">
       <CardBody p={4}>
