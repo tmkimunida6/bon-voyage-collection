@@ -30,7 +30,7 @@ const TopSearchForm = () => {
         as={NextLink}
         href={`./recommend?word=${word}&category_id=${selectedCategory.id}&category_name=${selectedCategory.name}`}
       >
-        お土産をみる
+        おすすめのお土産をみる
       </Button>
     </>
   )
