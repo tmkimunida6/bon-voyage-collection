@@ -21,8 +21,26 @@ export const metadata: Metadata = {
   keywords: 'お土産,Souvenir,マイページ,Bon Voyage Collection',
 }
 
-export default async function Mypage() {
+type MypageProps = {
+  searchParams: {
+    tab?: string
+  }
+}
+
+export default async function Mypage({ searchParams }: MypageProps) {
   const user = await checkLoginStatus()
+
+  let tabIndex = 0
+  switch (searchParams.tab) {
+    case 'post':
+      tabIndex = 0
+      break
+    case 'favorite':
+      tabIndex = 1
+      break
+    default:
+      tabIndex = 0
+  }
 
   return (
     <Stack spacing={6}>
@@ -30,7 +48,7 @@ export default async function Mypage() {
         <Avatar size="sm" />
         <Text fontSize="lg">{user.name || `user_${user.alias_id}`}</Text>
       </HStack>
-      <Tabs isFitted variant="enclosed">
+      <Tabs isFitted variant="enclosed" defaultIndex={tabIndex}>
         <TabList>
           <Tab gap={2}>
             買った！

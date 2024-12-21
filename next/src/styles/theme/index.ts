@@ -37,6 +37,9 @@ const customTheme = extendTheme({
   },
   styles: {
     global: {
+      html: {
+        overflowX: 'hidden',
+      },
       body: {
         bg: '#fef2da',
         color: 'brand.black',

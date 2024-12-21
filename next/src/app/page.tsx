@@ -19,7 +19,7 @@ export default function Top() {
             お土産との出会いを見つけよう。
           </Heading>
           <VStack spacing={6}>
-            <Text>まずはお土産を探してみましょう。</Text>
+            <Text>まずはあなたにおすすめのお土産をいくつかご紹介します。</Text>
             <TopSearchForm />
           </VStack>
           <Flex justifyContent="right">

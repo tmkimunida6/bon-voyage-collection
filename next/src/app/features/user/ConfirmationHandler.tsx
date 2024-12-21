@@ -7,6 +7,7 @@ import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { confirmUserAction } from '@/actions/confirmUserAction'
+import { favoriteBulkAction } from '@/actions/favoriteBulkAction'
 
 type ToastDataType = {
   confirmationToken: string
@@ -26,6 +27,21 @@ const ConfirmationHandler = ({ confirmationToken }: ToastDataType) => {
           duration: 5000,
           isClosable: true,
         })
+
+        // おすすめのお土産を「欲しい」に一括追加
+        const favoritedSouvenirsFromRecommend =
+          localStorage.getItem('favoritedSouvenirs')
+        if (favoritedSouvenirsFromRecommend) {
+          const favoriteResult = await favoriteBulkAction(
+            JSON.parse(favoritedSouvenirsFromRecommend),
+          )
+          toast({
+            title: favoriteResult.message,
+            status: favoriteResult.status,
+            duration: 5000,
+            isClosable: true,
+          })
+        }
       } catch (error: any) {
         toast({
           title:
@@ -36,7 +52,7 @@ const ConfirmationHandler = ({ confirmationToken }: ToastDataType) => {
           isClosable: true,
         })
       } finally {
-        router.push('/')
+        router.push('/timeline')
       }
     }
 

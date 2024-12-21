@@ -52,7 +52,7 @@ RSpec.describe "投稿", type: :request do
         it 'エラーを返す' do
           post_request
           expect(response).to have_http_status(:unprocessable_entity)
-          expect(json['errors']).to eq ["お土産を選択してください。"]
+          expect(json['errors']).to eq [ "お土産を選択してください。" ]
         end
       end
 
@@ -62,7 +62,7 @@ RSpec.describe "投稿", type: :request do
         it 'エラーを返す' do
           post_request
           expect(response).to have_http_status(:unprocessable_entity)
-          expect(json['errors']).to eq ["このお土産はすでに記録済みです。"]
+          expect(json['errors']).to eq [ "このお土産はすでに記録済みです。" ]
         end
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe "投稿", type: :request do
       it '401エラーを返す' do
         expect { post_request }.not_to change { Post.count }
         expect(response).to have_http_status(:unauthorized)
-        expect(json['errors']).to eq ["ログインもしくはアカウント登録してください。"]
+        expect(json['errors']).to eq [ "ログインもしくはアカウント登録してください。" ]
       end
     end
   end
@@ -94,7 +94,7 @@ RSpec.describe "投稿", type: :request do
       it '401エラーを返す' do
         expect { delete_request }.not_to change { Post.count }
         expect(response).to have_http_status(:unauthorized)
-        expect(json['errors']).to eq ["ログインもしくはアカウント登録してください。"]
+        expect(json['errors']).to eq [ "ログインもしくはアカウント登録してください。" ]
       end
     end
 
