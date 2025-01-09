@@ -11,7 +11,6 @@ import {
   Input,
   VStack,
 } from '@chakra-ui/react'
-import { useEffect } from 'react'
 import CustomIcon from '../atoms/CustomIcon'
 import useUploadImage from '@/hooks/useUploadImage'
 
@@ -19,35 +18,26 @@ type UploadAvatarFormProps = {
   name: string
   errors: Array<string> | undefined
   isRequired: boolean
-  newAvatarUrl: string
-  setNewAvatarUrl: (url: string) => void
+  prevImage: string
 }
 
 const UploadAvatarForm = ({
   name,
   errors,
   isRequired,
-  newAvatarUrl,
-  setNewAvatarUrl
+  prevImage
 }: UploadAvatarFormProps) => {
   const { selectedImage, previewUrl, inputFileRef, onClickInputFile, handleImageChange, deleteInputFile } = useUploadImage()
-
-  // 確認モーダル用のURLを設定
-  useEffect(() => {
-    if(previewUrl) {
-      setNewAvatarUrl(previewUrl)
-    }
-  }, [previewUrl])
 
   return (
     <VStack spacing={0}>
       <FormControl isRequired={isRequired}>
         <FormLabel>プロフィール画像</FormLabel>
         <Box position="relative" display="inline-block">
-          {!newAvatarUrl && !previewUrl ? (
+          {!prevImage && !previewUrl ? (
             <Avatar size="xl" src="https://bit.ly/broken-link" bg="gray.400" />
           ) : (
-            <Avatar size="xl" src={previewUrl || newAvatarUrl} bg={previewUrl ? "transparent" : "gray.400"} />
+            <Avatar size="xl" src={previewUrl || prevImage} bg={previewUrl ? "transparent" : "gray.400"} />
           )}
           <Flex
             bg="brand.primary"

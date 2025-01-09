@@ -27,7 +27,4 @@ export const registerSchema = z
 export const changeProfileSchema = z.object({
   nickname: z.string().optional(),
   image: z.string().optional(),
-  password: z
-    .string({ required_error: 'パスワードを入力してください。' })
-    .min(8, 'パスワードは8文字以上で入力して下さい。'),
 })

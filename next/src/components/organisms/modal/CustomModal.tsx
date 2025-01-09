@@ -28,7 +28,6 @@ const CustomModal = ({
   onClose,
   modalTitle,
   buttonText,
-  isSubmit = false,
   size = 'md',
   children,
 }: CustomModalProps) => {
@@ -41,13 +40,9 @@ const CustomModal = ({
         <ModalBody>{children}</ModalBody>
         <ModalFooter justifyContent="center">
           {buttonText && (
-            isSubmit ? (
-              <SubmitButton>{buttonText}</SubmitButton>
-            ) : (
-              <Button variant="primary" onClick={onClose}>
-                {buttonText}
-              </Button>
-            )
+            <Button variant="primary" onClick={onClose}>
+              {buttonText}
+            </Button>
           )}
         </ModalFooter>
       </ModalContent>

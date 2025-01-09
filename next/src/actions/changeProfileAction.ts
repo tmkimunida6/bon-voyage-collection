@@ -20,7 +20,6 @@ export async function changeProfileAction(prevState: unknown, formData: FormData
 
 
   const nickname = formData.get('nickname')
-  console.log(formData.get('nickname'))
   const imageFile = formData.get('image') ? String(formData.get('image')) : ''
   const current_password = "password"
 

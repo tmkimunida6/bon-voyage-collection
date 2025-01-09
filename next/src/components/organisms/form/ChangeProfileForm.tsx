@@ -4,36 +4,25 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
-  Avatar,
   Box,
-  Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
   Stack,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
   Text,
-  Tr,
-  useDisclosure,
   useToast,
-  VStack,
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { useFormState } from 'react-dom'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import { changeProfileSchema } from '@/schemas/userSchema'
-import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { changeProfileAction } from '@/actions/changeProfileAction'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { redirect } from 'next/navigation'
-import CustomModal from '../modal/CustomModal'
-import PasswordInput from '@/components/atoms/PasswordInput'
 import UploadAvatarForm from '@/components/molecules/UploadAvatarForm'
+import SubmitButton from '@/components/atoms/SubmitButton'
 
 type ChangeProfileFormProps = {
   nickname: string
@@ -41,9 +30,6 @@ type ChangeProfileFormProps = {
 }
 
 const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
-  const [newNickname, setNewNickname] = useState(nickname)
-  const [newAvatarUrl, setNewAvatarUrl] = useState(image)
-
   const [lastResult, action] = useFormState(changeProfileAction, undefined)
   const [form, fields] = useForm({
     lastResult,
@@ -66,9 +52,6 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
     }
   }, [lastResult])
 
-  // モーダル
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
   return (
     <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
       {form.errors && (
@@ -85,8 +68,7 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
               type='text'
               name={fields.nickname.name}
               placeholder="例：ボンボヤージュ太郎"
-              value={newNickname}
-              onChange={(e) => setNewNickname(e.target.value)}
+              defaultValue={nickname}
             />
             <FormErrorMessage>{fields.nickname.errors}</FormErrorMessage>
           </FormControl>
@@ -96,41 +78,9 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
           name={fields.image.name}
           errors={fields.image.errors}
           isRequired={true}
-          newAvatarUrl={newAvatarUrl}
-          setNewAvatarUrl={setNewAvatarUrl}
+          prevImage={image}
         />
-        <VStack>
-          <Button variant="primary" onClick={() => onOpen()}>変更内容を確認</Button>
-          <CustomModal
-            isOpen={isOpen}
-            onClose={onClose}
-            modalTitle="変更内容の確認"
-            buttonText="変更を完了する"
-            isSubmit={true}
-          >
-            <TableContainer whiteSpace="wrap">
-              <Table variant='simple' size="sm">
-                <Tbody>
-                  <Tr>
-                    <Td px={2} fontWeight="bold" whiteSpace="nowrap">表示名</Td>
-                    <Td px={2}>{newNickname === nickname ? "変更なし" : newNickname}</Td>
-                  </Tr>
-                  <Tr>
-                    <Td px={2} fontWeight="bold" whiteSpace="nowrap">プロフィール<br/>画像</Td>
-                    <Td px={2}><Avatar size="md" src={newAvatarUrl || "https://bit.ly/broken-link"} /></Td>
-                  </Tr>
-                </Tbody>
-              </Table>
-            </TableContainer>
-            <Stack spacing={4} mt={8}>
-              <Text fontSize="sm">上記の内容で問題なければ、パスワードを入力の上、変更を完了してください。</Text>
-              <FormControl isRequired={true} isInvalid={!!fields.password.errors}>
-                <PasswordInput name={fields.password.name} />
-                <FormErrorMessage>{fields.password.errors}</FormErrorMessage>
-              </FormControl>
-            </Stack>
-          </CustomModal>
-        </VStack>
+        <SubmitButton>変更を確定する</SubmitButton>
         <TextIconLink
           iconPosition="left"
           iconName="FaChevronLeft"
