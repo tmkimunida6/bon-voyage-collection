@@ -7,6 +7,7 @@ import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { changeProfileSchema } from '@/schemas/userSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
 import { uploadImageAction } from './uploadImageAction'
+import { revalidatePath } from 'next/cache'
 
 export async function changeProfileAction(prevState: unknown, formData: FormData) {
   console.log("hi")
@@ -21,7 +22,6 @@ export async function changeProfileAction(prevState: unknown, formData: FormData
 
   const nickname = formData.get('nickname')
   const imageFile = formData.get('image') ? String(formData.get('image')) : ''
-  const current_password = "password"
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -49,7 +49,6 @@ export async function changeProfileAction(prevState: unknown, formData: FormData
       body: JSON.stringify({
         nickname,
         image: image_url,
-        current_password,
       }),
     })
 
@@ -62,6 +61,8 @@ export async function changeProfileAction(prevState: unknown, formData: FormData
         ],
       })
     }
+
+    revalidatePath('/setting/profile')
     return submission.reply()
   } catch (error: any) {
     return submission.reply({
