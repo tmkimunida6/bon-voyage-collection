@@ -13,29 +13,45 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
-import { signinAction } from '@/actions/signinAction'
 import InputWithLabel from '@/components/molecules/InputWithLabel'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import { changeProfileSchema } from '@/schemas/userSchema'
 import UploadImageForm from '@/components/molecules/UploadImageForm'
+import { changeProfileAction } from '@/actions/changeProfileAction'
+import { useEffect } from 'react'
+import { redirect } from 'next/navigation'
 
 type ChangeProfileFormProps = {
   user_id: string
 }
 
 const ChangeProfileForm = ({ user_id }: ChangeProfileFormProps) => {
-  const [lastResult, action] = useFormState(signinAction, undefined)
+  const [lastResult, action] = useFormState(changeProfileAction, undefined)
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: changeProfileSchema })
     },
   })
+
+  const toast = useToast()
+  useEffect(() => {
+    if (lastResult?.status === 'success') {
+      toast({
+        title: 'プロフィールが更新されました。',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+      redirect('/setting')
+    }
+  }, [lastResult])
 
   return (
     <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
@@ -50,24 +66,16 @@ const ChangeProfileForm = ({ user_id }: ChangeProfileFormProps) => {
           <InputWithLabel
             label="表示名"
             type="text"
-            name={fields.user_name.name}
+            name={fields.nickname.name}
             placeholder="例：ボンボヤージュ太郎"
-            errors={fields.user_name.errors}
+            errors={fields.nickname.errors}
             isRequired={false}
           />
           <Text fontSize="xs" color="gray.500">*未設定時はユーザーIDが表示名となります。</Text>
         </Box>
-        <InputWithLabel
-          label="ユーザーID"
-          type="text"
-          name={fields.user_id.name}
-          placeholder="半角英数字で入力"
-          defaultValue={user_id}
-          errors={fields.user_id.errors}
-        />
         <UploadImageForm
-          name={fields.avatar.name}
-          errors={fields.avatar.errors}
+          name={fields.image.name}
+          errors={fields.image.errors}
           isRequired={true}
           isAvatar={true}
         />

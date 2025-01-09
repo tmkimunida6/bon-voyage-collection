@@ -12,4 +12,15 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_souvenirs, through: :favorites, source: :souvenir
+
+  before_update :prevent_empty_nickname_update
+
+  private
+
+  # nickname が空文字の場合は更新をキャンセル
+  def prevent_empty_nickname_update
+    if nickname_changed? && nickname.blank?
+      self.nickname = nickname_was # 以前の値に戻す
+    end
+  end
 end
