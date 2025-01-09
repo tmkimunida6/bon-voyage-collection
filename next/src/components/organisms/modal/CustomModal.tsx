@@ -1,5 +1,6 @@
 'use client'
 
+import SubmitButton from '@/components/atoms/SubmitButton'
 import {
   Modal,
   ModalOverlay,
@@ -17,6 +18,7 @@ type CustomModalProps = {
   onClose: () => void
   modalTitle: string
   buttonText?: string
+  isSubmit?: boolean
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   children: ReactNode
 }
@@ -26,6 +28,7 @@ const CustomModal = ({
   onClose,
   modalTitle,
   buttonText,
+  isSubmit = false,
   size = 'md',
   children,
 }: CustomModalProps) => {
@@ -38,9 +41,13 @@ const CustomModal = ({
         <ModalBody>{children}</ModalBody>
         <ModalFooter justifyContent="center">
           {buttonText && (
-            <Button variant="primary" onClick={onClose}>
-              {buttonText}
-            </Button>
+            isSubmit ? (
+              <SubmitButton>{buttonText}</SubmitButton>
+            ) : (
+              <Button variant="primary" onClick={onClose}>
+                {buttonText}
+              </Button>
+            )
           )}
         </ModalFooter>
       </ModalContent>

@@ -9,6 +9,7 @@ import { getUserTokens } from '@/utils/getUserTokens'
 import { uploadImageAction } from './uploadImageAction'
 
 export async function changeProfileAction(prevState: unknown, formData: FormData) {
+  console.log("hi")
   const submission = parseWithZod(formData, {
     schema: changeProfileSchema,
   })

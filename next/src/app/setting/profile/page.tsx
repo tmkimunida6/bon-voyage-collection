@@ -17,7 +17,7 @@ export default async function SignIn() {
       <HStack mb={6}>
         <Heading as="h1">プロフィール変更</Heading>
       </HStack>
-      <ChangeProfileForm user_id={user.alias_id} />
+      <ChangeProfileForm nickname={user.nickname} image={user.image} />
     </Box>
   )
 }

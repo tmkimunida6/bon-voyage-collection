@@ -7,31 +7,43 @@ import {
   Avatar,
   Box,
   Button,
-  Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   Stack,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
   Text,
+  Tr,
+  useDisclosure,
   useToast,
+  VStack,
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { useFormState } from 'react-dom'
-import SubmitButton from '../../atoms/SubmitButton'
-import InputWithLabel from '@/components/molecules/InputWithLabel'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import { changeProfileSchema } from '@/schemas/userSchema'
 import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { changeProfileAction } from '@/actions/changeProfileAction'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { redirect } from 'next/navigation'
+import CustomModal from '../modal/CustomModal'
+import PasswordInput from '@/components/atoms/PasswordInput'
+import UploadAvatarForm from '@/components/molecules/UploadAvatarForm'
 
 type ChangeProfileFormProps = {
-  user_id: string
+  nickname: string
+  image: string
 }
 
-const ChangeProfileForm = ({ user_id }: ChangeProfileFormProps) => {
+const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
+  const [newNickname, setNewNickname] = useState(nickname)
+  const [newAvatarUrl, setNewAvatarUrl] = useState(image)
+
   const [lastResult, action] = useFormState(changeProfileAction, undefined)
   const [form, fields] = useForm({
     lastResult,
@@ -40,6 +52,7 @@ const ChangeProfileForm = ({ user_id }: ChangeProfileFormProps) => {
     },
   })
 
+  // 成功時のメッセージ
   const toast = useToast()
   useEffect(() => {
     if (lastResult?.status === 'success') {
@@ -53,6 +66,9 @@ const ChangeProfileForm = ({ user_id }: ChangeProfileFormProps) => {
     }
   }, [lastResult])
 
+  // モーダル
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
       {form.errors && (
@@ -63,23 +79,58 @@ const ChangeProfileForm = ({ user_id }: ChangeProfileFormProps) => {
       )}
       <Stack spacing={6}>
         <Box>
-          <InputWithLabel
-            label="表示名"
-            type="text"
-            name={fields.nickname.name}
-            placeholder="例：ボンボヤージュ太郎"
-            errors={fields.nickname.errors}
-            isRequired={false}
-          />
+          <FormControl isInvalid={!!fields.nickname.errors}>
+            <FormLabel>表示名</FormLabel>
+            <Input
+              type='text'
+              name={fields.nickname.name}
+              placeholder="例：ボンボヤージュ太郎"
+              value={newNickname}
+              onChange={(e) => setNewNickname(e.target.value)}
+            />
+            <FormErrorMessage>{fields.nickname.errors}</FormErrorMessage>
+          </FormControl>
           <Text fontSize="xs" color="gray.500">*未設定時はユーザーIDが表示名となります。</Text>
         </Box>
-        <UploadImageForm
+        <UploadAvatarForm
           name={fields.image.name}
           errors={fields.image.errors}
           isRequired={true}
-          isAvatar={true}
+          newAvatarUrl={newAvatarUrl}
+          setNewAvatarUrl={setNewAvatarUrl}
         />
-        <SubmitButton>変更を完了する</SubmitButton>
+        <VStack>
+          <Button variant="primary" onClick={() => onOpen()}>変更内容を確認</Button>
+          <CustomModal
+            isOpen={isOpen}
+            onClose={onClose}
+            modalTitle="変更内容の確認"
+            buttonText="変更を完了する"
+            isSubmit={true}
+          >
+            <TableContainer whiteSpace="wrap">
+              <Table variant='simple' size="sm">
+                <Tbody>
+                  <Tr>
+                    <Td px={2} fontWeight="bold" whiteSpace="nowrap">表示名</Td>
+                    <Td px={2}>{newNickname === nickname ? "変更なし" : newNickname}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td px={2} fontWeight="bold" whiteSpace="nowrap">プロフィール<br/>画像</Td>
+                    <Td px={2}><Avatar size="md" src={newAvatarUrl || "https://bit.ly/broken-link"} /></Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </TableContainer>
+            <Stack spacing={4} mt={8}>
+              <Text fontSize="sm">上記の内容で問題なければ、パスワードを入力の上、変更を完了してください。</Text>
+              <FormControl isRequired={true} isInvalid={!!fields.password.errors}>
+                <PasswordInput name={fields.password.name} />
+                <FormErrorMessage>{fields.password.errors}</FormErrorMessage>
+              </FormControl>
+            </Stack>
+          </CustomModal>
+        </VStack>
         <TextIconLink
           iconPosition="left"
           iconName="FaChevronLeft"
