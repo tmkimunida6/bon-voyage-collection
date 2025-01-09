@@ -37,7 +37,7 @@ const UploadAvatarForm = ({
           {!prevImage && !previewUrl ? (
             <Avatar size="xl" src="https://bit.ly/broken-link" bg="gray.400" />
           ) : (
-            <Avatar size="xl" src={previewUrl || prevImage} bg={previewUrl ? "transparent" : "gray.400"} />
+            <Avatar size="xl" src={previewUrl || prevImage} />
           )}
           <Flex
             bg="brand.primary"
