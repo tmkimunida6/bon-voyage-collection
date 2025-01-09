@@ -24,3 +24,11 @@ export const registerSchema = z
     message: 'パスワードが一致しません。',
     path: ['password_confirmation'],
   })
+export const changeProfileSchema = z.object({
+  user_name: z.string().optional(),
+  user_id: z
+    .string({ required_error: 'ユーザーIDを入力してください。' })
+    .regex(/^[a-zA-Z0-9]+$/, { message: '半角英数字で入力してください' })
+    .min(8, 'ユーザーIDは8文字以上で入力して下さい。'),
+  avatar: z.string().optional(),
+})

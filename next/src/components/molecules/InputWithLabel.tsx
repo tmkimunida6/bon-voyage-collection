@@ -12,6 +12,7 @@ type InputWithLabelProps = {
   type?: 'text' | 'email' | 'password' | 'textarea'
   name: string
   placeholder: string
+  defaultValue?: string
   isRequired?: boolean
   errors: Array<string> | undefined
 }
@@ -21,19 +22,34 @@ const InputWithLabel = ({
   type = 'text',
   name,
   placeholder,
+  defaultValue = '',
   isRequired = true,
   errors,
 }: InputWithLabelProps) => {
   const inputType = () => {
     switch (type) {
       case 'text':
-        return <Input type={type} name={name} placeholder={placeholder} />
+        return (
+          <Input
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+          />
+        )
       case 'password':
         return <PasswordInput name={name} />
       case 'textarea':
         return <Textarea name={name} placeholder={placeholder} />
       default:
-        return <Input type={type} name={name} placeholder={placeholder} />
+        return (
+          <Input
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+          />
+        )
     }
   }
   return (

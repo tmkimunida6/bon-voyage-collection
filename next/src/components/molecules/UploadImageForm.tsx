@@ -3,10 +3,13 @@
 'use client'
 
 import {
+  Avatar,
   Box,
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
+  FormLabel,
   HStack,
   IconButton,
   Image,
@@ -21,13 +24,15 @@ import CustomIcon from '../atoms/CustomIcon'
 type UploadImageFormProps = {
   name: string
   errors: Array<string> | undefined
-  isRequired: boolean
+  isRequired: boolean,
+  isAvatar?: boolean
 }
 
 const UploadImageForm = ({
   name,
   errors,
   isRequired,
+  isAvatar
 }: UploadImageFormProps) => {
   const [selectedImage, setSelectedImage] = useState<string>('')
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
@@ -88,47 +93,98 @@ const UploadImageForm = ({
 
   return (
     <VStack spacing={0}>
-      {previewUrl ? (
-        <Box position="relative" display="inline-flex">
-          <Image src={previewUrl} alt="プレビュー画像" maxH="300px" />
-          <HStack position="absolute" bottom={2} right={2}>
-            <IconButton
-              colorScheme="yellow"
-              color="white"
-              aria-label="変更する"
-              icon={<CustomIcon iconName="FaPen" />}
-              size="xs"
-              onClick={onClickInputFile}
-            />
-            <IconButton
-              colorScheme="red"
-              aria-label="削除する"
-              icon={<CustomIcon iconName="FaTrashAlt" />}
-              size="xs"
+      {isAvatar ? (
+        <FormControl isRequired={isRequired}>
+          <FormLabel>プロフィール画像</FormLabel>
+          <Box position="relative" display="inline-block">
+            <Avatar size="xl" src={previewUrl || "https://bit.ly/broken-link"} bg={previewUrl ? "transparent" : "gray.400"} />
+            <Flex
+              bg="brand.primary"
+              borderRadius="50%"
+              p={1}
+              position="absolute"
+              bottom={0}
+              right={0}
+              alignItems="center"
+              justifyContent="center"
+              w="24px"
+              h="24px"
+            >
+              <Button
+                variant="ghost"
+                p={0}
+                _hover={{ opacity: 0.5 }}
+                onClick={onClickInputFile}
+              >
+                <CustomIcon iconName="FaPen" color="white" fontSize="xs" />
+              </Button>
+            </Flex>
+          </Box>
+          {previewUrl && (
+            <Button
+              variant="ghost"
+              fontSize="sm"
+              color="brand.link"
+              p={0}
+              h="auto"
+              display="flex"
+              alignItems="center"
+              gap="2px"
+              mt={4}
+              textDecoration="underline"
+              _hover={{ textDecoration: "none" }}
               onClick={deleteInputFile}
-            />
-          </HStack>
-        </Box>
+            >
+              <CustomIcon iconName='FaUndoAlt' />
+              元の画像に戻す
+            </Button>
+          )}
+        </FormControl>
       ) : (
-        <VStack
-          bg="gray.200"
-          w="100%"
-          h="128px"
-          borderRadius={4}
-          justifyContent="center"
-          border={errors && '2px solid var(--chakra-colors-red-500)'}
-          boxShadow={errors && '0 0 0 1px var(--chakra-colors-red-500)'}
-        >
-          <Button
-            variant="ghost"
-            w="100%"
-            h="100%"
-            onClick={onClickInputFile}
-            _hover={{ opacity: 0.5 }}
-          >
-            ＋画像をアップロード{isRequired && '（必須）'}
-          </Button>
-        </VStack>
+        <>
+          {previewUrl ? (
+            <Box position="relative" display="inline-flex">
+              <Image src={previewUrl} alt="プレビュー画像" maxH="300px" />
+              <HStack position="absolute" bottom={2} right={2}>
+                <IconButton
+                  colorScheme="yellow"
+                  color="white"
+                  aria-label="変更する"
+                  icon={<CustomIcon iconName="FaPen" />}
+                  size="xs"
+                  onClick={onClickInputFile}
+                />
+                <IconButton
+                  colorScheme="red"
+                  aria-label="削除する"
+                  icon={<CustomIcon iconName="FaTrashAlt" />}
+                  size="xs"
+                  onClick={deleteInputFile}
+                />
+              </HStack>
+            </Box>
+          ) : (
+            <VStack
+              bg="gray.200"
+              w="100%"
+              h="128px"
+              borderRadius={4}
+              justifyContent="center"
+              border={errors && '2px solid var(--chakra-colors-red-500)'}
+              boxShadow={errors && '0 0 0 1px var(--chakra-colors-red-500)'}
+            >
+              <Button
+                variant="ghost"
+                w="100%"
+                h="100%"
+                onClick={onClickInputFile}
+                _hover={{ opacity: 0.5 }}
+              >
+                ＋画像をアップロード{isRequired && '（必須）'}
+              </Button>
+            </VStack>
+          )}
+        </>
       )}
       <Input
         type="file"
