@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   before_update :prevent_empty_nickname_update
 
+  validates :image, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: 'は有効なURLを入力してください。' }, allow_blank: true
+
   protected
 
   # パスワードの変更以外はパスワード入力なしで変更可能にする

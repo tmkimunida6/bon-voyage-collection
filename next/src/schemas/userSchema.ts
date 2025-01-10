@@ -26,5 +26,5 @@ export const registerSchema = z
   })
 export const changeProfileSchema = z.object({
   nickname: z.string().optional(),
-  image: z.string().optional(),
+  image: z.string().url('有効なURLを入力してください。').optional(),
 })

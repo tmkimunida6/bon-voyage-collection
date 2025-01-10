@@ -1,6 +1,9 @@
 ja:
   activerecord:
     attributes:
+      user:
+        nickname: 表示名
+        image: プロフィール画像
       souvenir:
         name: お土産の名称
         description: 説明
