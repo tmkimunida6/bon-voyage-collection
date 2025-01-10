@@ -19,6 +19,12 @@ import {
   FaHandHoldingHeart,
   FaTrashAlt,
   FaReplyAll,
+  FaUserCog,
+  FaEnvelope,
+  FaLock,
+  FaSignOutAlt,
+  FaTrash,
+  FaUndoAlt,
 } from 'react-icons/fa'
 import {
   FaGift,
@@ -26,6 +32,7 @@ import {
   FaChevronLeft,
   FaChevronDown,
   FaChevronUp,
+  FaGear,
 } from 'react-icons/fa6'
 
 export const iconMapper = {
@@ -48,10 +55,17 @@ export const iconMapper = {
   FaEye,
   FaEyeSlash,
   FaSignInAlt,
+  FaSignOutAlt,
   FaClipboardList,
   FaTimes,
   FaUser,
   FaHandHoldingHeart,
+  FaTrash,
   FaTrashAlt,
   FaReplyAll,
+  FaGear,
+  FaUserCog,
+  FaEnvelope,
+  FaLock,
+  FaUndoAlt,
 }

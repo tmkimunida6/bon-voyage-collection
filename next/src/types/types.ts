@@ -6,7 +6,8 @@ export type FormFieldType = {
 
 export type UserType = {
   alias_id: string
-  name: string
+  nickname: string
+  image: string
   isSignedIn?: boolean
 }
 

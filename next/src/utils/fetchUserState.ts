@@ -9,7 +9,8 @@ import { UserType } from '@/types/types'
 export async function fetchUserState() {
   let user: UserType = {
     alias_id: '',
-    name: '',
+    nickname: '',
+    image: '',
     isSignedIn: false,
   }
   const tokens = await getUserTokens()

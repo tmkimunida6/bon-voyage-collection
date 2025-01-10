@@ -19,7 +19,7 @@ const SignoutButton = () => {
   return (
     <Button size="sm" variant="outline" gap="2px" onClick={handleSignout}>
       ログアウト
-      <CustomIcon iconName="FaSignInAlt" />
+      <CustomIcon iconName="FaSignOutAlt" />
     </Button>
   )
 }

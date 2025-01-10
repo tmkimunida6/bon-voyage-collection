@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   HStack,
   Stack,
   Tab,
@@ -10,8 +11,10 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Metadata } from 'next'
+import NextLink from 'next/link'
 import MySouvenirList from '../features/favorite/MySouvenirList'
 import CollectionCount from '../features/mypage/CollectionCount'
+import CustomIcon from '@/components/atoms/CustomIcon'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
 export const metadata: Metadata = {
@@ -44,9 +47,14 @@ export default async function Mypage({ searchParams }: MypageProps) {
 
   return (
     <Stack spacing={6}>
-      <HStack>
-        <Avatar size="sm" />
-        <Text fontSize="lg">{user.name || `user_${user.alias_id}`}</Text>
+      <HStack justifyContent="space-between">
+        <HStack>
+          <Avatar size="sm" src={user.image || 'https://bit.ly/broken-link'} />
+          <Text fontSize="lg">{user.nickname || `user_${user.alias_id}`}</Text>
+        </HStack>
+        <Button as={NextLink} href="/setting" size="xs" variant="ghost" p={0}>
+          <CustomIcon iconName="FaGear" fontSize="2xl" color="gray.400" />
+        </Button>
       </HStack>
       <Tabs isFitted variant="enclosed" defaultIndex={tabIndex}>
         <TabList>

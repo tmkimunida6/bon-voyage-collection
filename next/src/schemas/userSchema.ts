@@ -24,3 +24,7 @@ export const registerSchema = z
     message: 'パスワードが一致しません。',
     path: ['password_confirmation'],
   })
+export const changeProfileSchema = z.object({
+  nickname: z.string().optional(),
+  image: z.string().url('有効なURLを入力してください。').optional(),
+})

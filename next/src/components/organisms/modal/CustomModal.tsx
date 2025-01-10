@@ -17,6 +17,7 @@ type CustomModalProps = {
   onClose: () => void
   modalTitle: string
   buttonText?: string
+  isSubmit?: boolean
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   children: ReactNode
 }

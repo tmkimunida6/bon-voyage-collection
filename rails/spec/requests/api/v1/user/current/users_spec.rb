@@ -10,7 +10,7 @@ RSpec.describe "ログイン中のユーザー情報取得", type: :request do
       it "正常にレコードを取得できる" do
         get_request
         res = JSON.parse(response.body)
-        expect(res.keys).to eq [ "alias_id", "name" ]
+        expect(res.keys).to eq [ "alias_id", "nickname", "image" ]
         expect(response).to have_http_status(:ok)
       end
     end
