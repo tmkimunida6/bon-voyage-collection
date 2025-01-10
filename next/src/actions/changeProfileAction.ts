@@ -3,14 +3,16 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
+import { revalidatePath } from 'next/cache'
+import { uploadImageAction } from './uploadImageAction'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { changeProfileSchema } from '@/schemas/userSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
-import { uploadImageAction } from './uploadImageAction'
-import { revalidatePath } from 'next/cache'
 
-export async function changeProfileAction(prevState: unknown, formData: FormData) {
-  console.log("hi")
+export async function changeProfileAction(
+  prevState: unknown,
+  formData: FormData,
+) {
   const submission = parseWithZod(formData, {
     schema: changeProfileSchema,
   })
@@ -18,7 +20,6 @@ export async function changeProfileAction(prevState: unknown, formData: FormData
   if (submission.status !== 'success') {
     return submission.reply()
   }
-
 
   const nickname = formData.get('nickname')
   const imageFile = formData.get('image') ? String(formData.get('image')) : ''
@@ -39,7 +40,7 @@ export async function changeProfileAction(prevState: unknown, formData: FormData
     }
 
     const res = await fetch(`${apiBaseUrl}/auth`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         'access-token': tokens.accessToken,

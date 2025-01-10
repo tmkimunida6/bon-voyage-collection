@@ -1,8 +1,8 @@
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
 import { useToast } from '@chakra-ui/react'
-import { ChangeEvent, useRef, useState } from 'react'
 import imageCompression from 'browser-image-compression'
+import { ChangeEvent, useRef, useState } from 'react'
 
 const useUploadImage = () => {
   const [selectedImage, setSelectedImage] = useState<string>('')
@@ -68,7 +68,7 @@ const useUploadImage = () => {
     inputFileRef,
     onClickInputFile,
     handleImageChange,
-    deleteInputFile
+    deleteInputFile,
   }
 }
 

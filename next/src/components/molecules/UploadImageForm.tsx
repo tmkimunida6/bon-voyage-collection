@@ -17,7 +17,7 @@ import useUploadImage from '@/hooks/useUploadImage'
 type UploadImageFormProps = {
   name: string
   errors: Array<string> | undefined
-  isRequired: boolean,
+  isRequired: boolean
 }
 
 const UploadImageForm = ({
@@ -25,7 +25,14 @@ const UploadImageForm = ({
   errors,
   isRequired,
 }: UploadImageFormProps) => {
-  const { selectedImage, previewUrl, inputFileRef, onClickInputFile, handleImageChange, deleteInputFile } = useUploadImage()
+  const {
+    selectedImage,
+    previewUrl,
+    inputFileRef,
+    onClickInputFile,
+    handleImageChange,
+    deleteInputFile,
+  } = useUploadImage()
 
   return (
     <VStack spacing={0}>

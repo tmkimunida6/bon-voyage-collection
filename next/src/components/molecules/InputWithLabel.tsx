@@ -27,25 +27,13 @@ const InputWithLabel = ({
   const inputType = () => {
     switch (type) {
       case 'text':
-        return (
-          <Input
-            type={type}
-            name={name}
-            placeholder={placeholder}
-          />
-        )
+        return <Input type={type} name={name} placeholder={placeholder} />
       case 'password':
         return <PasswordInput name={name} />
       case 'textarea':
         return <Textarea name={name} placeholder={placeholder} />
       default:
-        return (
-          <Input
-            type={type}
-            name={name}
-            placeholder={placeholder}
-          />
-        )
+        return <Input type={type} name={name} placeholder={placeholder} />
     }
   }
   return (

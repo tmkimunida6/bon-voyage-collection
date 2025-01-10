@@ -34,7 +34,10 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
     <Card p={4} boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)">
       <Stack spacing={2}>
         <HStack>
-          <Avatar size="xs" src={post.user.image || "https://bit.ly/broken-link"} />
+          <Avatar
+            size="xs"
+            src={post.user.image || 'https://bit.ly/broken-link'}
+          />
           <Text fontSize="xs">
             {post.user.nickname || `user_${post.user.alias_id}`}
           </Text>

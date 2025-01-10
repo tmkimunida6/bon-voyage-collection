@@ -25,9 +25,16 @@ const UploadAvatarForm = ({
   name,
   errors,
   isRequired,
-  prevImage
+  prevImage,
 }: UploadAvatarFormProps) => {
-  const { selectedImage, previewUrl, inputFileRef, onClickInputFile, handleImageChange, deleteInputFile } = useUploadImage()
+  const {
+    selectedImage,
+    previewUrl,
+    inputFileRef,
+    onClickInputFile,
+    handleImageChange,
+    deleteInputFile,
+  } = useUploadImage()
 
   return (
     <VStack spacing={0}>
@@ -73,10 +80,10 @@ const UploadAvatarForm = ({
             gap="2px"
             mt={4}
             textDecoration="underline"
-            _hover={{ textDecoration: "none" }}
+            _hover={{ textDecoration: 'none' }}
             onClick={deleteInputFile}
           >
-            <CustomIcon iconName='FaUndoAlt' />
+            <CustomIcon iconName="FaUndoAlt" />
             元の画像に戻す
           </Button>
         )}

@@ -1,3 +1,5 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
+
 'use client'
 
 import {
@@ -15,14 +17,14 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { useFormState } from 'react-dom'
-import TextIconLink from '@/components/molecules/TextIconLink'
-import { changeProfileSchema } from '@/schemas/userSchema'
-import { changeProfileAction } from '@/actions/changeProfileAction'
-import { useEffect } from 'react'
 import { redirect } from 'next/navigation'
-import UploadAvatarForm from '@/components/molecules/UploadAvatarForm'
+import { useEffect } from 'react'
+import { useFormState } from 'react-dom'
+import { changeProfileAction } from '@/actions/changeProfileAction'
 import SubmitButton from '@/components/atoms/SubmitButton'
+import TextIconLink from '@/components/molecules/TextIconLink'
+import UploadAvatarForm from '@/components/molecules/UploadAvatarForm'
+import { changeProfileSchema } from '@/schemas/userSchema'
 
 type ChangeProfileFormProps = {
   nickname: string
@@ -65,14 +67,16 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
           <FormControl isInvalid={!!fields.nickname.errors}>
             <FormLabel>表示名</FormLabel>
             <Input
-              type='text'
+              type="text"
               name={fields.nickname.name}
               placeholder="例：ボンボヤージュ太郎"
               defaultValue={nickname}
             />
             <FormErrorMessage>{fields.nickname.errors}</FormErrorMessage>
           </FormControl>
-          <Text fontSize="xs" color="gray.500">*未設定時はユーザーIDが表示名となります。</Text>
+          <Text fontSize="xs" color="gray.500">
+            *未設定時はユーザーIDが表示名となります。
+          </Text>
         </Box>
         <UploadAvatarForm
           name={fields.image.name}
