@@ -21,7 +21,7 @@ RSpec.describe 'ユーザー削除', type: :request do
       it '失敗' do
         expect { delete_request }.not_to change { User.count }
         expect(response).to have_http_status(:not_found)
-        expect(json['errors']).to eq(["削除するアカウントが見つかりません。"])
+        expect(json['errors']).to eq([ "削除するアカウントが見つかりません。" ])
       end
     end
   end

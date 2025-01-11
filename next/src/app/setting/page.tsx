@@ -1,8 +1,8 @@
-import { Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import { Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
+import DeleteUserModalWithButton from '../features/setting/DeleteUserModalWithButton'
 import SettingLink from '../features/setting/SettingLink'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
-import DeleteUserModalWithButton from '../features/setting/DeleteUserModalWithButton'
 
 export const metadata: Metadata = {
   title: 'アカウント設定 | Bon Voyage Collcection',

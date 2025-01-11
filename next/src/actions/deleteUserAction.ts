@@ -4,7 +4,6 @@
 
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { getUserTokens } from '@/utils/getUserTokens'
-import { signoutAction } from './signoutAction'
 
 export async function deleteUserAction() {
   try {
@@ -20,7 +19,7 @@ export async function deleteUserAction() {
         'Content-Type': 'application/json',
         'access-token': tokens.accessToken,
         client: tokens.client,
-        uid: tokens.uid
+        uid: tokens.uid,
       },
     })
 

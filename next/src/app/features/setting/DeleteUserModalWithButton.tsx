@@ -1,8 +1,5 @@
 'use client'
 
-import { deleteUserAction } from '@/actions/deleteUserAction'
-import { signoutAction } from '@/actions/signoutAction'
-import CustomIcon from '@/components/atoms/CustomIcon'
 import {
   AlertDialog,
   AlertDialogFooter,
@@ -16,8 +13,10 @@ import {
   AlertDialogBody,
   useToast,
 } from '@chakra-ui/react'
-import { redirect, useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
+import { deleteUserAction } from '@/actions/deleteUserAction'
+import { signoutAction } from '@/actions/signoutAction'
+import CustomIcon from '@/components/atoms/CustomIcon'
 
 const DeleteUserModalWithButton = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
