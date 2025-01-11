@@ -1,5 +1,6 @@
 import { Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
+import DeleteUserModalWithButton from '../features/setting/DeleteUserModalWithButton'
 import SettingLink from '../features/setting/SettingLink'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
@@ -38,12 +39,7 @@ export default async function Setting() {
           linkText="ログアウト"
           icon="FaSignOutAlt"
         />
-        <SettingLink
-          href="/setting/delete"
-          linkText="アカウント削除"
-          icon="FaTrash"
-        />
-        あ
+        <DeleteUserModalWithButton />
       </Stack>
     </Stack>
   )
