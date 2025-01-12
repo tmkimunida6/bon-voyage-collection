@@ -50,24 +50,17 @@ export async function confirmUserAction(
       return { message: data.message, status: 'error' }
     }
 
-    // ユーザー登録時は自動ログイン（それ以外はログアウト）
-    if(requestAction === 'registration') {
-      const accessToken = data.access_token
-      const client = data.client
-      const uid = data.uid
+    const accessToken = data.access_token
+    const client = data.client
+    const uid = data.uid
 
-      if (accessToken && client && uid) {
-        await setAccessTokenAction(accessToken, client, uid)
-      } else {
-        return {
-          message:
-            'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
-          status: 'error',
-        }
-      }
+    if (accessToken && client && uid) {
+      await setAccessTokenAction(accessToken, client, uid)
     } else {
-      if(user.isSignedIn) {
-        await signoutAction()
+      return {
+        message:
+          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+        status: 'error',
       }
     }
 

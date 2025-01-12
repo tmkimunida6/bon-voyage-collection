@@ -1,8 +1,8 @@
-import { Box, Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import { Heading, HStack, Stack, Text } from '@chakra-ui/react'
 import { Metadata } from 'next'
-import ChangeProfileForm from '@/components/organisms/form/ChangeProfileForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 import ChangeEmailForm from '@/components/organisms/form/ChangeEmailForm'
+import TextIconLink from '@/components/molecules/TextIconLink'
 
 export const metadata: Metadata = {
   title: 'メールアドレス変更｜アカウント設定 | Bon Voyage Collcection',
@@ -14,8 +14,8 @@ export default async function SignIn() {
   const user = await checkLoginStatus()
 
   return (
-    <Box maxW="660px" mx="auto">
-      <HStack mb={6}>
+    <Stack maxW="660px" mx="auto" spacing={6}>
+      <HStack>
         <Heading as="h1">メールアドレス変更</Heading>
       </HStack>
       <Stack spacing={6}>
@@ -25,6 +25,13 @@ export default async function SignIn() {
         </Stack>
         <ChangeEmailForm email={user.email}/>
       </Stack>
-    </Box>
+      <TextIconLink
+        iconPosition="left"
+        iconName="FaChevronLeft"
+        href="/setting"
+      >
+        戻る
+      </TextIconLink>
+    </Stack>
   )
 }

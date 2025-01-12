@@ -85,13 +85,6 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
           prevImage={image}
         />
         <SubmitButton>変更を確定する</SubmitButton>
-        <TextIconLink
-          iconPosition="left"
-          iconName="FaChevronLeft"
-          href="/setting"
-        >
-          戻る
-        </TextIconLink>
       </Stack>
     </form>
   )

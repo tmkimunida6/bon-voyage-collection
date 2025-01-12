@@ -57,7 +57,7 @@ const ConfirmationHandler = ({ confirmationToken, requestAction }: ConfirmationH
         if(requestAction === "registration") {
           router.push('/timeline')
         } else {
-          router.push('/sign_in')
+          router.push('/mypage')
         }
       }
     }

@@ -3,10 +3,10 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
-import { revalidatePath } from 'next/cache'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { changeEmailSchema } from '@/schemas/userSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
+import { revalidatePath } from 'next/cache'
 
 export async function changeEmailAction(
   prevState: unknown,
@@ -49,7 +49,6 @@ export async function changeEmailAction(
 
     const data = await res.json()
 
-    console.log(data)
     if (!res.ok) {
       return submission.reply({
         formErrors: data.errors.full_messages || [
@@ -58,7 +57,7 @@ export async function changeEmailAction(
       })
     }
 
-    revalidatePath('/setting/profile')
+    revalidatePath('/setting/email')
     return submission.reply()
   } catch (error: any) {
     return submission.reply({

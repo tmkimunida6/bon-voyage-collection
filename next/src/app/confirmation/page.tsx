@@ -41,7 +41,7 @@ export default async function Confirmation({
       >
         <Spinner size="xl" speed="0.8s" thickness="4px" color="brand.primary" />
         <Text fontWeight="bold" fontSize="lg">
-          ユーザー認証中です
+          メールアドレスを認証中です
         </Text>
       </VStack>
       <ConfirmationHandler confirmationToken={confirmationToken} requestAction={requestAction} />

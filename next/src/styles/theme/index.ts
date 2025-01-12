@@ -33,6 +33,7 @@ const customTheme = extendTheme({
     Input: Form.Input,
     Select: Form.Select,
     Textarea: Form.Textarea,
+    FormLabel: Form.FormLabel,
     Tabs,
   },
   styles: {
