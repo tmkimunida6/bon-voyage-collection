@@ -1,0 +1,12 @@
+<p>※<%= t 'devise.mailer.caution_note.for_registered_mail_msg' %></p>
+
+<h2><%= t '.title' %></h2>
+
+<p>
+  <%= t '.accept_change_request_msg' %><br>
+  <%= t '.request_confirm_link_msg' %>
+</p>
+
+<p>URL：<%= link_to "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}&request_action=change_email", "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}&request_action=email_update", target: :_blank, rel: "noopener noreferrer" %></p>
+
+<%= render 'devise/mailer/shared/email_footer' %>
