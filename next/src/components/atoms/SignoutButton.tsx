@@ -4,12 +4,14 @@ import { Button } from '@chakra-ui/react'
 import CustomIcon from './CustomIcon'
 import { signoutAction } from '@/actions/signoutAction'
 import { useFavoriteStore } from '@/store/store'
+import { redirect } from 'next/navigation'
 
 const SignoutButton = () => {
   const { setFavoritedSouvenirs } = useFavoriteStore()
   const handleSignout = () => {
     setFavoritedSouvenirs([])
     signoutAction()
+    redirect('/sign_in')
 
     // おすすめのお土産の一時データをリセット
     localStorage.removeItem('favoritedSouvenirs')
