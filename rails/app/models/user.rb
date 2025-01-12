@@ -34,15 +34,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  # 変更後のメールアドレスが他のメールアドレスと重複しているか確認
-  def is_email_conflict?(email)
-    if pending_reconfirmation?
-      return User.exists?(email: email)
-    else
-      return false
-    end
-  end
-
   private
 
   # nickname が空文字の場合は更新をキャンセル

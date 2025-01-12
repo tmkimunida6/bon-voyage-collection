@@ -1,9 +1,12 @@
 class  Api::V1::User::RegistrationsController < DeviseTokenAuth::RegistrationsController
 
   def update
-    if @resource.is_email_conflict?(account_update_params[:email])
-      return render json: { status: 'error', errors: { full_messages: [ "このメールアドレスはすでに使用されています。" ] } }, status: :conflict
-    end
+    # 現在のメールアドレスと同じ場合
+    return render json: { status: 'error', errors: { full_messages: [ "新しいメールアドレスは現在のメールアドレスと異なる必要があります。" ] } }, status: :unprocessable_entity if @resource.email == account_update_params[:email]
+
+    # 他のメールアドレスと重複している場合
+    return render json: { status: 'error', errors: { full_messages: [ "このメールアドレスはすでに使用されています。" ] } }, status: :conflict if User.exists?(email: account_update_params[:email])
+
     super
   end
 

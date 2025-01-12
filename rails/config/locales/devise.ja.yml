@@ -51,7 +51,7 @@ ja:
         confirm_link_msg: "以下のリンクよりメールアドレスを認証してください。"
         confirm_account_link: "メールアドレスを認証する"
       email_change_confirmation_instructions:
-        subject: "【Bon Boyage Collection】メールアドレス確認のご案内"
+        subject: "【Bon Boyage Collection】メールアドレス変更手続きのご案内"
         title: "メールアドレス変更手続きを完了させてください。"
         accept_change_request_msg: "メールアドレス変更のお申し込みを承りました。"
         request_confirm_link_msg: "以下のリンクよりメールアドレスを認証してください。"

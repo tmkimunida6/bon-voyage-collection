@@ -35,6 +35,12 @@ RSpec.describe User, type: :model do
         expect(user_with_short_password).to be_invalid
         expect(user_with_short_password.errors[:password]).not_to be_empty
       end
+
+      it "プロフィール画像が正しい形式でない場合、バリデーションに失敗する" do
+        user_with_invalid_image = build(:user, image: "invalid_url")
+        expect(user_with_invalid_image).to be_invalid
+        expect(user_with_invalid_image.errors[:image]).not_to be_empty
+      end
     end
   end
 end
