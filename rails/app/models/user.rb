@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     generate_confirmation_token! unless @raw_confirmation_token
 
     # fall back to "default" config name
-    opts[:client_config] ||= 'default'
+    opts[:client_config] ||= "default"
     opts[:to] = unconfirmed_email if pending_reconfirmation?
     opts[:redirect_url] ||= DeviseTokenAuth.default_confirm_success_url
 
@@ -42,5 +42,4 @@ class User < ActiveRecord::Base
       self.nickname = nickname_was # 以前の値に戻す
     end
   end
-
 end

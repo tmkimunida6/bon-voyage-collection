@@ -5,8 +5,8 @@ import ConfirmationHandler from '../features/user/ConfirmationHandler'
 import { UserRequestType } from '@/types/types'
 
 export const metadata: Metadata = {
-  title: 'ユーザー認証中 | Bon Voyage Collcection',
-  description: 'ユーザー認証中です。',
+  title: 'メールアドレス認証中 | Bon Voyage Collcection',
+  description: 'メールアドレス認証中です。',
   keywords: '',
   robots: {
     index: false,
@@ -44,7 +44,10 @@ export default async function Confirmation({
           メールアドレスを認証中です
         </Text>
       </VStack>
-      <ConfirmationHandler confirmationToken={confirmationToken} requestAction={requestAction} />
+      <ConfirmationHandler
+        confirmationToken={confirmationToken}
+        requestAction={requestAction}
+      />
     </>
   )
 }

@@ -103,7 +103,7 @@ RSpec.describe 'プロフィール変更', type: :request do
             patch_request
             expect(response).to have_http_status(:unprocessable_entity)
             expect(json['status']).to eq('error')
-            expect(json['errors']['full_messages']).to eq(['現在のパスワードを入力してください'])
+            expect(json['errors']['full_messages']).to eq([ '現在のパスワードを入力してください' ])
           end
         end
 
@@ -119,7 +119,7 @@ RSpec.describe 'プロフィール変更', type: :request do
             patch_request
             expect(response).to have_http_status(:unprocessable_entity)
             expect(json['status']).to eq('error')
-            expect(json['errors']['full_messages']).to eq(['現在のパスワードが正しくありません。'])
+            expect(json['errors']['full_messages']).to eq([ '現在のパスワードが正しくありません。' ])
 
             user.reload
             expect(user.unconfirmed_email).to eq(nil)
@@ -138,7 +138,7 @@ RSpec.describe 'プロフィール変更', type: :request do
             patch_request
             expect(response).to have_http_status(:unprocessable_entity)
             expect(json['status']).to eq('error')
-            expect(json['errors']['full_messages']).to eq(['新しいメールアドレスは現在のメールアドレスと異なる必要があります。'])
+            expect(json['errors']['full_messages']).to eq([ '新しいメールアドレスは現在のメールアドレスと異なる必要があります。' ])
 
             user.reload
             expect(user.unconfirmed_email).to eq(nil)
@@ -158,7 +158,7 @@ RSpec.describe 'プロフィール変更', type: :request do
             patch_request
             expect(response).to have_http_status(:conflict)
             expect(json['status']).to eq('error')
-            expect(json['errors']['full_messages']).to eq(['このメールアドレスはすでに使用されています。'])
+            expect(json['errors']['full_messages']).to eq([ 'このメールアドレスはすでに使用されています。' ])
 
             user.reload
             expect(user.unconfirmed_email).to eq(nil)
@@ -166,7 +166,6 @@ RSpec.describe 'プロフィール変更', type: :request do
         end
       end
     end
-
   end
 
   describe 'メール認証' do
@@ -219,6 +218,5 @@ RSpec.describe 'プロフィール変更', type: :request do
         end
       end
     end
-
   end
 end

@@ -13,11 +13,11 @@ import {
   AlertDialogBody,
   useToast,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { deleteUserAction } from '@/actions/deleteUserAction'
 import { signoutAction } from '@/actions/signoutAction'
 import CustomIcon from '@/components/atoms/CustomIcon'
-import { redirect, useRouter } from 'next/navigation'
 
 const DeleteUserModalWithButton = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)

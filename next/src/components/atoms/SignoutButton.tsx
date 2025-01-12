@@ -1,10 +1,10 @@
 'use client'
 
 import { Button } from '@chakra-ui/react'
+import { redirect } from 'next/navigation'
 import CustomIcon from './CustomIcon'
 import { signoutAction } from '@/actions/signoutAction'
 import { useFavoriteStore } from '@/store/store'
-import { redirect } from 'next/navigation'
 
 const SignoutButton = () => {
   const { setFavoritedSouvenirs } = useFavoriteStore()

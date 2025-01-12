@@ -28,7 +28,7 @@ export const Form = {
   },
   FormLabel: {
     baseStyle: {
-      fontWeight: "bold"
-    }
-  }
+      fontWeight: 'bold',
+    },
+  },
 }

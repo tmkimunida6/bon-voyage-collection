@@ -15,7 +15,7 @@ export type CurrentUserType = UserType & {
   isSignedIn: boolean
 }
 
-export type UserRequestType = "registration" | "change_email"
+export type UserRequestType = 'registration' | 'change_email'
 
 export type CategoryType = {
   id: number | ''

@@ -1,8 +1,8 @@
-import { Box, Heading, HStack, Stack } from '@chakra-ui/react'
+import { Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
+import TextIconLink from '@/components/molecules/TextIconLink'
 import ChangeProfileForm from '@/components/organisms/form/ChangeProfileForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
-import TextIconLink from '@/components/molecules/TextIconLink'
 
 export const metadata: Metadata = {
   title: 'プロフィール変更｜アカウント設定 | Bon Voyage Collcection',

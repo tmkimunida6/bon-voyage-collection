@@ -22,7 +22,6 @@ import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import { changeProfileAction } from '@/actions/changeProfileAction'
 import SubmitButton from '@/components/atoms/SubmitButton'
-import TextIconLink from '@/components/molecules/TextIconLink'
 import UploadAvatarForm from '@/components/molecules/UploadAvatarForm'
 import { changeProfileSchema } from '@/schemas/userSchema'
 

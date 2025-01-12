@@ -22,7 +22,7 @@ class Api::V1::User::ConfirmationsController < Api::V1::BaseController
         message: "メールアドレスの認証に成功しました",
         access_token: token["access-token"],
         client: token["client"],
-        uid: token["uid"],
+        uid: token["uid"]
         }, status: :ok
 
     rescue StandardError => e

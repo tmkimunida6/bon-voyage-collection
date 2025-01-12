@@ -15,7 +15,10 @@ type ConfirmationHandlerType = {
   requestAction: UserRequestType
 }
 
-const ConfirmationHandler = ({ confirmationToken, requestAction }: ConfirmationHandlerType) => {
+const ConfirmationHandler = ({
+  confirmationToken,
+  requestAction,
+}: ConfirmationHandlerType) => {
   const toast = useToast()
   const router = useRouter()
 
@@ -54,7 +57,7 @@ const ConfirmationHandler = ({ confirmationToken, requestAction }: ConfirmationH
           isClosable: true,
         })
       } finally {
-        if(requestAction === "registration") {
+        if (requestAction === 'registration') {
           router.push('/timeline')
         } else {
           router.push('/mypage')

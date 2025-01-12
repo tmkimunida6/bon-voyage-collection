@@ -3,10 +3,10 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
+import { revalidatePath } from 'next/cache'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { changeEmailSchema } from '@/schemas/userSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
-import { revalidatePath } from 'next/cache'
 
 export async function changeEmailAction(
   prevState: unknown,
@@ -32,7 +32,6 @@ export async function changeEmailAction(
   }
 
   try {
-
     const res = await fetch(`${apiBaseUrl}/auth`, {
       method: 'PATCH',
       headers: {

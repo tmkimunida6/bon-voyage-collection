@@ -4,9 +4,8 @@
 
 import { setAccessTokenAction } from './setAccessTokenAction'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
-import { fetchUserState } from '@/utils/fetchUserState'
-import { signoutAction } from './signoutAction'
 import { UserRequestType } from '@/types/types'
+import { fetchUserState } from '@/utils/fetchUserState'
 
 type ConfirmUserActionResult = {
   message: string
@@ -15,7 +14,7 @@ type ConfirmUserActionResult = {
 
 export async function confirmUserAction(
   confirmationToken: string,
-  requestAction: UserRequestType
+  requestAction: UserRequestType,
 ): Promise<ConfirmUserActionResult> {
   const user = await fetchUserState()
 

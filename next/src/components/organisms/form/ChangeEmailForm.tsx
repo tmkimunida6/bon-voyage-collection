@@ -1,15 +1,25 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
+
 'use client'
 
-import { Alert, AlertDescription, AlertIcon, Input, Stack, Text, useToast } from '@chakra-ui/react'
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  Input,
+  Stack,
+  Text,
+  useToast,
+} from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
+import { redirect } from 'next/navigation'
+import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
-import { changeEmailSchema } from '@/schemas/userSchema'
 import { changeEmailAction } from '@/actions/changeEmailAction'
-import { useEffect } from 'react'
-import { redirect } from 'next/navigation'
+import { changeEmailSchema } from '@/schemas/userSchema'
 
 type ChangeEmailFormType = {
   email: string
@@ -30,7 +40,8 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
     if (lastResult?.status === 'success') {
       toast({
         title: '認証用のメールが送信されました。',
-        description: "メールに記載されているURLから変更手続きを完了させてください。",
+        description:
+          'メールに記載されているURLから変更手続きを完了させてください。',
         status: 'success',
         duration: 5000,
         isClosable: true,
@@ -62,7 +73,12 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
           placeholder="パスワードを入力して下さい"
           errors={fields.current_password.errors}
         />
-        <SubmitButton>変更する<Text as="span" fontSize="xs">（認証メール送信）</Text></SubmitButton>
+        <SubmitButton>
+          変更する
+          <Text as="span" fontSize="xs">
+            （認証メール送信）
+          </Text>
+        </SubmitButton>
       </Stack>
       <Input type="hidden" name="current_email" value={email} />
     </form>
