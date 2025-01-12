@@ -58,9 +58,9 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
         <InputWithLabel
           label="現在のパスワード"
           type="password"
-          name={fields.password.name}
+          name={fields.current_password.name}
           placeholder="パスワードを入力して下さい"
-          errors={fields.password.errors}
+          errors={fields.current_password.errors}
         />
         <SubmitButton>変更する<Text as="span" fontSize="xs">（認証メール送信）</Text></SubmitButton>
       </Stack>

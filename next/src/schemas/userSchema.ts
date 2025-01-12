@@ -38,7 +38,7 @@ export const changeEmailSchema = (currentEmail: string) => z.object({
       (newEmail) => newEmail !== currentEmail,
       { message: '新しいメールアドレスは現在のメールアドレスと異なる必要があります。' }
     ),
-  password: z
+  current_password: z
     .string({ required_error: 'パスワードを入力してください。' })
     .min(8, 'パスワードは8文字以上で入力して下さい。'),
 });

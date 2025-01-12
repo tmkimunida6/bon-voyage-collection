@@ -34,17 +34,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  protected
-
-  # パスワードの変更以外はパスワード入力なしで変更可能にする
-  def update_resource(resource, params)
-    if params[:password].blank? && params[:password_confirmation].blank?
-      resource.update_without_password(params)
-    else
-      super
-    end
-  end
-
   private
 
   # nickname が空文字の場合は更新をキャンセル

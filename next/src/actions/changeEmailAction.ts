@@ -22,7 +22,7 @@ export async function changeEmailAction(
   }
 
   const new_email = formData.get('new_email')
-  const password = formData.get('password')
+  const current_password = formData.get('current_password')
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -43,12 +43,13 @@ export async function changeEmailAction(
       },
       body: JSON.stringify({
         email: new_email,
-        // password,
+        current_password,
       }),
     })
 
     const data = await res.json()
 
+    console.log(data)
     if (!res.ok) {
       return submission.reply({
         formErrors: data.errors.full_messages || [
