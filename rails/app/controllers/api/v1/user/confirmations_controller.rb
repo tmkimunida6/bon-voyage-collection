@@ -3,12 +3,15 @@ class Api::V1::User::ConfirmationsController < Api::V1::BaseController
     begin
       user = User.find_by(confirmation_token: params[:confirmation_token])
       return render json: { message: "ユーザーが見つかりませんでした。再度会員登録を行ってください。" }, status: :not_found if user.nil?
-      return render json: { message: "このメールアドレスはすでに認証済みです。" }, status: :bad_request if user.confirmed? && !user.pending_reconfirmation?
 
       if user.pending_reconfirmation?
+        return render json: { message: "このメールアドレスはすでに使用されています。" }, status: :conflict if User.exists?(email: user.unconfirmed_email)
+
         user.skip_reconfirmation!
         user.email = user.unconfirmed_email
         user.unconfirmed_email = nil
+      else
+        return render json: { message: "このメールアドレスはすでに認証済みです。" }, status: :bad_request if user.confirmed?
       end
 
       user.confirmed_at = Time.current

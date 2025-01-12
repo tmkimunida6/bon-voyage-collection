@@ -1,5 +1,14 @@
 class  Api::V1::User::RegistrationsController < DeviseTokenAuth::RegistrationsController
+
+  def update
+    if @resource.is_email_conflict?(account_update_params[:email])
+      return render json: { status: 'error', errors: { full_messages: [ "このメールアドレスはすでに使用されています。" ] } }, status: :conflict
+    end
+    super
+  end
+
   protected
+
   # パスワードとメールアドレスの変更以外はパスワード入力なしで変更可能にする（devise_token_authオーバーライド）
   def resource_update_method
     if DeviseTokenAuth.check_current_password_before_update == :attributes
@@ -7,7 +16,6 @@ class  Api::V1::User::RegistrationsController < DeviseTokenAuth::RegistrationsCo
     else
       if account_update_params.key?(:password) || account_update_params.key?(:email) || account_update_params.key?(:current_password)
         'update_with_password'
-        # binding.pry
       else
         'update'
       end
