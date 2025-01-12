@@ -8,19 +8,21 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { confirmUserAction } from '@/actions/confirmUserAction'
 import { favoriteBulkAction } from '@/actions/favoriteBulkAction'
+import { UserRequestType } from '@/types/types'
 
-type ToastDataType = {
+type ConfirmationHandlerType = {
   confirmationToken: string
+  requestAction: UserRequestType
 }
 
-const ConfirmationHandler = ({ confirmationToken }: ToastDataType) => {
+const ConfirmationHandler = ({ confirmationToken, requestAction }: ConfirmationHandlerType) => {
   const toast = useToast()
   const router = useRouter()
 
   useEffect(() => {
     const confirmationAction = async () => {
       try {
-        const result = await confirmUserAction(confirmationToken)
+        const result = await confirmUserAction(confirmationToken, requestAction)
         toast({
           title: result.message,
           status: result.status,
@@ -52,7 +54,11 @@ const ConfirmationHandler = ({ confirmationToken }: ToastDataType) => {
           isClosable: true,
         })
       } finally {
-        router.push('/timeline')
+        if(requestAction === "registration") {
+          router.push('/timeline')
+        } else {
+          router.push('/sign_in')
+        }
       }
     }
 

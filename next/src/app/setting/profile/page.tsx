@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   keywords: '',
 }
 
-export default async function SignIn() {
+export default async function ChangeProfile() {
   const user = await checkLoginStatus()
 
   return (
