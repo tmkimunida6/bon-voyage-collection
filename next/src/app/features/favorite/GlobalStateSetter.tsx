@@ -8,10 +8,10 @@ import {
   useFavoriteStore,
   useMyPostsStore,
 } from '@/store/store'
-import { PostType, SouvenirCardType, UserType } from '@/types/types'
+import { PostType, SouvenirCardType, CurrentUserType } from '@/types/types'
 
 type GlobalStateSetterProps = {
-  userData: UserType
+  userData: CurrentUserType
   favoritedSouvenirsData: Array<SouvenirCardType>
   myPostsData: Array<PostType>
 }

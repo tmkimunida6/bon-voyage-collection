@@ -3,10 +3,10 @@ import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
 import SignoutButton from '../../atoms/SignoutButton'
-import { UserType } from '@/types/types'
+import { CurrentUserType } from '@/types/types'
 
 type HeaderProps = {
-  user: UserType
+  user: CurrentUserType
 }
 
 export default async function Header({ user }: HeaderProps) {
