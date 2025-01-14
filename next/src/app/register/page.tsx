@@ -1,6 +1,8 @@
 import { Box, Heading, HStack } from '@chakra-ui/react'
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import RegisterForm from '@/components/organisms/form/RegisterForm'
+import { fetchUserState } from '@/utils/fetchUserState'
 
 export const metadata: Metadata = {
   title: '会員登録 | Bon Voyage Collcection',
@@ -9,7 +11,12 @@ export const metadata: Metadata = {
   keywords: 'お土産,Souvenir,会員登録,Bon Voyage Collection',
 }
 
-export default function Register() {
+export default async function Register() {
+  const user = await fetchUserState()
+  if (user.isSignedIn) {
+    redirect('/mypage')
+  }
+
   return (
     <Box maxW="660px" mx="auto">
       <HStack mb={6}>
