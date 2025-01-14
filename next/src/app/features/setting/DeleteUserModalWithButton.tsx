@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
+
 'use client'
 
 import {
@@ -46,6 +48,13 @@ const DeleteUserModalWithButton = () => {
       } else {
         onClose()
       }
+    } catch (error: any) {
+      toast({
+        title: error.message,
+        status: error.status,
+        duration: 5000,
+        isClosable: true,
+      })
     } finally {
       setIsLoading(false)
     }

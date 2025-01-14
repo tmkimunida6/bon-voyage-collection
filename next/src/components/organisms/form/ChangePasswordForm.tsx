@@ -1,4 +1,5 @@
 /* eslint react-hooks/exhaustive-deps: 0 */
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 
 'use client'
 
@@ -12,12 +13,13 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
 import { changePasswordAction } from '@/actions/changePasswordAction'
+import { signoutAction } from '@/actions/signoutAction'
 import { changePasswordSchema } from '@/schemas/userSchema'
 
 const ChangePasswordForm = () => {
@@ -28,22 +30,35 @@ const ChangePasswordForm = () => {
       return parseWithZod(formData, { schema: changePasswordSchema })
     },
   })
+  const router = useRouter()
 
   // 成功時のメッセージ
   const toast = useToast()
   useEffect(() => {
-    console.log(lastResult)
-    if (lastResult?.status === 'success') {
-      toast({
-        title: '認証用のメールが送信されました。',
-        description:
-          'メールに記載されているURLから変更手続きを完了させてください。',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      })
-      redirect('/setting')
+    const handleSuccessAction = async () => {
+      if (lastResult?.status === 'success') {
+        toast({
+          title: 'パスワードが変更されました。',
+          description: 'お手数ですが、再度ログインしなおしてください。',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
+
+        try {
+          await signoutAction()
+          router.push('/sign_in')
+        } catch (error: any) {
+          toast({
+            title: error.message,
+            status: error.status,
+            duration: 5000,
+            isClosable: true,
+          })
+        }
+      }
     }
+    handleSuccessAction()
   }, [lastResult])
 
   return (
