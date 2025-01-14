@@ -5,16 +5,15 @@
 import { parseWithZod } from '@conform-to/zod'
 import { revalidatePath } from 'next/cache'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
-import { changeEmailSchema } from '@/schemas/userSchema'
+import { changePasswordSchema } from '@/schemas/userSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
 
-export async function changeEmailAction(
+export async function changeUserinfoAction(
   prevState: unknown,
   formData: FormData,
 ) {
-  const currentEmail = formData.get('current_email') as string
   const submission = parseWithZod(formData, {
-    schema: changeEmailSchema(currentEmail),
+    schema: changePasswordSchema,
   })
 
   if (submission.status !== 'success') {
@@ -23,6 +22,25 @@ export async function changeEmailAction(
 
   const new_email = formData.get('new_email')
   const current_password = formData.get('current_password')
+  const new_password = formData.get('new_password')
+  const new_password_confirmation = formData.get('new_password_confirmation')
+
+  // リクエストの種類によって送信するbodyを変える
+  let body: Record<string, FormDataEntryValue>
+  if (new_email && current_password) {
+    body = {
+      email: new_email,
+      current_password,
+    }
+  } else if (current_password && new_password && new_password_confirmation) {
+    body = {
+      password: new_password,
+      password_confirmation: new_password_confirmation,
+      current_password,
+    }
+  } else {
+    return submission.reply()
+  }
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -40,10 +58,7 @@ export async function changeEmailAction(
         client: tokens.client,
         uid: tokens.uid,
       },
-      body: JSON.stringify({
-        email: new_email,
-        current_password,
-      }),
+      body: JSON.stringify(body),
     })
 
     const data = await res.json()

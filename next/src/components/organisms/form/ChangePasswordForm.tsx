@@ -6,7 +6,6 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
-  Input,
   Stack,
   Text,
   useToast,
@@ -19,24 +18,21 @@ import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
 import { changeUserinfoAction } from '@/actions/changeUserinfoAction'
-import { changeEmailSchema } from '@/schemas/userSchema'
+import { changePasswordSchema } from '@/schemas/userSchema'
 
-type ChangeEmailFormType = {
-  email: string
-}
-
-const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
+const ChangePasswordForm = () => {
   const [lastResult, action] = useFormState(changeUserinfoAction, undefined)
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: changeEmailSchema(email) })
+      return parseWithZod(formData, { schema: changePasswordSchema })
     },
   })
 
   // 成功時のメッセージ
   const toast = useToast()
   useEffect(() => {
+    console.log(lastResult)
     if (lastResult?.status === 'success') {
       toast({
         title: '認証用のメールが送信されました。',
@@ -60,18 +56,25 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
       )}
       <Stack spacing={6}>
         <InputWithLabel
-          label="メールアドレス"
-          type="email"
-          name={fields.new_email.name}
-          placeholder="example@email.com"
-          errors={fields.new_email.errors}
-        />
-        <InputWithLabel
           label="現在のパスワード"
           type="password"
           name={fields.current_password.name}
-          placeholder="パスワードを入力してください"
+          placeholder="現在のパスワードを入力してください"
           errors={fields.current_password.errors}
+        />
+        <InputWithLabel
+          label="新しいパスワード"
+          type="password"
+          name={fields.new_password.name}
+          placeholder="新しいパスワードを入力してください"
+          errors={fields.new_password.errors}
+        />
+        <InputWithLabel
+          label="新しいパスワード（確認）"
+          type="password"
+          name={fields.new_password_confirmation.name}
+          placeholder="新しいパスワードを入力してください"
+          errors={fields.new_password_confirmation.errors}
         />
         <SubmitButton>
           変更する
@@ -80,9 +83,8 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
           </Text>
         </SubmitButton>
       </Stack>
-      <Input type="hidden" name="current_email" value={email} />
     </form>
   )
 }
 
-export default ChangeEmailForm
+export default ChangePasswordForm
