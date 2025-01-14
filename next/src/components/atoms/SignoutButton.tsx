@@ -9,7 +9,12 @@ import CustomIcon from './CustomIcon'
 import { signoutAction } from '@/actions/signoutAction'
 import { useFavoriteStore } from '@/store/store'
 
-const SignoutButton = () => {
+type SignoutButtonProps = {
+  size: 'sm' | 'md'
+  variant: 'outline' | 'danger'
+}
+
+const SignoutButton = ({ size, variant }: SignoutButtonProps) => {
   const [loading, setLoading] = useState(false)
   const { setFavoritedSouvenirs } = useFavoriteStore()
   const toast = useToast()
@@ -25,6 +30,12 @@ const SignoutButton = () => {
       localStorage.removeItem('favoritedSouvenirs')
       localStorage.removeItem('skipedSouvenirs')
 
+      toast({
+        title: 'ログアウトしました。',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
       router.push('/sign_in')
     } catch (error: any) {
       toast({
@@ -40,8 +51,9 @@ const SignoutButton = () => {
 
   return (
     <Button
-      size="sm"
-      variant="outline"
+      size={size}
+      variant={variant === 'outline' ? variant : 'solid'}
+      colorScheme={variant === 'danger' ? 'red' : ''}
       gap="2px"
       onClick={handleSignout}
       isLoading={loading}

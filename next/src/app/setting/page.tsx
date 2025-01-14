@@ -1,7 +1,7 @@
-import { Heading, HStack, Stack } from '@chakra-ui/react'
+import { Flex, Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
-import DeleteUserModalWithButton from '../features/setting/DeleteUserModalWithButton'
 import SettingLink from '../features/setting/SettingLink'
+import SettingLinkWithAlert from '../features/setting/SettingLinkWithAlert'
 import BackLink from '@/components/atoms/BackLink'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
@@ -35,12 +35,23 @@ export default async function Setting() {
           linkText="パスワード変更"
           icon="FaLock"
         />
-        <SettingLink
-          href="/setting/profile"
-          linkText="ログアウト"
-          icon="FaSignOutAlt"
-        />
-        <DeleteUserModalWithButton />
+        <Flex borderBottom="1px solid" borderColor="brand.primary">
+          <SettingLinkWithAlert
+            linkText="ログアウト"
+            icon="FaSignOutAlt"
+            alertTitle="ログアウトしますか？"
+            buttonType="signout"
+          />
+        </Flex>
+        <Flex>
+          <SettingLinkWithAlert
+            linkText="アカウント削除"
+            icon="FaTrash"
+            alertTitle="投稿を削除してもよろしいですか？"
+            alertText="アカウント削除を行うと、アップロードされた写真や投稿を含む全てのデータが削除されます。"
+            buttonType="delete"
+          />
+        </Flex>
       </Stack>
       <BackLink href="/mypage">マイページに戻る</BackLink>
     </Stack>

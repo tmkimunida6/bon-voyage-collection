@@ -7,20 +7,11 @@ type settingLinkProps = {
   href: string
   linkText: string
   icon: keyof typeof iconMapper
-  noBorderBottom?: boolean
 }
 
-const SettingLink = ({
-  href,
-  linkText,
-  icon,
-  noBorderBottom = false,
-}: settingLinkProps) => {
+const SettingLink = ({ href, linkText, icon }: settingLinkProps) => {
   return (
-    <Flex
-      borderBottom={noBorderBottom ? '' : '1px solid'}
-      borderColor={noBorderBottom ? '' : 'brand.primary'}
-    >
+    <Flex borderBottom="1px solid" borderColor="brand.primary">
       <ChakraLink
         as={NextLink}
         href={href}
