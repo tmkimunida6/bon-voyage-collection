@@ -18,7 +18,7 @@ import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
-import { changeUserinfoAction } from '@/actions/changeUserinfoAction'
+import { changeEmailAction } from '@/actions/changeEmailAction'
 import { changeEmailSchema } from '@/schemas/userSchema'
 
 type ChangeEmailFormType = {
@@ -26,7 +26,7 @@ type ChangeEmailFormType = {
 }
 
 const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
-  const [lastResult, action] = useFormState(changeUserinfoAction, undefined)
+  const [lastResult, action] = useFormState(changeEmailAction, undefined)
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {

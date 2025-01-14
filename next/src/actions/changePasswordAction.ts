@@ -8,7 +8,7 @@ import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { changePasswordSchema } from '@/schemas/userSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
 
-export async function changeUserinfoAction(
+export async function changePasswordAction(
   prevState: unknown,
   formData: FormData,
 ) {
@@ -17,30 +17,16 @@ export async function changeUserinfoAction(
   })
 
   if (submission.status !== 'success') {
-    return submission.reply()
+    return submission.reply({
+      formErrors: [
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      ],
+    })
   }
 
-  const new_email = formData.get('new_email')
   const current_password = formData.get('current_password')
   const new_password = formData.get('new_password')
   const new_password_confirmation = formData.get('new_password_confirmation')
-
-  // リクエストの種類によって送信するbodyを変える
-  let body: Record<string, FormDataEntryValue>
-  if (new_email && current_password) {
-    body = {
-      email: new_email,
-      current_password,
-    }
-  } else if (current_password && new_password && new_password_confirmation) {
-    body = {
-      password: new_password,
-      password_confirmation: new_password_confirmation,
-      current_password,
-    }
-  } else {
-    return submission.reply()
-  }
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -58,7 +44,11 @@ export async function changeUserinfoAction(
         client: tokens.client,
         uid: tokens.uid,
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        password: new_password,
+        password_confirmation: new_password_confirmation,
+        current_password,
+      }),
     })
 
     const data = await res.json()
