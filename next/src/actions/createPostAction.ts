@@ -15,7 +15,11 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
   })
 
   if (submission.status !== 'success') {
-    return submission.reply()
+    return submission.reply({
+      formErrors: [
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      ],
+    })
   }
 
   const souvenir_id = formData.get('souvenir_id')

@@ -18,7 +18,11 @@ export async function createSouvenirAction(
   })
 
   if (submission.status !== 'success') {
-    return submission.reply()
+    return submission.reply({
+      formErrors: [
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      ],
+    })
   }
 
   const name = formData.get('souvenir_name')

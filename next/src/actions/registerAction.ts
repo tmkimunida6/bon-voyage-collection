@@ -13,7 +13,11 @@ export async function registerAction(prevState: unknown, formData: FormData) {
   })
 
   if (submission.status !== 'success') {
-    return submission.reply()
+    return submission.reply({
+      formErrors: [
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      ],
+    })
   }
 
   const email = formData.get('email')
