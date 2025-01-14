@@ -41,7 +41,7 @@ export async function resetPasswordRequestAction(
 
     if (!res.ok) {
       return submission.reply({
-        formErrors: data.errors.full_messages || [
+        formErrors: data.errors || data.errors.full_messages || [
           'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
         ],
       })

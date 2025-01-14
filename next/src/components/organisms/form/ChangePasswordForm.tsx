@@ -104,12 +104,7 @@ const ChangePasswordForm = () => {
           placeholder="新しいパスワードを入力してください"
           errors={fields.new_password_confirmation.errors}
         />
-        <SubmitButton>
-          変更する
-          <Text as="span" fontSize="xs">
-            （認証メール送信）
-          </Text>
-        </SubmitButton>
+        <SubmitButton>変更する</SubmitButton>
       </Stack>
     </form>
   )

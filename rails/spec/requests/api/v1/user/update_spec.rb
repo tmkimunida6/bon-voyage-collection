@@ -32,10 +32,16 @@ RSpec.describe 'プロフィール変更', type: :request do
       context '失敗' do
         context '認証情報がない場合' do
           let(:headers) { {} }
+          let(:params) do
+            {
+              nickname: '新しいニックネーム',
+              image: 'http://example.com/new-image.jpg'
+            }
+          end
 
-          it '422エラーを返す' do
+          it '404エラーを返す' do
             patch_request
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:not_found)
             expect(json['errors']).not_to be_empty
           end
         end
@@ -162,6 +168,82 @@ RSpec.describe 'プロフィール変更', type: :request do
 
             user.reload
             expect(user.unconfirmed_email).to eq(nil)
+          end
+        end
+      end
+    end
+
+    context "パスワードの変更" do
+      context '成功' do
+        let(:params) do
+          {
+            current_password: user.password,
+            password: 'newpassword',
+            password_confirmation: 'newpassword',
+          }
+        end
+
+        it '現在のパスワードが正しい場合、パスワードが変更される' do
+          patch_request
+          expect(response).to have_http_status(:ok)
+          user.reload
+          expect(user.valid_password?(params[:password])).to be true
+        end
+      end
+
+      context '失敗' do
+        context '認証情報がない場合' do
+          let(:headers) { {} }
+          let(:params) do
+            {
+              current_password: user.password,
+              password: 'newpassword',
+              password_confirmation: 'newpassword',
+            }
+          end
+
+          it '404エラーを返す' do
+            patch_request
+            expect(response).to have_http_status(:not_found)
+            user.reload
+            expect(user.valid_password?(params[:password])).to be false
+            expect(json['errors']).not_to be_empty
+          end
+        end
+
+        context '現在のパスワードが間違っている場合' do
+          let(:params) do
+            {
+              current_password: 'wrongpassword',
+              password: 'newpassword',
+              password_confirmation: 'newpassword',
+            }
+          end
+
+          it '422エラーを返す' do
+            patch_request
+            expect(response).to have_http_status(:unprocessable_entity)
+            user.reload
+            expect(user.valid_password?(params[:password])).to be false
+            expect(json['errors']).not_to be_empty
+          end
+        end
+
+        context 'パスワードとパスワード（確認）が一致しない場合' do
+          let(:params) do
+            {
+              current_password: user.password,
+              password: 'newpassword',
+              password_confirmation: 'otherpassword',
+            }
+          end
+
+          it '422エラーを返す' do
+            patch_request
+            expect(response).to have_http_status(:unprocessable_entity)
+            user.reload
+            expect(user.valid_password?(params[:password])).to be false
+            expect(json['errors']["full_messages"]).to eq(["パスワード（確認用）とパスワードの入力が一致しません"])
           end
         end
       end
