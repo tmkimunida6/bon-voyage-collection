@@ -1,6 +1,6 @@
 import { Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
-import TextIconLink from '@/components/molecules/TextIconLink'
+import BackLink from '@/components/atoms/BackLink'
 import ChangeProfileForm from '@/components/organisms/form/ChangeProfileForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
@@ -19,13 +19,7 @@ export default async function ChangeProfile() {
         <Heading as="h1">プロフィール変更</Heading>
       </HStack>
       <ChangeProfileForm nickname={user.nickname} image={user.image} />
-      <TextIconLink
-        iconPosition="left"
-        iconName="FaChevronLeft"
-        href="/setting"
-      >
-        戻る
-      </TextIconLink>
+      <BackLink>戻る</BackLink>
     </Stack>
   )
 }

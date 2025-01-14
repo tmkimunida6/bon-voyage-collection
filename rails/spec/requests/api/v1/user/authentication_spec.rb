@@ -40,4 +40,30 @@ RSpec.describe 'ユーザー認証', type: :request do
       end
     end
   end
+
+  describe 'DELETE /api/v1/auth/sign_out' do
+    let(:user) { create(:user) }
+    let(:headers) { user.create_new_auth_token }
+    subject(:delete_request) { delete('/api/v1/auth/sign_out', headers:) }
+
+    context 'ログアウト成功' do
+      it '成功のレスポンスを返す' do
+        delete_request
+        expect(response).to have_http_status(:ok)
+        expect(json['success']).to be true
+      end
+    end
+
+    context 'ログアウト失敗' do
+      context 'トークンがない場合' do
+        let(:headers) { }
+
+        it '権限エラーを返す' do
+          delete_request
+          expect(response).to have_http_status(:not_found)
+          expect(json['errors']).to eq [ 'ユーザーが見つからないか、ログインしていません。' ]
+        end
+      end
+    end
+  end
 end

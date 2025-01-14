@@ -18,7 +18,11 @@ export async function changeEmailAction(
   })
 
   if (submission.status !== 'success') {
-    return submission.reply()
+    return submission.reply({
+      formErrors: [
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      ],
+    })
   }
 
   const new_email = formData.get('new_email')

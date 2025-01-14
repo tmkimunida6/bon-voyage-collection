@@ -1,6 +1,6 @@
 import { Heading, HStack, Stack, Text } from '@chakra-ui/react'
 import { Metadata } from 'next'
-import TextIconLink from '@/components/molecules/TextIconLink'
+import BackLink from '@/components/atoms/BackLink'
 import ChangeEmailForm from '@/components/organisms/form/ChangeEmailForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
@@ -25,13 +25,7 @@ export default async function SignIn() {
         </Stack>
         <ChangeEmailForm email={user.email} />
       </Stack>
-      <TextIconLink
-        iconPosition="left"
-        iconName="FaChevronLeft"
-        href="/setting"
-      >
-        戻る
-      </TextIconLink>
+      <BackLink>戻る</BackLink>
     </Stack>
   )
 }

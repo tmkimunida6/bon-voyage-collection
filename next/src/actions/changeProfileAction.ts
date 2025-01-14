@@ -18,7 +18,11 @@ export async function changeProfileAction(
   })
 
   if (submission.status !== 'success') {
-    return submission.reply()
+    return submission.reply({
+      formErrors: [
+        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+      ],
+    })
   }
 
   const nickname = formData.get('nickname')

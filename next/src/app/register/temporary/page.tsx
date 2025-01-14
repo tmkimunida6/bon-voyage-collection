@@ -21,7 +21,7 @@ export default function Temporary() {
       <Text>
         ご登録のメールアドレスに認証用リンクを送信しました。
         <br />
-        メールを確認し、ユーザー登録を完了させて下さい。
+        メールを確認し、ユーザー登録を完了させてください。
       </Text>
       <Button variant="primary" as={NextLink} href="/">
         TOPへ戻る

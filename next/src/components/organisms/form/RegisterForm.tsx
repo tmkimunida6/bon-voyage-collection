@@ -38,14 +38,14 @@ const RegisterForm = () => {
           label="パスワード"
           type="password"
           name={fields.password.name}
-          placeholder="パスワードを入力して下さい"
+          placeholder="パスワードを入力してください"
           errors={fields.password.errors}
         />
         <InputWithLabel
-          label="パスワード確認"
+          label="パスワード（確認）"
           type="password"
           name={fields.password_confirmation.name}
-          placeholder="パスワードを入力して下さい"
+          placeholder="パスワードを入力してください"
           errors={fields.password_confirmation.errors}
         />
         <SubmitButton>登録する</SubmitButton>

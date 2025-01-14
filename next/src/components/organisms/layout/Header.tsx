@@ -18,7 +18,7 @@ export default async function Header({ user }: HeaderProps) {
         </NextLink>
         <Spacer />
         {user.isSignedIn ? (
-          <SignoutButton></SignoutButton>
+          <SignoutButton size="sm" variant="outline" />
         ) : (
           <Button
             size="sm"

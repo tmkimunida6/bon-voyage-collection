@@ -5,6 +5,7 @@ import {
   Input,
   Textarea,
 } from '@chakra-ui/react'
+import React from 'react'
 import PasswordInput from '../atoms/PasswordInput'
 
 type InputWithLabelProps = {
@@ -40,7 +41,14 @@ const InputWithLabel = ({
     <FormControl isRequired={isRequired} isInvalid={!!errors}>
       <FormLabel>{label}</FormLabel>
       {inputType()}
-      <FormErrorMessage>{errors}</FormErrorMessage>
+      <FormErrorMessage>
+        {errors?.map((error, index) => (
+          <React.Fragment key={index}>
+            {error}
+            {index < errors.length - 1 && <br />}
+          </React.Fragment>
+        ))}
+      </FormErrorMessage>
     </FormControl>
   )
 }

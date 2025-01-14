@@ -3,13 +3,15 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
-import { redirect } from 'next/navigation'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
-import { registerSchema } from '@/schemas/userSchema'
+import { resetPasswordRequestSchema } from '@/schemas/userSchema'
 
-export async function registerAction(prevState: unknown, formData: FormData) {
+export async function resetPasswordRequestAction(
+  prevState: unknown,
+  formData: FormData,
+) {
   const submission = parseWithZod(formData, {
-    schema: registerSchema,
+    schema: resetPasswordRequestSchema,
   })
 
   if (submission.status !== 'success') {
@@ -21,20 +23,17 @@ export async function registerAction(prevState: unknown, formData: FormData) {
   }
 
   const email = formData.get('email')
-  const password = formData.get('password')
-  const password_confirmation = formData.get('password_confirmation')
-  const confirm_success_url = `${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/sign_in`
+  const redirect_url = `${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/reset_password/new`
+
   try {
-    const res = await fetch(`${apiBaseUrl}/auth`, {
+    const res = await fetch(`${apiBaseUrl}/auth/password`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email,
-        password,
-        password_confirmation,
-        confirm_success_url,
+        redirect_url,
       }),
     })
 
@@ -42,11 +41,14 @@ export async function registerAction(prevState: unknown, formData: FormData) {
 
     if (!res.ok) {
       return submission.reply({
-        formErrors: data.errors.full_messages || [
-          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
-        ],
+        formErrors: data.errors ||
+          data.errors.full_messages || [
+            'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+          ],
       })
     }
+
+    return submission.reply()
   } catch (error: any) {
     return submission.reply({
       formErrors: error.message || [
@@ -54,6 +56,4 @@ export async function registerAction(prevState: unknown, formData: FormData) {
       ],
     })
   }
-
-  redirect('/register/temporary')
 }
