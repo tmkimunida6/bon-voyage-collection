@@ -40,21 +40,21 @@ RSpec.describe 'パスワードリセット', type: :request do
         it '404エラーを返す' do
           post_request
           expect(response).to have_http_status(:not_found)
-          expect(json['errors']).to eq(["ユーザーが見つかりませんでした。ご登録メールアドレスを入力してください。"])
+          expect(json['errors']).to eq([ "ユーザーが見つかりませんでした。ご登録メールアドレスを入力してください。" ])
         end
       end
 
       context 'redirect_urlがない場合' do
         let(:params) do
           {
-            email: user.email,
+            email: user.email
           }
         end
 
         it '401エラーを返す' do
           post_request
           expect(response).to have_http_status(:unauthorized)
-          expect(json['errors']).to eq(["リダイレクトURLが与えられていません。"])
+          expect(json['errors']).to eq([ "リダイレクトURLが与えられていません。" ])
         end
       end
 
@@ -69,7 +69,7 @@ RSpec.describe 'パスワードリセット', type: :request do
         it '404エラーを返す' do
           post_request
           expect(response).to have_http_status(:not_found)
-          expect(json['errors']).to eq(["ユーザーが見つかりませんでした。ご登録メールアドレスを入力してください。"])
+          expect(json['errors']).to eq([ "ユーザーが見つかりませんでした。ご登録メールアドレスを入力してください。" ])
         end
       end
     end
@@ -102,7 +102,7 @@ RSpec.describe 'パスワードリセット', type: :request do
         let(:params) do
           {
             password: "newpassword",
-            password_confirmation: "newpassword",
+            password_confirmation: "newpassword"
           }
         end
 
@@ -125,10 +125,9 @@ RSpec.describe 'パスワードリセット', type: :request do
         it '422エラーを返す' do
           patch_request
           expect(response).to have_http_status(:unprocessable_entity)
-          expect(json['errors']["full_messages"]).to eq(["パスワード（確認用）とパスワードの入力が一致しません"])
+          expect(json['errors']["full_messages"]).to eq([ "パスワード（確認用）とパスワードの入力が一致しません" ])
         end
       end
-
     end
   end
 end

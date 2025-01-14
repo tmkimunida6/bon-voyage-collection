@@ -20,8 +20,8 @@ import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
 import { changeEmailAction } from '@/actions/changeEmailAction'
-import { changeEmailSchema } from '@/schemas/userSchema'
 import TextIconLink from '@/components/molecules/TextIconLink'
+import { changeEmailSchema } from '@/schemas/userSchema'
 
 type ChangeEmailFormType = {
   email: string

@@ -1,9 +1,8 @@
 import { Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
-import TextIconLink from '@/components/molecules/TextIconLink'
+import BackLink from '@/components/atoms/BackLink'
 import ChangePasswordForm from '@/components/organisms/form/ChangePasswordForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
-import BackLink from '@/components/atoms/BackLink'
 
 export const metadata: Metadata = {
   title: 'パスワード変更｜アカウント設定 | Bon Voyage Collcection',

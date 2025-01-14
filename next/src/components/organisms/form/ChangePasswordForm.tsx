@@ -9,7 +9,6 @@ import {
   AlertIcon,
   Flex,
   Stack,
-  Text,
   useToast,
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
@@ -21,8 +20,8 @@ import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
 import { changePasswordAction } from '@/actions/changePasswordAction'
 import { signoutAction } from '@/actions/signoutAction'
-import { changePasswordSchema } from '@/schemas/userSchema'
 import TextIconLink from '@/components/molecules/TextIconLink'
+import { changePasswordSchema } from '@/schemas/userSchema'
 
 const ChangePasswordForm = () => {
   const [lastResult, action] = useFormState(changePasswordAction, undefined)

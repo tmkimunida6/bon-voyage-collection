@@ -20,7 +20,10 @@ import { resetPasswordRequestAction } from '@/actions/resetPasswordRequestAction
 import { resetPasswordRequestSchema } from '@/schemas/userSchema'
 
 const ResetPasswordRequestForm = () => {
-  const [lastResult, action] = useFormState(resetPasswordRequestAction, undefined)
+  const [lastResult, action] = useFormState(
+    resetPasswordRequestAction,
+    undefined,
+  )
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {

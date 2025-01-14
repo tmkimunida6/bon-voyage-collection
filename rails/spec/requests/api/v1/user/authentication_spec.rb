@@ -47,7 +47,6 @@ RSpec.describe 'ユーザー認証', type: :request do
     subject(:delete_request) { delete('/api/v1/auth/sign_out', headers:) }
 
     context 'ログアウト成功' do
-
       it '成功のレスポンスを返す' do
         delete_request
         expect(response).to have_http_status(:ok)
@@ -57,7 +56,7 @@ RSpec.describe 'ユーザー認証', type: :request do
 
     context 'ログアウト失敗' do
       context 'トークンがない場合' do
-        let(:headers) {}
+        let(:headers) { }
 
         it '権限エラーを返す' do
           delete_request

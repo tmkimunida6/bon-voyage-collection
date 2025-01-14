@@ -179,7 +179,7 @@ RSpec.describe 'プロフィール変更', type: :request do
           {
             current_password: user.password,
             password: 'newpassword',
-            password_confirmation: 'newpassword',
+            password_confirmation: 'newpassword'
           }
         end
 
@@ -198,7 +198,7 @@ RSpec.describe 'プロフィール変更', type: :request do
             {
               current_password: user.password,
               password: 'newpassword',
-              password_confirmation: 'newpassword',
+              password_confirmation: 'newpassword'
             }
           end
 
@@ -216,7 +216,7 @@ RSpec.describe 'プロフィール変更', type: :request do
             {
               current_password: 'wrongpassword',
               password: 'newpassword',
-              password_confirmation: 'newpassword',
+              password_confirmation: 'newpassword'
             }
           end
 
@@ -234,7 +234,7 @@ RSpec.describe 'プロフィール変更', type: :request do
             {
               current_password: user.password,
               password: 'newpassword',
-              password_confirmation: 'otherpassword',
+              password_confirmation: 'otherpassword'
             }
           end
 
@@ -243,7 +243,7 @@ RSpec.describe 'プロフィール変更', type: :request do
             expect(response).to have_http_status(:unprocessable_entity)
             user.reload
             expect(user.valid_password?(params[:password])).to be false
-            expect(json['errors']["full_messages"]).to eq(["パスワード（確認用）とパスワードの入力が一致しません"])
+            expect(json['errors']["full_messages"]).to eq([ "パスワード（確認用）とパスワードの入力が一致しません" ])
           end
         end
       end
