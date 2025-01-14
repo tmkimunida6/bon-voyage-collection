@@ -1,8 +1,7 @@
 import { Heading, HStack, Stack, Text } from '@chakra-ui/react'
 import { Metadata } from 'next'
-import TextIconLink from '@/components/molecules/TextIconLink'
 import ResetPasswordRequestForm from '@/components/organisms/form/ResetPasswordRequestForm'
-import { checkLoginStatus } from '@/utils/checkLoginStatus'
+import BackLink from '@/components/atoms/BackLink'
 
 export const metadata: Metadata = {
   title: 'パスワードリセット｜アカウント設定 | Bon Voyage Collcection',
@@ -11,8 +10,6 @@ export const metadata: Metadata = {
 }
 
 export default async function ResetPassword() {
-  await checkLoginStatus()
-
   return (
     <Stack maxW="660px" mx="auto" spacing={6}>
       <HStack>
@@ -24,13 +21,7 @@ export default async function ResetPassword() {
         パスワードリセット用のURLが送信されます。
       </Text>
       <ResetPasswordRequestForm />
-      <TextIconLink
-        iconPosition="left"
-        iconName="FaChevronLeft"
-        href="/sign_in"
-      >
-        ログイン画面へ
-      </TextIconLink>
+      <BackLink>戻る</BackLink>
     </Stack>
   )
 }

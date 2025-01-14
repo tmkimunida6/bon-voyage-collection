@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import ChangeProfileForm from '@/components/organisms/form/ChangeProfileForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
+import BackLink from '@/components/atoms/BackLink'
 
 export const metadata: Metadata = {
   title: 'プロフィール変更｜アカウント設定 | Bon Voyage Collcection',
@@ -19,13 +20,7 @@ export default async function ChangeProfile() {
         <Heading as="h1">プロフィール変更</Heading>
       </HStack>
       <ChangeProfileForm nickname={user.nickname} image={user.image} />
-      <TextIconLink
-        iconPosition="left"
-        iconName="FaChevronLeft"
-        href="/setting"
-      >
-        戻る
-      </TextIconLink>
+      <BackLink>戻る</BackLink>
     </Stack>
   )
 }

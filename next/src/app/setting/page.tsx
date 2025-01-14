@@ -4,6 +4,7 @@ import DeleteUserModalWithButton from '../features/setting/DeleteUserModalWithBu
 import SettingLink from '../features/setting/SettingLink'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
+import BackLink from '@/components/atoms/BackLink'
 
 export const metadata: Metadata = {
   title: 'アカウント設定 | Bon Voyage Collcection',
@@ -42,9 +43,7 @@ export default async function Setting() {
         />
         <DeleteUserModalWithButton />
       </Stack>
-      <TextIconLink iconPosition="left" iconName="FaChevronLeft" href="/mypage">
-        マイページに戻る
-      </TextIconLink>
+      <BackLink href="/mypage">マイページに戻る</BackLink>
     </Stack>
   )
 }

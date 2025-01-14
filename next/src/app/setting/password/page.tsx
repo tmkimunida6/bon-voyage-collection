@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import ChangePasswordForm from '@/components/organisms/form/ChangePasswordForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
+import BackLink from '@/components/atoms/BackLink'
 
 export const metadata: Metadata = {
   title: 'パスワード変更｜アカウント設定 | Bon Voyage Collcection',
@@ -19,13 +20,7 @@ export default async function ChangePassword() {
         <Heading as="h1">パスワード変更</Heading>
       </HStack>
       <ChangePasswordForm />
-      <TextIconLink
-        iconPosition="left"
-        iconName="FaChevronLeft"
-        href="/setting"
-      >
-        戻る
-      </TextIconLink>
+      <BackLink>戻る</BackLink>
     </Stack>
   )
 }

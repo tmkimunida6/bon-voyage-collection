@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import ChangeEmailForm from '@/components/organisms/form/ChangeEmailForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
+import BackLink from '@/components/atoms/BackLink'
 
 export const metadata: Metadata = {
   title: 'メールアドレス変更｜アカウント設定 | Bon Voyage Collcection',
@@ -25,13 +26,7 @@ export default async function SignIn() {
         </Stack>
         <ChangeEmailForm email={user.email} />
       </Stack>
-      <TextIconLink
-        iconPosition="left"
-        iconName="FaChevronLeft"
-        href="/setting"
-      >
-        戻る
-      </TextIconLink>
+      <BackLink>戻る</BackLink>
     </Stack>
   )
 }
