@@ -7,6 +7,7 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
+  Flex,
   Stack,
   Text,
   useToast,
@@ -21,6 +22,7 @@ import InputWithLabel from '../../molecules/InputWithLabel'
 import { changePasswordAction } from '@/actions/changePasswordAction'
 import { signoutAction } from '@/actions/signoutAction'
 import { changePasswordSchema } from '@/schemas/userSchema'
+import TextIconLink from '@/components/molecules/TextIconLink'
 
 const ChangePasswordForm = () => {
   const [lastResult, action] = useFormState(changePasswordAction, undefined)
@@ -70,13 +72,24 @@ const ChangePasswordForm = () => {
         </Alert>
       )}
       <Stack spacing={6}>
-        <InputWithLabel
-          label="現在のパスワード"
-          type="password"
-          name={fields.current_password.name}
-          placeholder="現在のパスワードを入力してください"
-          errors={fields.current_password.errors}
-        />
+        <Stack spacing={2}>
+          <InputWithLabel
+            label="現在のパスワード"
+            type="password"
+            name={fields.current_password.name}
+            placeholder="現在のパスワードを入力してください"
+            errors={fields.current_password.errors}
+          />
+          <Flex justifyContent="right">
+            <TextIconLink
+              iconName={'FaRegQuestionCircle'}
+              iconPosition="left"
+              href="/reset_password"
+            >
+              パスワードをお忘れの方
+            </TextIconLink>
+          </Flex>
+        </Stack>
         <InputWithLabel
           label="新しいパスワード"
           type="password"

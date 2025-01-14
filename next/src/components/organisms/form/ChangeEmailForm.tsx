@@ -6,6 +6,7 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
+  Flex,
   Input,
   Stack,
   Text,
@@ -20,6 +21,7 @@ import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
 import { changeEmailAction } from '@/actions/changeEmailAction'
 import { changeEmailSchema } from '@/schemas/userSchema'
+import TextIconLink from '@/components/molecules/TextIconLink'
 
 type ChangeEmailFormType = {
   email: string
@@ -66,13 +68,24 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
           placeholder="example@email.com"
           errors={fields.new_email.errors}
         />
-        <InputWithLabel
-          label="現在のパスワード"
-          type="password"
-          name={fields.current_password.name}
-          placeholder="パスワードを入力してください"
-          errors={fields.current_password.errors}
-        />
+        <Stack spacing={2}>
+          <InputWithLabel
+            label="現在のパスワード"
+            type="password"
+            name={fields.current_password.name}
+            placeholder="パスワードを入力してください"
+            errors={fields.current_password.errors}
+          />
+          <Flex justifyContent="right">
+            <TextIconLink
+              iconName={'FaRegQuestionCircle'}
+              iconPosition="left"
+              href="/reset_password"
+            >
+              パスワードをお忘れの方
+            </TextIconLink>
+          </Flex>
+        </Stack>
         <SubmitButton>
           変更する
           <Text as="span" fontSize="xs">

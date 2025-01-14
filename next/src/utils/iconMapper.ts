@@ -25,6 +25,7 @@ import {
   FaSignOutAlt,
   FaTrash,
   FaUndoAlt,
+  FaRegQuestionCircle,
 } from 'react-icons/fa'
 import {
   FaGift,
@@ -68,4 +69,5 @@ export const iconMapper = {
   FaEnvelope,
   FaLock,
   FaUndoAlt,
+  FaRegQuestionCircle,
 }
