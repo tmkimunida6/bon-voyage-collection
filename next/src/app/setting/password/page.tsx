@@ -5,12 +5,12 @@ import ChangePasswordForm from '@/components/organisms/form/ChangePasswordForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
 export const metadata: Metadata = {
-  title: 'メールアドレス変更｜アカウント設定 | Bon Voyage Collcection',
-  description: 'メールアドレスの変更が可能です。',
+  title: 'パスワード変更｜アカウント設定 | Bon Voyage Collcection',
+  description: 'パスワードの変更が可能です。',
   keywords: '',
 }
 
-export default async function SignIn() {
+export default async function ChangePassword() {
   await checkLoginStatus()
 
   return (

@@ -65,3 +65,23 @@ export const changePasswordSchema = z
     message: '新しいパスワードは現在のパスワードと異なる必要があります。',
     path: ['new_password'],
   })
+
+export const resetPasswordRequestSchema = z.object({
+  email: z
+    .string({ required_error: 'メールアドレスを入力してください。' })
+    .email('メールアドレスの形式が正しくありません。'),
+})
+
+export const resetPasswordSchema = z
+  .object({
+    password: z
+      .string({ required_error: 'パスワードを入力してください。' })
+      .min(8, 'パスワードは8文字以上で入力してください。'),
+    password_confirmation: z
+      .string({ required_error: 'パスワードを入力してください。' })
+      .min(8, 'パスワードは8文字以上で入力してください。'),
+  })
+  .refine((data) => data.password === data.password_confirmation, {
+    message: 'パスワードが一致しません。',
+    path: ['new_password_confirmation'],
+  })
