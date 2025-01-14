@@ -70,7 +70,7 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
           label="現在のパスワード"
           type="password"
           name={fields.current_password.name}
-          placeholder="パスワードを入力して下さい"
+          placeholder="パスワードを入力してください"
           errors={fields.current_password.errors}
         />
         <SubmitButton>

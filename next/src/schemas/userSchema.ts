@@ -6,7 +6,7 @@ export const signinSchema = z.object({
     .email('メールアドレスの形式が正しくありません。'),
   password: z
     .string({ required_error: 'パスワードを入力してください。' })
-    .min(8, 'パスワードは8文字以上で入力して下さい。'),
+    .min(8, 'パスワードは8文字以上で入力してください。'),
 })
 
 export const registerSchema = z
@@ -16,10 +16,10 @@ export const registerSchema = z
       .email('メールアドレスの形式が正しくありません。'),
     password: z
       .string({ required_error: 'パスワードを入力してください。' })
-      .min(8, 'パスワードは8文字以上で入力して下さい。'),
+      .min(8, 'パスワードは8文字以上で入力してください。'),
     password_confirmation: z
       .string({ required_error: 'パスワードを入力してください。' })
-      .min(8, 'パスワードは8文字以上で入力して下さい。'),
+      .min(8, 'パスワードは8文字以上で入力してください。'),
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: 'パスワードが一致しません。',
@@ -42,5 +42,5 @@ export const changeEmailSchema = (currentEmail: string) =>
       }),
     current_password: z
       .string({ required_error: 'パスワードを入力してください。' })
-      .min(8, 'パスワードは8文字以上で入力して下さい。'),
+      .min(8, 'パスワードは8文字以上で入力してください。'),
   })

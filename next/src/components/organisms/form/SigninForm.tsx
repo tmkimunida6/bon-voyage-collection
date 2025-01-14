@@ -38,7 +38,7 @@ const SigninForm = () => {
           label="パスワード"
           type="password"
           name={fields.password.name}
-          placeholder="パスワードを入力して下さい"
+          placeholder="パスワードを入力してください"
           errors={fields.password.errors}
         />
         <SubmitButton>ログイン</SubmitButton>
