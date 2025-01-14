@@ -58,7 +58,7 @@ RSpec.describe 'ユーザー登録', type: :request do
       it 'メール認証が成功し、ユーザーが確認済みになる' do
         patch_request
         expect(response).to have_http_status(:ok)
-        expect(json['message']).to eq('ユーザー認証に成功しました。')
+        expect(json['message']).to eq('メールアドレスの認証に成功しました')
 
         user.reload
         expect(user.confirmed?).to be true
@@ -88,7 +88,7 @@ RSpec.describe 'ユーザー登録', type: :request do
           # 2回目は認証失敗
           patch "/api/v1/user/confirmations", params: { confirmation_token: token }
           expect(response).to have_http_status(:bad_request)
-          expect(json['message']).to eq('このユーザーはすでに認証済みです。')
+          expect(json['message']).to eq('このメールアドレスはすでに認証済みです。')
         end
       end
 

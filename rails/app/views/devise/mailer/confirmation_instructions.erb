@@ -7,19 +7,6 @@
   <%= t '.confirm_link_msg' %> 
 </p>
 
-<p>URL：<%= link_to "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}", "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}", target: :_blank, rel: "noopener noreferrer" %></p>
+<p>URL：<%= link_to "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}&request_action=registration", "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}&request_action=registration", target: :_blank, rel: "noopener noreferrer" %></p>
 
-<br><br>
-
-<p>
-  ※<%= t 'devise.mailer.caution_note.send_only_msg' %><br>
-  ※<%= t 'devise.mailer.caution_note.misdelivery_msg' %>
-</p>
-
-<br>
-<hr>
-
-<p>
-  Bon Boyage Collection<br>
-  <%= link_to "#{Settings.front_domain}", "#{Settings.front_domain}", target: :_blank, rel: "noopener noreferrer" %>
-</p>
+<%= render 'devise/mailer/shared/email_footer' %>

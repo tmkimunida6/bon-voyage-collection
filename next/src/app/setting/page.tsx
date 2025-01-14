@@ -2,6 +2,7 @@ import { Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
 import DeleteUserModalWithButton from '../features/setting/DeleteUserModalWithButton'
 import SettingLink from '../features/setting/SettingLink'
+import TextIconLink from '@/components/molecules/TextIconLink'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
 export const metadata: Metadata = {
@@ -41,6 +42,9 @@ export default async function Setting() {
         />
         <DeleteUserModalWithButton />
       </Stack>
+      <TextIconLink iconPosition="left" iconName="FaChevronLeft" href="/mypage">
+        マイページに戻る
+      </TextIconLink>
     </Stack>
   )
 }

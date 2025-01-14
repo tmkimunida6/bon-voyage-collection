@@ -4,13 +4,14 @@
 
 import { getUserTokens } from './getUserTokens'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
-import { UserType } from '@/types/types'
+import { CurrentUserType } from '@/types/types'
 
 export async function fetchUserState() {
-  let user: UserType = {
+  let user: CurrentUserType = {
     alias_id: '',
     nickname: '',
     image: '',
+    email: '',
     isSignedIn: false,
   }
   const tokens = await getUserTokens()

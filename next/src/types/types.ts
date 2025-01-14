@@ -8,8 +8,14 @@ export type UserType = {
   alias_id: string
   nickname: string
   image: string
-  isSignedIn?: boolean
 }
+
+export type CurrentUserType = UserType & {
+  email: string
+  isSignedIn: boolean
+}
+
+export type UserRequestType = 'registration' | 'change_email'
 
 export type CategoryType = {
   id: number | ''

@@ -4,25 +4,25 @@
 
 import { parseWithZod } from '@conform-to/zod'
 import { revalidatePath } from 'next/cache'
-import { uploadImageAction } from './uploadImageAction'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
-import { changeProfileSchema } from '@/schemas/userSchema'
+import { changeEmailSchema } from '@/schemas/userSchema'
 import { getUserTokens } from '@/utils/getUserTokens'
 
-export async function changeProfileAction(
+export async function changeEmailAction(
   prevState: unknown,
   formData: FormData,
 ) {
+  const currentEmail = formData.get('current_email') as string
   const submission = parseWithZod(formData, {
-    schema: changeProfileSchema,
+    schema: changeEmailSchema(currentEmail),
   })
 
   if (submission.status !== 'success') {
     return submission.reply()
   }
 
-  const nickname = formData.get('nickname')
-  const imageFile = formData.get('image') ? String(formData.get('image')) : ''
+  const new_email = formData.get('new_email')
+  const current_password = formData.get('current_password')
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -32,13 +32,6 @@ export async function changeProfileAction(
   }
 
   try {
-    let image_url = null
-    if (imageFile) {
-      // 画像をCloudinaryにアップロード
-      const uploadResult = await uploadImageAction(imageFile, 'profile')
-      image_url = uploadResult.secure_url
-    }
-
     const res = await fetch(`${apiBaseUrl}/auth`, {
       method: 'PATCH',
       headers: {
@@ -48,8 +41,8 @@ export async function changeProfileAction(
         uid: tokens.uid,
       },
       body: JSON.stringify({
-        nickname,
-        image: image_url,
+        email: new_email,
+        current_password,
       }),
     })
 
@@ -63,7 +56,7 @@ export async function changeProfileAction(
       })
     }
 
-    revalidatePath('/setting/profile')
+    revalidatePath('/setting/email')
     return submission.reply()
   } catch (error: any) {
     return submission.reply({

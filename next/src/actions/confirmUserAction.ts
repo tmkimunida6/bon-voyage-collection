@@ -4,6 +4,7 @@
 
 import { setAccessTokenAction } from './setAccessTokenAction'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
+import { UserRequestType } from '@/types/types'
 import { fetchUserState } from '@/utils/fetchUserState'
 
 type ConfirmUserActionResult = {
@@ -13,16 +14,17 @@ type ConfirmUserActionResult = {
 
 export async function confirmUserAction(
   confirmationToken: string,
+  requestAction: UserRequestType,
 ): Promise<ConfirmUserActionResult> {
   const user = await fetchUserState()
 
   // トークンなしの場合
-  if (!confirmationToken) {
+  if (!confirmationToken || !requestAction) {
     return { message: 'URLが有効ではありません。', status: 'error' }
   }
 
   // ログイン済みの場合
-  if (user.isSignedIn) {
+  if (user.isSignedIn && requestAction === 'registration') {
     return {
       message:
         'すでに別のアカウントでログイン済みです。ログアウトしてから再度アクセスしてください。',
@@ -36,7 +38,9 @@ export async function confirmUserAction(
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ confirmation_token: confirmationToken }),
+      body: JSON.stringify({
+        confirmation_token: confirmationToken,
+      }),
     })
 
     const data = await res.json()
@@ -51,7 +55,6 @@ export async function confirmUserAction(
 
     if (accessToken && client && uid) {
       await setAccessTokenAction(accessToken, client, uid)
-      return { message: data.message, status: 'success' }
     } else {
       return {
         message:
@@ -59,6 +62,8 @@ export async function confirmUserAction(
         status: 'error',
       }
     }
+
+    return { message: data.message, status: 'success' }
   } catch (error: any) {
     return {
       message:

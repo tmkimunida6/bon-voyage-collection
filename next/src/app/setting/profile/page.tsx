@@ -1,5 +1,6 @@
-import { Box, Heading, HStack } from '@chakra-ui/react'
+import { Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
+import TextIconLink from '@/components/molecules/TextIconLink'
 import ChangeProfileForm from '@/components/organisms/form/ChangeProfileForm'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
@@ -9,15 +10,22 @@ export const metadata: Metadata = {
   keywords: '',
 }
 
-export default async function SignIn() {
+export default async function ChangeProfile() {
   const user = await checkLoginStatus()
 
   return (
-    <Box maxW="660px" mx="auto">
-      <HStack mb={6}>
+    <Stack maxW="660px" mx="auto" spacing={6}>
+      <HStack>
         <Heading as="h1">プロフィール変更</Heading>
       </HStack>
       <ChangeProfileForm nickname={user.nickname} image={user.image} />
-    </Box>
+      <TextIconLink
+        iconPosition="left"
+        iconName="FaChevronLeft"
+        href="/setting"
+      >
+        戻る
+      </TextIconLink>
+    </Stack>
   )
 }
