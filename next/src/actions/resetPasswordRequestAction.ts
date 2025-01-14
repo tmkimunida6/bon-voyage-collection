@@ -27,7 +27,7 @@ export async function resetPasswordRequestAction(
 
   try {
     const res = await fetch(`${apiBaseUrl}/auth/password`, {
-      method: 'PATCH',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },

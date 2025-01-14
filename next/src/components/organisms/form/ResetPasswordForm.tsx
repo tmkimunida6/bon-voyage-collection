@@ -7,6 +7,7 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
+  Input,
   Stack,
   useToast,
 } from '@chakra-ui/react'
@@ -17,12 +18,16 @@ import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
-import { changePasswordAction } from '@/actions/changePasswordAction'
+import { resetPasswordAction } from '@/actions/resetPasswordAction'
 import { signoutAction } from '@/actions/signoutAction'
 import { resetPasswordSchema } from '@/schemas/userSchema'
 
-const ResetPasswordForm = () => {
-  const [lastResult, action] = useFormState(changePasswordAction, undefined)
+type ResetPasswordFormProps = {
+  resetPasswordToken: string
+}
+
+const ResetPasswordForm = ({ resetPasswordToken }: ResetPasswordFormProps) => {
+  const [lastResult, action] = useFormState(resetPasswordAction, undefined)
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -73,15 +78,21 @@ const ResetPasswordForm = () => {
           label="新しいパスワード"
           type="password"
           name={fields.password.name}
-          placeholder="新しい新しいパスワードを入力してください"
+          placeholder="新しいパスワードを入力してください"
           errors={fields.password.errors}
         />
         <InputWithLabel
-          label="パスワード（確認）"
+          label="新しいパスワード（確認）"
           type="password"
           name={fields.password_confirmation.name}
           placeholder="新しいパスワードを入力してください"
           errors={fields.password_confirmation.errors}
+        />
+        <Input
+          type="hidden"
+          value={resetPasswordToken}
+          name="reset_password_token"
+          readOnly
         />
         <SubmitButton>変更する</SubmitButton>
       </Stack>

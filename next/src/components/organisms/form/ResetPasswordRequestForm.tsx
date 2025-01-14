@@ -16,12 +16,11 @@ import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
-import { changePasswordAction } from '@/actions/changePasswordAction'
-import { signoutAction } from '@/actions/signoutAction'
+import { resetPasswordRequestAction } from '@/actions/resetPasswordRequestAction'
 import { resetPasswordRequestSchema } from '@/schemas/userSchema'
 
 const ResetPasswordRequestForm = () => {
-  const [lastResult, action] = useFormState(changePasswordAction, undefined)
+  const [lastResult, action] = useFormState(resetPasswordRequestAction, undefined)
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -32,30 +31,16 @@ const ResetPasswordRequestForm = () => {
   // 成功時のメッセージ
   const toast = useToast()
   useEffect(() => {
-    const handleSuccessAction = async () => {
-      if (lastResult?.status === 'success') {
-        toast({
-          title: 'パスワードリセット用のメールが送信されました。',
-          description:
-            'メールに記載されているURLから変更手続きを完了させてください。',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-        })
-
-        try {
-          await signoutAction()
-        } catch (error: any) {
-          toast({
-            title: error.message,
-            status: error.status,
-            duration: 5000,
-            isClosable: true,
-          })
-        }
-      }
+    if (lastResult?.status === 'success') {
+      toast({
+        title: 'パスワードリセット用のメールが送信されました。',
+        description:
+          'メールに記載されているURLから変更手続きを完了させてください。',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
     }
-    handleSuccessAction()
   }, [lastResult])
 
   return (

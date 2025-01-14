@@ -56,9 +56,10 @@ ja:
         accept_change_request_msg: "メールアドレス変更のお申し込みを承りました。"
         request_confirm_link_msg: "以下のリンクよりメールアドレスを認証してください。"
       reset_password_instructions:
-        request_reset_link_msg: "パスワード変更のリクエストが送信されました。下記のリンクからパスワードの変更ができます。"
-        password_change_link: "パスワードを変更する"
-        ignore_mail_msg: "もしこの内容に覚えがない場合は、このメールを無視してください。"
+        subject: "【Bon Boyage Collection】パスワードリセット手続きのご案内"
+        title: "パスワードリセット手続きを完了させてください。"
+        accept_change_request_msg: "パスワードリセットのお申し込みを承りました。"
+        request_confirm_link_msg: "以下のリンクよりパスワードを変更してください。"
         no_changes_msg: "上記のリンクにアクセスして新しいパスワードを作成するまで、現在のパスワードは変更されません。"
       unlock_instructions:
         account_lock_msg: "連続してログインに失敗したため、あなたのアカウントはロックされました。"
@@ -66,6 +67,7 @@ ja:
         unlock_link: "アカウントを有効化する"
       caution_note:
         for_registered_mail_msg: "このメールはBon Voyage Collectionにご登録いただいたメールアドレス宛に自動的に送信しています。"
+        for_inputed_mail_msg: "このメールはパスワードリセット申請時にご入力いただいたメールアドレス宛に自動的に送信しています。"
         misdelivery_msg: "本メールに心当たりのない場合は、リンクをクリックせず、お手数ですがこのままメールを破棄いただきますようお願いいたします。"
         send_only_msg: "このメールは送信専用です。ご返信いただいてもお答えはいたしかねますのでご了承ください。"
   hello: "こんにちは"

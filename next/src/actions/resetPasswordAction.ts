@@ -3,11 +3,10 @@
 'use server'
 
 import { parseWithZod } from '@conform-to/zod'
-import { revalidatePath } from 'next/cache'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { resetPasswordSchema } from '@/schemas/userSchema'
 
-export async function changePasswordAction(
+export async function resetPasswordAction(
   prevState: unknown,
   formData: FormData,
 ) {
@@ -23,7 +22,7 @@ export async function changePasswordAction(
     })
   }
 
-  const reset_password_token = formData.get('current_password')
+  const reset_password_token = formData.get('reset_password_token')
   const password = formData.get('password')
   const password_confirmation = formData.get('password_confirmation')
 

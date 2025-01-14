@@ -83,5 +83,5 @@ export const resetPasswordSchema = z
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: 'パスワードが一致しません。',
-    path: ['new_password_confirmation'],
+    path: ['password_confirmation'],
   })
