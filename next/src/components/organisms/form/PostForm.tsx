@@ -6,7 +6,9 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
+  Box,
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   Heading,
@@ -35,6 +37,8 @@ import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { ageOptions, forWhoOptions } from '@/constants/options'
 import { postSchema } from '@/schemas/postSchema'
 import { useSouvenirStore } from '@/store/store'
+import CategoryInput from '@/app/features/category/CategoryInput'
+import PlaceInput from '@/app/features/post/PlaceInput'
 
 const PostForm = () => {
   const [lastResult, action] = useFormState(createPostAction, undefined)
@@ -140,6 +144,18 @@ const PostForm = () => {
           </InputGroup>
           <FormErrorMessage>{fields.souvenir_id.errors}</FormErrorMessage>
         </FormControl>
+        <Flex gap={4}>
+          <Box w="50%">
+            <UploadImageForm
+              name={fields.image.name}
+              errors={fields.image.errors}
+              isRequired={false}
+            />
+          </Box>
+          <Box w="50%">
+            <PlaceInput />
+          </Box>
+        </Flex>
         <Stack spacing={1}>
           <Heading as="h2" fontSize="md">
             レビュー
@@ -163,11 +179,6 @@ const PostForm = () => {
           </HStack>
           <Textarea placeholder="感想を記入" name={fields.review.name} />
         </Stack>
-        <UploadImageForm
-          name={fields.image.name}
-          errors={fields.image.errors}
-          isRequired={false}
-        />
         <SubmitButton>記録する</SubmitButton>
       </Stack>
     </form>
