@@ -1,10 +1,15 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 'use client'
 
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
   Button,
   Flex,
   FormControl,
-  FormErrorMessage,
   FormLabel,
   Input,
   InputGroup,
@@ -18,11 +23,7 @@ import CustomIcon from '@/components/atoms/CustomIcon'
 import CustomModal from '@/components/organisms/modal/CustomModal'
 import { placesResultType, selectedPlaceType } from '@/types/types'
 
-type PlaceInputProps = {
-  errors?: Array<string> | undefined
-}
-
-const PlaceInput = ({ errors }: PlaceInputProps) => {
+const PlaceInput = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [selectedPlace, setSelectedPlace] = useState<selectedPlaceType>({
@@ -32,6 +33,7 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
   const [results, setResults] = useState<Array<placesResultType>>([])
   const [inputVal, setInputVal] = useState('')
   const [sessionToken, setSessionToken] = useState('')
+  const [isError, setIsError] = useState(false)
 
   // 新しいセッショントークンを生成
   useEffect(() => {
@@ -41,12 +43,21 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
   // 施設名オートコンプリート
   useEffect(() => {
     const fetchPlaceData = async () => {
-      const res = await fetch(
-        `/api/places?query=${encodeURIComponent(inputVal)}&sessiontoken=${sessionToken}`,
-      )
-      const data = await res.json()
-      if (data.predictions.length) {
-        setResults(data.predictions)
+      try {
+        const res = await fetch(
+          `/api/places?query=${encodeURIComponent(inputVal)}&sessiontoken=${sessionToken}`,
+        )
+        const data = await res.json()
+        if (!data.predictions.length) return
+
+        if (data.status === 'OK') {
+          setIsError(false)
+          setResults(data.predictions)
+        } else {
+          setIsError(true)
+        }
+      } catch (error: any) {
+        setIsError(true)
       }
     }
     fetchPlaceData()
@@ -58,6 +69,7 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
       place_id: place.place_id,
       name: place.structured_formatting.main_text,
     })
+    setInputVal(place.structured_formatting.main_text)
     onClose()
   }
 
@@ -69,7 +81,7 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
         name="category_id"
         value={selectedPlace.place_id || ''}
       />
-      <FormControl isInvalid={!!errors}>
+      <FormControl>
         <FormLabel fontSize="sm" mb={1}>
           購入場所
         </FormLabel>
@@ -80,12 +92,12 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
             name="category_name"
             isReadOnly
             value={selectedPlace.name || ''}
-            pr={selectedPlace.place_id ? 10 : 3}
+            pr={selectedPlace.place_id ? '28px' : 3}
             borderRadius="md"
             onClick={onOpen}
           />
           {selectedPlace.place_id && (
-            <InputRightElement width={selectedPlace.place_id ? '' : '4.5rem'}>
+            <InputRightElement>
               <Button
                 size="sm"
                 variant="ghost"
@@ -105,14 +117,38 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
         buttonText="確定する"
         size="lg"
       >
-        <Input
-          placeholder="店舗名を入力"
-          size="md"
-          name="place"
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setInputVal(e.target.value)
-          }
-        />
+        {isError && (
+          <Alert status="error" mb={4}>
+            <AlertIcon />
+            <AlertDescription fontSize="sm">
+              サーバーエラーが発生しました。時間をおいてから再度お試しください。
+            </AlertDescription>
+          </Alert>
+        )}
+        <InputGroup size="md">
+          <Input
+            placeholder="店舗名を入力"
+            size="md"
+            pr={selectedPlace.place_id ? 8 : 4}
+            name="place"
+            value={inputVal}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setInputVal(e.target.value)
+            }
+          />
+          {inputVal && (
+            <InputRightElement>
+              <Button
+                size="sm"
+                variant="ghost"
+                p={0}
+                onClick={() => setInputVal('')}
+              >
+                <CustomIcon iconName="FaTimes" color="gray.400" />
+              </Button>
+            </InputRightElement>
+          )}
+        </InputGroup>
         {results.map((result) => (
           <Button
             key={result.place_id}
@@ -147,7 +183,6 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
           </Button>
         ))}
       </CustomModal>
-      <FormErrorMessage>{errors}</FormErrorMessage>
     </>
   )
 }
