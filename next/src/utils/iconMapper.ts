@@ -71,5 +71,5 @@ export const iconMapper = {
   FaLock,
   FaUndoAlt,
   FaRegQuestionCircle,
-  FaMapMarkerAlt
+  FaMapMarkerAlt,
 }
