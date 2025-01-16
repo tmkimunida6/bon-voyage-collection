@@ -8,8 +8,6 @@ export async function GET(req: Request) {
   if (!query) {
     return NextResponse.json({ predictions: [] })
   }
-  console.log(query)
-  console.log(sessionToken)
 
   const apiKey = process.env.GOOGLE_MAP_API_KEY
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(

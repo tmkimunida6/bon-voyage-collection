@@ -30,6 +30,7 @@ import { useFormState } from 'react-dom'
 import CustomModal from '../modal/CustomModal'
 import SearchForm from './SearchForm'
 import { createPostAction } from '@/actions/createPostAction'
+import PlaceInput from '@/app/features/post/PlaceInput'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import SubmitButton from '@/components/atoms/SubmitButton'
 import RatingSlider from '@/components/molecules/RatingSlider'
@@ -37,8 +38,6 @@ import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { ageOptions, forWhoOptions } from '@/constants/options'
 import { postSchema } from '@/schemas/postSchema'
 import { useSouvenirStore } from '@/store/store'
-import CategoryInput from '@/app/features/category/CategoryInput'
-import PlaceInput from '@/app/features/post/PlaceInput'
 
 const PostForm = () => {
   const [lastResult, action] = useFormState(createPostAction, undefined)
