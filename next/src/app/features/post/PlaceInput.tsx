@@ -1,9 +1,6 @@
-/* eslint @typescript-eslint/no-unused-vars: 0 */
-
 'use client'
 
 import {
-  Box,
   Button,
   Flex,
   FormControl,
@@ -15,6 +12,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import { nanoid } from 'nanoid'
 import { ChangeEvent, useEffect, useState } from 'react'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import CustomModal from '@/components/organisms/modal/CustomModal'
@@ -33,14 +31,18 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
   })
   const [results, setResults] = useState<Array<placesResultType>>([])
   const [inputVal, setInputVal] = useState('')
+  const [sessionToken, setSessionToken] = useState('')
+
+  // 新しいセッショントークンを生成
+  useEffect(() => {
+    setSessionToken(nanoid())
+  }, [])
 
   // 施設名オートコンプリート
-  const handleSearchPlace = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputVal(e.target.value)
-
+  useEffect(() => {
     const fetchPlaceData = async () => {
       const res = await fetch(
-        `/api/places?query=${encodeURIComponent(inputVal)}`,
+        `/api/places?query=${encodeURIComponent(inputVal)}&sessiontoken=${sessionToken}`,
       )
       const data = await res.json()
       if (data.predictions.length) {
@@ -48,7 +50,7 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
       }
     }
     fetchPlaceData()
-  }
+  }, [inputVal, sessionToken])
 
   // 施設名選択
   const handleSelectPlace = (place: placesResultType) => {
@@ -107,7 +109,9 @@ const PlaceInput = ({ errors }: PlaceInputProps) => {
           placeholder="店舗名を入力"
           size="md"
           name="place"
-          onChange={handleSearchPlace}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setInputVal(e.target.value)
+          }
         />
         {results.map((result) => (
           <Button
