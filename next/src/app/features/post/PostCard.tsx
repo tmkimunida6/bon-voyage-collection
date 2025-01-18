@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-explicit-any: 0 */
+/* eslint @typescript-eslint/no-unused-vars: 0 */
 /* eslint react-hooks/exhaustive-deps: 0 */
 
 'use client'
@@ -77,11 +77,9 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
             url: data.result.url,
           })
         } else {
-          console.log(data)
           return
         }
-      } catch (error: any) {
-        console.log(error)
+      } catch (error) {
         return
       }
     }
@@ -196,7 +194,7 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
                   display="flex"
                   alignItems="center"
                   gap="2px"
-                  color='brand.link'
+                  color="brand.link"
                   target="_blank"
                   rel="noopener"
                 >
