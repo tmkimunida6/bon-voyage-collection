@@ -45,7 +45,7 @@ const PlaceInput = () => {
     const fetchPlaceData = async () => {
       try {
         const res = await fetch(
-          `/api/places?query=${encodeURIComponent(inputVal)}&sessiontoken=${sessionToken}`,
+          `/api/autocomplete?query=${encodeURIComponent(inputVal)}&sessiontoken=${sessionToken}`,
         )
         const data = await res.json()
         if (!data.predictions.length) return
@@ -78,7 +78,7 @@ const PlaceInput = () => {
       <Input
         type="hidden"
         isReadOnly
-        name="category_id"
+        name="place_id"
         value={selectedPlace.place_id || ''}
       />
       <FormControl>
@@ -89,7 +89,7 @@ const PlaceInput = () => {
           <Input
             placeholder="お店の名前を検索"
             size="sm"
-            name="category_name"
+            name="place_name"
             isReadOnly
             value={selectedPlace.name || ''}
             pr={selectedPlace.place_id ? '28px' : 3}

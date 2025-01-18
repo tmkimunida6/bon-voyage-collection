@@ -18,6 +18,7 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   def create
     souvenir = Souvenir.find_by(alias_id: params[:souvenir_id])
+    pp params
     if souvenir.nil?
       render json: { errors: [ "お土産を選択してください。" ] }, status: :unprocessable_entity
       return
@@ -68,7 +69,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   private
 
   def post_params
-    params.permit(:souvenir_id, :rating, :for_who, :age, :review, :image_url)
+    params.permit(:souvenir_id, :rating, :for_who, :age, :review, :image_url, :place_id)
   end
 
   def set_post
