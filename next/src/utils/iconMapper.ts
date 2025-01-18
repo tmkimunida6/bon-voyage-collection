@@ -27,6 +27,7 @@ import {
   FaUndoAlt,
   FaRegQuestionCircle,
   FaMapMarkerAlt,
+  FaExternalLinkAlt,
 } from 'react-icons/fa'
 import {
   FaGift,
@@ -35,6 +36,7 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaGear,
+  FaLocationDot,
 } from 'react-icons/fa6'
 
 export const iconMapper = {
@@ -72,4 +74,6 @@ export const iconMapper = {
   FaUndoAlt,
   FaRegQuestionCircle,
   FaMapMarkerAlt,
+  FaExternalLinkAlt,
+  FaLocationDot,
 }
