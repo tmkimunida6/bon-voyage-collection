@@ -38,9 +38,13 @@ type addressComponentType = {
 
 const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
-  const [placeName, setPlaceName] = useState<string>('')
-  const [countryData, setCountryData] = useState({ code: '', name: '' })
-  const [cityName, setCityName] = useState<string>('')
+  const [placeData, setPlaceData] = useState({
+    placeName: '',
+    countryCode: '',
+    countryName: '',
+    cityName: '',
+    url: '',
+  })
   const { currentUser } = useCurrentUserStore()
 
   // Google Map APIから情報取得
@@ -53,9 +57,7 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
         const data = await res.json()
 
         if (data.status === 'OK') {
-          setPlaceName(data.result.name)
-
-          // 国名取得
+          // Place情報取得
           const addressComponents = data.result.address_components
           const country = addressComponents.find(
             (component: addressComponentType) =>
@@ -65,15 +67,15 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
             (component: addressComponentType) =>
               component.types.includes('administrative_area_level_1'),
           )
-          if (country) {
-            setCountryData({
-              code: country.short_name,
-              name: country.long_name,
-            })
-          }
-          if (city) {
-            setCityName(city.long_name)
-          }
+
+          setPlaceData({
+            ...placeData,
+            placeName: data.result.name,
+            countryCode: country ? country.short_name : '',
+            countryName: country ? country.long_name : '',
+            cityName: city ? city.long_name : '',
+            url: data.result.url,
+          })
         } else {
           console.log(data)
           return
@@ -161,11 +163,13 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
           bg="gray.100"
         />
         <Stack maxW="calc(50% - 0.5rem)" spacing={1}>
-          {countryData && (
+          {(placeData.countryCode ||
+            placeData.countryName ||
+            placeData.cityName) && (
             <Flex gap={1} alignItems="flex-start">
               <HStack height="18px" flexShrink={0}>
                 <CountryFlag
-                  countryCode={countryData.code}
+                  countryCode={placeData.countryCode}
                   style={{
                     border: '1px solid var(--chakra-colors-gray-100)',
                     height: 'auto',
@@ -175,29 +179,33 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
                 />
               </HStack>
               <Text fontSize="xs">
-                {countryData.name}
-                {countryData.name && cityName && '/'}
-                {cityName}
+                {placeData.countryName}
+                {placeData.countryName && placeData.cityName && '/'}
+                {placeData.cityName}
               </Text>
             </Flex>
           )}
-          {placeName && (
+          {placeData.placeName && (
             <HStack spacing={1}>
               <CustomIcon iconName="FaLocationDot" color="brand.primary" />
-              <ChakraLink
-                as={NextLink}
-                href={`https://www.google.com/maps/place/?q=place_id:${post.place_id}`}
-                fontSize="xs"
-                display="flex"
-                alignItems="center"
-                gap="2px"
-                color="brand.link"
-                target="_blank"
-                rel="noopener"
-              >
-                {placeName}
-                <CustomIcon iconName="FaExternalLinkAlt" />
-              </ChakraLink>
+              {placeData.url ? (
+                <ChakraLink
+                  as={NextLink}
+                  href={placeData.url}
+                  fontSize="xs"
+                  display="flex"
+                  alignItems="center"
+                  gap="2px"
+                  color='brand.link'
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {placeData.placeName}
+                  {placeData.url && <CustomIcon iconName="FaExternalLinkAlt" />}
+                </ChakraLink>
+              ) : (
+                <Text fontSize="xs">{placeData.placeName}</Text>
+              )}
             </HStack>
           )}
           {(post.for_who || post.age) && (
