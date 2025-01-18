@@ -119,7 +119,7 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
             />
           )}
         </HStack>
-        {post.rating && <Rating rating={Number(post.rating)} />}
+        <Rating rating={post.rating ? Number(post.rating) : 0} />
         {post.review && (
           <Stack spacing={1}>
             <Text
