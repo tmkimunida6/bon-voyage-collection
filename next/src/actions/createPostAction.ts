@@ -28,6 +28,9 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
   const age = formData.get('age') ? Number(formData.get('age')) : ''
   const review = formData.get('review')
   const imageFile = formData.get('image') ? String(formData.get('image')) : ''
+  const place_id = formData.get('place_id')
+    ? String(formData.get('place_id'))
+    : ''
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -61,6 +64,7 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
         age,
         review,
         image_url,
+        place_id,
       }),
     })
 
