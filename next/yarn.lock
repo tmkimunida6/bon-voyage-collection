@@ -5338,6 +5338,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-country-flag@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "react-country-flag@npm:3.1.0"
+  peerDependencies:
+    react: ">=16"
+  checksum: 10c0/6271cde6cf355c66e2b669c74e98596d771534154210bbb84cd84788f46710c7ee14671229cb92203d09aeb4c30206bb882b73d63d95a73f96cdaca09ed2bd0d
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^18":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -5824,6 +5833,7 @@ __metadata:
     next-cloudinary: "npm:^6.16.0"
     prettier: "npm:^3.3.3"
     react: "npm:^18"
+    react-country-flag: "npm:^3.1.0"
     react-dom: "npm:^18"
     react-icons: "npm:^5.3.0"
     react-tinder-card: "npm:^1.6.4"

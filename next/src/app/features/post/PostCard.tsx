@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { SetStateAction, useEffect, useState } from 'react'
+import CountryFlag from 'react-country-flag'
 import FavoriteButton from '../favorite/FavoriteButton'
 import DeletePostButton from './DeletePostButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
@@ -38,7 +39,7 @@ type addressComponentType = {
 const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const [placeName, setPlaceName] = useState<string>('')
-  const [countryName, setCountryName] = useState<string>('')
+  const [countryData, setCountryData] = useState({ code: '', name: '' })
   const [cityName, setCityName] = useState<string>('')
   const { currentUser } = useCurrentUserStore()
 
@@ -65,7 +66,10 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
               component.types.includes('administrative_area_level_1'),
           )
           if (country) {
-            setCountryName(country.long_name)
+            setCountryData({
+              code: country.short_name,
+              name: country.long_name,
+            })
           }
           if (city) {
             setCityName(city.long_name)
@@ -156,14 +160,26 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
           maxW="calc(50% - 0.5rem)"
           bg="gray.100"
         />
-        <Stack maxW="calc(50% - 0.5rem)">
-          {countryName && (
-            <HStack spacing={1}>
-              <CustomIcon iconName="FaHandHoldingHeart" color="brand.primary" />
-              <Text fontSize="xs" isTruncated>
-                {cityName} / {countryName}
+        <Stack maxW="calc(50% - 0.5rem)" spacing={1}>
+          {countryData && (
+            <Flex gap={1} alignItems="flex-start">
+              <HStack height="18px" flexShrink={0}>
+                <CountryFlag
+                  countryCode={countryData.code}
+                  style={{
+                    border: '1px solid var(--chakra-colors-gray-100)',
+                    height: 'auto',
+                    marginTop: '2px',
+                  }}
+                  svg
+                />
+              </HStack>
+              <Text fontSize="xs">
+                {countryData.name}
+                {countryData.name && cityName && '/'}
+                {cityName}
               </Text>
-            </HStack>
+            </Flex>
           )}
           {placeName && (
             <HStack spacing={1}>
