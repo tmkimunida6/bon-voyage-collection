@@ -5,5 +5,6 @@ FactoryBot.define do
     age { Faker::Number.between(from: 0, to: 7) }
     review { Faker::Lorem.paragraph }
     sequence(:image_url) { |n| "https://example.com/image_#{n}.jpg" }
+    place_id { Faker::Alphanumeric.alphanumeric }
   end
 end
