@@ -11,10 +11,12 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
+  FormLabel,
   Heading,
   HStack,
   Input,
   InputGroup,
+  InputLeftAddon,
   InputRightElement,
   Select,
   Stack,
@@ -151,9 +153,24 @@ const PostForm = () => {
               isRequired={false}
             />
           </Box>
-          <Box w="50%">
+          <Stack w="50%" spacing={4}>
             <PlaceInput />
-          </Box>
+            <FormControl>
+              <FormLabel fontSize="sm" mb={1}>金額</FormLabel>
+              <InputGroup size="sm">
+                <InputLeftAddon>
+                  <Button variant="ghost" p={0} minW="none" h="auto">$</Button>
+                </InputLeftAddon>
+                <Input
+                  type='number'
+                  placeholder="20.00"
+                  size="sm"
+                  name="price"
+                  borderRadius="md"
+                />
+              </InputGroup>
+            </FormControl>
+          </Stack>
         </Flex>
         <Stack spacing={1}>
           <Heading as="h2" fontSize="md">
