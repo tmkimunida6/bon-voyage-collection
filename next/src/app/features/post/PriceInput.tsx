@@ -11,10 +11,12 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  Stack,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import CurrencySelectButton from './CurrencySelectButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import CustomModal from '@/components/organisms/modal/CustomModal'
 import { useCurrencyStore } from '@/store/store'
@@ -23,11 +25,30 @@ import { currencyResultType } from '@/types/types'
 const PriceInput = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [results, setResults] = useState<Array<currencyResultType> | null>(null)
+  const [lastSelectedCurrency, setLastSelectedCurrency] =
+    useState<currencyResultType | null>(null)
   const { selectedCurrency, setSelectedCurrency } = useCurrencyStore()
+
+  // 前回選択した通貨を取得
+  const getLastSelectedCurrency = () => {
+    if (!localStorage.getItem('selectedCurrency') || !results) return
+
+    const currencyData = results.find(
+      (currency) => currency.code === localStorage.getItem('selectedCurrency'),
+    )
+
+    if (currencyData) {
+      setLastSelectedCurrency({
+        code: currencyData.code,
+        name: currencyData.name,
+      })
+    }
+  }
 
   // 通貨一覧取得
   const handleSelectCurrency = async () => {
     if (results) {
+      getLastSelectedCurrency()
       onOpen()
       return
     }
@@ -35,7 +56,6 @@ const PriceInput = () => {
     try {
       const res = await fetch(`/api/currency`)
       const data = await res.json()
-      console.log(data)
       const currencyArray = Object.entries(data as Record<string, string>).map(
         ([code, name]) => ({
           code,
@@ -43,6 +63,7 @@ const PriceInput = () => {
         }),
       )
       setResults(currencyArray)
+      getLastSelectedCurrency()
       onOpen()
     } catch (error: any) {
       console.log(error)
@@ -52,6 +73,8 @@ const PriceInput = () => {
   const onSelectCurrency = (code: string) => {
     setSelectedCurrency(code)
     onClose()
+    // 選択履歴をローカルストレージに保存
+    localStorage.setItem('selectedCurrency', code)
   }
 
   return (
@@ -75,7 +98,7 @@ const PriceInput = () => {
         </InputLeftAddon>
         <Input
           type="number"
-          placeholder="2,000"
+          placeholder="100"
           size="sm"
           name="price"
           borderRadius="md"
@@ -89,42 +112,23 @@ const PriceInput = () => {
         size="sm"
       >
         <Box maxH="60dvh" overflowY="auto">
+          {lastSelectedCurrency && (
+            <Stack mb={4} spacing={0}>
+              <Text fontSize="sm" fontWeight="bold">前回選択した通貨</Text>
+              <CurrencySelectButton
+                code={lastSelectedCurrency.code}
+                name={lastSelectedCurrency.name}
+                onSelectCurrency={onSelectCurrency}
+              />
+            </Stack>
+          )}
           {results?.map((result) => (
-            <Button
+            <CurrencySelectButton
               key={result.code}
-              variant="ghost"
-              px={0}
-              py={2}
-              minW="auto"
-              h="auto"
-              borderBottom="1px solid"
-              borderColor="gray.100"
-              borderRadius={0}
-              w="100%"
-              justifyContent="flex-start"
-              gap={2}
-              fontSize="sm"
-              _hover={{
-                bg: 'brand.secondary',
-                color: 'white',
-              }}
-              _last={{
-                border: 'none',
-              }}
-              onClick={() => onSelectCurrency(result.code)}
-            >
-              <Text
-                as="span"
-                p={1}
-                bg="brand.secondary"
-                color="white"
-                w="43px"
-                borderRadius="4px"
-              >
-                {result.code}
-              </Text>
-              <Text as="span">{result.name}</Text>
-            </Button>
+              code={result.code}
+              name={result.name}
+              onSelectCurrency={onSelectCurrency}
+            />
           ))}
         </Box>
       </CustomModal>
