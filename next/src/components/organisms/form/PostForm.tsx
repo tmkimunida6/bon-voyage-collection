@@ -11,12 +11,10 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   Heading,
   HStack,
   Input,
   InputGroup,
-  InputLeftAddon,
   InputRightElement,
   Select,
   Stack,
@@ -33,6 +31,7 @@ import CustomModal from '../modal/CustomModal'
 import SearchForm from './SearchForm'
 import { createPostAction } from '@/actions/createPostAction'
 import PlaceInput from '@/app/features/post/PlaceInput'
+import PriceInput from '@/app/features/post/PriceInput'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import SubmitButton from '@/components/atoms/SubmitButton'
 import RatingSlider from '@/components/molecules/RatingSlider'
@@ -155,21 +154,7 @@ const PostForm = () => {
           </Box>
           <Stack w="50%" spacing={4}>
             <PlaceInput />
-            <FormControl>
-              <FormLabel fontSize="sm" mb={1}>金額</FormLabel>
-              <InputGroup size="sm">
-                <InputLeftAddon>
-                  <Button variant="ghost" p={0} minW="none" h="auto">$</Button>
-                </InputLeftAddon>
-                <Input
-                  type='number'
-                  placeholder="20.00"
-                  size="sm"
-                  name="price"
-                  borderRadius="md"
-                />
-              </InputGroup>
-            </FormControl>
+            <PriceInput />
           </Stack>
         </Flex>
         <Stack spacing={1}>

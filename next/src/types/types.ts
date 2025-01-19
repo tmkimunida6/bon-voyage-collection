@@ -86,3 +86,8 @@ export type placesResultType = {
   terms: Array<{ offset: number; value: string }>
   types: Array<string>
 }
+
+export type currencyResultType = {
+  code: string
+  name: string
+}
