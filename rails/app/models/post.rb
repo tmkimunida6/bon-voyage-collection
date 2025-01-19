@@ -12,6 +12,7 @@ class Post < ApplicationRecord
 
   validates :souvenir_id, presence: { message: "を選択してください" }, uniqueness: { scope: :user_id, message: "はすでに記録済みです。" }
   validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5, message: "は1以上5以下の値で入力してください。" }, allow_nil: true
+  validates :price, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 99999999.99, message: "は0以上かつ99999999.99以下の値で入力してください。" }, allow_nil: true
 
   # 平均評価スコア
   def self.average_rating
