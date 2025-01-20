@@ -5,6 +5,7 @@ class PostResource
   attributes :review, if: proc { !params[:mypage_posts] }
   attributes :place_id, if: proc { !params[:mypage_posts] }
   attributes :price, if: proc { !params[:mypage_posts] }
+  attributes :currency, if: proc { !params[:mypage_posts] }
 
   attribute :for_who, if: proc { !params[:mypage_posts] } do |post|
     I18n.t("activerecord.attributes.post.for_who.#{post.for_who}") unless post.for_who.nil?
