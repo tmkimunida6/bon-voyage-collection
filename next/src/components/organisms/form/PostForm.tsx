@@ -154,7 +154,7 @@ const PostForm = () => {
           </Box>
           <Stack w="50%" spacing={4}>
             <PlaceInput />
-            <PriceInput />
+            <PriceInput name={fields.price.name} errors={fields.price.errors} />
           </Stack>
         </Flex>
         <Stack spacing={1}>

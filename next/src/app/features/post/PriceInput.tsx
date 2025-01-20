@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   InputGroup,
@@ -15,20 +16,34 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import CurrencySelectButton from './CurrencySelectButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import CustomModal from '@/components/organisms/modal/CustomModal'
 import { useCurrencyStore } from '@/store/store'
 import { currencyResultType } from '@/types/types'
 
-const PriceInput = () => {
+type PriceInputProps = {
+  name: string
+  errors: Array<string> | undefined
+}
+
+const PriceInput = ({ name, errors }: PriceInputProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [results, setResults] = useState<Array<currencyResultType> | null>(null)
   const [lastSelectedCurrency, setLastSelectedCurrency] =
     useState<currencyResultType | null>(null)
+  const [inputPrice, setInputPrice] = useState<number | string>('')
+  const [onBlurError, setOnBlurError] = useState<string>('')
   const { selectedCurrency, setSelectedCurrency } = useCurrencyStore()
 
+  useEffect(() => {
+    if (errors) {
+      setOnBlurError(errors[0])
+    } else {
+      setOnBlurError('')
+    }
+  }, [errors])
   // 前回選択した通貨を取得
   const getLastSelectedCurrency = () => {
     if (!localStorage.getItem('selectedCurrency') || !results) return
@@ -77,8 +92,19 @@ const PriceInput = () => {
     localStorage.setItem('selectedCurrency', code)
   }
 
+  const onBlurValidate = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+
+    // 数値でない場合
+    if (isNaN(Number(value))) {
+      setOnBlurError('半角数字のみで入力してください。')
+    } else {
+      setOnBlurError('')
+    }
+  }
+
   return (
-    <FormControl>
+    <FormControl isInvalid={!!onBlurError}>
       <FormLabel fontSize="sm" mb={1}>
         金額
       </FormLabel>
@@ -97,13 +123,18 @@ const PriceInput = () => {
           </Button>
         </InputLeftAddon>
         <Input
-          type="number"
-          placeholder="100"
+          type="text"
+          placeholder="20.99 (半角数字で入力)"
           size="sm"
-          name="price"
+          name={name}
           borderRadius="md"
+          value={inputPrice}
+          onChange={(e) => setInputPrice(e.target.value)}
+          onBlur={onBlurValidate}
+          inputMode="numeric"
         />
       </InputGroup>
+      <FormErrorMessage>{onBlurError}</FormErrorMessage>
       <CustomModal
         isOpen={isOpen}
         onClose={onClose}
@@ -114,7 +145,9 @@ const PriceInput = () => {
         <Box maxH="60dvh" overflowY="auto">
           {lastSelectedCurrency && (
             <Stack mb={4} spacing={0}>
-              <Text fontSize="sm" fontWeight="bold">前回選択した通貨</Text>
+              <Text fontSize="sm" fontWeight="bold">
+                前回選択した通貨
+              </Text>
               <CurrencySelectButton
                 code={lastSelectedCurrency.code}
                 name={lastSelectedCurrency.name}
@@ -132,6 +165,7 @@ const PriceInput = () => {
           ))}
         </Box>
       </CustomModal>
+      <Input type="hidden" name="currency" value={selectedCurrency} />
     </FormControl>
   )
 }
