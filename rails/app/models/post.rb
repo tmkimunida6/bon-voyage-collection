@@ -30,12 +30,27 @@ class Post < ApplicationRecord
 
   # 金額カスタムバリデーション
   def price_range_validation
-    if price.present?
-      if price < 0
-        errors.add(:price, "は0以上の値で入力してください。")
-      elsif price > 99999999.99
-        errors.add(:price, "は99999999.99以下の値で入力してください。")
-      end
+    if price.blank?
+      return
+    end
+
+    # 半角数字と小数点以外の場合
+    unless price.match?(/^\d+(\.\d+)?$/)
+      errors.add(:price, "は半角数字で入力してください。")
+      return
+    end
+
+    # 8桁以下、小数点第3位までの場合
+    unless price.match?(/^\d{1,7}(\.\d{1,3})?$/)
+      errors.add(:price, "は8桁以下、小数点第3位までで入力してください。")
+      return
+    end
+
+    # 数値の範囲をチェック
+    if price.to_f < 0
+      errors.add(:price, "は0以上の値で入力してください。")
+    elsif price.to_f > 99999999.99
+      errors.add(:price, "は99999999.99以下の値で入力してください。")
     end
   end
 end
