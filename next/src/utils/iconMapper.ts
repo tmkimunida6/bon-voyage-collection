@@ -37,6 +37,7 @@ import {
   FaChevronUp,
   FaGear,
   FaLocationDot,
+  FaSackDollar,
 } from 'react-icons/fa6'
 
 export const iconMapper = {
@@ -76,4 +77,5 @@ export const iconMapper = {
   FaMapMarkerAlt,
   FaExternalLinkAlt,
   FaLocationDot,
+  FaSackDollar,
 }
