@@ -108,7 +108,7 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
       <FormLabel fontSize="sm" mb={1}>
         金額
       </FormLabel>
-      <InputGroup size="sm">
+      <InputGroup size="md">
         <InputLeftAddon>
           <Button
             variant="ghost"
@@ -116,22 +116,22 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
             minW="none"
             h="auto"
             onClick={() => handleSelectCurrency()}
-            fontSize="xs"
+            fontSize="sm"
           >
             {selectedCurrency}
-            <CustomIcon iconName="FaChevronDown" fontSize="10px" ml={1} />
+            <CustomIcon iconName="FaChevronDown" fontSize="xs" ml={1} />
           </Button>
         </InputLeftAddon>
         <Input
           type="text"
           placeholder="20.99 (半角数字で入力)"
-          size="sm"
+          size="md"
           name={name}
           borderRadius="md"
           value={inputPrice}
           onChange={(e) => setInputPrice(e.target.value)}
           onBlur={onBlurValidate}
-          inputMode="numeric"
+          inputMode="decimal"
         />
       </InputGroup>
       <FormErrorMessage>{onBlurError}</FormErrorMessage>

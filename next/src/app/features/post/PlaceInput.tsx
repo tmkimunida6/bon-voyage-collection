@@ -60,6 +60,8 @@ const PlaceInput = () => {
         setIsError(true)
       }
     }
+
+    if (!inputVal) return
     fetchPlaceData()
   }, [inputVal, sessionToken])
 
@@ -85,10 +87,10 @@ const PlaceInput = () => {
         <FormLabel fontSize="sm" mb={1}>
           購入場所
         </FormLabel>
-        <InputGroup size="sm">
+        <InputGroup size="md">
           <Input
             placeholder="お店の名前を検索"
-            size="sm"
+            size="md"
             name="place_name"
             isReadOnly
             value={selectedPlace.name || ''}
