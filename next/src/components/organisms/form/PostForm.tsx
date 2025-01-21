@@ -3,15 +3,14 @@
 'use client'
 
 import {
+  Accordion,
   Alert,
   AlertDescription,
   AlertIcon,
   Box,
   Button,
-  Flex,
   FormControl,
   FormErrorMessage,
-  Heading,
   HStack,
   Input,
   InputGroup,
@@ -31,8 +30,10 @@ import CustomModal from '../modal/CustomModal'
 import SearchForm from './SearchForm'
 import { createPostAction } from '@/actions/createPostAction'
 import PlaceInput from '@/app/features/post/PlaceInput'
+import PriceInput from '@/app/features/post/PriceInput'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import SubmitButton from '@/components/atoms/SubmitButton'
+import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
 import RatingSlider from '@/components/molecules/RatingSlider'
 import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { ageOptions, forWhoOptions } from '@/constants/options'
@@ -143,41 +144,57 @@ const PostForm = () => {
           </InputGroup>
           <FormErrorMessage>{fields.souvenir_id.errors}</FormErrorMessage>
         </FormControl>
-        <Flex gap={4}>
-          <Box w="50%">
-            <UploadImageForm
-              name={fields.image.name}
-              errors={fields.image.errors}
-              isRequired={false}
-            />
-          </Box>
-          <Box w="50%">
-            <PlaceInput />
-          </Box>
-        </Flex>
-        <Stack spacing={1}>
-          <Heading as="h2" fontSize="md">
-            レビュー
-          </Heading>
-          <RatingSlider />
-          <HStack spacing={1} mt={3}>
-            <Select placeholder="誰に？" size="sm" name={fields.for_who.name}>
-              {forWhoOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </Select>
-            <Select placeholder="年齢層" size="sm" name={fields.age.name}>
-              {ageOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </Select>
-          </HStack>
-          <Textarea placeholder="感想を記入" name={fields.review.name} />
-        </Stack>
+        <UploadImageForm
+          name={fields.image.name}
+          errors={fields.image.errors}
+          isRequired={false}
+        />
+        <Accordion allowMultiple w="100%">
+          <CustomAccordionItem title="購入データを入力" hasBorder={true}>
+            <Stack spacing={4} p={4} bg="white">
+              <PlaceInput />
+              <PriceInput
+                name={fields.price.name}
+                errors={fields.price.errors}
+              />
+            </Stack>
+          </CustomAccordionItem>
+        </Accordion>
+        <Accordion allowMultiple w="100%">
+          <CustomAccordionItem title="レビューを入力" hasBorder={true}>
+            <Box p={4} bg="white">
+              <Stack spacing={1}>
+                <RatingSlider />
+                <HStack spacing={1} mt={3}>
+                  <Select
+                    placeholder="誰に？"
+                    size="sm"
+                    name={fields.for_who.name}
+                  >
+                    {forWhoOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </Select>
+                  <Select placeholder="年齢層" size="sm" name={fields.age.name}>
+                    {ageOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </Select>
+                </HStack>
+                <Textarea
+                  placeholder="感想を記入"
+                  name={fields.review.name}
+                  size="md"
+                  rows={4}
+                />
+              </Stack>
+            </Box>
+          </CustomAccordionItem>
+        </Accordion>
         <SubmitButton>記録する</SubmitButton>
       </Stack>
     </form>

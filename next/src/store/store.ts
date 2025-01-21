@@ -27,6 +27,16 @@ export const useSouvenirStore = create<souvenirState>((set) => ({
   setSelectedSouvenir: (souvenir) => set({ selectedSouvenir: souvenir }),
 }))
 
+// 通貨選択
+type currencyState = {
+  selectedCurrency: string
+  setSelectedCurrency: (currency: string) => void
+}
+export const useCurrencyStore = create<currencyState>((set) => ({
+  selectedCurrency: 'JPY',
+  setSelectedCurrency: (currency) => set({ selectedCurrency: currency }),
+}))
+
 // 「欲しい！」お土産一覧
 type FavoritedSouvenirsState = {
   favoritedSouvenirs: Array<SouvenirCardType>

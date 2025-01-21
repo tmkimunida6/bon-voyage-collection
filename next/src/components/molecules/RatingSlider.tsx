@@ -21,6 +21,7 @@ const RatingSlider = () => {
     mt: '2',
     ml: '-2.5',
     fontSize: 'sm',
+    fontWeight: 'bold',
     color: 'brand.black',
   }
 
@@ -65,8 +66,8 @@ const RatingSlider = () => {
         <SliderTrack bg="gray.200">
           <SliderFilledTrack bg="brand.primary" />
         </SliderTrack>
-        <SliderThumb boxSize={6}>
-          <Box color="brand.star">
+        <SliderThumb boxSize={6} bg="brand.primary">
+          <Box color="white">
             <CustomIcon iconName="FaStar" />
           </Box>
         </SliderThumb>

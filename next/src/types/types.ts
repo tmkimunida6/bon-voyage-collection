@@ -58,6 +58,8 @@ export type PostType = {
   review: string | null
   image_url: string | null
   place_id: string | null
+  price: string | null
+  currency: string | null
   user: UserType
   souvenir: SouvenirCardType
 }
@@ -85,4 +87,9 @@ export type placesResultType = {
   }
   terms: Array<{ offset: number; value: string }>
   types: Array<string>
+}
+
+export type currencyResultType = {
+  code: string
+  name: string
 }

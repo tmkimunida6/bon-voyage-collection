@@ -49,7 +49,8 @@ const CustomAccordionItem = ({
         borderRadius="0 0 4px 4px"
         border={hasBorder ? '1px solid' : 'none'}
         borderWidth={hasBorder ? '0 1px 1px 1px' : '0'}
-        borderColor={hasBorder ? 'brand.primary' : 'transparent'}
+        borderColor={hasBorder ? triggerBgColor : 'transparent'}
+        overflow="hidden"
       >
         {children}
       </AccordionPanel>

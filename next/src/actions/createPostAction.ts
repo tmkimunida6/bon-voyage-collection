@@ -29,8 +29,8 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
   const review = formData.get('review')
   const imageFile = formData.get('image') ? String(formData.get('image')) : ''
   const place_id = formData.get('place_id')
-    ? String(formData.get('place_id'))
-    : ''
+  const price = formData.get('price')
+  const currency = formData.get('currency')
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -65,6 +65,8 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
         review,
         image_url,
         place_id,
+        price,
+        currency,
       }),
     })
 

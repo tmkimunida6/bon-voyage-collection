@@ -34,7 +34,10 @@ RSpec.describe "投稿", type: :request do
         for_who: 'for_myself',
         age: 'under_ten',
         review: 'This is a test post.',
-        image_url: 'http://example.com/image.jpg'
+        image_url: 'http://example.com/image.jpg',
+        place_id: "exampleplaceid",
+        price: "2000",
+        currency: "JPY"
       }
     end
 

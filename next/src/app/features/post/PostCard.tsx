@@ -206,6 +206,17 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
               )}
             </HStack>
           )}
+          {post.currency && post.price && (
+            <HStack spacing={1}>
+              <CustomIcon iconName="FaSackDollar" color="brand.primary" />
+              <Text fontSize="xs">
+                <Text as="span" fontWeight="bold" mr={1}>
+                  {post.currency}
+                </Text>
+                {post.price}
+              </Text>
+            </HStack>
+          )}
           {(post.for_who || post.age) && (
             <HStack spacing={1}>
               <CustomIcon iconName="FaHandHoldingHeart" color="brand.primary" />

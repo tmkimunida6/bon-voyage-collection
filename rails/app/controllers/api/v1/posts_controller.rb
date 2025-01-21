@@ -68,7 +68,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   private
 
   def post_params
-    params.permit(:souvenir_id, :rating, :for_who, :age, :review, :image_url, :place_id)
+    params.permit(:souvenir_id, :rating, :for_who, :age, :review, :image_url, :place_id, :price, :currency)
   end
 
   def set_post
@@ -76,8 +76,12 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def belongs_to_current_user?
-    unless @post.user_id == current_user.id
-      render json: { error: "ログインしているユーザーを確認してください。" }, status: :forbidden
+    if @post.present?
+      unless @post.user_id == current_user.id
+        render json: { error: "ログインしているユーザーを確認してください。" }, status: :forbidden
+      end
+    else
+      render json: { error: "投稿が存在しないか、すでに削除済みです。" }, status: :not_found
     end
   end
 end

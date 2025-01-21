@@ -32,5 +32,8 @@ ja:
           over_seventies: 70代以上
         review: 感想
         image_url: 画像
+        place_id: 購入場所
+        price: 金額
+        currency: 通貨
       favorite:
         souvenir_id: "このお土産"
