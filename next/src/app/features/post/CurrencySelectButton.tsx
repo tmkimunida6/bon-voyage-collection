@@ -46,7 +46,9 @@ const CurrencySelectButton = ({
       >
         {code}
       </Text>
-      <Text as="span" fontWeight="normal">{name}</Text>
+      <Text as="span" fontWeight="normal">
+        {name}
+      </Text>
     </Button>
   )
 }
