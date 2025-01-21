@@ -36,20 +36,51 @@ RSpec.describe Post, type: :model do
       it "評価スコアが範囲外の場合、バリデーションに失敗する" do
         post.rating = 6.0
         expect(post).to be_invalid
-        expect(post.errors[:rating]).not_to be_empty
+        expect(post.errors.full_messages).to include('スコアは1以上5以下の値で入力してください。')
       end
 
       it "評価スコアが負の値の場合、バリデーションに失敗する" do
         post.rating = -1.0
         expect(post).to be_invalid
         expect(post.errors[:rating]).not_to be_empty
+        expect(post.errors.full_messages).to include('スコアは1以上5以下の値で入力してください。')
       end
 
       it "ユーザーとお土産の組み合わせが重複している場合、バリデーションに失敗する" do
         create(:post, user: user, souvenir: souvenir)
         duplicate_post = build(:post, user: post.user, souvenir: post.souvenir)
         expect(duplicate_post).to be_invalid
-        expect(duplicate_post.errors[:souvenir_id]).not_to be_empty
+        expect(duplicate_post.errors.full_messages).to include('このお土産はすでに記録済みです。')
+      end
+
+      it "priceがあるが、currencyがない場合、バリデーションに失敗する" do
+        post.currency = nil
+        expect(post).to be_invalid
+        expect(post.errors.full_messages).to include('通貨を選択してください。')
+      end
+
+      it "currencyがあるが、priceがない場合、バリデーションに失敗する" do
+        post.price = nil
+        expect(post).to be_invalid
+        expect(post.errors.full_messages).to include('金額を入力してください。')
+      end
+
+      it "priceが小数点第4位以下の場合、バリデーションに失敗する" do
+        post.price = "2000.1234"
+        expect(post).to be_invalid
+        expect(post.errors.full_messages).to include('金額は小数点第3位までで入力してください。')
+      end
+
+      it "priceが0より小さい（マイナス）の場合、バリデーションに失敗する" do
+        post.price = "-1"
+        expect(post).to be_invalid
+        expect(post.errors.full_messages).to include('金額は半角数字で入力してください。')
+      end
+
+      it "priceが99999999.99より大きいの場合、バリデーションに失敗する" do
+        post.price = "199999999.99"
+        expect(post).to be_invalid
+        expect(post.errors.full_messages).to include('金額は99999999.99以下の値で入力してください。')
       end
     end
   end

@@ -6,5 +6,7 @@ FactoryBot.define do
     review { Faker::Lorem.paragraph }
     sequence(:image_url) { |n| "https://example.com/image_#{n}.jpg" }
     place_id { Faker::Alphanumeric.alphanumeric }
+    price { Faker::Number.decimal(l_digits: rand(1..4), r_digits: rand(1..3)).to_s }
+    currency { Faker::Currency.code }
   end
 end

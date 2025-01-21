@@ -40,9 +40,9 @@ class Post < ApplicationRecord
       return
     end
 
-    # 8桁以下、小数点第3位までの場合
-    unless price.match?(/^\d{1,7}(\.\d{1,3})?$/)
-      errors.add(:price, "は8桁以下、小数点第3位までで入力してください。")
+    # 小数点第3位までの場合
+    unless price.match?(/^\d+(\.\d{1,3})?$/)
+      errors.add(:price, "は小数点第3位までで入力してください。")
       return
     end
 
