@@ -107,11 +107,12 @@ const PostForm = () => {
               value={selectedSouvenir.name}
               isReadOnly
               pr={10}
+              onClick={handleSouvenirModal}
             />
             <InputRightElement
               width={selectedSouvenir.alias_id ? '' : '4.5rem'}
             >
-              {selectedSouvenir.alias_id ? (
+              {selectedSouvenir.alias_id && (
                 <Button size="sm" variant="ghost" p={0}>
                   <CustomIcon
                     iconName="FaTimes"
@@ -120,15 +121,6 @@ const PostForm = () => {
                       setSelectedSouvenir({ alias_id: '', name: '' })
                     }
                   />
-                </Button>
-              ) : (
-                <Button
-                  h="1.75rem"
-                  size="sm"
-                  colorScheme="gray"
-                  onClick={handleSouvenirModal}
-                >
-                  選択
                 </Button>
               )}
             </InputRightElement>

@@ -81,24 +81,16 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
           isReadOnly
           value={selectedCategory.name || ''}
           pr={10}
+          onClick={handleCategoryModal}
         />
         <InputRightElement width={selectedCategory.id ? '' : '4.5rem'}>
-          {selectedCategory.id ? (
+          {selectedCategory.id && (
             <Button size="sm" variant="ghost" p={0}>
               <CustomIcon
                 iconName="FaTimes"
                 color="gray.400"
                 onClick={() => setSelectedCategory({ id: '', name: '' })}
               />
-            </Button>
-          ) : (
-            <Button
-              h="1.75rem"
-              size="sm"
-              colorScheme="gray"
-              onClick={handleCategoryModal}
-            >
-              選択
             </Button>
           )}
         </InputRightElement>
