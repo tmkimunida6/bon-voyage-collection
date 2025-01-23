@@ -18,7 +18,7 @@ import {
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { redirect } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useFormState } from 'react-dom'
 import { changeProfileAction } from '@/actions/changeProfileAction'
 import SubmitButton from '@/components/atoms/SubmitButton'
@@ -38,6 +38,10 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
       return parseWithZod(formData, { schema: changeProfileSchema })
     },
   })
+  const [editing, setEditing] = useState(false)
+  const [nicknameChanged, setNicknameChanged] = useState(false)
+  const [imageChanged, setImageChanged] = useState(false)
+  const isInitialRender = useRef(true)
 
   // 成功時のメッセージ
   const toast = useToast()
@@ -52,6 +56,20 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
       redirect('/setting')
     }
   }, [lastResult])
+
+  // 入力に変更があった場合のみ変更ボタンを活性化
+  useEffect(() => {
+    // 初期表示時は何もしない
+    if (isInitialRender.current) {
+      isInitialRender.current = false
+      return
+    }
+
+    // 編集開始フラグ
+    if (!editing) {
+      setEditing(true)
+    }
+  }, [nicknameChanged, imageChanged])
 
   return (
     <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
@@ -70,6 +88,7 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
               name={fields.nickname.name}
               placeholder="例：ボンボヤージュ太郎"
               defaultValue={nickname}
+              onChange={() => !nicknameChanged && setNicknameChanged(true)}
             />
             <FormErrorMessage>{fields.nickname.errors}</FormErrorMessage>
           </FormControl>
@@ -82,8 +101,10 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
           errors={fields.image.errors}
           isRequired={true}
           prevImage={image}
+          imageChanged={imageChanged}
+          setImageChanged={setImageChanged}
         />
-        <SubmitButton>変更を確定する</SubmitButton>
+        <SubmitButton disabled={!editing}>変更を確定する</SubmitButton>
       </Stack>
     </form>
   )

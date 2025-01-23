@@ -11,6 +11,7 @@ import {
   Input,
   VStack,
 } from '@chakra-ui/react'
+import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import CustomIcon from '../atoms/CustomIcon'
 import useUploadImage from '@/hooks/useUploadImage'
 
@@ -19,6 +20,8 @@ type UploadAvatarFormProps = {
   errors: Array<string> | undefined
   isRequired: boolean
   prevImage: string
+  imageChanged: boolean
+  setImageChanged: Dispatch<SetStateAction<boolean>>
 }
 
 const UploadAvatarForm = ({
@@ -26,6 +29,8 @@ const UploadAvatarForm = ({
   errors,
   isRequired,
   prevImage,
+  imageChanged,
+  setImageChanged,
 }: UploadAvatarFormProps) => {
   const {
     selectedImage,
@@ -35,6 +40,14 @@ const UploadAvatarForm = ({
     handleImageChange,
     deleteInputFile,
   } = useUploadImage()
+
+  const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    // 画像変更開始フラグ
+    if (!imageChanged) {
+      setImageChanged(true)
+    }
+    handleImageChange(e)
+  }
 
   return (
     <VStack spacing={0}>
@@ -91,7 +104,7 @@ const UploadAvatarForm = ({
       <Input
         type="file"
         accept="image/*"
-        onChange={handleImageChange}
+        onChange={onChangeImage}
         hidden
         ref={inputFileRef}
       />

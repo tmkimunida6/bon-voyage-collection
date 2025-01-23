@@ -12,6 +12,7 @@ import {
   InputGroup,
   InputLeftAddon,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { ChangeEvent, useEffect, useState } from 'react'
 import CurrencySearchBox from './CurrencySearchBox'
@@ -33,6 +34,7 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
   const [inputPrice, setInputPrice] = useState<number | string>('')
   const [onBlurError, setOnBlurError] = useState<string>('')
   const { selectedCurrency } = useCurrencyStore()
+  const toast = useToast()
 
   useEffect(() => {
     if (errors) {
@@ -75,7 +77,14 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
       getLastSelectedCurrency()
       onOpen()
     } catch (error: any) {
-      console.log(error)
+      toast({
+        title:
+          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+      onClose()
     }
   }
 
