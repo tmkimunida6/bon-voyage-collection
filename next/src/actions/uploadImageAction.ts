@@ -18,5 +18,6 @@ export async function uploadImageAction(
     public_id,
     format: 'webp',
   }
-  return await cloudinary.uploader.upload(fileData, options)
+  const result = await cloudinary.uploader.upload(fileData, options)
+  return result
 }

@@ -42,7 +42,7 @@ const UploadAvatarForm = ({
         <FormLabel>プロフィール画像</FormLabel>
         <Box position="relative" display="inline-block">
           {!prevImage && !previewUrl ? (
-            <Avatar size="xl" src="https://bit.ly/broken-link" bg="gray.400" />
+            <Avatar size="xl" bg="gray.400" />
           ) : (
             <Avatar size="xl" src={previewUrl || prevImage} />
           )}

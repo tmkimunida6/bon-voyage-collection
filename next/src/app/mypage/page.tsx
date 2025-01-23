@@ -49,7 +49,7 @@ export default async function Mypage({ searchParams }: MypageProps) {
     <Stack spacing={6}>
       <HStack justifyContent="space-between">
         <HStack>
-          <Avatar size="sm" src={user.image || 'https://bit.ly/broken-link'} />
+          <Avatar size="sm" src={user.image || ''} />
           <Text fontSize="lg">{user.nickname || `user_${user.alias_id}`}</Text>
         </HStack>
         <Button as={NextLink} href="/setting" size="xs" variant="ghost" p={0}>

@@ -28,6 +28,7 @@ import { PostType, timelineResultType } from '@/types/types'
 type PostCardProps = {
   post: PostType
   setTimelineResult: (state: SetStateAction<timelineResultType>) => void
+  page: 'timeline' | 'detail'
 }
 
 type addressComponentType = {
@@ -36,7 +37,7 @@ type addressComponentType = {
   types: Array<string>
 }
 
-const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
+const PostCard = ({ post, setTimelineResult, page }: PostCardProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const [placeData, setPlaceData] = useState({
     placeName: '',
@@ -90,10 +91,7 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
     <Card p={4} boxShadow="0 0 15px 0 rgba(0, 0, 0, 0.25)">
       <Stack spacing={2}>
         <HStack>
-          <Avatar
-            size="xs"
-            src={post.user.image || 'https://bit.ly/broken-link'}
-          />
+          <Avatar size="xs" src={post.user.image || ''} />
           <Text fontSize="xs">
             {post.user.nickname || `user_${post.user.alias_id}`}
           </Text>
@@ -151,15 +149,17 @@ const PostCard = ({ post, setTimelineResult }: PostCardProps) => {
         )}
       </Stack>
       <Flex gap={4} mt={4}>
-        <Image
-          src={post.image_url ? post.image_url : post.souvenir.image_url}
-          alt={post.souvenir.name}
-          borderRadius="sm"
-          objectFit="contain"
-          aspectRatio="3/2"
-          maxW="calc(50% - 0.5rem)"
-          bg="gray.100"
-        />
+        {!(page === 'detail' && !post.image_url) && (
+          <Image
+            src={post.image_url ? post.image_url : post.souvenir.image_url}
+            alt={post.souvenir.name}
+            borderRadius="sm"
+            objectFit="contain"
+            aspectRatio="3/2"
+            maxW="calc(50% - 0.5rem)"
+            bg="gray.100"
+          />
+        )}
         <Stack maxW="calc(50% - 0.5rem)" spacing={1}>
           {(placeData.countryCode ||
             placeData.countryName ||
