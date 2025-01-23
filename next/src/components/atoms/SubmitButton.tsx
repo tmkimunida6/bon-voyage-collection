@@ -6,14 +6,21 @@ import { useFormStatus } from 'react-dom'
 
 type SubmitButtonProps = {
   children: ReactNode
+  disabled?: boolean
 }
 
-const SubmitButton = ({ children }: SubmitButtonProps) => {
+const SubmitButton = ({ children, disabled = false }: SubmitButtonProps) => {
   const { pending } = useFormStatus()
 
   return (
     <ButtonGroup justifyContent="center">
-      <Button type="submit" variant="primary" isLoading={pending}>
+      <Button
+        type="submit"
+        variant="primary"
+        isLoading={pending}
+        disabled={disabled}
+        aria-disabled={disabled}
+      >
         {children}
       </Button>
     </ButtonGroup>
