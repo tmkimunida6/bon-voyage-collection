@@ -36,11 +36,19 @@ export async function changeProfileAction(
   }
 
   try {
-    let image_url = null
+    let image_url: string | null = null
     if (imageFile) {
       // 画像をCloudinaryにアップロード
       const uploadResult = await uploadImageAction(imageFile, 'profile')
       image_url = uploadResult.secure_url
+    }
+
+    const body: { nickname?: string; image?: string } = {}
+    if (nickname) {
+      body.nickname = String(nickname)
+    }
+    if (image_url) {
+      body.image = image_url
     }
 
     const res = await fetch(`${apiBaseUrl}/auth`, {
@@ -51,10 +59,7 @@ export async function changeProfileAction(
         client: tokens.client,
         uid: tokens.uid,
       },
-      body: JSON.stringify({
-        nickname,
-        image: image_url,
-      }),
+      body: JSON.stringify(body),
     })
 
     const data = await res.json()
