@@ -98,6 +98,7 @@ const PostCardList = ({
             key={post.alias_id}
             post={post}
             setTimelineResult={setTimelineResult}
+            page={page}
           />
         ))}
       </SimpleGrid>
