@@ -61,7 +61,7 @@ export async function changeProfileAction(
 
     if (!res.ok) {
       return submission.reply({
-        formErrors: data.errors.full_messages || [
+        formErrors: data.errors || [
           'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
         ],
       })
@@ -70,10 +70,11 @@ export async function changeProfileAction(
     revalidatePath('/setting/profile')
     return submission.reply()
   } catch (error: any) {
+    const message = error.message
+      ? error.message
+      : 'サーバーエラーが発生しました。時間をおいてから再度お試しください。'
     return submission.reply({
-      formErrors: error.message || [
-        'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
-      ],
+      formErrors: [message],
     })
   }
 }

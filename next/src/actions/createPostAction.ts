@@ -82,11 +82,11 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
     revalidatePath('/timeline')
     return submission.reply()
   } catch (error: any) {
+    const message = error.message
+      ? error.message
+      : 'サーバーエラーが発生しました。時間をおいてから再度お試しください。'
     return submission.reply({
-      formErrors: [
-        error.message ||
-          'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
-      ],
+      formErrors: [message],
     })
   }
 }
