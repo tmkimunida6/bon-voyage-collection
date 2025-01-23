@@ -18,6 +18,12 @@ RSpec.describe Post, type: :model do
         expect(created_post.alias_id).to be_present
         expect(created_post.alias_id).to be_a(String)
       end
+
+      it "currencyがあるが、priceがない場合、バリデーションに失敗しない" do
+        post.price = nil
+        expect(post).to be_valid
+        expect(post.errors).to be_empty
+      end
     end
 
     context "失敗" do
@@ -57,12 +63,6 @@ RSpec.describe Post, type: :model do
         post.currency = nil
         expect(post).to be_invalid
         expect(post.errors.full_messages).to include('通貨を選択してください。')
-      end
-
-      it "currencyがあるが、priceがない場合、バリデーションに失敗する" do
-        post.price = nil
-        expect(post).to be_invalid
-        expect(post.errors.full_messages).to include('金額を入力してください。')
       end
 
       it "priceが小数点第4位以下の場合、バリデーションに失敗する" do
