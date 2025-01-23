@@ -68,6 +68,15 @@ RSpec.describe "投稿", type: :request do
           expect(json['errors']).to eq [ "このお土産はすでに記録済みです。" ]
         end
       end
+
+      context "currencyがあるが、priceがない場合" do
+        let(:params) { super().merge(price: '') }
+        it 'currencyはnilで登録される' do
+          expect { post_request }.to change { Post.count }.by(1)
+          expect(response).to have_http_status(:ok)
+          expect(json['price']).to eq('')
+        end
+      end
     end
 
     context '未認証のユーザーの場合' do

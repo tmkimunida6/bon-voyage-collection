@@ -23,6 +23,10 @@ class Api::V1::PostsController < Api::V1::BaseController
       return
     end
 
+    # 金額の入力がなく、通貨だけの場合、通貨は登録しない
+    processed_params = post_params
+    processed_params[:currency] = nil if processed_params[:price].present?
+
     post = current_user.posts.build(post_params)
     post.souvenir = souvenir
     if post.save

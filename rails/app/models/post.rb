@@ -12,7 +12,6 @@ class Post < ApplicationRecord
 
   validates :souvenir_id, presence: { message: "を選択してください。" }, uniqueness: { scope: :user_id, message: "はすでに記録済みです。" }
   validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5, message: "は1以上5以下の値で入力してください。" }, allow_nil: true
-  validates :price, presence: { message: "を入力してください。" }, if: -> { currency.present? }
   validates :currency, presence: { message: "を選択してください。" }, if: -> { price.present? }
   validate :price_range_validation
 

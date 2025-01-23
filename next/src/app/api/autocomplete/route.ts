@@ -10,6 +10,7 @@ export async function GET(req: Request) {
   }
 
   const apiKey = process.env.GOOGLE_MAP_API_KEY
+  console.log(apiKey)
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(
     query,
   )}&key=${apiKey}&sessiontoken=${sessionToken}&types=establishment&language=ja`
