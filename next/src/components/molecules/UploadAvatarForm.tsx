@@ -46,7 +46,7 @@ const UploadAvatarForm = ({
     if (!imageChanged) {
       setImageChanged(true)
     }
-    handleImageChange(e)
+    handleImageChange(e, 192)
   }
 
   return (

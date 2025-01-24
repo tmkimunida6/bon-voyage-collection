@@ -24,15 +24,19 @@ const useUploadImage = () => {
     })
   }
 
-  const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (
+    event: ChangeEvent<HTMLInputElement>,
+    size: number,
+  ) => {
     const file = event.target.files?.[0]
     if (file) {
       try {
         // 画像を圧縮
         const options = {
-          maxSizeMB: 1,
-          maxWidthOrHeight: 800,
+          maxSizeMB: 0.5,
+          maxWidthOrHeight: size,
           useWebWorker: true,
+          fileType: 'image/webp',
         }
         const compressedFile = await imageCompression(file, options)
 
