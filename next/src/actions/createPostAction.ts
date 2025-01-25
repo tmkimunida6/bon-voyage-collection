@@ -31,6 +31,10 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
   const place_id = formData.get('place_id')
   const price = formData.get('price')
   const currency = formData.get('currency')
+  const memoryImageFile = formData.get('memory_image')
+    ? String(formData.get('memory_image'))
+    : ''
+  const memory_content = formData.get('memory_content')
 
   const tokens = await getUserTokens()
   if (!tokens) {
@@ -42,10 +46,17 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
   let data
   try {
     let image_url = null
+    let memory_image_url = null
     if (imageFile) {
       // 画像をCloudinaryにアップロード
       const uploadResult = await uploadImageAction(imageFile, 'post')
       image_url = uploadResult.secure_url
+    }
+
+    if (memoryImageFile) {
+      // 画像をCloudinaryにアップロード
+      const uploadResult = await uploadImageAction(memoryImageFile, 'memory')
+      memory_image_url = uploadResult.secure_url
     }
 
     // DBにデータ送信
@@ -67,6 +78,8 @@ export async function createPostAction(prevState: unknown, formData: FormData) {
         place_id,
         price,
         currency,
+        memory_image_url,
+        memory_content,
       }),
     })
 
