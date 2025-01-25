@@ -31,4 +31,21 @@ export const Form = {
       fontWeight: 'bold',
     },
   },
+  Checkbox: {
+    baseStyle: {
+      container: {
+        alignItems: 'flex-start',
+      },
+      control: {
+        _checked: {
+          bg: 'brand.primary',
+          borderColor: 'brand.primary',
+          _hover: {
+            bg: 'brand.primary',
+            borderColor: 'brand.primary',
+          },
+        },
+      },
+    },
+  },
 }
