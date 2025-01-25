@@ -29,6 +29,7 @@ import {
   FaMapMarkerAlt,
   FaExternalLinkAlt,
   FaCheckCircle,
+  FaSearchPlus,
 } from 'react-icons/fa'
 import {
   FaGift,
@@ -80,4 +81,5 @@ export const iconMapper = {
   FaLocationDot,
   FaSackDollar,
   FaCheckCircle,
+  FaSearchPlus,
 }

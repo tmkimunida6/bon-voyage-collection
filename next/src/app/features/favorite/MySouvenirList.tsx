@@ -1,5 +1,6 @@
 'use client'
 
+import MySouvenirCardWithMemoryModal from '../mypage/MySouvenirCardWithMemoryModal'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
 import { useFavoriteStore, useMyPostsStore } from '@/store/store'
@@ -21,13 +22,7 @@ const MySouvenirList = ({ type }: MySouvenirListProps) => {
           {type === 'myPost' ? (
             <>
               {myPosts.map((post: PostType) => (
-                <SouvenirCard
-                  key={post.alias_id}
-                  size="md"
-                  souvenir={post.souvenir}
-                  isFavoritable={false}
-                  rating={post.rating}
-                />
+                <MySouvenirCardWithMemoryModal key={post.alias_id} post={post} />
               ))}
             </>
           ) : (
