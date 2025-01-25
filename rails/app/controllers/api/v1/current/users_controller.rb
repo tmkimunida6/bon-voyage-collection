@@ -7,6 +7,6 @@ class Api::V1::Current::UsersController < Api::V1::BaseController
 
   def posts
     posts = current_user.posts
-    render json: PostResource.new(posts).serialize
+    render json: PostResource.new(posts, params: { mypage_posts: true }).serialize
   end
 end

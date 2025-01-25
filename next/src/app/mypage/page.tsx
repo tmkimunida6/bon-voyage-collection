@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Button,
   HStack,
   Stack,
@@ -69,6 +70,20 @@ export default async function Mypage({ searchParams }: MypageProps) {
         </TabList>
         <TabPanels>
           <TabPanel p={0} pt={6}>
+            <Text fontSize="xs" textAlign="right" color="gray.500" mb={4}>
+              <Box
+                as="span"
+                bg="blue.500"
+                color="white"
+                borderRadius="md"
+                px={1}
+                py="2px"
+                mr="2px"
+              >
+                <CustomIcon iconName="FaSearchPlus" />
+              </Box>
+              をクリックで思い出を表示
+            </Text>
             <MySouvenirList type="myPost" />
           </TabPanel>
           <TabPanel p={0} pt={6}>

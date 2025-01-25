@@ -28,4 +28,6 @@ export const postSchema = z.object({
       message: '価格は0以上で入力してください。',
     })
     .optional(),
+  memory_image: z.string().optional(),
+  memory_content: z.string().optional(),
 })

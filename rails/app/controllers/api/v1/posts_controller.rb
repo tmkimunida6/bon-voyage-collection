@@ -72,7 +72,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   private
 
   def post_params
-    params.permit(:souvenir_id, :rating, :for_who, :age, :review, :image_url, :place_id, :price, :currency)
+    params.permit(:souvenir_id, :rating, :for_who, :age, :review, :image_url, :place_id, :price, :currency, :memory_image_url, :memory_content)
   end
 
   def set_post
