@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_20_154459) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_25_125347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_20_154459) do
     t.string "place_id"
     t.string "price"
     t.string "currency"
+    t.string "memory_image_url"
+    t.text "memory_content"
     t.index ["alias_id"], name: "index_posts_on_alias_id", unique: true
     t.index ["image_url"], name: "index_posts_on_image_url", unique: true
     t.index ["souvenir_id"], name: "index_posts_on_souvenir_id"
