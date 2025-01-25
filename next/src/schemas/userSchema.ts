@@ -20,6 +20,13 @@ export const registerSchema = z
     password_confirmation: z
       .string({ required_error: 'パスワードを入力してください。' })
       .min(8, 'パスワードは8文字以上で入力してください。'),
+    agreeToPolicy: z
+      .boolean({
+        required_error: '利用規約・プライバシーポリシーに同意してください。',
+      })
+      .refine((val) => val === true, {
+        message: '利用規約・プライバシーポリシーに同意してください。',
+      }),
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: 'パスワードが一致しません。',

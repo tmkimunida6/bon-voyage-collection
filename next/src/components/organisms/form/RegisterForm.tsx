@@ -1,12 +1,19 @@
 'use client'
 
-import { Alert, AlertDescription, AlertIcon, Stack } from '@chakra-ui/react'
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  Stack,
+  VStack,
+} from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
 import { registerAction } from '@/actions/registerAction'
+import AgreeToPolicyBox from '@/app/features/user/AgreeToPolicyBox'
 import { registerSchema } from '@/schemas/userSchema'
 
 const RegisterForm = () => {
@@ -48,7 +55,13 @@ const RegisterForm = () => {
           placeholder="パスワードを入力してください"
           errors={fields.password_confirmation.errors}
         />
-        <SubmitButton>登録する</SubmitButton>
+        <VStack spacing={4} mt={6}>
+          <AgreeToPolicyBox
+            name={fields.agreeToPolicy.name}
+            errors={fields.agreeToPolicy.errors}
+          />
+          <SubmitButton>登録する</SubmitButton>
+        </VStack>
       </Stack>
     </form>
   )

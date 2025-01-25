@@ -34,6 +34,7 @@ const customTheme = extendTheme({
     Select: Form.Select,
     Textarea: Form.Textarea,
     FormLabel: Form.FormLabel,
+    Checkbox: Form.Checkbox,
     Tabs,
   },
   styles: {
