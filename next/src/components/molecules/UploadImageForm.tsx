@@ -81,7 +81,7 @@ const UploadImageForm = ({
       <Input
         type="file"
         accept="image/*"
-        onChange={handleImageChange}
+        onChange={(e) => handleImageChange(e, 800)}
         hidden
         ref={inputFileRef}
       />

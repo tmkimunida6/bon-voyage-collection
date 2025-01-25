@@ -18,7 +18,7 @@ const SubmitButton = ({ children, disabled = false }: SubmitButtonProps) => {
         type="submit"
         variant="primary"
         isLoading={pending}
-        disabled={disabled}
+        disabled={disabled || pending}
         aria-disabled={disabled}
       >
         {children}
