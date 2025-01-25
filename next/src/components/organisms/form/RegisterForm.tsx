@@ -13,8 +13,8 @@ import { useFormState } from 'react-dom'
 import SubmitButton from '../../atoms/SubmitButton'
 import InputWithLabel from '../../molecules/InputWithLabel'
 import { registerAction } from '@/actions/registerAction'
-import { registerSchema } from '@/schemas/userSchema'
 import AgreeToPolicyBox from '@/app/features/user/AgreeToPolicyBox'
+import { registerSchema } from '@/schemas/userSchema'
 
 const RegisterForm = () => {
   const [lastResult, action] = useFormState(registerAction, undefined)
@@ -56,7 +56,10 @@ const RegisterForm = () => {
           errors={fields.password_confirmation.errors}
         />
         <VStack spacing={4} mt={6}>
-          <AgreeToPolicyBox name={fields.agreeToPolicy.name} errors={fields.agreeToPolicy.errors} />
+          <AgreeToPolicyBox
+            name={fields.agreeToPolicy.name}
+            errors={fields.agreeToPolicy.errors}
+          />
           <SubmitButton>登録する</SubmitButton>
         </VStack>
       </Stack>

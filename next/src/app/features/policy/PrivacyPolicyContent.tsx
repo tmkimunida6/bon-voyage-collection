@@ -10,15 +10,7 @@ import {
 
 export default function PrivacyPolicyContent() {
   return (
-    <Box
-      p={8}
-      maxW="660px"
-      mx="auto"
-      bg="white"
-      px={{ base: 6, md: 10 }}
-      py={{ base: 10, md: 16 }}
-      fontSize="sm"
-    >
+    <Box maxW="660px" mx="auto" fontSize="sm">
       <Heading as="h1" mb={8} textAlign="center">
         プライバシーポリシー
       </Heading>

@@ -1,20 +1,37 @@
 'use client'
 
-import { Button, Checkbox, FormControl, FormErrorMessage, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from "@chakra-ui/react"
-import TermsOfUseContent from "../policy/TermsOfUseContent"
-import PrivacyPolicyContent from "../policy/PrivacyPolicyContent"
-import { ReactNode, useState } from "react"
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  FormErrorMessage,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  VStack,
+} from '@chakra-ui/react'
+import { ReactNode, useState } from 'react'
+import PrivacyPolicyContent from '../policy/PrivacyPolicyContent'
+import TermsOfUseContent from '../policy/TermsOfUseContent'
 
 type AgreeToPolicyBoxProps = {
   name: string
   errors: Array<string> | undefined
 }
 
-export default function AgreeToPolicyBox({ name, errors }: AgreeToPolicyBoxProps) {
+export default function AgreeToPolicyBox({
+  name,
+  errors,
+}: AgreeToPolicyBoxProps) {
   const [policyContent, setPolicyContent] = useState<ReactNode | null>(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const openPolicyModal = (policy: 'terms' | 'privacy') => {
-    if(policy === 'terms') {
+    if (policy === 'terms') {
       setPolicyContent(<TermsOfUseContent />)
     } else if (policy === 'privacy') {
       setPolicyContent(<PrivacyPolicyContent />)
@@ -27,7 +44,7 @@ export default function AgreeToPolicyBox({ name, errors }: AgreeToPolicyBoxProps
   return (
     <VStack bg="white" w="100%" p={4} pt="19px" borderRadius={4}>
       <FormControl isRequired isInvalid={!!errors}>
-        <Checkbox size="lg" spacing={2} w="fit-content" maxW="80vw" name={name} >
+        <Checkbox size="lg" spacing={2} w="fit-content" maxW="80vw" name={name}>
           <Text as="span" fontSize="md" display="block" mt="-3px">
             <Button
               variant="ghost"
@@ -66,10 +83,17 @@ export default function AgreeToPolicyBox({ name, errors }: AgreeToPolicyBoxProps
           </Text>
         </Checkbox>
         <FormErrorMessage>{errors}</FormErrorMessage>
-        <Modal isOpen={isOpen} onClose={onClose} size="xxl" scrollBehavior="inside">
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+          size="xxl"
+          scrollBehavior="inside"
+        >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader p={5}><ModalCloseButton /></ModalHeader>
+            <ModalHeader p={5}>
+              <ModalCloseButton />
+            </ModalHeader>
             <ModalBody px={4}>{policyContent}</ModalBody>
           </ModalContent>
         </Modal>

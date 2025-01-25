@@ -1,6 +1,6 @@
+import { Box } from '@chakra-ui/react'
 import { Metadata } from 'next'
 import TermsOfUseContent from '../features/policy/TermsOfUseContent'
-import { Box } from '@chakra-ui/react'
 
 export const metadata: Metadata = {
   title: '利用規約 | Bon Voyage Collcection',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Terms() {
   return (
-    <Box px={{ base: 6, md: 10 }} py={{ base: 10, md: 16 }}>
+    <Box px={{ base: 6, md: 10 }} py={{ base: 10, md: 16 }} bg="white">
       <TermsOfUseContent />
     </Box>
   )

@@ -12,12 +12,7 @@ import NextLink from 'next/link'
 
 export default function TermsOfUseContent() {
   return (
-    <Box
-      maxW="660px"
-      mx="auto"
-      bg="white"
-      fontSize="sm"
-    >
+    <Box maxW="660px" mx="auto" fontSize="sm">
       <Heading as="h1" mb={8} textAlign="center">
         利用規約
       </Heading>
