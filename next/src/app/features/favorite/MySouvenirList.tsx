@@ -22,7 +22,10 @@ const MySouvenirList = ({ type }: MySouvenirListProps) => {
           {type === 'myPost' ? (
             <>
               {myPosts.map((post: PostType) => (
-                <MySouvenirCardWithMemoryModal key={post.alias_id} post={post} />
+                <MySouvenirCardWithMemoryModal
+                  key={post.alias_id}
+                  post={post}
+                />
               ))}
             </>
           ) : (
