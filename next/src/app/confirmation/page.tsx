@@ -38,6 +38,7 @@ export default async function Confirmation({
         left="50%"
         transform="translate(-50%, -50%)"
         spacing={4}
+        w="100%"
       >
         <Spinner size="xl" speed="0.8s" thickness="4px" color="brand.primary" />
         <Text fontWeight="bold" fontSize="lg">

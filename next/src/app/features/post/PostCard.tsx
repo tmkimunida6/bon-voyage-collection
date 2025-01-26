@@ -197,8 +197,11 @@ const PostCard = ({ post, setTimelineResult, page }: PostCardProps) => {
                   color="brand.link"
                   target="_blank"
                   rel="noopener"
+                  isTruncated
                 >
-                  {placeData.placeName}
+                  <Text as="span" isTruncated>
+                    {placeData.placeName}
+                  </Text>
                   {placeData.url && <CustomIcon iconName="FaExternalLinkAlt" />}
                 </ChakraLink>
               ) : (
@@ -210,7 +213,7 @@ const PostCard = ({ post, setTimelineResult, page }: PostCardProps) => {
             <HStack spacing={1}>
               <CustomIcon iconName="FaSackDollar" color="brand.primary" />
               <Text fontSize="xs">
-                <Text as="span" fontWeight="bold" mr={1}>
+                <Text as="span" mr={1}>
                   {post.currency}
                 </Text>
                 {post.price}

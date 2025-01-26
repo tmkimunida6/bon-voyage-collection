@@ -3,9 +3,6 @@ import { Metadata } from 'next'
 import SettingLink from '../features/setting/SettingLink'
 import BackLink from '@/components/atoms/BackLink'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
-import CustomAlertDialog from '@/components/molecules/CustomAlertDialog'
-import SignoutButton from '@/components/atoms/SignoutButton'
-import DeleteUserButton from '@/components/atoms/DeleteUserButton'
 import SettingLinkWithAlert from '../features/setting/SettingLinkWithAlert'
 
 export const metadata: Metadata = {
@@ -18,7 +15,7 @@ export default async function Setting() {
   await checkLoginStatus()
 
   return (
-    <Stack spacing={6}>
+    <Stack maxW="660px" mx="auto" spacing={6}>
       <HStack>
         <Heading as="h1">アカウント設定</Heading>
       </HStack>
