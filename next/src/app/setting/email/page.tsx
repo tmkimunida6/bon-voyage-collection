@@ -21,7 +21,7 @@ export default async function SignIn() {
       <Stack spacing={6}>
         <Stack spacing={2}>
           <Text fontWeight="bold">現在のメールアドレス</Text>
-          <Text>{user.email}</Text>
+          <Text as="p">{user.email}</Text>
         </Stack>
         <ChangeEmailForm email={user.email} />
       </Stack>

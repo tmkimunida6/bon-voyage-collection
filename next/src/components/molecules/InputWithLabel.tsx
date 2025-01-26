@@ -15,7 +15,13 @@ type InputWithLabelProps = {
   placeholder: string
   isRequired?: boolean
   errors: Array<string> | undefined
-  autoComplete?: 'off' | 'on' | 'email' | 'username' | 'new-password' |'current-password'
+  autoComplete?:
+    | 'off'
+    | 'on'
+    | 'email'
+    | 'username'
+    | 'new-password'
+    | 'current-password'
 }
 
 const InputWithLabel = ({
@@ -30,13 +36,32 @@ const InputWithLabel = ({
   const inputType = () => {
     switch (type) {
       case 'text':
-        return <Input type={type} name={name} placeholder={placeholder} autoComplete={autoComplete}/>
+        return (
+          <Input
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+          />
+        )
       case 'password':
-        return <PasswordInput name={name} autoComplete={autoComplete as 'new-password' | 'current-password'} />
+        return (
+          <PasswordInput
+            name={name}
+            autoComplete={autoComplete as 'new-password' | 'current-password'}
+          />
+        )
       case 'textarea':
         return <Textarea name={name} placeholder={placeholder} />
       default:
-        return <Input type={type} name={name} placeholder={placeholder} autoComplete={autoComplete} />
+        return (
+          <Input
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+          />
+        )
     }
   }
   return (

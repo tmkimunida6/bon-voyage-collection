@@ -1,10 +1,9 @@
-import { Avatar, Box, Button, HStack, Spacer } from '@chakra-ui/react'
+import { Box, Button, HStack, Spacer } from '@chakra-ui/react'
 import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
-import SignoutButton from '../../atoms/SignoutButton'
-import { CurrentUserType } from '@/types/types'
 import UserMenu from '@/app/features/header/UserMenu'
+import { CurrentUserType } from '@/types/types'
 
 type HeaderProps = {
   user: CurrentUserType

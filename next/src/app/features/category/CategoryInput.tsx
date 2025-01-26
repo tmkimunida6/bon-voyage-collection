@@ -85,13 +85,13 @@ const CategoryInput = ({ errors }: CategoryInputProps) => {
         />
         {selectedCategory.id && (
           <InputRightElement>
-              <Button size="sm" variant="ghost" p={0}>
-                <CustomIcon
-                  iconName="FaTimes"
-                  color="gray.400"
-                  onClick={() => setSelectedCategory({ id: '', name: '' })}
-                />
-              </Button>
+            <Button size="sm" variant="ghost" p={0}>
+              <CustomIcon
+                iconName="FaTimes"
+                color="gray.400"
+                onClick={() => setSelectedCategory({ id: '', name: '' })}
+              />
+            </Button>
           </InputRightElement>
         )}
       </InputGroup>

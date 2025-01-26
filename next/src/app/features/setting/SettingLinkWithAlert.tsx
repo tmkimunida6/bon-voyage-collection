@@ -6,8 +6,8 @@ import { Button, useDisclosure } from '@chakra-ui/react'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import DeleteUserButton from '@/components/atoms/DeleteUserButton'
 import SignoutButton from '@/components/atoms/SignoutButton'
-import { iconMapper } from '@/utils/iconMapper'
 import CustomAlertDialog from '@/components/molecules/CustomAlertDialog'
+import { iconMapper } from '@/utils/iconMapper'
 
 type SettingLinkWithAlertProps = {
   linkText: string
@@ -18,7 +18,7 @@ type SettingLinkWithAlertProps = {
 const SettingLinkWithAlert = ({
   linkText,
   icon,
-  buttonType
+  buttonType,
 }: SettingLinkWithAlertProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -45,9 +45,20 @@ const SettingLinkWithAlert = ({
         {linkText}
       </Button>
       {buttonType === 'signout' ? (
-        <CustomAlertDialog alertTitle="ログアウトしますか？" button={<SignoutButton size="md" variant="danger" />} isOpen={isOpen} onClose={onClose} />
+        <CustomAlertDialog
+          alertTitle="ログアウトしますか？"
+          button={<SignoutButton size="md" variant="danger" />}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
       ) : (
-        <CustomAlertDialog alertTitle="投稿を削除してもよろしいですか？" alertText="アカウント削除を行うと、アップロードされた写真や投稿を含む全てのデータが削除されます。" button={<DeleteUserButton onClose={onClose} />} isOpen={isOpen} onClose={onClose} />
+        <CustomAlertDialog
+          alertTitle="投稿を削除してもよろしいですか？"
+          alertText="アカウント削除を行うと、アップロードされた写真や投稿を含む全てのデータが削除されます。"
+          button={<DeleteUserButton onClose={onClose} />}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
       )}
     </>
   )

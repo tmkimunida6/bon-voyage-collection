@@ -1,9 +1,9 @@
 import { Flex, Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
 import SettingLink from '../features/setting/SettingLink'
+import SettingLinkWithAlert from '../features/setting/SettingLinkWithAlert'
 import BackLink from '@/components/atoms/BackLink'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
-import SettingLinkWithAlert from '../features/setting/SettingLinkWithAlert'
 
 export const metadata: Metadata = {
   title: 'アカウント設定 | Bon Voyage Collcection',

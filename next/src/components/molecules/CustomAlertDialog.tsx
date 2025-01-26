@@ -23,7 +23,7 @@ export default function CustomAlertDialog({
   alertText = '',
   button,
   isOpen,
-  onClose
+  onClose,
 }: CustomAlertDialogProps) {
   const cancelRef = useRef<HTMLButtonElement>(null)
 
@@ -41,9 +41,7 @@ export default function CustomAlertDialog({
           </AlertDialogHeader>
           {alertText && (
             <AlertDialogBody>
-              <Text fontSize="md">
-                {alertText}
-              </Text>
+              <Text fontSize="md">{alertText}</Text>
             </AlertDialogBody>
           )}
           <AlertDialogFooter justifyContent="center" gap={4}>
