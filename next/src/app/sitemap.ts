@@ -1,5 +1,7 @@
-import { apiBaseUrl } from '@/constants/apiBaseUrl'
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 import { MetadataRoute } from 'next'
+import { apiBaseUrl } from '@/constants/apiBaseUrl'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.NEXT_PUBLIC_FRONT_BASE_URL
@@ -44,12 +46,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // 動的ページを生成
-  const dynamicPages = souvenirs.map((souvenir: { alias_id: string, updated_at: string }) => ({
-    url: `${url}/souvenirs/${souvenir.alias_id}`,
-    lastModified: new Date(souvenir.updated_at),
-    changeFrequency: 'monthly',
-    priority: 0.5,
-  }))
+  const dynamicPages = souvenirs.map(
+    (souvenir: { alias_id: string; updated_at: string }) => ({
+      url: `${url}/souvenirs/${souvenir.alias_id}`,
+      lastModified: new Date(souvenir.updated_at),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    }),
+  )
 
   return [...staticPages, ...dynamicPages]
 }

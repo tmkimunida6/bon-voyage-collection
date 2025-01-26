@@ -1,12 +1,12 @@
 import { Spinner, VStack } from '@chakra-ui/react'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Toaster from '@/components/molecules/Toaster'
 import DefaultTemplate from '@/components/templates/DefaultTemplate'
 import { Providers } from '@/providers/providers'
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title: 'Bon Voyage Collcection | お土産との出会いを見つけるサービス',
