@@ -6,6 +6,7 @@ import DefaultTemplate from '@/components/templates/DefaultTemplate'
 import { Providers } from '@/providers/providers'
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title: 'Bon Voyage Collcection | お土産との出会いを見つけるサービス',
@@ -33,6 +34,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const gaId = process.env.GA_ID || ''
+
   return (
     <html lang="ja" suppressHydrationWarning>
       <head>
@@ -74,6 +77,7 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
       </body>
+      <GoogleAnalytics gaId={gaId} />
     </html>
   )
 }
