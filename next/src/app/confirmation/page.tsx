@@ -5,7 +5,7 @@ import ConfirmationHandler from '../features/user/ConfirmationHandler'
 import { UserRequestType } from '@/types/types'
 
 export const metadata: Metadata = {
-  title: 'メールアドレス認証中 | Bon Voyage Collcection',
+  title: 'メールアドレス認証中 | Bon Voyage Collection',
   description: 'メールアドレス認証中です。',
   keywords: '',
   robots: {

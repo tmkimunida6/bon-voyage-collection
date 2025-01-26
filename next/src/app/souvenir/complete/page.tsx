@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import TextIconLink from '@/components/molecules/TextIconLink'
 
 export const metadata: Metadata = {
-  title: 'お土産の新規登録完了 | Bon Voyage Collcection',
+  title: 'お土産の新規登録完了 | Bon Voyage Collection',
   description: 'お土産の登録が完了しました。',
   keywords: '',
   robots: {

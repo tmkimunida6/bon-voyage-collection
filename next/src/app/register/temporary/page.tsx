@@ -3,9 +3,9 @@ import { Metadata } from 'next'
 import NextLink from 'next/link'
 
 export const metadata: Metadata = {
-  title: '会員登録完了 | Bon Voyage Collcection',
+  title: '会員登録完了 | Bon Voyage Collection',
   description:
-    'Bon Voyage Collcectionへの会員登録が完了しました。さっそくあなただけのお土産コレクションを作成しましょう。',
+    'Bon Voyage Collectionへの会員登録が完了しました。さっそくあなただけのお土産コレクションを作成しましょう。',
   keywords: '',
   robots: {
     index: false,

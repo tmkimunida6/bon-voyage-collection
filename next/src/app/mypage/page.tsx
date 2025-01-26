@@ -19,7 +19,7 @@ import CustomIcon from '@/components/atoms/CustomIcon'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
 export const metadata: Metadata = {
-  title: 'マイページ | Bon Voyage Collcection',
+  title: 'マイページ | Bon Voyage Collection',
   description:
     '記録したお土産と欲しいお土産を一覧でチェック。あなただけのお土産コレクション管理しましょう。',
   keywords: 'お土産,Souvenir,マイページ,Bon Voyage Collection',
