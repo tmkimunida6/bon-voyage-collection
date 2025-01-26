@@ -89,6 +89,7 @@ const ChangeProfileForm = ({ nickname, image }: ChangeProfileFormProps) => {
               placeholder="例：ボンボヤージュ太郎"
               defaultValue={nickname}
               onChange={() => !nicknameChanged && setNicknameChanged(true)}
+              autoComplete="nickname"
             />
             <FormErrorMessage>{fields.nickname.errors}</FormErrorMessage>
           </FormControl>

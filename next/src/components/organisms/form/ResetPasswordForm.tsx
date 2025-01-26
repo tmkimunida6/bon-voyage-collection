@@ -80,6 +80,7 @@ const ResetPasswordForm = ({ resetPasswordToken }: ResetPasswordFormProps) => {
           name={fields.password.name}
           placeholder="新しいパスワードを入力してください"
           errors={fields.password.errors}
+          autoComplete="new-password"
         />
         <InputWithLabel
           label="新しいパスワード（確認）"
@@ -87,6 +88,7 @@ const ResetPasswordForm = ({ resetPasswordToken }: ResetPasswordFormProps) => {
           name={fields.password_confirmation.name}
           placeholder="新しいパスワードを入力してください"
           errors={fields.password_confirmation.errors}
+          autoComplete="new-password"
         />
         <Input
           type="hidden"

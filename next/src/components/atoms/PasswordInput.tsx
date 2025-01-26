@@ -6,9 +6,10 @@ import CustomIcon from './CustomIcon'
 
 type PasswordInputProps = {
   name: string
+  autoComplete: 'new-password' | 'current-password'
 }
 
-const PasswordInput = ({ name }: PasswordInputProps) => {
+const PasswordInput = ({ name, autoComplete }: PasswordInputProps) => {
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)
 
@@ -19,6 +20,7 @@ const PasswordInput = ({ name }: PasswordInputProps) => {
         type={show ? 'text' : 'password'}
         name={name}
         placeholder="パスワードを入力"
+        autoComplete={autoComplete}
       />
       <InputRightElement>
         <Button variant="ghost" onClick={handleClick}>

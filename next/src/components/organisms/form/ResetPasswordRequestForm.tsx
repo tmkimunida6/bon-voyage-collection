@@ -61,6 +61,7 @@ const ResetPasswordRequestForm = () => {
           name={fields.email.name}
           placeholder="example@email.com"
           errors={fields.email.errors}
+          autoComplete="email"
         />
         <SubmitButton>リセット用URLを送信</SubmitButton>
       </Stack>
