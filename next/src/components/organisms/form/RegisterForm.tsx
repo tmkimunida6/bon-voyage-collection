@@ -40,6 +40,7 @@ const RegisterForm = () => {
           name={fields.email.name}
           placeholder="example@email.com"
           errors={fields.email.errors}
+          autoComplete="email"
         />
         <InputWithLabel
           label="パスワード"
@@ -47,6 +48,7 @@ const RegisterForm = () => {
           name={fields.password.name}
           placeholder="パスワードを入力してください"
           errors={fields.password.errors}
+          autoComplete="new-password"
         />
         <InputWithLabel
           label="パスワード（確認）"
@@ -54,6 +56,7 @@ const RegisterForm = () => {
           name={fields.password_confirmation.name}
           placeholder="パスワードを入力してください"
           errors={fields.password_confirmation.errors}
+          autoComplete="new-password"
         />
         <VStack spacing={4} mt={6}>
           <AgreeToPolicyBox

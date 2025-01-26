@@ -8,7 +8,7 @@ import PostCardList from '../features/post/PostCardList'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
 
 export const metadata: Metadata = {
-  title: 'ホーム | Bon Voyage Collcection',
+  title: 'ホーム | Bon Voyage Collection',
   description:
     '旅先で見つけたお土産の記録をタイムラインでチェックし、新しい出会いを見つけましょう。',
   keywords: 'お土産,Souvenir,タイムライン,SNS,Bon Voyage Collection',

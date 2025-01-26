@@ -36,7 +36,8 @@ const SignoutButton = ({ size, variant }: SignoutButtonProps) => {
         duration: 5000,
         isClosable: true,
       })
-      router.push('/sign_in')
+      await router.push('/sign_in')
+      router.refresh()
     } catch (error: any) {
       toast({
         title: error.message,

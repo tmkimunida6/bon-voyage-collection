@@ -92,7 +92,7 @@ RSpec.describe 'プロフィール変更', type: :request do
           # メールが送信されていることを確認
           mail = ActionMailer::Base.deliveries.last
           expect(mail.to).to include(params[:email])
-          expect(mail.subject).to eq('【Bon Boyage Collection】メールアドレス変更手続きのご案内')
+          expect(mail.subject).to eq('【Bon Voyage Collection】メールアドレス変更手続きのご案内')
         end
       end
 

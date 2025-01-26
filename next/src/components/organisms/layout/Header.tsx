@@ -2,7 +2,7 @@ import { Box, Button, HStack, Spacer } from '@chakra-ui/react'
 import Logo from '/public/images/logo.svg'
 import NextLink from 'next/link'
 import CustomIcon from '../../atoms/CustomIcon'
-import SignoutButton from '../../atoms/SignoutButton'
+import UserMenu from '@/app/features/header/UserMenu'
 import { CurrentUserType } from '@/types/types'
 
 type HeaderProps = {
@@ -18,7 +18,7 @@ export default async function Header({ user }: HeaderProps) {
         </NextLink>
         <Spacer />
         {user.isSignedIn ? (
-          <SignoutButton size="sm" variant="outline" />
+          <UserMenu user={user} />
         ) : (
           <Button
             size="sm"

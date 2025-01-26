@@ -15,7 +15,7 @@ export default async function Setting() {
   await checkLoginStatus()
 
   return (
-    <Stack spacing={6}>
+    <Stack maxW="660px" mx="auto" spacing={6}>
       <HStack>
         <Heading as="h1">アカウント設定</Heading>
       </HStack>
@@ -39,7 +39,6 @@ export default async function Setting() {
           <SettingLinkWithAlert
             linkText="ログアウト"
             icon="FaSignOutAlt"
-            alertTitle="ログアウトしますか？"
             buttonType="signout"
           />
         </Flex>
@@ -47,8 +46,6 @@ export default async function Setting() {
           <SettingLinkWithAlert
             linkText="アカウント削除"
             icon="FaTrash"
-            alertTitle="投稿を削除してもよろしいですか？"
-            alertText="アカウント削除を行うと、アップロードされた写真や投稿を含む全てのデータが削除されます。"
             buttonType="delete"
           />
         </Flex>

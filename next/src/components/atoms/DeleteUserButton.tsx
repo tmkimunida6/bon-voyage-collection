@@ -31,7 +31,8 @@ const DeleteUserButton = ({ onClose }: DeleteUserButtonProps) => {
 
       if (result.status === 'success') {
         await signoutAction()
-        router.push('/sign_in')
+        await router.push('/sign_in')
+        router.refresh()
       } else {
         onClose()
       }

@@ -67,6 +67,7 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
           name={fields.new_email.name}
           placeholder="example@email.com"
           errors={fields.new_email.errors}
+          autoComplete="email"
         />
         <Stack spacing={2}>
           <InputWithLabel
@@ -75,6 +76,7 @@ const ChangeEmailForm = ({ email }: ChangeEmailFormType) => {
             name={fields.current_password.name}
             placeholder="パスワードを入力してください"
             errors={fields.current_password.errors}
+            autoComplete="current-password"
           />
           <Flex justifyContent="right">
             <TextIconLink

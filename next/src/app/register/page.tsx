@@ -5,9 +5,9 @@ import RegisterForm from '@/components/organisms/form/RegisterForm'
 import { fetchUserState } from '@/utils/fetchUserState'
 
 export const metadata: Metadata = {
-  title: '会員登録 | Bon Voyage Collcection',
+  title: '会員登録 | Bon Voyage Collection',
   description:
-    'Bon Voyage Collcectionに会員登録して、あなただけのお土産コレクションを作成しましょう。',
+    'Bon Voyage Collectionに会員登録して、あなただけのお土産コレクションを作成しましょう。',
   keywords: 'お土産,Souvenir,会員登録,Bon Voyage Collection',
 }
 

@@ -6,9 +6,9 @@ import SigninForm from '@/components/organisms/form/SigninForm'
 import { fetchUserState } from '@/utils/fetchUserState'
 
 export const metadata: Metadata = {
-  title: 'ログイン | Bon Voyage Collcection',
+  title: 'ログイン | Bon Voyage Collection',
   description:
-    'Bon Voyage Collcectionにログインして、あなただけのお土産コレクションを作成しましょう。',
+    'Bon Voyage Collectionにログインして、あなただけのお土産コレクションを作成しましょう。',
   keywords: 'お土産,Souvenir,ログイン,Bon Voyage Collection',
 }
 

@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Box,
   Button,
   HStack,
   Stack,
@@ -19,7 +18,7 @@ import CustomIcon from '@/components/atoms/CustomIcon'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
 
 export const metadata: Metadata = {
-  title: 'マイページ | Bon Voyage Collcection',
+  title: 'マイページ | Bon Voyage Collection',
   description:
     '記録したお土産と欲しいお土産を一覧でチェック。あなただけのお土産コレクション管理しましょう。',
   keywords: 'お土産,Souvenir,マイページ,Bon Voyage Collection',
@@ -70,20 +69,6 @@ export default async function Mypage({ searchParams }: MypageProps) {
         </TabList>
         <TabPanels>
           <TabPanel p={0} pt={6}>
-            <Text fontSize="xs" textAlign="right" color="gray.500" mb={4}>
-              <Box
-                as="span"
-                bg="blue.500"
-                color="white"
-                borderRadius="md"
-                px={1}
-                py="2px"
-                mr="2px"
-              >
-                <CustomIcon iconName="FaSearchPlus" />
-              </Box>
-              をクリックで思い出を表示
-            </Text>
             <MySouvenirList type="myPost" />
           </TabPanel>
           <TabPanel p={0} pt={6}>

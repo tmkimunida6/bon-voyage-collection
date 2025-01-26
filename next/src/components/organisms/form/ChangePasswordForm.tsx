@@ -78,6 +78,7 @@ const ChangePasswordForm = () => {
             name={fields.current_password.name}
             placeholder="現在のパスワードを入力してください"
             errors={fields.current_password.errors}
+            autoComplete="current-password"
           />
           <Flex justifyContent="right">
             <TextIconLink
@@ -95,6 +96,7 @@ const ChangePasswordForm = () => {
           name={fields.new_password.name}
           placeholder="新しいパスワードを入力してください"
           errors={fields.new_password.errors}
+          autoComplete="new-password"
         />
         <InputWithLabel
           label="新しいパスワード（確認）"
@@ -102,6 +104,7 @@ const ChangePasswordForm = () => {
           name={fields.new_password_confirmation.name}
           placeholder="新しいパスワードを入力してください"
           errors={fields.new_password_confirmation.errors}
+          autoComplete="new-password"
         />
         <SubmitButton>変更する</SubmitButton>
       </Stack>

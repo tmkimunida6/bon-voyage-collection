@@ -23,7 +23,7 @@ RSpec.describe 'ユーザー登録', type: :request do
         # メールが送信されていることを確認
         mail = ActionMailer::Base.deliveries.last
         expect(mail.to).to include(params[:email])
-        expect(mail.subject).to eq('【Bon Boyage Collection】メールアドレス認証のご案内')
+        expect(mail.subject).to eq('【Bon Voyage Collection】メールアドレス認証のご案内')
       end
     end
 

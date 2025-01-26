@@ -40,6 +40,7 @@ const SigninForm = () => {
           name={fields.email.name}
           placeholder="example@email.com"
           errors={fields.email.errors}
+          autoComplete="email"
         />
         <Stack spacing={2}>
           <InputWithLabel
@@ -48,6 +49,7 @@ const SigninForm = () => {
             name={fields.password.name}
             placeholder="パスワードを入力してください"
             errors={fields.password.errors}
+            autoComplete="current-password"
           />
           <Flex justifyContent="right">
             <TextIconLink
