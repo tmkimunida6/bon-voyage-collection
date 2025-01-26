@@ -1,4 +1,7 @@
 import { Spinner, VStack } from '@chakra-ui/react'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Toaster from '@/components/molecules/Toaster'
@@ -31,6 +34,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const gaId = process.env.GA_ID || ''
+
   return (
     <html lang="ja" suppressHydrationWarning>
       <head>
@@ -69,7 +74,10 @@ export default function RootLayout({
           </Suspense>
           <DefaultTemplate>{children}</DefaultTemplate>
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
+      <GoogleAnalytics gaId={gaId} />
     </html>
   )
 }

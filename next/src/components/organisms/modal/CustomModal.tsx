@@ -31,7 +31,12 @@ const CustomModal = ({
   children,
 }: CustomModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={size}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size={size}
+      scrollBehavior="inside"
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{modalTitle}</ModalHeader>

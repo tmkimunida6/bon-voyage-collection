@@ -8,5 +8,7 @@ FactoryBot.define do
     place_id { Faker::Alphanumeric.alphanumeric }
     price { Faker::Number.decimal(l_digits: rand(1..4), r_digits: rand(1..3)).to_s }
     currency { Faker::Currency.code }
+    sequence(:memory_image_url) { |n| "https://example.com/image_#{n}.jpg" }
+    memory_content { Faker::Lorem.paragraph }
   end
 end

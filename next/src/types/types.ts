@@ -60,6 +60,8 @@ export type PostType = {
   place_id: string | null
   price: string | null
   currency: string | null
+  memory_image_url: string | null
+  memory_content: string | null
   user: UserType
   souvenir: SouvenirCardType
 }

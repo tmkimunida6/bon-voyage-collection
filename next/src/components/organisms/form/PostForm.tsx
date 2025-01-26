@@ -29,6 +29,7 @@ import { useFormState } from 'react-dom'
 import CustomModal from '../modal/CustomModal'
 import SearchForm from './SearchForm'
 import { createPostAction } from '@/actions/createPostAction'
+import MemoryInputModal from '@/app/features/post/MemoryInputModal'
 import PlaceInput from '@/app/features/post/PlaceInput'
 import PriceInput from '@/app/features/post/PriceInput'
 import CustomIcon from '@/components/atoms/CustomIcon'
@@ -187,6 +188,10 @@ const PostForm = () => {
             </Box>
           </CustomAccordionItem>
         </Accordion>
+        <MemoryInputModal
+          memoryImageName={fields.memory_image.name}
+          memoryContentName={fields.memory_content.name}
+        />
         <SubmitButton>記録する</SubmitButton>
       </Stack>
     </form>

@@ -1,7 +1,9 @@
 class SouvenirResource
   include Alba::Resource
 
-  attributes :alias_id, :name
+  attributes :alias_id
+  attributes :name, if: proc { !params[:exclude_name] }
+  attributes :updated_at, if: proc { params[:all] }
   attributes :description, if: proc { !params[:exclude_description] }
   attributes :image_url, if: proc { !params[:exclude_image_url] }
 
