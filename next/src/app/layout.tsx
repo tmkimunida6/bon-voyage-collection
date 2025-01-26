@@ -4,6 +4,8 @@ import { Suspense } from 'react'
 import Toaster from '@/components/molecules/Toaster'
 import DefaultTemplate from '@/components/templates/DefaultTemplate'
 import { Providers } from '@/providers/providers'
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: 'Bon Voyage Collcection | お土産との出会いを見つけるサービス',
@@ -69,6 +71,8 @@ export default function RootLayout({
           </Suspense>
           <DefaultTemplate>{children}</DefaultTemplate>
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
