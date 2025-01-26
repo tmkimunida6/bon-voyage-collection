@@ -1,5 +1,5 @@
 class Api::V1::SouvenirsController < Api::V1::BaseController
-  before_action :authenticate_user!, except: [ :index, :show, :related, :recommend ]
+  before_action :authenticate_user!, except: [ :index, :show, :related, :recommend, :all ]
   before_action :set_souvenir, only: [ :show, :related, :favorited_index ]
 
   def index
@@ -73,6 +73,13 @@ class Api::V1::SouvenirsController < Api::V1::BaseController
     end
 
     render json: JSON.parse(SouvenirResource.new(souvenirs, params: { exclude_description: true }).serialize)
+  end
+
+  # 全件取得（sitemap用）
+  def all
+    souvenirs = Souvenir.all
+    pp souvenirs
+    render json: SouvenirResource.new(souvenirs, params: { exclude_description: true, exclude_image_url: true, exclude_average_rating: true, exclude_category: true, exclude_name: true, all: true }).serialize
   end
 
   private
