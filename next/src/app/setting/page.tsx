@@ -1,9 +1,12 @@
 import { Flex, Heading, HStack, Stack } from '@chakra-ui/react'
 import { Metadata } from 'next'
 import SettingLink from '../features/setting/SettingLink'
-import SettingLinkWithAlert from '../features/setting/SettingLinkWithAlert'
 import BackLink from '@/components/atoms/BackLink'
 import { checkLoginStatus } from '@/utils/checkLoginStatus'
+import CustomAlertDialog from '@/components/molecules/CustomAlertDialog'
+import SignoutButton from '@/components/atoms/SignoutButton'
+import DeleteUserButton from '@/components/atoms/DeleteUserButton'
+import SettingLinkWithAlert from '../features/setting/SettingLinkWithAlert'
 
 export const metadata: Metadata = {
   title: 'アカウント設定 | Bon Voyage Collcection',
@@ -39,7 +42,6 @@ export default async function Setting() {
           <SettingLinkWithAlert
             linkText="ログアウト"
             icon="FaSignOutAlt"
-            alertTitle="ログアウトしますか？"
             buttonType="signout"
           />
         </Flex>
@@ -47,8 +49,6 @@ export default async function Setting() {
           <SettingLinkWithAlert
             linkText="アカウント削除"
             icon="FaTrash"
-            alertTitle="投稿を削除してもよろしいですか？"
-            alertText="アカウント削除を行うと、アップロードされた写真や投稿を含む全てのデータが削除されます。"
             buttonType="delete"
           />
         </Flex>
