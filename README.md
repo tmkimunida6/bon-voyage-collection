@@ -1,4 +1,5 @@
 ## 【Bon Voyage Collection】新しいお土産を発見・保存し、購入したお土産を記録・共有できるサービス
+![opengraph-image](https://github.com/user-attachments/assets/950fd66e-87a7-4bd7-9d4e-ca30fee4ce33)
 
 ### サービスURL
 URL: https://bon-voyage-collection.com/
