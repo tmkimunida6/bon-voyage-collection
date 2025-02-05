@@ -127,7 +127,7 @@ const PostForm = () => {
               isOpen={isOpen}
               onClose={onClose}
               modalTitle="お土産を探す"
-              buttonText=""
+              buttonText={selectedSouvenir.alias_id ? '確定' : ''}
               size="lg"
             >
               <SearchForm />
