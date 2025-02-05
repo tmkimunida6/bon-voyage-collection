@@ -42,5 +42,10 @@ module Myapp
     config.api_only = true
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml").to_s]
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.action_controller.allow_forgery_protection = false
+    config.action_dispatch.cookies_same_site_protection = :none
+    config.action_controller.forgery_protection_origin_check = false
   end
 end

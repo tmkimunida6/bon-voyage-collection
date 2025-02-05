@@ -12,10 +12,18 @@ Rails.application.routes.draw do
       get "health_check", to: "health_check#index"
 
       # ユーザー
+
+
+      # ログイン失敗時のリダイレクト
+      get 'auth/sign_in', to: 'user/omniauth_callbacks#failure'
+
+
       # devise認証
       mount_devise_token_auth_for "User", at: "auth", controllers: {
-        registrations: "api/v1/user/registrations"
+        registrations: "api/v1/user/registrations",
+        omniauth_callbacks: "api/v1/user/omniauth_callbacks"
       }
+
       # メール認証後のアクション
       namespace :user do
         resource :confirmations, only: [ :update ]
