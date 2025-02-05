@@ -6,7 +6,7 @@ import { Button } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useEffect, useState } from 'react'
 import CustomIcon from '@/components/atoms/CustomIcon'
-import { useMyPostsStore } from '@/store/store'
+import { useMyPostsStore } from '@/store/index'
 import { SouvenirDetailType } from '@/types/types'
 
 type PostButtonFromDetailProps = {

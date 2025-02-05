@@ -1,6 +1,6 @@
 import { Accordion, Button, HStack } from '@chakra-ui/react'
 import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
-import { useCategoryStore } from '@/store/store'
+import { useCategoryStore } from '@/store/index'
 import { CategoriesType } from '@/types/types'
 
 type CategoryListProps = {

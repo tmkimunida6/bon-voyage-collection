@@ -39,7 +39,7 @@ import RatingSlider from '@/components/molecules/RatingSlider'
 import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { ageOptions, forWhoOptions } from '@/constants/options'
 import { postSchema } from '@/schemas/postSchema'
-import { useSouvenirStore } from '@/store/store'
+import { useSouvenirStore } from '@/store/index'
 
 const PostForm = () => {
   const [lastResult, action] = useFormState(createPostAction, undefined)

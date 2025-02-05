@@ -9,7 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import TextIconLink from '@/components/molecules/TextIconLink'
-import { useSouvenirStore } from '@/store/store'
+import { useSouvenirStore } from '@/store/index'
 import { SouvenirSelectType, SouvenirCardType } from '@/types/types'
 
 type SouvenirSearchResultForPostProps = {

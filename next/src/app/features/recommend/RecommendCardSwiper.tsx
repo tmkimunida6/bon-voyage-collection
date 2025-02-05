@@ -24,7 +24,7 @@ import RecommendCard from '@/app/recommend/RecommendCard'
 import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
-import { useCurrentUserStore, useFavoriteStore } from '@/store/store'
+import { useCurrentUserStore, useFavoriteStore } from '@/store/index'
 import { SouvenirDetailType } from '@/types/types'
 
 type RecommendCardSwiperProps = {

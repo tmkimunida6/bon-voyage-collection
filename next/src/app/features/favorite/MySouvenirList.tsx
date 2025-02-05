@@ -6,7 +6,7 @@ import CustomIcon from '@/components/atoms/CustomIcon'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
-import { useFavoriteStore, useMyPostsStore } from '@/store/store'
+import { useFavoriteStore, useMyPostsStore } from '@/store/index'
 import { PostType, SouvenirCardType } from '@/types/types'
 
 type MySouvenirListProps = {

@@ -20,7 +20,7 @@ import SouvenirSearchResult from '@/app/features/search/SouvenirSearchResult'
 import SouvenirSearchResultForPost from '@/app/features/search/SouvenirSearchResultForPost'
 import Pagination from '@/components/molecules/Pagination'
 import useSearchSouvenir from '@/hooks/useSearchSouvenir'
-import { useCategoryStore } from '@/store/store'
+import { useCategoryStore } from '@/store/index'
 
 const SearchForm = () => {
   const searchParams = useSearchParams()

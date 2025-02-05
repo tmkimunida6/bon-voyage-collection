@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import CustomIcon from './CustomIcon'
 import { signoutAction } from '@/actions/signoutAction'
-import { useFavoriteStore } from '@/store/store'
+import { useFavoriteStore } from '@/store/index'
 
 type SignoutButtonProps = {
   size: 'sm' | 'md'
