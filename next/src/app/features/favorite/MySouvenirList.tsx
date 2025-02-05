@@ -21,7 +21,6 @@ const MySouvenirList = ({ type }: MySouvenirListProps) => {
   const postsWithMemory = myPosts.filter(
     (post) => post.memory_image_url || post.memory_content,
   )
-  console.log(postsWithMemory.length)
 
   return (
     <>

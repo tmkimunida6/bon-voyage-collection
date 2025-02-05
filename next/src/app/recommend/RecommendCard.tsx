@@ -34,11 +34,12 @@ const RecommendCard = ({ souvenir, rating = '0' }: RecommendCardProps) => {
               <Image
                 src={souvenir.image_url}
                 alt={souvenir.name}
-                borderRadius="lg"
+                borderRadius="sm"
                 width="100%"
                 aspectRatio="3/2"
                 objectFit="contain"
                 pointerEvents="none"
+                bg="gray.100"
               />
             </Flex>
           </Stack>

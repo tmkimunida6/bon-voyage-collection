@@ -16,7 +16,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import TinderCard from 'react-tinder-card'
 import RecommendSwipeIcon from './RecommendSwipeIcon'
 import { favoriteBulkAction } from '@/actions/favoriteBulkAction'
@@ -48,6 +48,18 @@ export default function RecommendCardSwiper({
   const { addFavoritedSouvenir } = useFavoriteStore()
 
   const toast = useToast()
+
+  useEffect(() => {
+    const preventDefault = (e: TouchEvent) => e.preventDefault()
+    // タッチイベントを無効化
+    document.addEventListener('touchmove', preventDefault, { passive: false })
+    window.scrollTo(0, 0)
+
+    // クリーンアップ時にタッチイベントを有効化
+    return () => {
+      document.removeEventListener('touchmove', preventDefault)
+    }
+  }, [])
 
   const handleSwipe = (direction: string, souvenir: SouvenirDetailType) => {
     if (direction === 'right') {
