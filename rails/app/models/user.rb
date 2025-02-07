@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable,
+         :omniauthable, omniauth_providers: [ :google_oauth2 ]
   include DeviseTokenAuth::Concerns::User
   include Aliasable
 
@@ -32,6 +33,21 @@ class User < ActiveRecord::Base
     else
       send_devise_notification(:confirmation_instructions, @raw_confirmation_token, opts)
     end
+  end
+
+  # 外部サービス認証時にユーザー作成
+  def self.find_or_create_by_oauth(auth)
+    user = find_by(email: auth["info"]["email"])
+    unless user
+      user = create(
+        email: auth["info"]["email"],
+        uid: auth["uid"],
+        provider: auth["provider"],
+        nickname: auth["info"]["name"],
+        image: auth["info"]["image"]
+      )
+    end
+    user
   end
 
   private
