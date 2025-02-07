@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
 
       # ログイン失敗時のリダイレクト
-      get 'auth/sign_in', to: 'user/omniauth_callbacks#failure'
+      get "auth/sign_in", to: "user/omniauth_callbacks#failure"
 
 
       # devise認証

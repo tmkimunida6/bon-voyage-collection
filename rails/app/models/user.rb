@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :omniauthable, omniauth_providers: [ :google_oauth2 ]
   include DeviseTokenAuth::Concerns::User
   include Aliasable
 
@@ -37,14 +37,14 @@ class User < ActiveRecord::Base
 
   # 外部サービス認証時にユーザー作成
   def self.find_or_create_by_oauth(auth)
-    user = find_by(email: auth['info']['email'])
+    user = find_by(email: auth["info"]["email"])
     unless user
       user = create(
-        email: auth['info']['email'],
-        uid: auth['uid'],
-        provider: auth['provider'],
-        nickname: auth['info']['name'],
-        image: auth['info']['image']
+        email: auth["info"]["email"],
+        uid: auth["uid"],
+        provider: auth["provider"],
+        nickname: auth["info"]["name"],
+        image: auth["info"]["image"]
       )
     end
     user

@@ -1,7 +1,7 @@
 class Api::V1::User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   # 成功時
   def omniauth_success
-    user = User.find_or_create_by_oauth(request.env['omniauth.auth'])
+    user = User.find_or_create_by_oauth(request.env["omniauth.auth"])
     if user.persisted?
       client_id = SecureRandom.urlsafe_base64(nil, false)
       token = SecureRandom.urlsafe_base64(nil, false)
