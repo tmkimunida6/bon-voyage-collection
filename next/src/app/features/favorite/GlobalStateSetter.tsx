@@ -7,7 +7,7 @@ import {
   useCurrentUserStore,
   useFavoriteStore,
   useMyPostsStore,
-} from '@/store/store'
+} from '@/store/index'
 import { PostType, SouvenirCardType, CurrentUserType } from '@/types/types'
 
 type GlobalStateSetterProps = {

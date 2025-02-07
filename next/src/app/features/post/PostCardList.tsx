@@ -6,7 +6,7 @@
 import { SimpleGrid, Spinner, useToast, VStack } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import PostCard from './PostCard'
-import { useCurrentUserStore } from '@/store/store'
+import { useCurrentUserStore } from '@/store/index'
 import { timelineResultType } from '@/types/types'
 import { fetchPostDataAll } from '@/utils/fetchPostDataAll'
 import { fetchPostDataBySouvenir } from '@/utils/fetchPostDataBySouvenir'

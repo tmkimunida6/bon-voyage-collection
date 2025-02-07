@@ -24,7 +24,7 @@ const PasswordInput = ({ name, autoComplete }: PasswordInputProps) => {
       />
       <InputRightElement>
         <Button variant="ghost" onClick={handleClick}>
-          <CustomIcon iconName={show ? 'FaEyeSlash' : 'FaEye'} />
+          <CustomIcon iconName={show ? 'FaEye' : 'FaEyeSlash'} />
         </Button>
       </InputRightElement>
     </InputGroup>

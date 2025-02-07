@@ -22,7 +22,7 @@ import FavoriteButton from '../favorite/FavoriteButton'
 import DeletePostButton from './DeletePostButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import Rating from '@/components/molecules/Rating'
-import { useCurrentUserStore } from '@/store/store'
+import { useCurrentUserStore } from '@/store/index'
 import { PostType, timelineResultType } from '@/types/types'
 
 type PostCardProps = {

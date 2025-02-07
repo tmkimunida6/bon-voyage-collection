@@ -5,7 +5,7 @@
 import { useToast } from '@chakra-ui/react'
 import { useState } from 'react'
 import { favoriteAction } from '@/actions/favoriteAction'
-import { useFavoriteStore } from '@/store/store'
+import { useFavoriteStore } from '@/store/index'
 import { SouvenirCardType } from '@/types/types'
 
 type UseFavoriteHook = {
