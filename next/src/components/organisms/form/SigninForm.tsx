@@ -1,12 +1,13 @@
 'use client'
 
 import {
+  AbsoluteCenter,
   Alert,
   AlertDescription,
   AlertIcon,
+  Box,
   Divider,
   Flex,
-  Heading,
   Stack,
   VStack,
 } from '@chakra-ui/react'
@@ -69,11 +70,13 @@ const SigninForm = () => {
           <SubmitButton>ログイン</SubmitButton>
         </Stack>
       </form>
-      <Divider my={6} borderColor="gray.400" />
+      <Box position="relative" py={10}>
+        <Divider borderColor="gray.500" />
+        <AbsoluteCenter bg="brand.bg" px="4" color="gray.500">
+          または
+        </AbsoluteCenter>
+      </Box>
       <VStack spacing={4}>
-        <Heading as="h2" fontSize="md">
-          その他のサービスからログイン
-        </Heading>
         <GoogleButton>Googleでログイン</GoogleButton>
       </VStack>
     </>

@@ -1,5 +1,8 @@
+/* eslint react-hooks/exhaustive-deps: 0 */
+
 'use client'
 
+import { Spinner, VStack } from '@chakra-ui/react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -34,5 +37,15 @@ export default function AuthCallbackPage() {
     }
   }, [])
 
-  return null
+  return (
+    <VStack
+      position="absolute"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+      spacing={4}
+    >
+      <Spinner size="xl" speed="0.5s" thickness="4px" />
+    </VStack>
+  )
 }

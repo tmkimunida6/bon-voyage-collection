@@ -55,11 +55,10 @@
   -webkit-flex-grow: 1;
   flex-grow: 1;
   font-family: 'Roboto', arial, sans-serif;
-  font-weight: 500;
+  font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: top;
-  font-weight: bold;
 }
 
 .gsi-material-button .gsi-material-button-state {

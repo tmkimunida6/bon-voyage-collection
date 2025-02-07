@@ -1,5 +1,9 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+/* eslint react-hooks/exhaustive-deps: 0 */
+
 'use client'
 
+import { Button, useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { ReactNode, useEffect, useState } from 'react'
 import { setAccessTokenAction } from '@/actions/setAccessTokenAction'
@@ -10,6 +14,58 @@ type GoogleButtonProps = {
 }
 
 export default function GoogleButton({ children }: GoogleButtonProps) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const toast = useToast()
+
+  useEffect(() => {
+    const handleMessage = async (event: MessageEvent) => {
+      if (event.origin !== process.env.NEXT_PUBLIC_FRONT_BASE_URL) return
+
+      const data = event.data as
+        | { accessToken: string; uid: string; expiry: string; client: string }
+        | { status: string }
+
+      // 今回はアクセストークンがあるかどうかで検知
+      if ('accessToken' in data) {
+        const { accessToken, uid, client } = data
+        // アクセストークンがあればCookieなどに保存
+        await setAccessTokenAction(accessToken, client, uid)
+        setIsLoggedIn(true)
+      }
+    }
+    window.addEventListener('message', handleMessage)
+  }, [])
+
+  useEffect(() => {
+    // 認証をしたかどうか
+    if (!isLoggedIn) return
+    console.log(isLoggedIn)
+    setLoading(true)
+
+    const fetchUserData = async () => {
+      try {
+        const user = await fetchUserState()
+        if (user.isSignedIn) {
+          router.push('/mypage')
+        } else {
+          toast({
+            title:
+              'ログインに失敗しました。時間をおいてから再度お試しください。',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          })
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchUserData()
+  }, [isLoggedIn])
+
+  // Googleログイン
   const handleGoogleLogin = () => {
     const form = document.createElement('form')
     form.method = 'POST'
@@ -34,44 +90,13 @@ export default function GoogleButton({ children }: GoogleButtonProps) {
     }, 1000)
   }
 
-  const router = useRouter()
-
-  // 外部サービスログイン
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  useEffect(() => {
-    const handleMessage = async (event: MessageEvent) => {
-      if (event.origin !== process.env.NEXT_PUBLIC_FRONT_BASE_URL) return
-
-      const data = event.data as
-        | { accessToken: string; uid: string; expiry: string; client: string }
-        | { status: string }
-
-      // 今回はアクセストークンがあるかどうかで検知
-      if ('accessToken' in data) {
-        const { accessToken, uid, client } = data
-        // アクセストークンがあればCookieなどに保存
-        await setAccessTokenAction(accessToken, client, uid)
-        setIsLoggedIn(true)
-      }
-    }
-    window.addEventListener('message', handleMessage)
-  }, [])
-
-  useEffect(() => {
-    // 認証をしたかどうか
-    if (!isLoggedIn) return
-
-    const fetchUserData = async () => {
-      const user = await fetchUserState()
-      if (user.isSignedIn) {
-        router.push('/mypage')
-      }
-    }
-    fetchUserData()
-  }, [isLoggedIn])
-
   return (
-    <button className="gsi-material-button" onClick={handleGoogleLogin}>
+    <Button
+      className="gsi-material-button"
+      onClick={handleGoogleLogin}
+      isLoading={loading}
+      bg="white"
+    >
       <div className="gsi-material-button-state"></div>
       <div className="gsi-material-button-content-wrapper">
         <div className="gsi-material-button-icon">
@@ -104,6 +129,6 @@ export default function GoogleButton({ children }: GoogleButtonProps) {
         <span className="gsi-material-button-contents">{children}</span>
         <span style={{ display: 'none' }}>{children}</span>
       </div>
-    </button>
+    </Button>
   )
 }
