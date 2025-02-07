@@ -25,6 +25,7 @@ const customTheme = extendTheme({
       black: '#333333',
       link: '#88BFB8',
       star: '#E2DB87',
+      bg: '#fef2da',
     },
   },
   components: {
@@ -43,7 +44,7 @@ const customTheme = extendTheme({
         overflowX: 'hidden',
       },
       body: {
-        bg: '#fef2da',
+        bg: 'brand.bg',
         color: 'brand.black',
       },
     },

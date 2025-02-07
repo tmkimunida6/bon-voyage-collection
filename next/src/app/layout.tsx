@@ -7,6 +7,7 @@ import { Suspense } from 'react'
 import Toaster from '@/components/molecules/Toaster'
 import DefaultTemplate from '@/components/templates/DefaultTemplate'
 import { Providers } from '@/providers/providers'
+import '@/styles/globals.css'
 
 export const metadata: Metadata = {
   title: 'Bon Voyage Collection | お土産との出会いを見つけるサービス',
