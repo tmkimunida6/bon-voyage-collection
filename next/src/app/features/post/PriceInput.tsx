@@ -18,7 +18,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import CurrencySearchBox from './CurrencySearchBox'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import CustomModal from '@/components/organisms/modal/CustomModal'
-import { useCurrencyStore } from '@/store/store'
+import { useCurrencyStore } from '@/store/index'
 import { currencyResultType } from '@/types/types'
 
 type PriceInputProps = {

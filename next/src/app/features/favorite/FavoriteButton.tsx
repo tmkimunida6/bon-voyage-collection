@@ -7,7 +7,7 @@ import { Button, IconButton } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import useFavorite from '@/hooks/useFavorite'
-import { useFavoriteStore } from '@/store/store'
+import { useFavoriteStore } from '@/store/index'
 import { SouvenirCardType } from '@/types/types'
 
 type FavoriteButtonProps = {

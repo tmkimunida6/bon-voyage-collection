@@ -1,5 +1,6 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import Footer from './Footer'
 import Nav from './Nav'
@@ -7,6 +8,10 @@ import Nav from './Nav'
 const IntersectingNavFooter = () => {
   const footerRef = useRef<HTMLElement>(null)
   const [isIntersecting, setIsIntersecting] = useState<boolean>(false)
+
+  const pathname = usePathname()
+  const hiddenFooterPaths = ['/recommend']
+  const isFooterHidden = hiddenFooterPaths.includes(pathname)
 
   useEffect(() => {
     const footerElement = footerRef.current
@@ -30,8 +35,14 @@ const IntersectingNavFooter = () => {
   }, [footerRef])
   return (
     <>
-      <Nav isIntersecting={isIntersecting} />
-      <Footer ref={footerRef} />
+      {!isFooterHidden ? (
+        <>
+          <Nav isIntersecting={isIntersecting} />
+          <Footer ref={footerRef} />
+        </>
+      ) : (
+        <Nav isIntersecting={isIntersecting} />
+      )}
     </>
   )
 }

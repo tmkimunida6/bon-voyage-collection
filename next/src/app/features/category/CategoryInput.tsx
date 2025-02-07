@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react'
 import CategoryList from './CategoryList'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import CustomModal from '@/components/organisms/modal/CustomModal'
-import { useCategoryStore } from '@/store/store'
+import { useCategoryStore } from '@/store/index'
 import { CategoriesType } from '@/types/types'
 import { fetchCategories } from '@/utils/fetchCategories'
 

@@ -3,7 +3,7 @@
 import { Box, Input, Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import CurrencySelectButton from './CurrencySelectButton'
-import { useCurrencyStore } from '@/store/store'
+import { useCurrencyStore } from '@/store/index'
 import { currencyResultType } from '@/types/types'
 
 type CurrencySearchBoxProps = {

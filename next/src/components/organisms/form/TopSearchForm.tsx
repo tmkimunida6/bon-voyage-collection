@@ -1,10 +1,19 @@
 'use client'
 
-import { Button, FormControl, HStack, Input } from '@chakra-ui/react'
+import {
+  Button,
+  FormControl,
+  HStack,
+  Input,
+  Text,
+  Flex,
+  VStack,
+} from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
-import { useCategoryStore } from '@/store/store'
+import TextIconLink from '@/components/molecules/TextIconLink'
+import { useCategoryStore } from '@/store/index'
 
 const TopSearchForm = () => {
   const [word, setWord] = useState<string>('')
@@ -30,8 +39,20 @@ const TopSearchForm = () => {
         as={NextLink}
         href={`./recommend?word=${word}&category_id=${selectedCategory.id}&category_name=${selectedCategory.name}`}
       >
-        おすすめのお土産をみる
+        お土産を見つける
       </Button>
+      <VStack spacing={0}>
+        <Text fontSize="sm">すでにアカウントをお持ちですか？</Text>
+        <Flex justifyContent="center" fontWeight="bold">
+          <TextIconLink
+            iconName="FaSignInAlt"
+            iconPosition="left"
+            href="./sign_in"
+          >
+            ログイン
+          </TextIconLink>
+        </Flex>
+      </VStack>
     </>
   )
 }

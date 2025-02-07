@@ -1,7 +1,7 @@
 'use client'
 
 import { Text, VStack } from '@chakra-ui/react'
-import { useFavoriteStore, useMyPostsStore } from '@/store/store'
+import { useFavoriteStore, useMyPostsStore } from '@/store/index'
 
 type CollectionCountProps = {
   type: 'myPost' | 'favoritedSouvenir'
