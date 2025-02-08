@@ -14,6 +14,15 @@ import {
   Stack,
   Text,
   Link as ChakraLink,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+  ModalFooter,
+  VStack,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { SetStateAction, useEffect, useState } from 'react'
@@ -22,6 +31,7 @@ import FavoriteButton from '../favorite/FavoriteButton'
 import DeletePostButton from './DeletePostButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import Rating from '@/components/molecules/Rating'
+import CustomModal from '@/components/organisms/modal/CustomModal'
 import { useCurrentUserStore } from '@/store/index'
 import { PostType, timelineResultType } from '@/types/types'
 
@@ -47,6 +57,7 @@ const PostCard = ({ post, setTimelineResult, page }: PostCardProps) => {
     url: '',
   })
   const { currentUser } = useCurrentUserStore()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   // Google Map APIから情報取得
   useEffect(() => {
@@ -150,15 +161,37 @@ const PostCard = ({ post, setTimelineResult, page }: PostCardProps) => {
       </Stack>
       <Flex gap={4} mt={4}>
         {!(page === 'detail' && !post.image_url) && (
-          <Image
-            src={post.image_url ? post.image_url : post.souvenir.image_url}
-            alt={post.souvenir.name}
-            borderRadius="sm"
-            objectFit="contain"
-            aspectRatio="3/2"
-            maxW="calc(50% - 0.5rem)"
-            bg="gray.100"
-          />
+          <>
+            <Image
+              src={post.image_url ? post.image_url : post.souvenir.image_url}
+              alt={post.souvenir.name}
+              borderRadius="sm"
+              objectFit="cover"
+              aspectRatio="4/3"
+              maxW="calc(50% - 0.5rem)"
+              cursor="pointer"
+              onClick={onOpen}
+            />
+            <CustomModal
+              isOpen={isOpen}
+              onClose={onClose}
+              modalTitle={post.souvenir.name}
+              buttonText=""
+              size="lg"
+            >
+              <VStack>
+                <Image
+                  src={
+                    post.image_url ? post.image_url : post.souvenir.image_url
+                  }
+                  alt={post.souvenir.name}
+                  borderRadius="sm"
+                  objectFit="contain"
+                  maxW="100%"
+                />
+              </VStack>
+            </CustomModal>
+          </>
         )}
         <Stack maxW="calc(50% - 0.5rem)" spacing={1}>
           {(placeData.countryCode ||

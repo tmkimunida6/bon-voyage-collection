@@ -41,7 +41,6 @@ export default function GoogleButton({ children }: GoogleButtonProps) {
   useEffect(() => {
     // 認証をしたかどうか
     if (!isLoggedIn) return
-    console.log(isLoggedIn)
     setLoading(true)
 
     const fetchUserData = async () => {
