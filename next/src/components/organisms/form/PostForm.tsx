@@ -15,11 +15,20 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
   Stack,
+  Text,
   Textarea,
   useDisclosure,
   useToast,
+  VStack,
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
@@ -40,6 +49,7 @@ import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { ageOptions, forWhoOptions } from '@/constants/options'
 import { postSchema } from '@/schemas/postSchema'
 import { useSouvenirStore } from '@/store/index'
+import TextIconLink from '@/components/molecules/TextIconLink'
 
 const PostForm = () => {
   const [lastResult, action] = useFormState(createPostAction, undefined)
@@ -123,15 +133,37 @@ const PostForm = () => {
                 </Button>
               </InputRightElement>
             )}
-            <CustomModal
+            <Modal
               isOpen={isOpen}
               onClose={onClose}
-              modalTitle="お土産を探す"
-              buttonText={selectedSouvenir.alias_id ? '確定' : ''}
               size="lg"
+              scrollBehavior="inside"
             >
-              <SearchForm />
-            </CustomModal>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>お土産を探す</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <SearchForm />
+                </ModalBody>
+                <ModalFooter justifyContent="center" gap={2}>
+                {selectedSouvenir.alias_id ? (
+                  <Button variant="primary" onClick={onClose}>確定</Button>
+                ) : (
+                  <>
+                    <Text fontSize="sm">お土産が見つかりませんか？</Text>
+                    <TextIconLink
+                      iconName="FaPen"
+                      iconPosition="left"
+                      href="/souvenir/new"
+                    >
+                      新規登録
+                    </TextIconLink>
+                  </>
+                )}
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
           </InputGroup>
           <FormErrorMessage>{fields.souvenir_id.errors}</FormErrorMessage>
         </FormControl>
