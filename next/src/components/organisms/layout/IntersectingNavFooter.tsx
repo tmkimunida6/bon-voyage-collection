@@ -32,7 +32,8 @@ const IntersectingNavFooter = () => {
         observer.unobserve(footerElement)
       }
     }
-  }, [footerRef])
+  }, [footerRef, isFooterHidden])
+
   return (
     <>
       {!isFooterHidden ? (
