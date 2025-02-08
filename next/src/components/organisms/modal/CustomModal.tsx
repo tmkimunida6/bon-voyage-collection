@@ -39,7 +39,7 @@ const CustomModal = ({
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{modalTitle}</ModalHeader>
+        <ModalHeader pr="44px" fontSize="lg">{modalTitle}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>{children}</ModalBody>
         <ModalFooter justifyContent="center">

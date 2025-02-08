@@ -139,7 +139,7 @@ const PostForm = () => {
             >
               <ModalOverlay />
               <ModalContent>
-                <ModalHeader>お土産を探す</ModalHeader>
+                <ModalHeader fontSize="lg">お土産を探す</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                   <SearchForm />
