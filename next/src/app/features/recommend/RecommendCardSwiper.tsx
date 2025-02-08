@@ -77,6 +77,10 @@ export default function RecommendCardSwiper({
 
     // 全てのスワイプが完了したあとにlocalStorageに保存する
     if (currentIndex === 0) {
+      // 全てのスワイプが完了したらタッチイベントを有効化
+      const enableTouchMove = (e: TouchEvent) => e.stopPropagation()
+      document.removeEventListener('touchmove', enableTouchMove)
+
       // ログイン中の場合は「欲しい！」に追加 / 未ログイン時はlocalStorageに保存
       const favoritedAliasIds = favorites.map((favorite) => favorite.alias_id)
       if (currentUser?.isSignedIn) {
@@ -126,8 +130,25 @@ export default function RecommendCardSwiper({
 
   // 結果によって内容だしわけ
   const recommendCompletedContent = useMemo(() => {
+    // 条件に合うお土産がひとつもなかった場合
+    if (!fetchedRecommendResult.length) {
+      return {
+        text: (
+          <>
+            条件に合うお土産が
+            <br />
+            見つかりませんでした...
+          </>
+        ),
+        buttonText: 'もう一度試す',
+        buttonHref: '/',
+      }
+    }
+
+    // サインインしている場合
     if (currentUser?.isSignedIn) {
       if (favorites.length) {
+        // 右にスワイプしたお土産がある場合
         return {
           text: (
             <>
@@ -140,26 +161,38 @@ export default function RecommendCardSwiper({
           buttonHref: '/mypage?tab=favorite',
         }
       } else {
+        // 全てスキップした場合
         return {
-          text: <>今回「欲しい！」に追加したお土産はありません。</>,
+          text: <>今回「欲しい！」に追加した<br/>お土産はありません。</>,
           buttonText: 'もう一度試す',
           buttonHref: '/',
         }
       }
     } else {
-      return {
-        text: (
-          <>
-            右にスワイプしたお土産を
-            <br />
-            「欲しい！」に{loading ? '追加中...' : '追加しました！'}
-          </>
-        ),
-        buttonText: '会員登録へ進む',
-        buttonHref: '/register',
+      // サインインしていない場合
+      if (favorites.length) {
+        // 右にスワイプしたお土産がある場合
+        return {
+          text: (
+            <>
+              右にスワイプしたお土産を
+              <br />
+              「欲しい！」に{loading ? '追加中...' : '追加しました！'}
+            </>
+          ),
+          buttonText: '会員登録へ進む',
+          buttonHref: '/register',
+        }
+      } else {
+        // 全てスキップした場合
+        return {
+          text: <>今回「欲しい！」に追加した<br/>お土産はありません。</>,
+          buttonText: 'もう一度試す',
+          buttonHref: '/',
+        }
       }
     }
-  }, [currentUser, favorites, loading])
+  }, [currentUser, favorites, loading, fetchedRecommendResult])
 
   return (
     <>
@@ -223,7 +256,7 @@ export default function RecommendCardSwiper({
           <RecommendSwipeIcon position="right" />
         </>
       )}
-      {currentIndex < 0 && (
+      {currentIndex < 0 && !!favorites.length && (
         <Accordion allowMultiple w="100%">
           <CustomAccordionItem title="欲しい！に追加したお土産一覧">
             <Box py={4}>
