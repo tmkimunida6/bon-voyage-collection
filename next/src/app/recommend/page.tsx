@@ -27,7 +27,15 @@ export default async function Recommend({ searchParams }: RecommendProps) {
       searchParams?.category_id || '',
     )
     return (
-      <Stack spacing={4} maxW="660px" mx={-4} px={4} pb={6} h="100%" overflow="hidden">
+      <Stack
+        spacing={4}
+        maxW="660px"
+        mx={-4}
+        px={4}
+        pb={6}
+        h="100%"
+        overflow="hidden"
+      >
         <VStack spacing={1}>
           <Heading fontSize="lg" textAlign="center">
             お土産を最大10個ランダムで紹介！

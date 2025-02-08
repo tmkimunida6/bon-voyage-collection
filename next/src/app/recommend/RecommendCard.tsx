@@ -2,16 +2,15 @@ import {
   Card,
   CardBody,
   Heading,
-  Image,
   Stack,
   Flex,
   Text,
   HStack,
 } from '@chakra-ui/react'
+import RecommendCardImage from '../features/recommend/RecommendCardImage'
 import DataWithIcon from '@/components/molecules/DataWithIcon'
 import Rating from '@/components/molecules/Rating'
 import { SouvenirDetailType } from '@/types/types'
-import RecommendCardImage from '../features/recommend/RecommendCardImage'
 
 type RecommendCardProps = {
   souvenir: SouvenirDetailType

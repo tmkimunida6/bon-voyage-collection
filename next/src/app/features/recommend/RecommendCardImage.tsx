@@ -1,14 +1,16 @@
 'use client'
 
-import CustomModal from "@/components/organisms/modal/CustomModal";
-import { SouvenirDetailType } from "@/types/types";
-import { Image, useDisclosure, VStack } from "@chakra-ui/react";
+import { Image, useDisclosure, VStack } from '@chakra-ui/react'
+import CustomModal from '@/components/organisms/modal/CustomModal'
+import { SouvenirDetailType } from '@/types/types'
 
 type RecommendCardImageProps = {
   souvenir: SouvenirDetailType
 }
 
-export default function RecommendCardImage({ souvenir }: RecommendCardImageProps) {
+export default function RecommendCardImage({
+  souvenir,
+}: RecommendCardImageProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (

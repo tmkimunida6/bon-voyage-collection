@@ -39,7 +39,13 @@ const UploadImageForm = ({
     <VStack spacing={0}>
       {previewUrl ? (
         <Box position="relative" display="inline-flex">
-          <Image src={previewUrl} alt="プレビュー画像" maxH="300px" aspectRatio="4/3" objectFit="cover" />
+          <Image
+            src={previewUrl}
+            alt="プレビュー画像"
+            maxH="300px"
+            aspectRatio="4/3"
+            objectFit="cover"
+          />
           <HStack position="absolute" bottom={2} right={2}>
             <IconButton
               colorScheme="yellow"
@@ -61,7 +67,7 @@ const UploadImageForm = ({
       ) : (
         <VStack
           bg="gray.200"
-          w={{ base: "100%", sm: "80%", md: "60%" }}
+          w={{ base: '100%', sm: '80%', md: '60%' }}
           aspectRatio="4/3"
           borderRadius={4}
           justifyContent="center"
@@ -85,7 +91,9 @@ const UploadImageForm = ({
                 </Text>
               )}
             </Text>
-            <Text as="span" fontWeight="normal" fontSize="xs">※縦横比3:4を推奨</Text>
+            <Text as="span" fontWeight="normal" fontSize="xs">
+              ※縦横比3:4を推奨
+            </Text>
           </Button>
         </VStack>
       )}

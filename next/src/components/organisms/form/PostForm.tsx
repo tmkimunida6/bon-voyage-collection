@@ -28,14 +28,12 @@ import {
   Textarea,
   useDisclosure,
   useToast,
-  VStack,
 } from '@chakra-ui/react'
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { redirect, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
-import CustomModal from '../modal/CustomModal'
 import SearchForm from './SearchForm'
 import { createPostAction } from '@/actions/createPostAction'
 import MemoryInputModal from '@/app/features/post/MemoryInputModal'
@@ -45,11 +43,11 @@ import CustomIcon from '@/components/atoms/CustomIcon'
 import SubmitButton from '@/components/atoms/SubmitButton'
 import CustomAccordionItem from '@/components/molecules/CustomAccordionItem'
 import RatingSlider from '@/components/molecules/RatingSlider'
+import TextIconLink from '@/components/molecules/TextIconLink'
 import UploadImageForm from '@/components/molecules/UploadImageForm'
 import { ageOptions, forWhoOptions } from '@/constants/options'
 import { postSchema } from '@/schemas/postSchema'
 import { useSouvenirStore } from '@/store/index'
-import TextIconLink from '@/components/molecules/TextIconLink'
 
 const PostForm = () => {
   const [lastResult, action] = useFormState(createPostAction, undefined)
@@ -147,20 +145,22 @@ const PostForm = () => {
                   <SearchForm />
                 </ModalBody>
                 <ModalFooter justifyContent="center" gap={2}>
-                {selectedSouvenir.alias_id ? (
-                  <Button variant="primary" onClick={onClose}>確定</Button>
-                ) : (
-                  <>
-                    <Text fontSize="sm">お土産が見つかりませんか？</Text>
-                    <TextIconLink
-                      iconName="FaPen"
-                      iconPosition="left"
-                      href="/souvenir/new"
-                    >
-                      新規登録
-                    </TextIconLink>
-                  </>
-                )}
+                  {selectedSouvenir.alias_id ? (
+                    <Button variant="primary" onClick={onClose}>
+                      確定
+                    </Button>
+                  ) : (
+                    <>
+                      <Text fontSize="sm">お土産が見つかりませんか？</Text>
+                      <TextIconLink
+                        iconName="FaPen"
+                        iconPosition="left"
+                        href="/souvenir/new"
+                      >
+                        新規登録
+                      </TextIconLink>
+                    </>
+                  )}
                 </ModalFooter>
               </ModalContent>
             </Modal>

@@ -163,7 +163,13 @@ export default function RecommendCardSwiper({
       } else {
         // 全てスキップした場合
         return {
-          text: <>今回「欲しい！」に追加した<br/>お土産はありません。</>,
+          text: (
+            <>
+              今回「欲しい！」に追加した
+              <br />
+              お土産はありません。
+            </>
+          ),
           buttonText: 'もう一度試す',
           buttonHref: '/',
         }
@@ -186,7 +192,13 @@ export default function RecommendCardSwiper({
       } else {
         // 全てスキップした場合
         return {
-          text: <>今回「欲しい！」に追加した<br/>お土産はありません。</>,
+          text: (
+            <>
+              今回「欲しい！」に追加した
+              <br />
+              お土産はありません。
+            </>
+          ),
           buttonText: 'もう一度試す',
           buttonHref: '/',
         }

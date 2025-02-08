@@ -31,9 +31,9 @@ import FavoriteButton from '../favorite/FavoriteButton'
 import DeletePostButton from './DeletePostButton'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import Rating from '@/components/molecules/Rating'
+import CustomModal from '@/components/organisms/modal/CustomModal'
 import { useCurrentUserStore } from '@/store/index'
 import { PostType, timelineResultType } from '@/types/types'
-import CustomModal from '@/components/organisms/modal/CustomModal'
 
 type PostCardProps = {
   post: PostType
@@ -181,7 +181,9 @@ const PostCard = ({ post, setTimelineResult, page }: PostCardProps) => {
             >
               <VStack>
                 <Image
-                  src={post.image_url ? post.image_url : post.souvenir.image_url}
+                  src={
+                    post.image_url ? post.image_url : post.souvenir.image_url
+                  }
                   alt={post.souvenir.name}
                   borderRadius="sm"
                   objectFit="contain"
