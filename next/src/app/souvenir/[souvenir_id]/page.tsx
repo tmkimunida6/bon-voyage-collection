@@ -79,8 +79,9 @@ export default async function SouvenirDetailPage({
         <Image
           src={souvenirData.image_url}
           alt={souvenirData.name}
-          aspectRatio="3/2"
+          aspectRatio="4/3"
           objectFit="contain"
+          maxH="300px"
         />
         <Stack spacing={2}>
           <DataWithIcon iconName="FaClipboardList">

@@ -9,6 +9,7 @@ import {
   IconButton,
   Image,
   Input,
+  Text,
   VStack,
 } from '@chakra-ui/react'
 import CustomIcon from '../atoms/CustomIcon'
@@ -38,7 +39,7 @@ const UploadImageForm = ({
     <VStack spacing={0}>
       {previewUrl ? (
         <Box position="relative" display="inline-flex">
-          <Image src={previewUrl} alt="プレビュー画像" maxH="300px" />
+          <Image src={previewUrl} alt="プレビュー画像" maxH="300px" aspectRatio="4/3" objectFit="cover" />
           <HStack position="absolute" bottom={2} right={2}>
             <IconButton
               colorScheme="yellow"
@@ -60,8 +61,8 @@ const UploadImageForm = ({
       ) : (
         <VStack
           bg="gray.200"
-          w="100%"
-          h="128px"
+          w={{ base: "100%", sm: "80%", md: "60%" }}
+          aspectRatio="4/3"
           borderRadius={4}
           justifyContent="center"
           border={errors && '2px solid var(--chakra-colors-red-500)'}
@@ -73,8 +74,18 @@ const UploadImageForm = ({
             h="100%"
             onClick={onClickInputFile}
             _hover={{ opacity: 0.5 }}
+            flexDirection="column"
+            gap={1}
           >
-            ＋画像をアップロード{isRequired && '（必須）'}
+            <Text as="span" fontWeight="bold" fontSize="md">
+              ＋画像をアップロード
+              {isRequired && (
+                <Text as="span" color="red.500" fontWeight="bold">
+                  *
+                </Text>
+              )}
+            </Text>
+            <Text as="span" fontWeight="normal" fontSize="xs">※縦横比3:4を推奨</Text>
           </Button>
         </VStack>
       )}

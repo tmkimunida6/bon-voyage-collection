@@ -11,6 +11,7 @@ import {
 import DataWithIcon from '@/components/molecules/DataWithIcon'
 import Rating from '@/components/molecules/Rating'
 import { SouvenirDetailType } from '@/types/types'
+import RecommendCardImage from '../features/recommend/RecommendCardImage'
 
 type RecommendCardProps = {
   souvenir: SouvenirDetailType
@@ -31,16 +32,7 @@ const RecommendCard = ({ souvenir, rating = '0' }: RecommendCardProps) => {
               <Rating rating={Number(rating)} isSmall={false} />
             </HStack>
             <Flex aspectRatio="3/2" justifyContent="center" alignItems="center">
-              <Image
-                src={souvenir.image_url}
-                alt={souvenir.name}
-                borderRadius="sm"
-                width="100%"
-                aspectRatio="3/2"
-                objectFit="contain"
-                pointerEvents="none"
-                bg="gray.100"
-              />
+              <RecommendCardImage souvenir={souvenir} />
             </Flex>
           </Stack>
           <DataWithIcon iconName="FaClipboardList">

@@ -60,7 +60,7 @@ const SouvenirCard = ({
           <Stack justifyContent="space-between" height="100%" spacing={2}>
             <Stack spacing={2}>
               <Flex
-                aspectRatio="3/2"
+                aspectRatio="4/3"
                 justifyContent="center"
                 alignItems="center"
               >
@@ -69,9 +69,8 @@ const SouvenirCard = ({
                   alt={souvenir.name}
                   borderRadius="sm"
                   width="100%"
-                  aspectRatio="3/2"
-                  objectFit="contain"
-                  bg="gray.100"
+                  aspectRatio="4/3"
+                  objectFit="cover"
                 />
               </Flex>
               <LinkOverlay
