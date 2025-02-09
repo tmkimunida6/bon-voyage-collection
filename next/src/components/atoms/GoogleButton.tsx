@@ -49,7 +49,7 @@ export default function GoogleButton({ children }: GoogleButtonProps) {
         if (user.isSignedIn) {
           toast({
             title: 'ログインに成功しました。',
-            description: "マイページに移動します。",
+            description: 'マイページに移動します。',
             status: 'success',
             duration: 5000,
             isClosable: true,
