@@ -31,6 +31,11 @@ const DeleteUserButton = ({ onClose }: DeleteUserButtonProps) => {
 
       if (result.status === 'success') {
         await signoutAction()
+
+        // おすすめのお土産の一時データをリセット
+        localStorage.removeItem('favoritedSouvenirs')
+        localStorage.removeItem('selectedCurrency')
+
         await router.push('/sign_in')
         router.refresh()
       } else {

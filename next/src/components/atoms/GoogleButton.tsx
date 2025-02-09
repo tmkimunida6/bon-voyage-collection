@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { ReactNode, useEffect, useState } from 'react'
 import { setAccessTokenAction } from '@/actions/setAccessTokenAction'
 import { fetchUserState } from '@/utils/fetchUserState'
+import { favoriteBulkAction } from '@/actions/favoriteBulkAction'
 
 type GoogleButtonProps = {
   children: ReactNode
@@ -47,6 +48,13 @@ export default function GoogleButton({ children }: GoogleButtonProps) {
       try {
         const user = await fetchUserState()
         if (user.isSignedIn) {
+          // おすすめのお土産を「欲しい」に一括追加
+          const favoritedSouvenirsFromRecommend = localStorage.getItem('favoritedSouvenirs')
+          console.log(favoritedSouvenirsFromRecommend)
+          if (favoritedSouvenirsFromRecommend) {
+            await favoriteBulkAction(JSON.parse(favoritedSouvenirsFromRecommend))
+          }
+
           toast({
             title: 'ログインに成功しました。',
             description: 'マイページに移動します。',
