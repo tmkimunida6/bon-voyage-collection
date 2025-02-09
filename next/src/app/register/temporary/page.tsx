@@ -18,11 +18,16 @@ export default function Temporary() {
       <HStack mb={6}>
         <Heading as="h1">仮登録完了</Heading>
       </HStack>
-      <Text>
-        ご登録のメールアドレスに認証用リンクを送信しました。
-        <br />
-        メールを確認し、ユーザー登録を完了させてください。
-      </Text>
+      <Stack spacing={4}>
+        <Text>
+          ご登録のメールアドレスに認証用リンクを送信しました。
+          <br />
+          メールを確認し、ユーザー登録を完了させてください。
+        </Text>
+        <Text fontSize="sm" color="gray.500">
+          ※万が一メールが届かない場合は、迷惑メールフォルダに自動的に振り分けられている可能性がありますので、一度ご確認いただきますようお願いいたします。
+        </Text>
+      </Stack>
       <Button variant="primary" as={NextLink} href="/">
         TOPへ戻る
       </Button>

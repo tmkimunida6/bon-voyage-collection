@@ -84,7 +84,6 @@ export default function RecommendCardSwiper({
     )
 
     // 全てのスワイプが完了したあとにlocalStorageに保存する
-    console.log(currentIndex)
     if (currentIndex === 0) {
       // ログイン中の場合は「欲しい！」に追加 / 未ログイン時はlocalStorageに保存
       const favoritedAliasIds = favorites.map((favorite) => favorite.alias_id)
