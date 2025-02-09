@@ -47,11 +47,17 @@ export default function GoogleButton({ children }: GoogleButtonProps) {
       try {
         const user = await fetchUserState()
         if (user.isSignedIn) {
+          toast({
+            title: 'ログインに成功しました。',
+            description: "マイページに移動します。",
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          })
           router.push('/mypage')
         } else {
           toast({
-            title:
-              'ログインに失敗しました。時間をおいてから再度お試しください。',
+            title: 'ログインに失敗しました。',
             status: 'error',
             duration: 5000,
             isClosable: true,
