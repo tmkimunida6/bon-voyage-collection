@@ -44,10 +44,6 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
     }
   }, [errors])
 
-  useEffect(() => {
-    getLastSelectedCurrency()
-  }, [])
-
   // 金額バリデーション
   const onBlurValidate = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value

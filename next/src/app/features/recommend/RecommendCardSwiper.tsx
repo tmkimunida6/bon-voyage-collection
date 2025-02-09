@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/no-explicit-any: 0 */
+/* eslint react-hooks/exhaustive-deps: 0 */
 
 'use client'
 

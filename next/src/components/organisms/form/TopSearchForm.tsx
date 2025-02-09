@@ -9,7 +9,6 @@ import {
   Flex,
   VStack,
 } from '@chakra-ui/react'
-import NextLink from 'next/link'
 import { useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
 import TextIconLink from '@/components/molecules/TextIconLink'
