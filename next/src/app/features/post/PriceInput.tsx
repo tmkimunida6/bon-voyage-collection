@@ -44,6 +44,10 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
     }
   }, [errors])
 
+  useEffect(() => {
+    getLastSelectedCurrency()
+  }, [])
+
   // 金額バリデーション
   const onBlurValidate = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -119,7 +123,7 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
             onClick={() => handleSelectCurrency()}
             fontSize="sm"
           >
-            {selectedCurrency}
+            {localStorage.getItem('selectedCurrency') ? localStorage.getItem('selectedCurrency') : selectedCurrency}
             <CustomIcon iconName="FaChevronDown" fontSize="xs" ml={1} />
           </Button>
         </InputLeftAddon>
@@ -149,7 +153,7 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
           onClose={onClose}
         />
       </CustomModal>
-      <Input type="hidden" name="currency" value={selectedCurrency} />
+      <Input type="hidden" name="currency" value={localStorage.getItem('selectedCurrency') ? localStorage.getItem('selectedCurrency') as string : selectedCurrency} />
     </FormControl>
   )
 }
