@@ -123,7 +123,9 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
             onClick={() => handleSelectCurrency()}
             fontSize="sm"
           >
-            {localStorage.getItem('selectedCurrency') ? localStorage.getItem('selectedCurrency') : selectedCurrency}
+            {localStorage.getItem('selectedCurrency')
+              ? localStorage.getItem('selectedCurrency')
+              : selectedCurrency}
             <CustomIcon iconName="FaChevronDown" fontSize="xs" ml={1} />
           </Button>
         </InputLeftAddon>
@@ -153,7 +155,15 @@ const PriceInput = ({ name, errors }: PriceInputProps) => {
           onClose={onClose}
         />
       </CustomModal>
-      <Input type="hidden" name="currency" value={localStorage.getItem('selectedCurrency') ? localStorage.getItem('selectedCurrency') as string : selectedCurrency} />
+      <Input
+        type="hidden"
+        name="currency"
+        value={
+          localStorage.getItem('selectedCurrency')
+            ? (localStorage.getItem('selectedCurrency') as string)
+            : selectedCurrency
+        }
+      />
     </FormControl>
   )
 }

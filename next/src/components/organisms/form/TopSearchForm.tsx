@@ -20,7 +20,10 @@ const TopSearchForm = () => {
   const [word, setWord] = useState<string>('')
   const { selectedCategory } = useCategoryStore()
 
-  const handleLinkRecommendPage = (word: string, selectedCategory: CategoryType) => {
+  const handleLinkRecommendPage = (
+    word: string,
+    selectedCategory: CategoryType,
+  ) => {
     window.location.href = `./recommend?word=${word}&category_id=${selectedCategory.id}&category_name=${selectedCategory.name}` // 完全なリロード
   }
 
@@ -39,7 +42,10 @@ const TopSearchForm = () => {
           <CategoryInput />
         </FormControl>
       </HStack>
-      <Button variant="primary" onClick={() => handleLinkRecommendPage(word, selectedCategory)}>
+      <Button
+        variant="primary"
+        onClick={() => handleLinkRecommendPage(word, selectedCategory)}
+      >
         お土産を見つける
       </Button>
       <VStack spacing={0}>
