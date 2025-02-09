@@ -50,16 +50,24 @@ export default function RecommendCardSwiper({
   const toast = useToast()
 
   useEffect(() => {
-    const preventDefault = (e: TouchEvent) => e.preventDefault()
-    // タッチイベントを無効化
-    document.addEventListener('touchmove', preventDefault, { passive: false })
-    window.scrollTo(0, 0)
+    const preventDefault = (e: TouchEvent) => {
+      if (e.cancelable) {
+        e.preventDefault()
+      }
+    }
 
-    // クリーンアップ時にタッチイベントを有効化
+    if (currentIndex >= 0) {
+      // タッチイベントを無効化
+      document.addEventListener('touchmove', preventDefault, { passive: false })
+    } else {
+      // 全てのスワイプが完了したらタッチイベントを有効化
+      document.removeEventListener('touchmove', preventDefault)
+    }
+
     return () => {
       document.removeEventListener('touchmove', preventDefault)
     }
-  }, [])
+  }, [currentIndex])
 
   const handleSwipe = (direction: string, souvenir: SouvenirDetailType) => {
     if (direction === 'right') {
@@ -76,11 +84,8 @@ export default function RecommendCardSwiper({
     )
 
     // 全てのスワイプが完了したあとにlocalStorageに保存する
+    console.log(currentIndex)
     if (currentIndex === 0) {
-      // 全てのスワイプが完了したらタッチイベントを有効化
-      const enableTouchMove = (e: TouchEvent) => e.stopPropagation()
-      document.removeEventListener('touchmove', enableTouchMove)
-
       // ログイン中の場合は「欲しい！」に追加 / 未ログイン時はlocalStorageに保存
       const favoritedAliasIds = favorites.map((favorite) => favorite.alias_id)
       if (currentUser?.isSignedIn) {
