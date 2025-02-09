@@ -6,6 +6,7 @@
 import { Button, useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { ReactNode, useEffect, useState } from 'react'
+import { favoriteBulkAction } from '@/actions/favoriteBulkAction'
 import { setAccessTokenAction } from '@/actions/setAccessTokenAction'
 import { fetchUserState } from '@/utils/fetchUserState'
 
@@ -47,6 +48,16 @@ export default function GoogleButton({ children }: GoogleButtonProps) {
       try {
         const user = await fetchUserState()
         if (user.isSignedIn) {
+          // おすすめのお土産を「欲しい」に一括追加
+          const favoritedSouvenirsFromRecommend =
+            localStorage.getItem('favoritedSouvenirs')
+          console.log(favoritedSouvenirsFromRecommend)
+          if (favoritedSouvenirsFromRecommend) {
+            await favoriteBulkAction(
+              JSON.parse(favoritedSouvenirsFromRecommend),
+            )
+          }
+
           toast({
             title: 'ログインに成功しました。',
             description: 'マイページに移動します。',

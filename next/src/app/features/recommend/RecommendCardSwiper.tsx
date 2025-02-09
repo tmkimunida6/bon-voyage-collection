@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/no-explicit-any: 0 */
+/* eslint react-hooks/exhaustive-deps: 0 */
 
 'use client'
 
@@ -62,29 +63,7 @@ export default function RecommendCardSwiper({
     } else {
       // 全てのスワイプが完了したらタッチイベントを有効化
       document.removeEventListener('touchmove', preventDefault)
-    }
 
-    return () => {
-      document.removeEventListener('touchmove', preventDefault)
-    }
-  }, [currentIndex])
-
-  const handleSwipe = (direction: string, souvenir: SouvenirDetailType) => {
-    if (direction === 'right') {
-      setFavorites((prev) => [...prev, souvenir])
-      // } else if (direction === 'left') {
-      //   setSkips((prev) => [...prev, souvenir])
-    }
-    setCurrentIndex((prev) => prev - 1)
-  }
-
-  const handleCardLeftScreen = (alias_id: string) => {
-    setRecommendSouvenirs((prevSouvenirs) =>
-      prevSouvenirs.filter((souvenir) => souvenir.alias_id !== alias_id),
-    )
-
-    // 全てのスワイプが完了したあとにlocalStorageに保存する
-    if (currentIndex === 0) {
       // ログイン中の場合は「欲しい！」に追加 / 未ログイン時はlocalStorageに保存
       const favoritedAliasIds = favorites.map((favorite) => favorite.alias_id)
       if (currentUser?.isSignedIn) {
@@ -130,6 +109,25 @@ export default function RecommendCardSwiper({
         // localStorage.setItem('skipedSouvenirs', JSON.stringify(newSkipedAliasIds))
       }
     }
+
+    return () => {
+      document.removeEventListener('touchmove', preventDefault)
+    }
+  }, [currentIndex])
+
+  const handleSwipe = (direction: string, souvenir: SouvenirDetailType) => {
+    if (direction === 'right') {
+      setFavorites((prev) => [...prev, souvenir])
+      // } else if (direction === 'left') {
+      //   setSkips((prev) => [...prev, souvenir])
+    }
+    setCurrentIndex((prev) => prev - 1)
+  }
+
+  const handleCardLeftScreen = (alias_id: string) => {
+    setRecommendSouvenirs((prevSouvenirs) =>
+      prevSouvenirs.filter((souvenir) => souvenir.alias_id !== alias_id),
+    )
   }
 
   // 結果によって内容だしわけ
@@ -185,9 +183,9 @@ export default function RecommendCardSwiper({
         return {
           text: (
             <>
-              右にスワイプしたお土産を
+              会員登録をして、
               <br />
-              「欲しい！」に{loading ? '追加中...' : '追加しました！'}
+              欲しいお土産を保存しましょう
             </>
           ),
           buttonText: '会員登録へ進む',

@@ -28,7 +28,7 @@ const SignoutButton = ({ size, variant }: SignoutButtonProps) => {
 
       // おすすめのお土産の一時データをリセット
       localStorage.removeItem('favoritedSouvenirs')
-      localStorage.removeItem('skipedSouvenirs')
+      localStorage.removeItem('selectedCurrency')
 
       toast({
         title: 'ログアウトしました。',

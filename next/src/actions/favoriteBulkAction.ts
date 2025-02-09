@@ -2,7 +2,6 @@
 
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { apiBaseUrl } from '@/constants/apiBaseUrl'
 import { getUserTokens } from '@/utils/getUserTokens'
 
@@ -32,7 +31,6 @@ export async function favoriteBulkAction(souvenir_ids: Array<string>) {
           'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
       )
     }
-    revalidatePath('/mypage')
     return data
   } catch (error: any) {
     return { status: 'error', message: error.message }

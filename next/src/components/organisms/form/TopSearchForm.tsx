@@ -9,15 +9,22 @@ import {
   Flex,
   VStack,
 } from '@chakra-ui/react'
-import NextLink from 'next/link'
 import { useState } from 'react'
 import CategoryInput from '@/app/features/category/CategoryInput'
 import TextIconLink from '@/components/molecules/TextIconLink'
 import { useCategoryStore } from '@/store/index'
+import { CategoryType } from '@/types/types'
 
 const TopSearchForm = () => {
   const [word, setWord] = useState<string>('')
   const { selectedCategory } = useCategoryStore()
+
+  const handleLinkRecommendPage = (
+    word: string,
+    selectedCategory: CategoryType,
+  ) => {
+    window.location.href = `./recommend?word=${word}&category_id=${selectedCategory.id}&category_name=${selectedCategory.name}` // 完全なリロード
+  }
 
   return (
     <>
@@ -36,8 +43,7 @@ const TopSearchForm = () => {
       </HStack>
       <Button
         variant="primary"
-        as={NextLink}
-        href={`./recommend?word=${word}&category_id=${selectedCategory.id}&category_name=${selectedCategory.name}`}
+        onClick={() => handleLinkRecommendPage(word, selectedCategory)}
       >
         お土産を見つける
       </Button>
