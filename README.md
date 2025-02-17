@@ -57,28 +57,33 @@ URL: https://bon-voyage-collection.com/
 ## 💻 機能紹介
 | TOP | レコメンド |
 | ---- | ---- |
-| [![Image from Gyazo](https://i.gyazo.com/1ca1212d1cf3efd8740b019ea2ee4ff4.gif)](https://gyazo.com/1ca1212d1cf3efd8740b019ea2ee4ff4) | [![Image from Gyazo](https://i.gyazo.com/8b0f0a42a1a8fdfd57ddcca3d38742e0.gif)](https://gyazo.com/8b0f0a42a1a8fdfd57ddcca3d38742e0) |
-| トップページからはおすすめ検索が可能です。条件の入力がなくても検索可能。 |  |
+| <img src="https://i.gyazo.com/1ca1212d1cf3efd8740b019ea2ee4ff4.gif" width="80%"> | <img src="https://i.gyazo.com/8b0f0a42a1a8fdfd57ddcca3d38742e0.gif" width="80%"> |
+| トップページからはおすすめ検索が可能です。条件の入力がなくても検索可能です。 | ランダムでおすすめされたお土産をスワイプで振り分け、お気に入りに追加できます。 |
 
 | タイムライン | 検索 |
 | ---- | ---- |
-| [![Image from Gyazo](https://i.gyazo.com/e83643e1b08f5599924e20256e6be158.gif)](https://gyazo.com/e83643e1b08f5599924e20256e6be158) | [![Image from Gyazo](https://i.gyazo.com/8537f000a8cb1294f25efb59aac0b9e8.gif)](https://gyazo.com/8537f000a8cb1294f25efb59aac0b9e8) |
+| <img src="https://i.gyazo.com/e83643e1b08f5599924e20256e6be158.gif" width="80%"> | <img src="https://i.gyazo.com/8537f000a8cb1294f25efb59aac0b9e8.gif" width="80%"> |
+| 投稿されたお土産へのレビューを見ることができます。 | 条件を指定し、お土産を検索することができます。 |
 
 | 投稿 | お土産新規登録 |
 | ---- | ---- |
-| [![Image from Gyazo](https://i.gyazo.com/2482bf0ab26499571f3369929067c101.gif)](https://gyazo.com/2482bf0ab26499571f3369929067c101) | [![Image from Gyazo](https://i.gyazo.com/2f357ce3ec52f1f9e379570e2c4fa818.gif)](https://gyazo.com/2f357ce3ec52f1f9e379570e2c4fa818) |
+| <img src="https://i.gyazo.com/4023ecaf399f3e6507801c3417a81609.gif" width="100%"> | <img src="https://i.gyazo.com/2f357ce3ec52f1f9e379570e2c4fa818.gif" width="80%"> |
+| 投稿画面ではお土産を選択して、画像と購入データ、レビュー、旅行の思い出などを入力し、投稿が可能です。 | 投稿時にお土産が見つからなかった場合は自分でお土産を追加することが可能です。 |
 
 | 購入場所検索（投稿） | 通貨選択（投稿） |
 | ---- | ---- |
-| [![Image from Gyazo](https://i.gyazo.com/33ee951c7e2e854fd2cdff1cb3a19375.gif)](https://gyazo.com/33ee951c7e2e854fd2cdff1cb3a19375) | [![Image from Gyazo](https://i.gyazo.com/e6fed321cda68a8df5ad9cf34ff73afc.gif)](https://gyazo.com/e6fed321cda68a8df5ad9cf34ff73afc) |
+| <img src="https://i.gyazo.com/33ee951c7e2e854fd2cdff1cb3a19375.gif" width="80%"> | <img src="https://i.gyazo.com/e6fed321cda68a8df5ad9cf34ff73afc.gif" width="80%"> |
+| 購入場所を入力する際は入力内容に応じてサジェストが表示されます。（Google Places API使用） | 通貨は一覧から検索して選択します。一度選択した通貨は一番上に表示されるようになっています。（Open Exchange Rate API使用） |
 
 | マイページ | プロフィール変更 |
 | ---- | ---- |
-| [![Image from Gyazo](https://i.gyazo.com/5ca6c7993e5fa2612d142f19785134e1.gif)](https://gyazo.com/5ca6c7993e5fa2612d142f19785134e1) | [![Image from Gyazo](https://i.gyazo.com/2b138693e44ef45f6d4f01e87b27b360.gif)](https://gyazo.com/2b138693e44ef45f6d4f01e87b27b360) |
+| <img src="https://i.gyazo.com/5ca6c7993e5fa2612d142f19785134e1.gif" width="80%"> | <img src="https://i.gyazo.com/2b138693e44ef45f6d4f01e87b27b360.gif" width="80%"> |
+| 投稿したお土産やお気に入りに追加したお土産を一覧で確認ができます。拡大ボタンを押すと旅行のお土産の確認も可能です。 | ユーザー名とプロフィール画像は自由に変更可能です。 |
 
 | お土産詳細 | Googleログイン |
 | ---- | ---- |
-| [![Image from Gyazo](https://i.gyazo.com/ff8fc4e6e8bf3f412ea4b936b9b2491f.gif)](https://gyazo.com/ff8fc4e6e8bf3f412ea4b936b9b2491f) | [![Image from Gyazo](https://i.gyazo.com/28ccff269be880408105d6712ff61797.gif)](https://gyazo.com/28ccff269be880408105d6712ff61797) |
+| <img src="https://i.gyazo.com/ff8fc4e6e8bf3f412ea4b936b9b2491f.gif" width="80%"> | <img src="https://i.gyazo.com/28ccff269be880408105d6712ff61797.gif" width="80%"> |
+| 投稿されたお土産の名前や画像、カテゴリーなどの詳細情報が掲載されています。お土産に対する投稿や同カテゴリーのお土産も確認できます。 | ログイン、もしくは会員登録時はGoogleアカウントによるログインも可能です。 |
 
 
 ### 将来的な拡張
