@@ -54,37 +54,40 @@ URL: https://bon-voyage-collection.com/
 - 旅行の思い出を記録しておきたい人
 <br><br>
 
+
+
+
+
 ## 💻 機能紹介
 | TOP | レコメンド |
 | ---- | ---- |
-| <img src="https://i.gyazo.com/1ca1212d1cf3efd8740b019ea2ee4ff4.gif" width="80%"> | <img src="https://i.gyazo.com/8b0f0a42a1a8fdfd57ddcca3d38742e0.gif" width="80%"> |
-| トップページからはおすすめ検索が可能です。条件の入力がなくても検索可能です。 | ランダムでおすすめされたお土産をスワイプで振り分け、お気に入りに追加できます。 |
+| ![top](https://github.com/user-attachments/assets/b1f7e828-c2b2-4997-a089-0c361ece4248) | ![recommend](https://github.com/user-attachments/assets/52919149-c1d2-4c52-8569-eca1ff74a63c) |
+| トップページからはおすすめ検索が可能です。<br/>条件の入力がなくても検索可能です。 | ランダムでおすすめされたお土産をスワイプで振り分け、<br/>お気に入りに追加できます。 |
 
 | タイムライン | 検索 |
 | ---- | ---- |
-| <img src="https://i.gyazo.com/e83643e1b08f5599924e20256e6be158.gif" width="80%"> | <img src="https://i.gyazo.com/8537f000a8cb1294f25efb59aac0b9e8.gif" width="80%"> |
+| ![timeline](https://github.com/user-attachments/assets/4e132255-a9c2-48fb-bd86-ed84688bd6a1) | ![search](https://github.com/user-attachments/assets/e82d12e0-2c21-4f80-baef-48f07dbe6e34) |
 | 投稿されたお土産へのレビューを見ることができます。 | 条件を指定し、お土産を検索することができます。 |
 
 | 投稿 | お土産新規登録 |
 | ---- | ---- |
-| <img src="https://i.gyazo.com/4023ecaf399f3e6507801c3417a81609.gif" width="100%"> | <img src="https://i.gyazo.com/2f357ce3ec52f1f9e379570e2c4fa818.gif" width="80%"> |
-| 投稿画面ではお土産を選択して、画像と購入データ、レビュー、旅行の思い出などを入力し、投稿が可能です。 | 投稿時にお土産が見つからなかった場合は自分でお土産を追加することが可能です。 |
+| ![post](https://github.com/user-attachments/assets/bb44a7a8-37f2-4395-bea4-72fa68e0f22e) | ![souvenir](https://github.com/user-attachments/assets/2f95d1b6-074e-4f2c-a032-6fd90e48fa41) |
+| 投稿画面ではお土産を選択して、<br/>画像と購入データ、レビュー、<br/>旅行の思い出などを入力し、投稿が可能です。 | 投稿時にお土産が見つからなかった場合は<br/>自分でお土産を追加することが可能です。 |
 
 | 購入場所検索（投稿） | 通貨選択（投稿） |
 | ---- | ---- |
-| <img src="https://i.gyazo.com/33ee951c7e2e854fd2cdff1cb3a19375.gif" width="80%"> | <img src="https://i.gyazo.com/e6fed321cda68a8df5ad9cf34ff73afc.gif" width="80%"> |
-| 購入場所を入力する際は入力内容に応じてサジェストが表示されます。（Google Places API使用） | 通貨は一覧から検索して選択します。一度選択した通貨は一番上に表示されるようになっています。（Open Exchange Rate API使用） |
+| ![place](https://github.com/user-attachments/assets/3bf35b94-4d07-4cee-a326-a4bc77304b6b) | ![price](https://github.com/user-attachments/assets/019124ef-3903-4e80-87df-ab39082c96ed) |
+| 購入場所を入力する際は入力内容に応じてサジェストが表示されます。<br/>（Google Places API使用） | 通貨は一覧から検索して選択します。<br/>一度選択した通貨は一番上に表示されるようになっています。<br/>（Open Exchange Rate API使用） |
 
 | マイページ | プロフィール変更 |
 | ---- | ---- |
-| <img src="https://i.gyazo.com/5ca6c7993e5fa2612d142f19785134e1.gif" width="80%"> | <img src="https://i.gyazo.com/2b138693e44ef45f6d4f01e87b27b360.gif" width="80%"> |
-| 投稿したお土産やお気に入りに追加したお土産を一覧で確認ができます。拡大ボタンを押すと旅行のお土産の確認も可能です。 | ユーザー名とプロフィール画像は自由に変更可能です。 |
+| ![mypage](https://github.com/user-attachments/assets/06353bae-addc-43bb-bf5a-6cd0f30ae4f1) | ![profile](https://github.com/user-attachments/assets/0be87741-61da-4894-bbad-b204c6908fc9) |
+| 投稿したお土産やお気に入りに追加したお土産を<br/>一覧で確認ができます。<br/>拡大ボタンを押すと旅行のお土産の確認も可能です。 | ユーザー名とプロフィール画像は自由に変更可能です。 |
 
 | お土産詳細 | Googleログイン |
 | ---- | ---- |
-| <img src="https://i.gyazo.com/ff8fc4e6e8bf3f412ea4b936b9b2491f.gif" width="80%"> | <img src="https://i.gyazo.com/28ccff269be880408105d6712ff61797.gif" width="80%"> |
-| 投稿されたお土産の名前や画像、カテゴリーなどの詳細情報が掲載されています。お土産に対する投稿や同カテゴリーのお土産も確認できます。 | ログイン、もしくは会員登録時はGoogleアカウントによるログインも可能です。 |
-
+| ![detail](https://github.com/user-attachments/assets/85ce5b8f-acd5-40e7-aaf4-de56f43482a6) | ![google](https://github.com/user-attachments/assets/8deafb63-0b8f-47ca-b8da-a069782099a6) |
+| 投稿されたお土産の名前や画像、<br/>カテゴリーなどの詳細情報が掲載されています。<br/>お土産に対する投稿や同カテゴリーのお土産も確認できます。 | ログイン、もしくは会員登録時は<br/>Googleアカウントによるログインも可能です。 |
 
 ### 将来的な拡張
 - 新規登録されたお土産の運営による承認フロー
@@ -117,5 +120,5 @@ URL: https://bon-voyage-collection.com/
 Figma：https://www.figma.com/design/OXJ6Eoec2lubFa9zQ37bnz/Portfolio?node-id=0-1&t=qsWIeidmTbucADgU-1
 
 ## ER図
-dbdiagram：https://dbdocs.io/yuguchi.tomoki.p0/My-New-Portfolio?view=relationships
 [![Image from Gyazo](https://i.gyazo.com/58dcc5cd6f9b6a6238d382aea404d799.png)](https://gyazo.com/58dcc5cd6f9b6a6238d382aea404d799)
+dbdiagram：https://dbdocs.io/yuguchi.tomoki.p0/My-New-Portfolio?view=relationships
