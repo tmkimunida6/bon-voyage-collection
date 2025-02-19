@@ -1,12 +1,22 @@
 ## Bon Voyage Collection
 <img src="https://github.com/user-attachments/assets/950fd66e-87a7-4bd7-9d4e-ca30fee4ce33" width="600px">
-
 <br><br>
 
 ## サービスURL
 URL: https://bon-voyage-collection.com/
-
 <br><br>
+
+# 目次
+- [🧳 サービス概要](#-サービス概要)
+- [🤖 技術スタック](#-技術スタック)
+- [💝 このサービスへの思い・作りたかった理由](#-このサービスへの思い作りたかった理由)
+- [👤 ターゲットユーザー層](#-ターゲットユーザー層)
+- [⭐️ サービスの差別化ポイント・推しポイント](#%EF%B8%8F-サービスの差別化ポイント推しポイント)
+- [💻 機能紹介](#-機能紹介)
+- [画面遷移図](#画面遷移図)
+- [ER図](#er図)
+<br><br>
+
 
 ## 🧳 サービス概要
 〜 新しいお土産を発見・保存し、購入したお土産を記録・共有できるサービス 〜
@@ -18,14 +28,16 @@ URL: https://bon-voyage-collection.com/
 
 ## 🤖 技術スタック
 | カテゴリ | 技術内容 |
-| バックエンド | Ruby on Rails(7.1) / Ruby(3.3.5) |
-| フロントエンド | Next.js(14.2.14) / Type Script |
-| CSSフレームワーク | Chakra UI(2.10.2) |
+| ---- | ---- |
+| バックエンド | Ruby on Rails (7.1) / Ruby (3.3.5) |
+| フロントエンド | Next.js (14.2.14) / Type Script |
+| CSSフレームワーク | Chakra UI (2.10.2) |
 | Web API | Google Places API / Open Exchange Rates API |
 | データベースサーバー | Neon / PostgreSQL |
 | 画像サーバー | Cloudinary |
 | アプリケーションサーバー | Render.com(バックエンド) / Vercel(フロントエンド) |
 | バージョン管理ツール | Git |
+
 <br><br>
 
 ## 💝 このサービスへの思い・作りたかった理由
@@ -54,40 +66,51 @@ URL: https://bon-voyage-collection.com/
 - 旅行の思い出を記録しておきたい人
 <br><br>
 
+## ⭐️ サービスの差別化ポイント・推しポイント
+- お土産に特化<br>
+もちろん他のSNSや旅行ガイドブックでもお土産を探すことは可能ですが、情報量が非常に多く、特定のジャンルに絞って検索したい場合は探しづらいと考えています。
+このサービスでは、お土産に特化しているため、知りたいお土産の情報を最短距離で探すことができます。
 
+- 新しいお土産に出会える<br>
+たくさんあるお土産の中から自分の好みにあったお土産を表示してくれるレコメンド機能や人気投稿やランキング機能で、これまで知らなかったお土産を発見するきっかけを作ります。
+まだガイドブックにも載っていないようなニッチなお土産やまだ話題になっていない最新トレンドのお土産にも出会えるかもしれません。
 
-
+- 思い出と共にコレクション<br>
+単純にお土産をコレクションする楽しさに加え、「お土産を見ると（もしくは食べるとき）旅行をしていた時の楽しかった思い出や光景が思い浮かぶ」という経験から、お土産の記録とともに、旅行の写真や日記を追加できるような仕組みを作りました。<br>
+形がなってしまうお土産であっても、このサービスに記録しておけば、旅行の思い出と共に残り続けます。
+<br><br>
 
 ## 💻 機能紹介
 | TOP | レコメンド |
 | ---- | ---- |
 | ![top](https://github.com/user-attachments/assets/b1f7e828-c2b2-4997-a089-0c361ece4248) | ![recommend](https://github.com/user-attachments/assets/52919149-c1d2-4c52-8569-eca1ff74a63c) |
-| トップページからはおすすめ検索が可能です。<br/>条件の入力がなくても検索可能です。 | ランダムでおすすめされたお土産をスワイプで振り分け、<br/>お気に入りに追加できます。 |
+| トップページからはおすすめ検索が可能です。<br/>条件の入力がなくても検索可能です。 | ランダムでおすすめされたお土産をスワイプで振り分け、<br/>お気に入りに追加できます。<br/>スワイプ機能は「react-tinder-card」というライブラリを使用 |
 
 | タイムライン | 検索 |
 | ---- | ---- |
 | ![timeline](https://github.com/user-attachments/assets/4e132255-a9c2-48fb-bd86-ed84688bd6a1) | ![search](https://github.com/user-attachments/assets/e82d12e0-2c21-4f80-baef-48f07dbe6e34) |
-| 投稿されたお土産へのレビューを見ることができます。 | 条件を指定し、お土産を検索することができます。 |
+| 投稿されたお土産へのレビューを時系列順に見ることができます。<br/>最下部までスクロールすると10件後のに読み込むように実装。 | 条件を指定し、お土産を検索することができます。<br/>ページネーションで10件ごとに検索結果を表示します。 |
 
 | 投稿 | お土産新規登録 |
 | ---- | ---- |
 | ![post](https://github.com/user-attachments/assets/bb44a7a8-37f2-4395-bea4-72fa68e0f22e) | ![souvenir](https://github.com/user-attachments/assets/2f95d1b6-074e-4f2c-a032-6fd90e48fa41) |
-| 投稿画面ではお土産を選択して、<br/>画像と購入データ、レビュー、<br/>旅行の思い出などを入力し、投稿が可能です。 | 投稿時にお土産が見つからなかった場合は<br/>自分でお土産を追加することが可能です。 |
+| 投稿画面ではお土産を選択して、<br/>画像や購入データ、レビュー、<br/>旅行の思い出などを入力し、投稿が可能です。 | 投稿時にお土産が見つからなかった場合は<br/>自分でお土産を追加することが可能です。 |
 
 | 購入場所検索（投稿） | 通貨選択（投稿） |
 | ---- | ---- |
 | ![place](https://github.com/user-attachments/assets/3bf35b94-4d07-4cee-a326-a4bc77304b6b) | ![price](https://github.com/user-attachments/assets/019124ef-3903-4e80-87df-ab39082c96ed) |
-| 購入場所を入力する際は入力内容に応じてサジェストが表示されます。<br/>（Google Places API使用） | 通貨は一覧から検索して選択します。<br/>一度選択した通貨は一番上に表示されるようになっています。<br/>（Open Exchange Rate API使用） |
+| 購入場所を入力する際は<br/>入力内容に応じてサジェストが表示されます。<br/>（Google Places API使用） | 通貨は一覧から検索して選択します。<br/>一度選択した通貨は一番上に表示されるようになっています。<br/>（Open Exchange Rate API使用） |
 
 | マイページ | プロフィール変更 |
 | ---- | ---- |
 | ![mypage](https://github.com/user-attachments/assets/06353bae-addc-43bb-bf5a-6cd0f30ae4f1) | ![profile](https://github.com/user-attachments/assets/0be87741-61da-4894-bbad-b204c6908fc9) |
-| 投稿したお土産やお気に入りに追加したお土産を<br/>一覧で確認ができます。<br/>拡大ボタンを押すと旅行のお土産の確認も可能です。 | ユーザー名とプロフィール画像は自由に変更可能です。 |
+| 投稿したお土産やお気に入りに追加したお土産を<br/>一覧で確認ができます。<br/>拡大ボタンを押すと旅行のお土産の確認も可能です。 | ユーザー名とプロフィール画像は自由に変更可能です。<br/>Googleログインの場合はGoogleの情報が自動で反映されます。 |
 
 | お土産詳細 | Googleログイン |
 | ---- | ---- |
 | ![detail](https://github.com/user-attachments/assets/85ce5b8f-acd5-40e7-aaf4-de56f43482a6) | ![google](https://github.com/user-attachments/assets/8deafb63-0b8f-47ca-b8da-a069782099a6) |
 | 投稿されたお土産の名前や画像、<br/>カテゴリーなどの詳細情報が掲載されています。<br/>お土産に対する投稿や同カテゴリーのお土産も確認できます。 | ログイン、もしくは会員登録時は<br/>Googleアカウントによるログインも可能です。 |
+
 
 ### 将来的な拡張
 - 新規登録されたお土産の運営による承認フロー
@@ -118,6 +141,7 @@ URL: https://bon-voyage-collection.com/
 
 ## 画面遷移図
 Figma：https://www.figma.com/design/OXJ6Eoec2lubFa9zQ37bnz/Portfolio?node-id=0-1&t=qsWIeidmTbucADgU-1
+<br><br>
 
 ## ER図
 [![Image from Gyazo](https://i.gyazo.com/58dcc5cd6f9b6a6238d382aea404d799.png)](https://gyazo.com/58dcc5cd6f9b6a6238d382aea404d799)
