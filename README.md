@@ -7,7 +7,7 @@ URL: https://bon-voyage-collection.com/
 <br><br>
 #### ▼ゲストアカウント情報（※採用ご担当者様向け）
 メールアドレスを登録しなくても簡単にアプリを試していただけるように、ゲストアカウントを用意しております。<br>
-[ログインページ](https://bon-voyage-collection.com/sign_in)よりログインを行い、アプリをご利用ください。
+[ログインページ](https://bon-voyage-collection.com/sign_in)より以下の情報を入力した上でログインを行い、ぜひアプリをご利用ください。
 - メールアドレス：guest@test.com
 - パスワード：guestpassword
 <br><br>
