@@ -28,7 +28,7 @@ const NavButton = ({ iconName, text, href }: NavButtonProps) => {
     >
       <VStack gap="2px">
         <CustomIcon iconName={iconName} />
-        <Text fontSize="xs">{text}</Text>
+        <Text fontSize={{base: "2xs", sm: "xs"}}>{text}</Text>
       </VStack>
     </Button>
   )
