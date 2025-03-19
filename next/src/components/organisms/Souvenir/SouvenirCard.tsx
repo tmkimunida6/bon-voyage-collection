@@ -23,6 +23,7 @@ type SouvenirCardProps = {
   souvenir: SouvenirCardType
   rating: string | null
   hasTrashIcon?: boolean
+  img?: string
 }
 
 const SouvenirCard = ({
@@ -31,6 +32,7 @@ const SouvenirCard = ({
   souvenir,
   rating = '0',
   hasTrashIcon = false,
+  img = souvenir.image_url
 }: SouvenirCardProps) => {
   const cardStyles = {
     sm: {
@@ -65,7 +67,7 @@ const SouvenirCard = ({
                 alignItems="center"
               >
                 <Image
-                  src={souvenir.image_url}
+                  src={img}
                   alt={souvenir.name}
                   borderRadius="sm"
                   width="100%"
