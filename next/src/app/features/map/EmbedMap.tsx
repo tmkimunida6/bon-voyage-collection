@@ -47,6 +47,7 @@ export default function EmbedMap({
   apiKey,
   mapId,
 }: EmbedMapProps) {
+  console.log(posts)
   const [markers, setMarkers] = useState<Array<markerType>>([])
   const [center, setCenter] = useState({ lat: 21.2795422, lng: -157.8304625 }) // 初期値を東京駅に設定
   const [currentPos, setCurrentPos] = useState<{
@@ -114,6 +115,7 @@ export default function EmbedMap({
     const fetchPlaceData = async () => {
       const newMarkers: Array<markerType> = []
       for (const post of posts) {
+        console.log(post)
         if (post.place_id) {
           if (newMarkers.some((marker) => marker.place_id === post.place_id)) {
             continue // 重複する場合はスキップ
@@ -145,10 +147,11 @@ export default function EmbedMap({
                 })
               }
             }
+            console.log(data.result)
           } catch (error) {
             toast({
               title:
-                'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+                `サーバーエラーが発生しました。時間をおいてから再度お試しください。${error}`,
               status: 'error',
               duration: 5000,
               isClosable: true,
