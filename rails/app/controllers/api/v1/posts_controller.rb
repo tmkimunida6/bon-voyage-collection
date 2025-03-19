@@ -70,7 +70,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def posts_with_place
-    posts = Post.where.not(place_id: [nil, ''])
+    posts = Post.where.not(place_id: [ nil, "" ])
 
     render json: JSON.parse(PostResource.new(posts).serialize)
   end

@@ -9,7 +9,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ predictions: [] })
   }
 
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY
+  const apiKey = process.env.GOOGLE_MAP_API_KEY
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(
     query,
   )}&key=${apiKey}&sessiontoken=${sessionToken}&types=establishment&language=ja`

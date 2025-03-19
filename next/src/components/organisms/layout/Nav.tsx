@@ -7,7 +7,7 @@ type NavProps = {
 
 const Nav = ({ isIntersecting }: NavProps) => {
   return (
-    <Box as="nav" minH="48px">
+    <Box as="nav" minH={{ base: '46px', sm: '48px' }}>
       <HStack
         spacing={0}
         position={!isIntersecting ? 'fixed' : 'static'}
