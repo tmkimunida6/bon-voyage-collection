@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     return NextResponse.json({})
   }
 
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY
+  const apiKey = process.env.GOOGLE_MAP_API_KEY
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}&language=ja`
 
   const res = await fetch(url)

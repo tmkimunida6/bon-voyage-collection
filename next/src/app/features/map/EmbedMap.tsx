@@ -26,7 +26,6 @@ import {
   Pin,
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps'
-import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import CurrentLocationMarker from './CurrentLocationMarker'
 import PlaceDetailData from './PlaceDetailData'
@@ -38,9 +37,16 @@ import { markerType, PostType } from '@/types/types'
 type EmbedMapProps = {
   posts: Array<PostType>
   placeId: string | null
+  apiKey: string
+  mapId: string
 }
 
-export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
+export default function EmbedMap({
+  posts,
+  placeId,
+  apiKey,
+  mapId,
+}: EmbedMapProps) {
   const [markers, setMarkers] = useState<Array<markerType>>([])
   const [center, setCenter] = useState({ lat: 21.2795422, lng: -157.8304625 }) // 初期値を東京駅に設定
   const [currentPos, setCurrentPos] = useState<{
@@ -167,13 +173,6 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
 
     fetchPlaceData()
   }, [])
-
-  // GoogleマップAPI Key / Map ID
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY
-  const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAP_MAP_ID
-  if (!apiKey || !mapId) {
-    redirect('/?status=server_error')
-  }
 
   return (
     <Box w="100%" h="calc(100vh - 80px - 48px)">
