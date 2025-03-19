@@ -10,7 +10,7 @@ const IntersectingNavFooter = () => {
   const [isIntersecting, setIsIntersecting] = useState<boolean>(false)
 
   const pathname = usePathname()
-  const hiddenFooterPaths = ['/recommend']
+  const hiddenFooterPaths = ['/recommend', '/map']
   const isFooterHidden = hiddenFooterPaths.includes(pathname)
 
   useEffect(() => {

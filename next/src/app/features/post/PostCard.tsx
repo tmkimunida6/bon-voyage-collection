@@ -14,14 +14,7 @@ import {
   Stack,
   Text,
   Link as ChakraLink,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   useDisclosure,
-  ModalFooter,
   VStack,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
@@ -222,20 +215,17 @@ const PostCard = ({ post, setTimelineResult, page }: PostCardProps) => {
               {placeData.url ? (
                 <ChakraLink
                   as={NextLink}
-                  href={placeData.url}
+                  href={`/map?place_id=${post.place_id}`}
                   fontSize="xs"
                   display="flex"
                   alignItems="center"
                   gap="2px"
                   color="brand.link"
-                  target="_blank"
-                  rel="noopener"
                   isTruncated
                 >
                   <Text as="span" isTruncated>
                     {placeData.placeName}
                   </Text>
-                  {placeData.url && <CustomIcon iconName="FaExternalLinkAlt" />}
                 </ChakraLink>
               ) : (
                 <Text fontSize="xs">{placeData.placeName}</Text>

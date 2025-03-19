@@ -20,6 +20,7 @@ const Nav = ({ isIntersecting }: NavProps) => {
         <NavButton iconName="FaHome" text="タイムライン" href="/timeline" />
         <NavButton iconName="FaSearch" text="検索" href="/search" />
         <NavButton iconName="FaPenSquare" text="投稿" href="/post" />
+        <NavButton iconName="FaMapMarkedAlt" text="地図" href="/map" />
         <NavButton iconName="FaUserAlt" text="マイページ" href="/mypage" />
       </HStack>
     </Box>

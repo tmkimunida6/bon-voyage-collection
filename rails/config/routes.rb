@@ -70,6 +70,8 @@ Rails.application.routes.draw do
         # 特定のお土産に対する投稿
         collection do
           get "by_souvenir/:id", to: "posts#index_by_souvenir"
+
+          get :posts_with_place
         end
       end
     end

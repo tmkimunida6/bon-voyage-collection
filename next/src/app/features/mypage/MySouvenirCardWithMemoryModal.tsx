@@ -44,6 +44,7 @@ export default function MySouvenirCardWithMemoryModal({
           souvenir={post.souvenir}
           isFavoritable={false}
           rating={post.rating}
+          img={post.image_url || post.souvenir.image_url}
         />
         {(post.memory_image_url || post.memory_content) && (
           <>

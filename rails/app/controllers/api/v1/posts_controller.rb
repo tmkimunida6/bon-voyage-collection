@@ -1,5 +1,5 @@
 class Api::V1::PostsController < Api::V1::BaseController
-  before_action :authenticate_user!, except: [ :index, :index_by_souvenir ]
+  before_action :authenticate_user!, except: [ :index, :index_by_souvenir, :posts_with_place ]
   before_action :set_post, only: [ :destroy ]
   before_action :belongs_to_current_user?, only: [ :destroy ]
 
@@ -67,6 +67,12 @@ class Api::V1::PostsController < Api::V1::BaseController
         prev_page: paginated_posts.prev_page
       }
     }
+  end
+
+  def posts_with_place
+    posts = Post.where.not(place_id: [nil, ''])
+
+    render json: JSON.parse(PostResource.new(posts).serialize)
   end
 
   private

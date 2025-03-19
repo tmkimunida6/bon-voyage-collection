@@ -9,6 +9,7 @@ type TextIconLinkProps = {
   iconName: keyof typeof iconMapper
   iconPosition?: 'left' | 'right'
   href: string
+  openInNew?: boolean
   children: ReactNode
 }
 
@@ -17,13 +18,21 @@ const TextIconLink = ({
   iconPosition,
   href,
   children,
+  openInNew,
 }: TextIconLinkProps) => {
   return (
     <HStack spacing={1} width="max-content">
       {iconPosition === 'left' && (
         <CustomIcon iconName={iconName} color="brand.link" />
       )}
-      <ChakraLink as={NextLink} href={href} fontSize="sm" color="brand.link">
+      <ChakraLink
+        as={NextLink}
+        href={href}
+        fontSize="sm"
+        color="brand.link"
+        target={openInNew ? '_blank' : undefined}
+        rel={openInNew ? 'noopener noreferrer' : undefined}
+      >
         {children}
       </ChakraLink>
       {iconPosition === 'right' && (
