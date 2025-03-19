@@ -1,3 +1,6 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+/* eslint react-hooks/exhaustive-deps: 0 */
+
 'use client'
 
 import {
@@ -23,14 +26,14 @@ import {
   Pin,
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps'
+import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import CurrentLocationMarker from './CurrentLocationMarker'
+import PlaceDetailData from './PlaceDetailData'
 import CustomIcon from '@/components/atoms/CustomIcon'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
 import { markerType, PostType } from '@/types/types'
-import CurrentLocationMarker from './CurrentLocationMarker'
-import PlaceDetailData from './PlaceDetailData'
-import { redirect } from 'next/navigation'
 
 type EmbedMapProps = {
   posts: Array<PostType>
@@ -40,7 +43,10 @@ type EmbedMapProps = {
 export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
   const [markers, setMarkers] = useState<Array<markerType>>([])
   const [center, setCenter] = useState({ lat: 21.2795422, lng: -157.8304625 }) // 初期値を東京駅に設定
-  const [currentPos, setCurrentPos] = useState<{ lat: number, lng: number } | null>(null)
+  const [currentPos, setCurrentPos] = useState<{
+    lat: number
+    lng: number
+  } | null>(null)
   const [selectedMarker, setSelectedMarker] = useState<markerType | null>(null)
   const [isDetailVisible, setIsDetailVisible] = useState(true)
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -75,7 +81,7 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
           setCurrentPos({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-          });
+          })
         },
         (error) => {
           toast({
@@ -84,9 +90,9 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
             duration: 5000,
             isClosable: true,
           })
-        }
-      );
-      return () => navigator.geolocation.clearWatch(watchId);
+        },
+      )
+      return () => navigator.geolocation.clearWatch(watchId)
     } else {
       toast({
         title: 'このブラウザでは、位置情報がサポートされていません。',
@@ -104,7 +110,7 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
       for (const post of posts) {
         if (post.place_id) {
           if (newMarkers.some((marker) => marker.place_id === post.place_id)) {
-            continue; // 重複する場合はスキップ
+            continue // 重複する場合はスキップ
           }
 
           try {
@@ -123,7 +129,7 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
                 rating: data.result.rating,
                 user_ratings_total: data.result.user_ratings_total,
                 url: data.result.url,
-                marker_img: post.image_url || post.souvenir.image_url
+                marker_img: post.image_url || post.souvenir.image_url,
               })
 
               if (post.place_id === placeId) {
@@ -135,7 +141,8 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
             }
           } catch (error) {
             toast({
-              title: 'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
+              title:
+                'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
               status: 'error',
               duration: 5000,
               isClosable: true,
@@ -164,7 +171,7 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
   // GoogleマップAPI Key / Map ID
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY
   const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAP_MAP_ID
-  if(!apiKey || !mapId) {
+  if (!apiKey || !mapId) {
     redirect('/?status=server_error')
   }
 
@@ -203,7 +210,7 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
                   borderRadius="50%"
                   objectFit="cover"
                 />
-                </Pin>
+              </Pin>
             </AdvancedMarker>
           ))}
           {currentPos && (
@@ -234,7 +241,7 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
                   h="auto"
                   onClick={() => setIsDetailVisible((prev) => !prev)}
                 >
-                  詳細を{isDetailVisible ? '閉じる' : '見る' }
+                  詳細を{isDetailVisible ? '閉じる' : '見る'}
                   <CustomIcon
                     iconName={isDetailVisible ? 'FaChevronUp' : 'FaChevronDown'}
                     fontSize="xs"
@@ -246,7 +253,9 @@ export default function EmbedMap({ posts, placeId }: EmbedMapProps) {
             <ModalCloseButton />
             <ModalBody px={4} pb={10}>
               <Stack spacing={4}>
-                {isDetailVisible && <PlaceDetailData selectedMarker={selectedMarker} />}
+                {isDetailVisible && (
+                  <PlaceDetailData selectedMarker={selectedMarker} />
+                )}
                 <Stack spacing={4}>
                   <Stack spacing={1}>
                     <Heading as="h2" fontSize="md">

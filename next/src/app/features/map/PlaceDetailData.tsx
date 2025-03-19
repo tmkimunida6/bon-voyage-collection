@@ -1,4 +1,3 @@
-import CustomIcon from "@/components/atoms/CustomIcon";
 import {
   Box,
   Table,
@@ -12,19 +11,23 @@ import {
   Link as ChakraLink,
   Flex,
   Text,
-} from "@chakra-ui/react";
-import { useState } from "react";
+} from '@chakra-ui/react'
 import NextLink from 'next/link'
-import Rating from "@/components/molecules/Rating";
-import TextIconLink from "@/components/molecules/TextIconLink";
-import { markerType } from "@/types/types";
+import { useState } from 'react'
+import CustomIcon from '@/components/atoms/CustomIcon'
+import Rating from '@/components/molecules/Rating'
+import TextIconLink from '@/components/molecules/TextIconLink'
+import { markerType } from '@/types/types'
 
 type PlaceDetailDataProps = {
   selectedMarker: markerType
 }
 
-export default function PlaceDetailData({ selectedMarker }: PlaceDetailDataProps) {
-  const [isOpeningHoursVisible, setIsOpeningHoursVisible] = useState<boolean>(false)
+export default function PlaceDetailData({
+  selectedMarker,
+}: PlaceDetailDataProps) {
+  const [isOpeningHoursVisible, setIsOpeningHoursVisible] =
+    useState<boolean>(false)
 
   // 今日の曜日
   const today = new Date()
@@ -52,9 +55,7 @@ export default function PlaceDetailData({ selectedMarker }: PlaceDetailDataProps
           <Tbody>
             <Tr>
               <Th>住所</Th>
-              <Td whiteSpace="normal">
-                {selectedMarker.address}
-              </Td>
+              <Td whiteSpace="normal">{selectedMarker.address}</Td>
             </Tr>
             <Tr>
               <Th>営業時間</Th>
@@ -66,9 +67,7 @@ export default function PlaceDetailData({ selectedMarker }: PlaceDetailDataProps
                   color="brand.black"
                   p={0}
                   h="auto"
-                  onClick={() =>
-                    setIsOpeningHoursVisible((prev) => !prev)
-                  }
+                  onClick={() => setIsOpeningHoursVisible((prev) => !prev)}
                 >
                   {selectedMarker.weekday_text[dayOfWeek]
                     .replace(':', ' ')
@@ -76,9 +75,7 @@ export default function PlaceDetailData({ selectedMarker }: PlaceDetailDataProps
                     .replaceAll('分', '')}
                   <CustomIcon
                     iconName={
-                      isOpeningHoursVisible
-                        ? 'FaChevronUp'
-                        : 'FaChevronDown'
+                      isOpeningHoursVisible ? 'FaChevronUp' : 'FaChevronDown'
                     }
                     fontSize="xs"
                     ml={2}
@@ -86,17 +83,15 @@ export default function PlaceDetailData({ selectedMarker }: PlaceDetailDataProps
                 </Button>
                 {isOpeningHoursVisible && (
                   <Stack spacing="2px" mt={2}>
-                    {selectedMarker.weekday_text.map(
-                      (day, index) => (
-                        <Text key={index} fontSize="xs">
-                          {day
-                            .replace('曜日', '')
-                            .replace(':', '　')
-                            .replaceAll('時', ':')
-                            .replaceAll('分', '')}
-                        </Text>
-                      ),
-                    )}
+                    {selectedMarker.weekday_text.map((day, index) => (
+                      <Text key={index} fontSize="xs">
+                        {day
+                          .replace('曜日', '')
+                          .replace(':', '　')
+                          .replaceAll('時', ':')
+                          .replaceAll('分', '')}
+                      </Text>
+                    ))}
                   </Stack>
                 )}
               </Td>

@@ -32,7 +32,7 @@ const SouvenirCard = ({
   souvenir,
   rating = '0',
   hasTrashIcon = false,
-  img = souvenir.image_url
+  img = souvenir.image_url,
 }: SouvenirCardProps) => {
   const cardStyles = {
     sm: {
