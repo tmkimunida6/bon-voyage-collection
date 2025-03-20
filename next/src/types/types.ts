@@ -101,11 +101,11 @@ export type markerType = {
   lat: number
   lng: number
   name: string
-  address: string
-  weekday_text: Array<string>
-  website: string
-  rating: number
-  user_ratings_total: number
-  url: string
+  address: string | ''
+  weekday_text: Array<string> | ''
+  website: string | ''
+  rating: number | ''
+  user_ratings_total: number | ''
+  url: string | ''
   marker_img: string
 }
