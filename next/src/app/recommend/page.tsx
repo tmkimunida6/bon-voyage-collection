@@ -27,33 +27,34 @@ export default async function Recommend({ searchParams }: RecommendProps) {
       searchParams?.category_id || '',
     )
     return (
-      <Stack
-        spacing={4}
-        maxW="660px"
-        mx={-4}
-        px={4}
-        pb={6}
-        h="100%"
-        overflow="hidden"
-      >
-        <VStack spacing={1}>
-          <Heading fontSize="lg" textAlign="center">
-            お土産を最大10個ランダムで紹介！
-          </Heading>
-          <Text fontSize="md" textAlign="center">
-            最後までスワイプして、
-            <br />
-            気になるお土産を保存しましょう！
-          </Text>
-        </VStack>
-        <Box>
-          <VStack position="relative" spacing={6}>
-            <RecommendCardSwiper
-              fetchedRecommendResult={fetchedRecommendResult}
-            />
+      <Box maxW="660px" mx="auto">
+        <Stack
+          spacing={4}
+          mx="calc(50% - 50cqi)"
+          px={4}
+          pb={6}
+          h="100%"
+          overflow="hidden"
+        >
+          <VStack spacing={1}>
+            <Heading fontSize="lg" textAlign="center">
+              お土産を最大10個ランダムで紹介！
+            </Heading>
+            <Text fontSize="md" textAlign="center">
+              最後までスワイプして、
+              <br />
+              気になるお土産を保存しましょう！
+            </Text>
           </VStack>
-        </Box>
-      </Stack>
+          <Box>
+            <VStack position="relative" spacing={6} maxW="660px" mx="auto">
+              <RecommendCardSwiper
+                fetchedRecommendResult={fetchedRecommendResult}
+              />
+            </VStack>
+          </Box>
+        </Stack>
+      </Box>
     )
   } catch (error) {
     redirect('/?status=server_error')

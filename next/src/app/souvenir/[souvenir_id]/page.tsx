@@ -54,7 +54,7 @@ export default async function SouvenirDetailPage({
   }
 
   return (
-    <Stack spacing={6}>
+    <Stack spacing={6} maxW="660px" mx="auto">
       <HStack mb={6}>
         <Heading as="h1">お土産の詳細</Heading>
       </HStack>

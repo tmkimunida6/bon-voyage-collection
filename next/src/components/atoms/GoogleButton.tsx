@@ -51,7 +51,6 @@ export default function GoogleButton({ children }: GoogleButtonProps) {
           // おすすめのお土産を「欲しい」に一括追加
           const favoritedSouvenirsFromRecommend =
             localStorage.getItem('favoritedSouvenirs')
-          console.log(favoritedSouvenirsFromRecommend)
           if (favoritedSouvenirsFromRecommend) {
             await favoriteBulkAction(
               JSON.parse(favoritedSouvenirsFromRecommend),

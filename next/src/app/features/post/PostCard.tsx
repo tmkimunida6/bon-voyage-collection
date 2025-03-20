@@ -186,7 +186,14 @@ const PostCard = ({ post, setTimelineResult, page }: PostCardProps) => {
             </CustomModal>
           </>
         )}
-        <Stack maxW="calc(50% - 0.5rem)" spacing={1}>
+        <Stack
+          maxW={
+            !(page === 'detail' && !post.image_url)
+              ? 'calc(50% - 0.5rem)'
+              : '100%'
+          }
+          spacing={1}
+        >
           {(placeData.countryCode ||
             placeData.countryName ||
             placeData.cityName) && (
