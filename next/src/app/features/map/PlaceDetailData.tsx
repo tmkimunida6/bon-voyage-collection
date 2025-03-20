@@ -28,6 +28,12 @@ export default function PlaceDetailData({
   const today = new Date()
   const dayOfWeek = today.getDay() - 1
 
+  // 時間を00:00の形に変換
+  const convertTime = (timeString: string) => {
+    const convertedTime = timeString.replaceAll(/(\d+)時(\d+)分/g, '$1:$2')
+    return convertedTime
+  }
+
   return (
     <Stack bg="gray.50" p={4} spacing={2}>
       {selectedMarker.address && (
@@ -37,22 +43,22 @@ export default function PlaceDetailData({
         </Flex>
       )}
       {selectedMarker.weekday_text && (
-        <HStack spacing={4}>
-          <CustomIcon iconName="FaRegClock" color="brand.primary" />
-          <Box>
+        <Flex gap={4}>
+          <CustomIcon iconName="FaRegClock" color="brand.primary" mt={1} />
+          <Flex justifyContent="center" flexDirection="column">
             <Button
               variant="ghost"
-              fontSize="xs"
+              fontSize="sm"
               fontWeight="normal"
               color="brand.black"
               p={0}
               h="auto"
+              lineHeight="1.5"
               onClick={() => setIsOpeningHoursVisible((prev) => !prev)}
             >
-              {selectedMarker.weekday_text[dayOfWeek]
-                .replace(':', ' ')
-                .replaceAll('時', ':')
-                .replaceAll('分', '')}
+              {convertTime(
+                selectedMarker.weekday_text[dayOfWeek].replace(':', ' '),
+              )}
               <CustomIcon
                 iconName={
                   isOpeningHoursVisible ? 'FaChevronUp' : 'FaChevronDown'
@@ -65,17 +71,13 @@ export default function PlaceDetailData({
               <Stack spacing="2px" mt={2}>
                 {selectedMarker.weekday_text.map((day, index) => (
                   <Text key={index} fontSize="xs">
-                    {day
-                      .replace('曜日', '')
-                      .replace(':', '　')
-                      .replaceAll('時', ':')
-                      .replaceAll('分', '')}
+                    {convertTime(day.replace(':', '　').replace('曜日', ''))}
                   </Text>
                 ))}
               </Stack>
             )}
-          </Box>
-        </HStack>
+          </Flex>
+        </Flex>
       )}
       {selectedMarker.website && (
         <HStack spacing={4} w="100%">
