@@ -18,6 +18,7 @@ import {
   Heading,
   useToast,
   Image,
+  Flex,
 } from '@chakra-ui/react'
 import {
   APIProvider,
@@ -30,6 +31,7 @@ import { useEffect, useState } from 'react'
 import CurrentLocationMarker from './CurrentLocationMarker'
 import PlaceDetailData from './PlaceDetailData'
 import CustomIcon from '@/components/atoms/CustomIcon'
+import TextIconLink from '@/components/molecules/TextIconLink'
 import SouvenirCard from '@/components/organisms/Souvenir/SouvenirCard'
 import SouvenirCardList from '@/components/organisms/Souvenir/SouvenirCardList'
 import { markerType, PostType } from '@/types/types'
@@ -47,7 +49,6 @@ export default function EmbedMap({
   apiKey,
   mapId,
 }: EmbedMapProps) {
-  console.log(posts)
   const [markers, setMarkers] = useState<Array<markerType>>([])
   const [center, setCenter] = useState({ lat: 21.2795422, lng: -157.8304625 }) // 初期値を東京駅に設定
   const [currentPos, setCurrentPos] = useState<{
@@ -115,7 +116,6 @@ export default function EmbedMap({
     const fetchPlaceData = async () => {
       const newMarkers: Array<markerType> = []
       for (const post of posts) {
-        console.log(post)
         if (post.place_id) {
           if (newMarkers.some((marker) => marker.place_id === post.place_id)) {
             continue // 重複する場合はスキップ
@@ -131,12 +131,14 @@ export default function EmbedMap({
                 lat,
                 lng,
                 name: data.result.name,
-                address: data.result.formatted_address,
-                weekday_text: data.result.opening_hours.weekday_text,
-                website: data.result.website,
-                rating: data.result.rating,
-                user_ratings_total: data.result.user_ratings_total,
-                url: data.result.url,
+                address: data.result.formatted_address || '',
+                weekday_text: data.result.opening_hours
+                  ? data.result.opening_hours.weekday_text
+                  : '',
+                website: data.result.website || '',
+                rating: data.result.rating || '',
+                user_ratings_total: data.result.user_ratings_total || '',
+                url: data.result.url || '',
                 marker_img: post.image_url || post.souvenir.image_url,
               })
 
@@ -147,11 +149,10 @@ export default function EmbedMap({
                 })
               }
             }
-            console.log(data.result)
           } catch (error) {
             toast({
               title:
-                `サーバーエラーが発生しました。時間をおいてから再度お試しください。${error}`,
+                'サーバーエラーが発生しました。時間をおいてから再度お試しください。',
               status: 'error',
               duration: 5000,
               isClosable: true,
@@ -176,6 +177,14 @@ export default function EmbedMap({
 
     fetchPlaceData()
   }, [])
+
+  // 施設データがない場合
+  const hasNoDetailData =
+    !!selectedMarker &&
+    !selectedMarker.address &&
+    !selectedMarker.weekday_text &&
+    !selectedMarker.website &&
+    !selectedMarker.rating
 
   return (
     <Box w="100%" h="calc(100vh - 80px - 48px)">
@@ -234,28 +243,47 @@ export default function EmbedMap({
             <ModalHeader pl={4} pr="44px" fontSize="lg">
               <Stack spacing={1}>
                 <Text as="span">{selectedMarker.name}</Text>
-                <Button
-                  variant="ghost"
-                  fontSize="xs"
-                  fontWeight="normal"
-                  color="brand.secondary"
-                  p={0}
-                  h="auto"
-                  onClick={() => setIsDetailVisible((prev) => !prev)}
-                >
-                  詳細を{isDetailVisible ? '閉じる' : '見る'}
-                  <CustomIcon
-                    iconName={isDetailVisible ? 'FaChevronUp' : 'FaChevronDown'}
+                {hasNoDetailData ? (
+                  <Flex
+                    fontWeight="normal"
+                    justifyContent="flex-end"
+                    mr="-28px"
+                  >
+                    <TextIconLink
+                      iconPosition="right"
+                      iconName="FaExternalLinkAlt"
+                      href={selectedMarker.url}
+                      openInNew
+                    >
+                      Googleマップで見る
+                    </TextIconLink>
+                  </Flex>
+                ) : (
+                  <Button
+                    variant="ghost"
                     fontSize="xs"
-                    ml={2}
-                  />
-                </Button>
+                    fontWeight="normal"
+                    color="brand.secondary"
+                    p={0}
+                    h="auto"
+                    onClick={() => setIsDetailVisible((prev) => !prev)}
+                  >
+                    詳細を{isDetailVisible ? '閉じる' : '見る'}
+                    <CustomIcon
+                      iconName={
+                        isDetailVisible ? 'FaChevronUp' : 'FaChevronDown'
+                      }
+                      fontSize="xs"
+                      ml={2}
+                    />
+                  </Button>
+                )}
               </Stack>
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody px={4} pb={10}>
               <Stack spacing={4}>
-                {isDetailVisible && (
+                {isDetailVisible && !hasNoDetailData && (
                   <PlaceDetailData selectedMarker={selectedMarker} />
                 )}
                 <Stack spacing={4}>

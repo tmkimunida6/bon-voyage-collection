@@ -41,6 +41,8 @@ import {
   FaGear,
   FaLocationDot,
   FaSackDollar,
+  FaEarthAmericas,
+  FaRegClock,
 } from 'react-icons/fa6'
 
 export const iconMapper = {
@@ -84,4 +86,6 @@ export const iconMapper = {
   FaCheckCircle,
   FaSearchPlus,
   FaMapMarkedAlt,
+  FaEarthAmericas,
+  FaRegClock,
 }
