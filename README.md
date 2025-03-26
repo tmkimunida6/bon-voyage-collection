@@ -117,6 +117,11 @@ URL: https://bon-voyage-collection.com/
 | ![detail](https://github.com/user-attachments/assets/85ce5b8f-acd5-40e7-aaf4-de56f43482a6) | ![google](https://github.com/user-attachments/assets/8deafb63-0b8f-47ca-b8da-a069782099a6) |
 | 投稿されたお土産の名前や画像、<br/>カテゴリーなどの詳細情報が掲載されています。<br/>お土産に対する投稿や同カテゴリーのお土産も確認できます。 | ログイン、もしくは会員登録時は<br/>Googleアカウントによるログインも可能です。 |
 
+| 【NEW】地図から探す |
+| ---- |
+| ![map](https://github.com/user-attachments/assets/b7a80680-0fa2-46c6-b652-beb7b7ed0aa6)| 
+| お土産が購入された施設を地図上で探すことができる機能です。<br/>地図上のピンをクリックすれば、<br/>その施設情報とその施設で購入されたお土産を確認できます。 |
+
 
 ### 将来的な拡張
 - 新規登録されたお土産の運営による承認フロー
