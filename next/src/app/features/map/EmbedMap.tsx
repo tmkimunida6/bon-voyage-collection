@@ -50,7 +50,7 @@ export default function EmbedMap({
   mapId,
 }: EmbedMapProps) {
   const [markers, setMarkers] = useState<Array<markerType>>([])
-  const [center, setCenter] = useState({ lat: 21.2795422, lng: -157.8304625 }) // 初期値を東京駅に設定
+  const [center, setCenter] = useState({ lat: 21.2795422, lng: -157.8304625 }) // 初期値をハワイに設定
   const [currentPos, setCurrentPos] = useState<{
     lat: number
     lng: number
@@ -63,25 +63,25 @@ export default function EmbedMap({
   // 現在地の取得と監視
   useEffect(() => {
     if (navigator.geolocation) {
-      // placeIdがない場合は現在地を中心に
-      if (!placeId) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            setCenter({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            })
-          },
-          (error) => {
-            toast({
-              title: '現在地の取得に失敗しました。',
-              status: 'error',
-              duration: 5000,
-              isClosable: true,
-            })
-          },
-        )
-      }
+      // // placeIdがない場合は現在地を中心に
+      // if (!placeId) {
+      //   navigator.geolocation.getCurrentPosition(
+      //     (position) => {
+      //       setCenter({
+      //         lat: position.coords.latitude,
+      //         lng: position.coords.longitude,
+      //       })
+      //     },
+      //     (error) => {
+      //       toast({
+      //         title: '現在地の取得に失敗しました。',
+      //         status: 'error',
+      //         duration: 5000,
+      //         isClosable: true,
+      //       })
+      //     },
+      //   )
+      // }
 
       // 現在地の監視
       const watchId = navigator.geolocation.watchPosition(
@@ -190,7 +190,7 @@ export default function EmbedMap({
     <Box w="100%" h="calc(100vh - 80px - 48px)">
       <APIProvider apiKey={apiKey}>
         <Map
-          defaultZoom={18}
+          defaultZoom={15}
           center={center}
           mapId={mapId}
           gestureHandling="greedy"
@@ -203,7 +203,6 @@ export default function EmbedMap({
               key={marker.place_id}
               position={{ lat: marker.lat, lng: marker.lng }}
               onClick={() => {
-                // ピンをクリックしたときに詳細情報を表示
                 setSelectedMarker(marker)
                 setIsDetailVisible(true)
                 onOpen()
@@ -215,7 +214,7 @@ export default function EmbedMap({
                 scale={2}
               >
                 <Image
-                  src={marker.marker_img} // 画像のパス
+                  src={marker.marker_img}
                   alt={marker.name}
                   boxSize="48px"
                   borderRadius="50%"
