@@ -3,7 +3,7 @@
 <br><br>
 
 ## サービスURL
-URL: https://bon-voyage-collection.com/
+URL: https://bon-voyage-collection.com/（※現在は公開停止中）
 <br><br>
 #### ▼ゲストアカウント情報（※採用ご担当者様向け）
 メールアドレスを登録しなくても簡単にアプリを試していただけるように、ゲストアカウントを用意しております。<br>
