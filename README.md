@@ -2,8 +2,8 @@
 <img src="https://github.com/user-attachments/assets/950fd66e-87a7-4bd7-9d4e-ca30fee4ce33" width="600px">
 <br><br>
 
-## サービスURL
-URL: https://bon-voyage-collection.com/　（※現在は公開停止中）
+## サービスURL（※現在は公開停止中）
+URL: https://bon-voyage-collection.com/
 <br><br>
 #### ▼ゲストアカウント情報（※採用ご担当者様向け）
 メールアドレスを登録しなくても簡単にアプリを試していただけるように、ゲストアカウントを用意しております。<br>
