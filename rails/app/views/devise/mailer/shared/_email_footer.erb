@@ -10,5 +10,5 @@
 
 <p>
   Bon Voyage Collection<br>
-  <%= link_to "#{Settings.front_domain}", "#{Settings.front_domain}", target: :_blank, rel: "noopener noreferrer" %>
+  <%= link_to "#{ENV.fetch("FRONT_DOMAIN")}", "#{ENV.fetch("FRONT_DOMAIN")}", target: :_blank, rel: "noopener noreferrer" %>
 </p>

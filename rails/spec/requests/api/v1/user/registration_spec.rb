@@ -11,7 +11,7 @@ RSpec.describe 'ユーザー登録', type: :request do
           email: 'test@example.com',
           password: 'password',
           password_confirmation: 'password',
-          confirm_success_url: "#{Settings.front_domain}/sign_in"
+          confirm_success_url: "#{ENV.fetch("FRONT_DOMAIN")}/sign_in"
         }
       end
 
@@ -33,7 +33,7 @@ RSpec.describe 'ユーザー登録', type: :request do
           email: 'test@example.com',
           password: 'password',
           password_confirmation: 'wrongpassword',
-          confirm_success_url: "#{Settings.front_domain}/sign_in"
+          confirm_success_url: "#{ENV.fetch("FRONT_DOMAIN")}/sign_in"
         }
       end
 

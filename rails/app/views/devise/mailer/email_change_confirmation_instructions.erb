@@ -7,6 +7,6 @@
   <%= t '.request_confirm_link_msg' %>
 </p>
 
-<p>URL：<%= link_to "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}&request_action=change_email", "#{Settings.front_domain}/confirmation?confirmation_token=#{@token}&request_action=change_email", target: :_blank, rel: "noopener noreferrer" %></p>
+<p>URL：<%= link_to "#{ENV.fetch("FRONT_DOMAIN")}/confirmation?confirmation_token=#{@token}&request_action=change_email", "#{ENV.fetch("FRONT_DOMAIN")}/confirmation?confirmation_token=#{@token}&request_action=change_email", target: :_blank, rel: "noopener noreferrer" %></p>
 
 <%= render 'devise/mailer/shared/email_footer' %>

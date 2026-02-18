@@ -15,15 +15,15 @@ class Api::V1::User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCall
       user.confirmed_at = Time.current # メール認証をスキップ
       user.save
 
-      redirect_to "#{Settings.front_domain}/auth/callback?status=success&uid=#{user.uid}&accessToken=#{token}&client=#{client_id}&expiry=#{expiry}", allow_other_host: true
+      redirect_to "#{ENV.fetch("FRONT_DOMAIN")}/auth/callback?status=success&uid=#{user.uid}&accessToken=#{token}&client=#{client_id}&expiry=#{expiry}", allow_other_host: true
     else
-      redirect_to "#{Settings.front_domain}/auth/callback?status=failure", allow_other_host: true
+      redirect_to "#{ENV.fetch("FRONT_DOMAIN")}/auth/callback?status=failure", allow_other_host: true
     end
   end
 
   # 失敗時
   def failure
-    redirect_to "#{Settings.front_domain}/auth/callback?status=failure", allow_other_host: true
+    redirect_to "#{ENV.fetch("FRONT_DOMAIN")}/auth/callback?status=failure", allow_other_host: true
   end
 
   private

@@ -12,7 +12,7 @@ RSpec.describe 'パスワードリセット', type: :request do
       let(:params) do
         {
           email: user.email,
-          redirect_url: "#{Settings.front_domain}/reset_password/new"
+          redirect_url: "#{ENV.fetch("FRONT_DOMAIN")}/reset_password/new"
         }
       end
 
@@ -33,7 +33,7 @@ RSpec.describe 'パスワードリセット', type: :request do
         let(:params) do
           {
             email: 'other@example.com',
-            redirect_url: "#{Settings.front_domain}/reset_password/new"
+            redirect_url: "#{ENV.fetch("FRONT_DOMAIN")}/reset_password/new"
           }
         end
 
@@ -62,7 +62,7 @@ RSpec.describe 'パスワードリセット', type: :request do
         let(:params) do
           {
             email: "",
-            redirect_url: "#{Settings.front_domain}/reset_password/new"
+            redirect_url: "#{ENV.fetch("FRONT_DOMAIN")}/reset_password/new"
           }
         end
 
